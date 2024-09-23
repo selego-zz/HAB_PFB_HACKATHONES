@@ -8,8 +8,6 @@ La web permite registro de usuarios, con rol a escoger entre **desarrolladores**
 
 ## Instalación y ejecución
 
-Para el *back-end*, junto con Node.js, se han utilizado el *framework* **Express** y la dependencia **Nodemon** para reiniciar automáticamente el servidor durante el desarrollo.
-
-Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el directorio de la carpeta raíz del proyecto. A continuación, se ejecutará `npm install` para instalar todas las dependencias necesarias. 
+Para el *back-end*, junto con Node.js, se han utilizado el *framework* **Express** y la dependencia **Nodemon**, entre otros. Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el directorio de la carpeta raíz del proyecto. A continuación, se ejecutará `npm install` para instalar automáticamente todas las dependencias necesarias. 
 
 Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para arrancar el servidor con Nodemon ejecutaremos `npm run dev`, el cual por defecto estará disponible en `http://localhost:3000`.  Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los *end-points*.
