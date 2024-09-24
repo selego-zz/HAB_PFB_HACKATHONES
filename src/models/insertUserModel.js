@@ -14,7 +14,6 @@ const insertUserModel = async (
     username,
     email,
     password,
-    registrationCode,
 ) => {
     const pool = await getPool();
 

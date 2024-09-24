@@ -8,6 +8,7 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 // Importamos los modelos.
 import selectUserByUsernameModel from '../../models/selectUserByUsernameModel.js';
 import selectUserByEmailModel from '../../models/selectUserByEmailModel.js';
+import insertUserModel from '../../models/insertUserModel.js';
 
 //////
 
@@ -35,10 +36,7 @@ const newUserController = async (req, res, next) => {
         }
 
         // Insertamos el usuario.
-        await pool.query(
-            `INSERT INTO users(username, email, password, registrationCode) VALUES(?, ?, ?, ?)`,
-            [username, email, hashedPass, registrationCode],
-        );
+        await insertUserModel(firstName, lastName, username, email, password);
 
         // Asunto del email de verificación.
         const emailSubject = 'Activa tu usuario en Diario de Viajes :)';
