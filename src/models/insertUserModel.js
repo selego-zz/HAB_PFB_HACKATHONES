@@ -1,6 +1,5 @@
 // Importamos las dependencias.
 import bcrypt from 'bcrypt';
-import crypto from 'crypto';
 
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from '../../db/getPool.js';
@@ -17,9 +16,6 @@ const insertUserModel = async (
     registrationCode,
 ) => {
     const pool = await getPool();
-
-    // Creamos un código de registro.
-    const registrationCode = crypto.randomBytes(15).toString('hex');
 
     // Encriptamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
