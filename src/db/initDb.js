@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import getPool from './getPool.js';
-
+import bcrypt from 'bcrypt';
 //////
 
 // Declaramos las tablas que generaremos.
@@ -18,7 +18,7 @@ const SQL_USERS_TABLE = `
         firstName VARCHAR(50),
         lastName VARCHAR(50),
         avatar VARCHAR(100),
-        role ENUM ('organizador', 'desarrollador') NOT NULL,
+        role ENUM ('administrador', 'organizador', 'desarrollador') NOT NULL,
         recoverPassCode CHAR(30),
         activationCode CHAR(30),
         active BOOLEAN DEFAULT FALSE,
@@ -70,6 +70,9 @@ const SQL_HASTAGS_TABLE = `
         hackathonId INT UNSIGNED,
         FOREIGN KEY (hackathonId) REFERENCES hackathons(id),
 
+        tagId INT UNSIGNED,
+        FOREIGN KEY (tagId) REFERENCES tags(id),
+
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )`;
@@ -84,7 +87,8 @@ const SQL_ENROLLSIN_TABLE = `
         hackathonId INT UNSIGNED NOT NULL,
         FOREIGN KEY (hackathonId) REFERENCES hackathons(id),
 
-        date DATETIME NOT NULL,
+        inscriptionDate DATETIME NOT NULL,
+        attended BOOLEAN,
         rating TINYINT UNSIGNED,
         score INT UNSIGNED,
 
@@ -92,7 +96,16 @@ const SQL_ENROLLSIN_TABLE = `
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )`;
 
-// Generamos tablas.
+const SQL_ADMIN_INSERT = `
+    INSERT INTO users (username, email, password, role, active)
+        VALUES (?, ?, ?, 'administrador', true)`;
+
+////////////////////////////////////////////////////
+// Función que genera las tablas en la base de datos
+// también crea el usuario administrador
+// no recibe parámetros
+// no devuelve nada
+////////////////////////////////////////////////////
 const initDB = async () => {
     try {
         // Obtenemos una conexión con la base de datos.
@@ -104,13 +117,31 @@ const initDB = async () => {
         await pool.query(SQL_DROP_TABLE);
 
         console.log('Creando tablas...');
+
+        console.log('Tabla users');
         await pool.query(SQL_USERS_TABLE);
+
+        console.log('Tabla hackatons');
         await pool.query(SQL_HACKATHONS_TABLE);
+
+        console.log('Tabla tags');
         await pool.query(SQL_TAGS_TABLE);
+
+        console.log('Tabla hasTags');
         await pool.query(SQL_HASTAGS_TABLE);
+
+        console.log('Tabla enrollsIn');
         await pool.query(SQL_ENROLLSIN_TABLE);
 
         console.log('¡Tablas creadas!');
+        console.log('Insertando usuario administrador');
+        await pool.query(SQL_ADMIN_INSERT, [
+            process.env.ADMIN_USER_USERNAME,
+            process.env.ADMIN_USER_EMAIL,
+            await bcrypt.hash(process.env.ADMIN_USER_PASSWORD, 10),
+        ]);
+
+        //falta añadir tecnologías y temáticas.... que diferencia hay entre una y otra? añadimos unas pocas? añadimos un montón?....
 
         process.exit(0);
     } catch (err) {
