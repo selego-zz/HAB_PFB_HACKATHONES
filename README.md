@@ -12,22 +12,38 @@ Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express
 
 Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para arrancar el servidor con Nodemon ejecutaremos `npm run dev`, el cual por defecto estará disponible en `http://localhost:3000`. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
 
-Endpoints Users
-✅- POST - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación
-✅- PUT - ["/api/users/register/validate/:validationCode"] - Validar usuario con un código. No requiere autenticación
-✅- POST - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación
-✅- GET - ["/api/users/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
-✅- PUT - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
-✅- PUT - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación
-✅- PUT - ["/api/users/password/reset/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación
+## Endpoints Users
 
-Endpoitns Hackathons
-✅- GET - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación
-✅- POST - ["/api/hackathons"] - Añadir un evento de hackathone. Sí require autenticación de organizador.
-✅- PUT - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntentificación de organizador.
-✅- GET - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
-✅- POST - ["/api/hackathons/registration"] - Inscripción a un eventO de hackathone. Requiere autenticación de desarrollador.
-✅- GET - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathones en los que el usuario está registrado. Requiere autenticación de desarrollador.
-✅- DELETE - ["/api/hackathons/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autentificación del desarrollador.
-✅- PUT - ["/api/hackathons/rating"] - Rating 1-5 después de la fecha de realización. Requiere autentificación del desarrollador.
-✅- PUT - ["/api/hackathons/classification] - Clasificación de los participaten después de cada competición.
+✅- **POST** - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación.
+
+✅- **PUT** - ["/api/users/register/validate/:validationCode"] - Validar usuario con un código. No requiere autenticación.
+
+✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
+
+✅- **GET** - ["/api/users/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
+
+✅- **PUT** - ["/pi/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
+
+✅- **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
+
+✅- **PUT** - ["/api/users/password/reset/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación.
+
+## Endpoitns Hackathons
+
+✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
+
+✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathone. Sí require autenticación de organizador.
+
+✅- **PUT** - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntentificación de organizador.
+
+✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
+
+✅- **POST** - ["/api/hackathons/registration"] - Inscripción a un evento de hackathone. Requiere autenticación de desarrollador.
+
+✅- **GET** - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathones en los que el usuario está registrado. Requiere autenticación de desarrollador.
+
+✅- **DELETE** - ["/api/hackathons/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autentificación del desarrollador.
+
+✅- **PUT** - ["/api/hackathons/rating"] - Rating 1-5 después de la fecha de realización. Requiere autentificación del desarrollador.
+
+✅- **PUT** - ["/api/hackathons/classification"] - Clasificación de los participaten después de cada competición.
