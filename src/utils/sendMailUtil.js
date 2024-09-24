@@ -19,16 +19,21 @@ const transport = nodemailer.createTransport({
     },
 });
 
+///////////////////////////////////////////////////////////
 // Función que envía un email a un correo electrónico dado.
+// recibe: el mail destinatario, el asunto, y el cuerpo del mensaje
+// devuelve un json con información sobre el envío
+///////////////////////////////////////////////////////////
 const sendMailUtil = async (email, subject, body) => {
     try {
         // Enviamos el email.
-        await transport.sendMail({
+        const info = await transport.sendMail({
             from: SMTP_USER,
             to: email,
             subject,
-            text: body,
+            html: body,
         });
+        return info;
     } catch (err) {
         console.error(err);
 
