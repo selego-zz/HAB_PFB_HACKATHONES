@@ -1,8 +1,8 @@
-# Hackathones
+# Hackathon
 
 ## Descripción
 
-_Hackathones_ es un proyecto web basado en **Node.js** y **React**. Se trata de una plataforma que muestra un calendario de eventos competitivos de programación a los visitantes, quienes podrán acceder a los detalles concretos de cada uno y realizar una búsqueda filtrada de los mismos según sus preferencias, así como comprobar los _rankings_ de ganadores una vez concluyen.
+_Hackathon_ es un proyecto web basado en **Node.js** y **React**. Se trata de una plataforma que muestra un calendario de eventos competitivos de programación a los visitantes, quienes podrán acceder a los detalles concretos de cada uno y realizar una búsqueda filtrada de los mismos según sus preferencias, así como comprobar los _rankings_ de ganadores una vez concluyen.
 
 La web permite registro de usuarios, con rol a escoger entre **desarrolladores** y **organizadores**. Los desarrolladores podrán inscribirse como participantes en cuantos desafíos deseen, cancelar sus inscripciones dentro de los plazos establecidos y dejar valoraciones de 1 a 5 estrellas a los eventos en los que hayan participado. A su vez, los organizadores podrán añadir sus _hackathones_ al calendario de la página, con los detalles, objetivos, premios, requerimientos, etc. Todos los usuarios registrados tendrán la posibilidad de gestionar y modificar sus perfiles a conveniencia.
 
@@ -28,7 +28,7 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **PUT** - ["/api/users/password/reset/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación.
 
-## Endpoitns Hackathons
+## Endpoints Hackathons
 
 ✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
 
