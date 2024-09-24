@@ -1,9 +1,12 @@
 import 'dotenv/config';
-
 import getPool from './getPool.js';
 
+//////
+
+// Declaramos las tablas que generaremos.
+
 const SQL_DROP_TABLE =
-    'DROP TABLE IF EXISTS enrollsOn, hasLabel, labels, hackathons, users';
+    'DROP TABLE IF EXISTS enrollsIn, hasLabel, labels, hackathons, users';
 
 const SQL_USERS_TABLE = `
     CREATE TABLE IF NOT EXISTS users(
@@ -36,7 +39,7 @@ const SQL_HACKATHONS_TABLE = `
         date DATETIME NOT NULL,
         end DATETIME NOT NULL,
 
-        maxParticipants UNSIGNED INT,
+        maxParticipants INT UNSIGNED,
         prices DECIMAL(9, 2),
         logo VARCHAR(100),
         online BOOLEAN DEFAULT TRUE,
@@ -64,21 +67,21 @@ const SQL_HASTAGS_TABLE = `
         userId INT UNSIGNED,
         FOREIGN KEY (userId) REFERENCES users(id),
 
-        hackathoneId INT UNSIGNED,
+        hackathonId INT UNSIGNED,
         FOREIGN KEY (hackathonId) REFERENCES hackathons(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )`;
 
-const SQL_ENROLLSON_TABLE = `
-    CREATE TABLE IF NOT EXISTS enrollsOn(
+const SQL_ENROLLSIN_TABLE = `
+    CREATE TABLE IF NOT EXISTS enrollsIn(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 
         userId INT UNSIGNED NOT NULL,
         FOREIGN KEY (userId) REFERENCES users(id),
 
-        hackathoneId INT UNSIGNED NOT NULL,
+        hackathonId INT UNSIGNED NOT NULL,
         FOREIGN KEY (hackathonId) REFERENCES hackathons(id),
 
         date DATETIME NOT NULL,
@@ -89,6 +92,7 @@ const SQL_ENROLLSON_TABLE = `
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )`;
 
+// Generamos tablas.
 const initDB = async () => {
     try {
         // Obtenemos una conexión con la base de datos.
@@ -97,16 +101,16 @@ const initDB = async () => {
         console.log('Borrando tablas...');
 
         // Borramos las tablas.
-        pool.query(SQL_DROP_TABLE);
+        await pool.query(SQL_DROP_TABLE);
 
         console.log('Creando tablas...');
-        pool.query(SQL_USERS_TABLE);
-        pool.query(SQL_HACKATHONS_TABLE);
-        pool.query(SQL_TAGS_TABLE);
-        pool.query(SQL_HASTAGS_TABLE);
-        pool.query(SQL_ENROLLSON_TABLE);
+        await pool.query(SQL_USERS_TABLE);
+        await pool.query(SQL_HACKATHONS_TABLE);
+        await pool.query(SQL_TAGS_TABLE);
+        await pool.query(SQL_HASTAGS_TABLE);
+        await pool.query(SQL_ENROLLSIN_TABLE);
 
-        console.log('Tablas creadas!');
+        console.log('¡Tablas creadas!');
 
         process.exit(0);
     } catch (err) {
@@ -114,4 +118,7 @@ const initDB = async () => {
         process.exit(1);
     }
 };
+
+initDB();
+
 export default initDB;
