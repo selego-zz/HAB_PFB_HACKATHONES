@@ -20,19 +20,21 @@ const newUserController = async (req, res, next) => {
 
         // Si falta algún campo lanzamos un error.
         if (!firstName || !lastName || !username || !email || !password) {
-            generateErrorUtil('Falta uno o varios campos obligatorios', 400);
+            generateErrorUtil('Falta uno o varios campos obligatorios.', 400);
         }
 
         // Comprobamos si existe usuario con ese nombre de usuario y lanzamos un error si lo hay.
         const usernameUserExists = await selectUserByUsernameModel(username);
+
         if (usernameUserExists) {
-            generateErrorUtil('Nombre de usuario no disponible', 409);
+            generateErrorUtil('Nombre de usuario no disponible.', 409);
         }
 
         // Comprobamos si existe usuario con ese email y lanzamos un error si lo hay.
         const emailUserExists = await selectUserByEmailModel(email);
+
         if (emailUserExists) {
-            generateErrorUtil('Email no disponible', 409);
+            generateErrorUtil('Email no disponible.', 409);
         }
 
         // Una vez completaedas las comprobaciones, procedemos a generar un código de registro.
@@ -49,7 +51,7 @@ const newUserController = async (req, res, next) => {
         );
 
         // Asunto del email de verificación.
-        const emailSubject = 'Activa tu usuario en Diario de Viajes :)';
+        const emailSubject = 'Activa tu usuario en Hackathon';
 
         // Cuerpo del email de verificación.
         const emailBody = `
