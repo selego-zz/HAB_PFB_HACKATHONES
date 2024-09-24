@@ -1,5 +1,5 @@
-// Importamos la función que retorna una conexión con la base de datos.
-import getPool from '../../db/getPool.js';
+// Importamos las dependencias.
+import crypto from 'crypto';
 
 // Importamos las utilidades.
 import sendMailUtil from '../../utils/sendMailUtil.js';
@@ -35,8 +35,18 @@ const newUserController = async (req, res, next) => {
             generateErrorUtil('Email no disponible', 409);
         }
 
+        // Una vez completaedas las comprobaciones, procedemos a generar un código de registro.
+        const registrationCode = crypto.randomBytes(15).toString('hex');
+
         // Insertamos el usuario.
-        await insertUserModel(firstName, lastName, username, email, password);
+        await insertUserModel(
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
+            registrationCode,
+        );
 
         // Asunto del email de verificación.
         const emailSubject = 'Activa tu usuario en Diario de Viajes :)';
