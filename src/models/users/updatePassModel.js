@@ -2,7 +2,7 @@
 import getPool from '../../db/getPool.js';
 
 // Importamos los errores.
-import generateErrorUtil from '../utils/generateErrorUtil.js';
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //////
 
