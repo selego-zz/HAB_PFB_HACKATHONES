@@ -30,14 +30,13 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ## Endpoints Hackathons
 
-✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. Devuelve numero de inscritos, la clasificación de los usuarios en el hackathon (¿solo los 3 primeros?). No requiere autenticación.
-los organizadores de otros hackathones pueden ver todos los ranking?
+✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. Devuelve numero de inscritos. No requiere autenticación.
 
 ✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathone. Sí require autenticación de organizador.
 
 ✅- **PUT** - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntentificación de organizador.
 
-✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
+✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Devuelve numero de inscritos, la clasificación de los usuarios en el hackathon (¿solo los 3 primeros?- un organizador (incluso de otros hackathones) puede verlos todo) . Requiere autenticación de desarrollador u organizador.
 
 ✅- **POST** - ["/api/hackathons/registration/:hackatonsId"] - Inscripción a un evento de hackathone. Requiere autenticación de desarrollador.
 

@@ -16,7 +16,8 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **POST** - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación.
 
-✅- **PUT** - ["/api/users/register/validate/:validationCode"] - Validar usuario con un código. No requiere autenticación.
+✅- **PATCH** - ["/api/users/register/validate/:validationCode"] - Validar usuario con un código. No requiere autenticación.
+//mientras desarrollemos la api será GET
 
 ✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
 
@@ -26,7 +27,7 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
 
-✅- **PUT** - ["/api/users/password/reset/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación.
+✅- **PUT** - ["/api/users/password/recover/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación.
 
 ## Endpoints Hackathons
 
@@ -38,12 +39,16 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
 
-✅- **POST** - ["/api/hackathons/registration"] - Inscripción a un evento de hackathon. Requiere autenticación de desarrollador.
+✅- **POST** - ["/api/hackathons/registration/:hackatonsId"] - Inscripción a un evento de hackathon. Requiere autenticación de desarrollador.
 
 ✅- **GET** - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathons en los que el usuario está registrado. Requiere autenticación de desarrollador.
 
-✅- **DELETE** - ["/api/hackathons/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autenticación del desarrollador.
+✅- **DELETE** - ["/api/hackathons/:hackatonsId/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autenticación del desarrollador.
 
-✅- **PUT** - ["/api/hackathons/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
+✅- **PUT** - ["/api/hackathons/:hackatonsId/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
 
-✅- **PUT** - ["/api/hackathons/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+✅- **PUT** - ["/api/hackathons/:hackatonsId/:developerId/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+
+✅- **GET** - ["/api/tecnologys"] -
+
+✅- **GET** - ["/api/temathycs"] -
