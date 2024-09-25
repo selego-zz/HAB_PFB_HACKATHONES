@@ -13,15 +13,16 @@ const changePassController = async (req, res, next) => {
         const { oldPass, newPass, repeatNewPass } = req.body;
 
         const userId = req.user.id;
+        const userPass = req.user.password;
 
-        // Si faltan campos lanzamos un error.
-        if (!oldPass || !newPass || !repeatNewPass) {
-            generateErrorUtil('Faltan campos', 400);
+        //Comprobamos que la vieja contraseña introducida por el usuario coincide con la que está en la base de datos.
+        if (oldPass !== userPass) {
+            generateErrorUtil('Contraseña incorrecta', 409);
         }
 
         // Si las contraseñas no coinciden lanzamos un error.
         if (newPass !== repeatNewPass) {
-            generateErrorUtil('Las contraseñas no coinciden.', 409);
+            generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
         }
 
         await updateUserModel(newPass, userId);

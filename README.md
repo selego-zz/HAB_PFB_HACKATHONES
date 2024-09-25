@@ -21,9 +21,11 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
 
-✅- **GET** - ["/api/users/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
+✅- **GET** - ["/api/user/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
 
 ✅- **PUT** - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
+
+✅- **PUT** - ["api/users/password"] - Actualiza la contraseña. Sí requiere autenticación.
 
 ✅- **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
 
@@ -51,4 +53,4 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **GET** - ["/api/tecnologys"] -
 
-✅- **GET** - ["/api/temathycs"] -
+✅- **GET** - ["/api/thematics"] -

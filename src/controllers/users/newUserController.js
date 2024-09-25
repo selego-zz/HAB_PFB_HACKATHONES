@@ -18,11 +18,6 @@ const newUserController = async (req, res, next) => {
         // Obtenemos los datos necesarios del body.
         const { firstName, lastName, username, email, password } = req.body;
 
-        // Si falta algún campo lanzamos un error.
-        if (!firstName || !lastName || !username || !email || !password) {
-            generateErrorUtil('Falta uno o varios campos obligatorios.', 400);
-        }
-
         // Comprobamos si existe usuario con ese nombre de usuario y lanzamos un error si lo hay.
         const usernameUserExists = await selectUserByUsernameModel(username);
 
