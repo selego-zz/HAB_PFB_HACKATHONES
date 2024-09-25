@@ -22,7 +22,7 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **GET** - ["/api/users/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
 
-✅- **PUT** - ["/pi/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
+✅- **PUT** - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
 
 ✅- **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
 
@@ -32,18 +32,18 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
 
-✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathone. Sí require autenticación de organizador.
+✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathon. Sí require autenticación de organizador.
 
-✅- **PUT** - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntentificación de organizador.
+✅- **PUT** - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntenticación de organizador.
 
 ✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
 
-✅- **POST** - ["/api/hackathons/registration"] - Inscripción a un evento de hackathone. Requiere autenticación de desarrollador.
+✅- **POST** - ["/api/hackathons/registration"] - Inscripción a un evento de hackathon. Requiere autenticación de desarrollador.
 
-✅- **GET** - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathones en los que el usuario está registrado. Requiere autenticación de desarrollador.
+✅- **GET** - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathons en los que el usuario está registrado. Requiere autenticación de desarrollador.
 
-✅- **DELETE** - ["/api/hackathons/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autentificación del desarrollador.
+✅- **DELETE** - ["/api/hackathons/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autenticación del desarrollador.
 
-✅- **PUT** - ["/api/hackathons/rating"] - Rating 1-5 después de la fecha de realización. Requiere autentificación del desarrollador.
+✅- **PUT** - ["/api/hackathons/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
 
-✅- **PUT** - ["/api/hackathons/classification"] - Clasificación de los participaten después de cada competición.
+✅- **PUT** - ["/api/hackathons/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.

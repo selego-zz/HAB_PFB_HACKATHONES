@@ -15,7 +15,7 @@ router.post('/api/users/login');
 router.get('/api/users/');
 
 //MIdelware que actualiza el perfil del usuario
-router.put('/pi/users/update');
+router.put('/api/users/update');
 
 //Middleware que envía códico de recuperación de contraseña
 router.put('/api/users/password/recover');
