@@ -50,7 +50,6 @@ const loginUserController = async (req, res, next) => {
         const tokenInfo = {
             id: user.id,
             username: user.username,
-            password: user.password,
             role: user.role,
             email: user.email,
         };
