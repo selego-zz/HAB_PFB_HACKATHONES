@@ -2,7 +2,7 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importamos los modelos.
-import updateUserModel from '../../models/updateUserModel.js';
+import updatePassModel from '../../models/updatePassModel.js';
 
 //////
 
@@ -13,24 +13,19 @@ const changePassController = async (req, res, next) => {
         const { oldPass, newPass, repeatNewPass } = req.body;
 
         const userId = req.user.id;
-        const userPass = req.user.password;
-
-        //Comprobamos que la vieja contraseña introducida por el usuario coincide con la que está en la base de datos.
-        if (oldPass !== userPass) {
-            generateErrorUtil('Contraseña incorrecta', 409);
-        }
 
         // Si las contraseñas no coinciden lanzamos un error.
         if (newPass !== repeatNewPass) {
             generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
         }
 
-        await updateUserModel(newPass, userId);
+        // Actualizamos la base de datos, comprobando que la vieja contraseña introducida por el usuario coincide con la ya existente.
+        await updatePassModel(userId, oldPass, newPass);
 
         // Enviamos una respuesta al cliente.
         res.send({
             status: 'ok',
-            message: 'Contraseña actualizada exitosamente',
+            message: 'Contraseña actualizada con éxito.',
         });
     } catch (err) {
         next(err);
