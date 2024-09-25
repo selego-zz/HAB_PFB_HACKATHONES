@@ -9,11 +9,7 @@ import {
     updateUserController,
 } from '../controllers/users/index.js';
 
-import {
-    authHostController,
-    authUserController,
-    authDeveloperController,
-} from '../middlewares/index.js';
+import { authUserController } from '../middlewares/index.js';
 
 //////
 
