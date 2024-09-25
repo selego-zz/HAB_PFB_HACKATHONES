@@ -1,16 +1,21 @@
 import express from 'express';
+
 import {
     newUserController,
     validateUserController,
     loginUserController,
     getOwnUserController,
     changePassController,
+    updateUserController,
 } from '../controllers/users/index.js';
+
 import {
     authHostController,
     authUserController,
     authDeveloperController,
 } from '../middlewares/index.js';
+
+//////
 
 const router = express.Router();
 
@@ -32,7 +37,6 @@ router.get('/api/user', authUserController, getOwnUserController);
 
 //MIdelware que actualiza el perfil del usuario
 router.put('/api/users/update', authUserController, updateUserController);
-
 router.put('api/users/password', authUserController, changePassController);
 
 //Middleware que envía códico de recuperación de contraseña

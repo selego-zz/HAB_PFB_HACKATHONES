@@ -1,5 +1,7 @@
 // Importamos los modelos.
-import updateActiveUserModel from '../../models/users/updateActiveUserModel.js';
+import updateActiveUserModel from '../../models/users/index.js';
+
+//////
 
 // Función controladora que valida a un usuario recién registrado.
 const validateUserController = async (req, res, next) => {
