@@ -33,7 +33,7 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ## Endpoints Hackathons
 
-✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackatones filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
+✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackathons filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
 
 ✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathon. Sí require autenticación de organizador.
 
