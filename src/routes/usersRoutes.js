@@ -6,7 +6,8 @@ const router = express.Router();
 router.post('/api/users/register');
 
 //Middleware que valida un nuevo usuario
-router.put('/api/users/register/validate/:validationCode');
+router.patch('/api/users/register/validate/:validationCode');
+//al principio get
 
 //Middleware que logea un usuario ya creado.
 router.post('/api/users/login');
@@ -21,4 +22,4 @@ router.put('/pi/users/update');
 router.put('/api/users/password/recover');
 
 //Middleware que cambia la contraseña recuperada
-router.put('/api/users/password/reset/:recoverPassCode');
+router.put('/api/users/password/recover/:recoverPassCode');
