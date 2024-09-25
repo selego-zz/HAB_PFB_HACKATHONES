@@ -1,4 +1,5 @@
 import insertUserModel from './insertUserModel.js';
+import resetPassModel from './resetPassModel.js';
 import selectUserByEmailModel from './selectUserByEmailModel.js';
 import selectUserByIdModel from './selectUserByIdModel.js';
 import selectUserByUsernameModel from './selectUserByUsernameModel.js';
@@ -8,6 +9,7 @@ import updateUserModel from './updateUserModel.js';
 
 export {
     insertUserModel,
+    resetPassModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,

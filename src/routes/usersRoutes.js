@@ -7,6 +7,8 @@ import {
     getOwnUserController,
     changePassController,
     updateUserController,
+    generateRecoverCodeController,
+    recoverPasswordController,
 } from '../controllers/users/index.js';
 
 import { authUserController } from '../middlewares/index.js';
