@@ -2,7 +2,7 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importamos los modelos.
-import updatePassModel from '../../models/updatePassModel.js';
+import updatePassModel from '../../models/users/index.js';
 
 //////
 

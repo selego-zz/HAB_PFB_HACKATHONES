@@ -3,11 +3,10 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // Importamos los modelos.
-import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
+import selectUserByEmailModel from '../../models/users/index.js';
 
 // Importamos la función que valida esquemas.
 import validateSchema from '../../utilities/validateSchema.js';
-
 // Importamos el esquema de Joi.
 import loginUserSchema from '../../schemas/users/loginUserSchema.js';
 
@@ -16,6 +15,8 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importamos las variables de entorno.
 import { SECRET } from '../../../env.js';
+
+//////
 
 // Función controladora final que logea a un usuario retornando un token.
 const loginUserController = async (req, res, next) => {

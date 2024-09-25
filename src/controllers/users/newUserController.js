@@ -6,9 +6,9 @@ import sendMailUtil from '../../utils/sendMailUtil.js';
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importamos los modelos.
-import selectUserByUsernameModel from '../../models/selectUserByUsernameModel.js';
-import selectUserByEmailModel from '../../models/selectUserByEmailModel.js';
-import insertUserModel from '../../models/insertUserModel.js';
+import selectUserByUsernameModel from '../../models/users/index.js';
+import selectUserByEmailModel from '../../models/users/index.js';
+import insertUserModel from '../../models/users/index.js';
 
 //////
 
