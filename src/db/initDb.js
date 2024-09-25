@@ -211,7 +211,7 @@ const initDB = async () => {
             await pool.query(SQL_THEME_INSERT, [theme]);
         }
 
-        const technologies = process.env.DB_THECHNOLOGIES.split(',').map(
+        const technologies = process.env.DB_TECHNOLOGIES.split(',').map(
             (technology) => technology.replace(/^"|"$/g, ''),
         ); //esto ultimo quita la comilla inicial y final
 
