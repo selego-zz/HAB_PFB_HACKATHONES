@@ -2,7 +2,7 @@
 import selectUserByIdModel from '../../models/users/selectUserByIdModel.js';
 
 // Importamos los errores.
-import generateErrorUtil from '../utils/generateErrorUtil.js';
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //////
 
