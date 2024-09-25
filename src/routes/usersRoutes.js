@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/users/register');
 
 //Middleware que valida un nuevo usuario
-router.patch('/api/users/register/validate/:validationCode');
+router.get('/api/users/register/validate/:validationCode');
 //al principio get
 
 //Middleware que logea un usuario ya creado.
