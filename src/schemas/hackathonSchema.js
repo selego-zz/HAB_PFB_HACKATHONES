@@ -30,7 +30,7 @@ import joiErrorMessages from './joiErrorMessages.js';
 //////////////////////////////////////////////////////////////
 
 const hackathonSchema = Joi.object().keys({
-    organizerId: Joi.number(),
+    organizerId: Joi.number().required(),
     //los mensajes de date.greater las pongo aquí por que dependen de la variable
     inscriptionDate: Joi.date().required().messages(joiErrorMessages),
     inscriptionEnd: Joi.date()
