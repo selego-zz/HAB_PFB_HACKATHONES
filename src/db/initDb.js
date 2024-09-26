@@ -36,8 +36,8 @@ const SQL_HACKATHONS_TABLE = `
     CREATE TABLE IF NOT EXISTS hackathons(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 
-        hostId INT UNSIGNED NOT NULL,
-        FOREIGN KEY (hostId) REFERENCES users(id),
+        organizerId INT UNSIGNED NOT NULL,
+        FOREIGN KEY (organizerId) REFERENCES users(id),
 
         inscriptionDate DATETIME NOT NULL,
         inscriptionEnd DATETIME NOT NULL,

@@ -1,11 +1,11 @@
 import authAdminController from './authAdminController.js';
 import authDeveloperController from './authDeveloperController.js';
-import authHostController from './authHostController.js';
+import authOrganizerController from './authOrganizerController.js';
 import authUserController from './authUserController.js';
 
 export {
     authAdminController,
     authDeveloperController,
-    authHostController,
+    authOrganizerController,
     authUserController,
 };

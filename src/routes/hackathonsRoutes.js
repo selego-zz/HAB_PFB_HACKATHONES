@@ -4,7 +4,7 @@ const router = express.Router();
 
 import {
     authUserController,
-    authHostController,
+    authOrganizerController,
     authDeveloperController,
 } from '../middlewares/index.js';
 
@@ -26,10 +26,14 @@ import {
 router.get('/hackathons', getAllHackathonsController);
 
 //Middleware que añade un evento de hackathon.
-router.post('/hackathons', authHostController, addHackathonController);
+router.post('/hackathons', authOrganizerController, addHackathonController);
 
 //Middleware que actualiza un evento de hackathon.
-router.put('/hackathons/update', authHostController, updateHackathonController);
+router.put(
+    '/hackathons/update',
+    authOrganizerController,
+    updateHackathonController,
+);
 
 //Middleware que devuelve información sobre un evento de hackathon.
 router.get(
@@ -69,7 +73,7 @@ router.put(
 //Middleware que clasifica a los participantes después del evento de hackathon.
 router.put(
     '/hackathons/:hacakathonId/:developerId/classification',
-    authHostController,
+    authOrganizerController,
     addScoreController,
 );
 
