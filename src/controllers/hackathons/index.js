@@ -7,7 +7,7 @@ import getTechnologiesController from './getTechnologiesController.js';
 import getThemesController from './getThemesController.js';
 import getUsersHackathonController from './getUsersHackathonController.js';
 import hackathonEnrollController from './hackathonEnrollController.js';
-import putRatingController from './putRatingController.js';
+import rateHackathonController from './rateHackathonController.js';
 import updateHackathonController from './updateHackathonController.js';
 
 export {
@@ -20,6 +20,6 @@ export {
     getThemesController,
     getUsersHackathonController, // FALTA
     hackathonEnrollController, // FALTA
-    putRatingController, // FALTA
+    rateHackathonController,
     updateHackathonController, // FALTA
 };
