@@ -1,18 +1,19 @@
-import generateErrorUtil from "../../utils/generateErrorUtil.js";
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
-const getHackathonDetailsController=(req,res,next)=>{ 
-try {
-    const { hackathonId } = req.params;
-    const hackathon=getHackathonById(hackathonId)
-    if (!hackathon) {
-     generateErrorUtil("Hackathon no encontrado", 404)
+const getHackathonDetailsController = (req, res, next) => {
+    try {
+        const { hackathonId } = req.params;
+        const hackathon = getHackathonById(hackathonId);
+        if (!hackathon) {
+            generateErrorUtil('Hackathon no encontrado', 404);
+        }
+        res.send({
+            status: 'ok',
+            message: 'hackathon obtenido',
+            data: hackathon,
+        });
+    } catch (err) {
+        next(err);
     }
-    res.send({status:"ok",
-        message:"hackathon obtenido",
-        data:hackathon
-     });
-} catch (err) {
-    next (err);
-}
 };
-export default getHackathonDetailsController
+export default getHackathonDetailsController;

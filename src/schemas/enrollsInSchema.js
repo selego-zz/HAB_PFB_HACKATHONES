@@ -27,7 +27,6 @@ import joiErrorMessages from './joiErrorMessages.js';
 
 const enrollsInSchema = Joi.object().keys({
     userId: Joi.number().required().messages(joiErrorMessages),
-    hackathonId: Joi.number().required().messages(joiErrorMessages),
     inscriptionDate: Joi.date().required().messages(joiErrorMessages),
 });
 
