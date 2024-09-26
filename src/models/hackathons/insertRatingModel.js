@@ -7,34 +7,34 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //////
 
 // Función que realiza una consulta a la base de datos votar una entrada.
-const insertRatingModel = async (value, hackathonId, userId) => {
+const insertRatingModel = async (rating, hackathonId, userId) => {
     const pool = await getPool();
 
     // Comprobamos si ya existe un valoración previa por parte del usuario que está intentando votar.
-    const [votes] = await pool.query(
-        `SELECT id FROM hackathonsRatings WHERE hackathonId = ? AND userId = ?`,
+    const [ratings] = await pool.query(
+        `SELECT id FROM enrollsin WHERE hackathonId = ? AND userId = ?`,
         [hackathonId, userId],
     );
 
     // Si el usuario ya ha votado el hackathon lanzamos un error.
-    if (votes.length > 0) {
+    if (ratings.length > 0) {
         generateErrorUtil('No puedes votar dos veces el mismo hackathon', 403);
     }
 
     // Insertamos el voto.
     await pool.query(
-        `INSERT INTO hackathonsRatings (value, hackathonId, userId) VALUES (?, ?, ?)`,
-        [value, hackathonId, userId],
+        `INSERT INTO enrollsin (rating, hackathonId, userId) VALUES (?, ?, ?)`,
+        [rating, hackathonId, userId],
     );
 
     // Obtenemos la media de votos.
-    const [votesAvg] = await pool.query(
-        `SELECT AVG(value) AS avg FROM hackathonsRatings WHERE hackathonId = ?`,
+    const [ratingsAvg] = await pool.query(
+        `SELECT AVG(rating) AS avg FROM enrollsin WHERE hackathonId = ?`,
         [hackathonId],
     );
 
     // Retornamos la media de votos.
-    return Number(votesAvg[0].avg);
+    return Number(ratingsAvg[0].avg);
 };
 
 export default insertRatingModel;

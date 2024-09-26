@@ -20,7 +20,7 @@ const rateHackathonController = async (req, res, next) => {
         const { hackathonId } = req.params;
 
         // Obtenemos el valor del voto.
-        const { value } = req.body;
+        const { rating } = req.body;
 
         // Obtenemos la entrada del hackathon por su id.
         const hackathon = await getHackathonByIdModel(hackathonId);
@@ -46,7 +46,7 @@ const rateHackathonController = async (req, res, next) => {
 
         // Insertamos el voto y obtenemos la media de votos.
         const votesAvg = await insertRatingModel(
-            value,
+            rating,
             hackathonId,
             req.user.id,
         );
