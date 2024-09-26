@@ -1,6 +1,6 @@
 import getPool from '../../db/getPool.js';
 
-//////
+///////
 
 const getAllHackathonsModel = async () => {
     const pool = await getPool();
