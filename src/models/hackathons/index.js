@@ -1,5 +1,6 @@
 import createHackathonInscriptionModel from './createHackathonInscriptionModel.js';
 import getAllHackathonsModel from './getAllHackathonsModel.js';
+import getFilteredHackathonsModel from './getFilteredHackathonsModel.js';
 import getHackathonByIdModel from './getHackathonByIdModel.js';
 import getHackathonTechnologiesModel from './getHackathonTechnologiesModel.js';
 import getHackathonThemesModel from './getHackathonThemesModel.js';
@@ -10,6 +11,7 @@ import insertScoreModel from './insertScoreModel.js';
 export {
     createHackathonInscriptionModel,
     getAllHackathonsModel,
+    getFilteredHackathonsModel,
     getHackathonByIdModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
