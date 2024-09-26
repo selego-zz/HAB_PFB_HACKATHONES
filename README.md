@@ -51,6 +51,6 @@ Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para 
 
 ✅- **PUT** - ["/api/hackathons/:hackatonsId/:developerId/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
 
-✅- **GET** - ["/api/tecnologys"] -
+✅- **GET** - ["/api/technologies"] -
 
-✅- **GET** - ["/api/thematics"] -
+✅- **GET** - ["/api/themes"] -
