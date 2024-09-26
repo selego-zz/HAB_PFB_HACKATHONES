@@ -1,5 +1,8 @@
 import { validateSchema } from '../../utils/index.js';
-import getAllHackathonsModel from '../../models/hackathons/getAllHackathonsModel.js';
+import {
+    getAllHackathonsModel,
+    getFilteredHackathonsModel,
+} from '../../models/hackathons/index.js';
 import { hackathonFilterSchema } from '../../schemas/index.js';
 
 /////////////////////////////////////////////////////////////////
@@ -30,7 +33,10 @@ import { hackathonFilterSchema } from '../../schemas/index.js';
 const getAllHackathonsController = async (req, res, next) => {
     try {
         await validateSchema(hackathonFilterSchema, req.body);
-        const hackathons = await getAllHackathonsModel(req.body);
+
+        let hackathons;
+        if (req.body) hackathons = await getFilteredHackathonsModel(req.body);
+        else hackathons = await getAllHackathonsModel();
 
         let message =
             hackathons.length > 0
