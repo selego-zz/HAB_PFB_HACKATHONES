@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-import joiErrorMessages from './joiErrorMessages.js';
+import joiErrorMessages from '../joiErrorMessages.js';
 
 /*
  *    CREATE TABLE IF NOT EXISTS users(
@@ -22,21 +22,12 @@ import joiErrorMessages from './joiErrorMessages.js';
  */
 
 //////////////////////////////////////////////////////////////
-// Esquema de usuario que se ajusta a la base de datos
-// Tiene todos los campos no automáticos de la tabla usuarios
+// Esquema para loguearse, solo mail y contraseña
 /////////////////////////////////////////////////////////////
 
-const userSchema = Joi.object().keys({
-    username: Joi.string().max(50).required().messages(joiErrorMessages),
+const loginUserSchema = Joi.object().keys({
     email: Joi.string().email().max(100).required().messages(joiErrorMessages),
     password: Joi.string().max(100).required().messages(joiErrorMessages),
-    firstName: Joi.string().max(50).required().messages(joiErrorMessages),
-    lastName: Joi.string().max(50).required().messages(joiErrorMessages),
-    avatar: Joi.string().max(100).optional().messages(joiErrorMessages),
-    role: Joi.string()
-        .valid('administrador', 'organizador', 'desarrollador')
-        .required()
-        .messages(joiErrorMessages),
 });
 
-export default userSchema;
+export default loginUserSchema;

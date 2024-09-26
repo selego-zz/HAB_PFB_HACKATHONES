@@ -6,12 +6,10 @@ import jwt from 'jsonwebtoken';
 import { selectUserByEmailModel } from '../../models/users/index.js';
 
 // Importamos la función que valida esquemas.
-import { validateSchema } from '../../utils/index.js';
-// Importamos el esquema de Joi.
-import loginUserSchema from '../../schemas/loginUserSchema.js';
-
 // Importamos los errores.
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import { generateErrorUtil, validateSchema } from '../../utils/index.js';
+// Importamos el esquema de Joi.
+import loginUserSchema from '../../schemas/index.js';
 
 // Importamos las variables de entorno.
 const { SECRET } = process.env;

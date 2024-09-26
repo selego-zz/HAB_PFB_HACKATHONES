@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-import joiErrorMessages from './joiErrorMessages.js';
+import joiErrorMessages from '../joiErrorMessages.js';
 
 /*
  *    CREATE TABLE IF NOT EXISTS users(
