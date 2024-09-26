@@ -1,27 +1,20 @@
-import generateErrorUtil from "../../utils/generateErrorUtil.js";
-import createHackathonInscription from "../../services/inscriptionService.js";
-
+import {generateErrorUtil,} from "../../utils/index.js";
+import {createHackathonInscriptionModel} from "../../models/index.js";
+import {enrollsInSchema} from "../../schemas/index.js"
+// recibe id de hackaton, id de usuario y fecha y devuelve id de inscripcion
 const inscriptionHackathonController = async (req, res, next) => {
   try {
+    await validateSchema(enrollsInSchema,req.body)
     const { hackathonId } = req.params;
     const { userId } = req.body;
 
-    if (!hackathonId || isNaN(hackathonId)) {
-      throw generateErrorUtil("ID de Hackathon no válido", 400);
-    }
-
-    if (!userId) {
-      throw generateErrorUtil("ID de usuario es obligatorio", 400);
-    }
-
-    // Crear la inscripción
-    const inscription = await createHackathonInscription(hackathonId, userId);
+    const inscription = await createHackathonInscriptionModel(hackathonId, userId);
 
     if (!inscription) {
       throw generateErrorUtil("No se pudo crear la inscripción", 500);
     }
 
-    res.status(201).json({
+    res.status(201).send({
       status: "ok",
       message: "Inscripción realizada con éxito",
       data: inscription,

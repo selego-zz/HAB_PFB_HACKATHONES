@@ -1,15 +1,17 @@
-import generateErrorUtil from "../../utils/generateErrorUtil.js";
-import getAllHackathons from "../../services/hackathonService.js";
-
+import {generateErrorUtil,validateSchema} from "../../utils/index.js";
+import {getAllHackathonsModel} from "../../models/index.js";
+import {hackathonFilterSchema} from "../../schemas/index.js"
 const getHackathonsController = async (req, res, next) => {
   try {
-    const hackathons = await getAllHackathons();
+    await validateSchema(hackathonFilterSchema,req.body)
+    const hackathons = await getAllHackathonsModel(req.body);
+    
 
     if (!hackathons || hackathons.length === 0) {
       throw generateErrorUtil("No se encontraron hackatones", 404);
     }
 
-    res.status(200).json({
+    res.send({
       status: "ok",
       message: "Hackatones obtenidos",
       data: hackathons,
