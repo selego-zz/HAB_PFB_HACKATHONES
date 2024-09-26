@@ -8,8 +8,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 // Importamos las rutas.
-import userRoutes from './src/routes/userRoutes.js';
-import hackRoutes from './src/routes/hackRoutes.js';
+import userRoutes from './src/routes/usersRoutes.js';
+import hackRoutes from './src/routes/hackathonsRoutes.js';
 
 // Importamos las variables de entorno necesarias.
 const { PORT, UPLOADS_DIR } = process.env;

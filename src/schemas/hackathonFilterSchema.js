@@ -30,9 +30,9 @@ import joiErrorMessages from './joiErrorMessages.js';
 //////////////////////////////////////////////////////////////
 
 const hackathonFilterSchema = Joi.object().keys({
-    organizerId: Joi.number.optional(),
-    hackathonDate: Joi.date().optional().messages(joiErrorMessages),
-    hackathonEnd: Joi.date().optional().messages(joiErrorMessages),
+    organizerId: Joi.number().optional(),
+    inscriptionDate: Joi.date().optional().messages(joiErrorMessages),
+    inscriptionEnd: Joi.date().optional().messages(joiErrorMessages),
     hackathonDate: Joi.date().optional().messages(joiErrorMessages),
     hackathonEnd: Joi.date().optional().messages(joiErrorMessages),
     maxParticipants: Joi.number().optional().messages(joiErrorMessages),

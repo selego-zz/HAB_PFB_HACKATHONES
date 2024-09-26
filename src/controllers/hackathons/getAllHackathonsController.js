@@ -1,7 +1,10 @@
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-import { getAllHackathonsModel } from '../../models/index.js';
-import { hackathonFilterSchema } from '../../schemas/index.js';
-const getHackathonsController = async (req, res, next) => {
+import getAllHackathonsModel from '../../models/hackathons/getAllHackathonsModel.js';
+import hackathonFilterSchema from '../../schemas/hackathonFilterSchema.js';
+
+//////
+
+const getAllHackathonsController = async (req, res, next) => {
     try {
         await validateSchema(hackathonFilterSchema, req.body);
         const hackathons = await getAllHackathonsModel(req.body);
@@ -20,4 +23,4 @@ const getHackathonsController = async (req, res, next) => {
     }
 };
 
-export default getHackathonsController;
+export default getAllHackathonsController;

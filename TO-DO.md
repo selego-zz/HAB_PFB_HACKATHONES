@@ -11,3 +11,7 @@ router.post('/api/users/addhost', authAdminController, newUserController);
 sí, usamos la misma función que para registrar a un usuario comun, pero al poner el middleware de authAdminController, solo puede ejecutarla el administrador
 
 TO DO: Crear funcion const hackathons = await getAllHackathonsModel(req.body);
+
+- Models de hackathons en archivo index
+- Meter los schemas al index.
+- Comprobar los schemas con la BBDD

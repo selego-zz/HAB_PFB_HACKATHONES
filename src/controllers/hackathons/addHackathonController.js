@@ -3,7 +3,7 @@ import insertHackathonModel from '../../models/hackathons/insertHackathonModel.j
 import validateSchema from '../../utils/validateSchema.js';
 import { hackathonSchema } from '../../schemas/index.js';
 
-const addHackthonController = async (req, res, next) => {
+const addHackathonController = async (req, res, next) => {
     try {
         await validateSchema(hackathonSchema, req.body);
 
@@ -42,4 +42,4 @@ const addHackthonController = async (req, res, next) => {
     }
 };
 
-export default addHackthonController;
+export default addHackathonController;
