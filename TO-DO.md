@@ -53,3 +53,7 @@ puede ser que sea lo mismo que createHackathonInscriptionController???
 
 newUserController
 Permitimos subir avatar en la creación del usuario?
+
+updateUserController:
+mejor extraer la función de savePhotoUtil para reaprovecharla en otras partes?
+habría que borrar el avatar anterior con removePhotoUtil?
