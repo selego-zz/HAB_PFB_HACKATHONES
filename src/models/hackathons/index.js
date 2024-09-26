@@ -5,6 +5,7 @@ import getHackathonTechnologiesModel from './getHackathonTechnologiesModel.js';
 import getHackathonThemesModel from './getHackathonThemesModel.js';
 import insertHackathonModel from './insertHackathonModel.js';
 import insertRatingModel from './insertRatingModel.js';
+import insertScoreModel from './insertScoreModel.js';
 
 export {
     createHackathonInscriptionModel,
@@ -14,4 +15,5 @@ export {
     getHackathonThemesModel,
     insertHackathonModel,
     insertRatingModel,
+    insertScoreModel,
 };

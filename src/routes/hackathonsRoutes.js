@@ -9,7 +9,7 @@ import {
 } from '../middlewares/index.js';
 
 import {
-    addRankingController,
+    addScoreController,
     addHackathonController,
     deleteHackathonController,
     getAllHackathonsController,
@@ -70,7 +70,7 @@ router.put(
 router.put(
     '/hackathons/:hacakathonId/:developerId/classification',
     authHostController,
-    addRankingController,
+    addScoreController,
 );
 
 router.get('/technologies', getTechnologiesController);
