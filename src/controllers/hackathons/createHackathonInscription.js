@@ -1,13 +1,18 @@
-import { generateErrorUtil } from '../../utils/index.js';
+import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 import { createHackathonInscriptionModel } from '../../models/index.js';
 import { enrollsInSchema } from '../../schemas/index.js';
+
+//////
+
 // recibe id de hackaton, id de usuario y fecha y devuelve id de inscripcion
 const inscriptionHackathonController = async (req, res, next) => {
     try {
         await validateSchema(enrollsInSchema, req.body);
+
         const { hackathonId } = req.params;
         const { userId } = req.body;
         const { date } = req.body;
+
         const inscription = await createHackathonInscriptionModel(
             hackathonId,
             userId,

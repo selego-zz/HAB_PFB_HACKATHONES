@@ -1,4 +1,4 @@
-import { getPool } from '../../db/index.js';
+import getPool from '../../db/getPool.js';
 
 /////////////////////////////////////////////////////////////////
 // Modelo que actualiza los datos del usuario en la base de datos

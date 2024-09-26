@@ -2,7 +2,7 @@
 import fileUpload from 'express-fileupload';
 
 // Importamos los modelos.
-import updateUserModel from '../../models/users/index.js';
+import { updateUserModel } from '../../models/users/index.js';
 
 //////
 
@@ -14,7 +14,7 @@ const updateUserController = async (req, res, next) => {
         const userId = req.user.id;
         req.body.id = req.user.id;
 
-        req.body.avatar = await file;
+        req.body.avatar = await fileUpload();
 
         // Actualizamos la base de datos.
         await updateUserModel(req.body);

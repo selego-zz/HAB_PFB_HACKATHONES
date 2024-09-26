@@ -1,5 +1,5 @@
 // Importamos los modelos.
-import updateActiveUserModel from '../../models/users/index.js';
+import { updateActiveUserModel } from '../../models/users/index.js';
 
 //////
 

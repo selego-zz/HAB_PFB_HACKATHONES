@@ -1,22 +1,22 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
-import getHackathonTechnologies from '../../services/hackathonService.js';
+import getHackathonThemesModel from '../../models/hackathons/getHackathonThemesModel.js';
 
-const getTechnologiesController = async (req, res, next) => {
+const getThemesController = async (req, res, next) => {
     try {
-        const technologies = await getHackathonTechnologies();
+        const themes = await getHackathonThemesModel();
 
-        if (!technologies || technologies.length === 0) {
-            throw generateErrorUtil('No se encontraron tecnologías', 404);
+        if (!themes || themes.length === 0) {
+            throw generateErrorUtil('No se encontraron temas', 404);
         }
 
         res.send({
             status: 'ok',
-            message: 'Tecnologías obtenidas',
-            data: technologies,
+            message: 'Temas obtenidos',
+            data: themes,
         });
     } catch (err) {
         next(err);
     }
 };
 
-export default getTechnologiesController;
+export default getThemesController;

@@ -3,18 +3,18 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 // Importamos los modelos.
-import selectUserByEmailModel from '../../models/users/index.js';
+import { selectUserByEmailModel } from '../../models/users/index.js';
 
 // Importamos la función que valida esquemas.
-import validateSchema from '../../utilities/validateSchema.js';
+import { validateSchema } from '../../utils/index.js';
 // Importamos el esquema de Joi.
-import loginUserSchema from '../../schemas/users/loginUserSchema.js';
+import loginUserSchema from '../../schemas/loginUserSchema.js';
 
 // Importamos los errores.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 // Importamos las variables de entorno.
-import { SECRET } from '../../../env.js';
+const { SECRET } = process.env;
 
 //////
 

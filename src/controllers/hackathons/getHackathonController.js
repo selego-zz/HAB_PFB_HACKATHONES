@@ -1,6 +1,7 @@
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import getHackathonById from '../../models/hackathons/getHackathonByIdModel.js';
 
-const getHackathonDetailsController = (req, res, next) => {
+const getHackathonController = (req, res, next) => {
     try {
         const { hackathonId } = req.params;
         const hackathon = getHackathonById(hackathonId);
@@ -9,11 +10,11 @@ const getHackathonDetailsController = (req, res, next) => {
         }
         res.send({
             status: 'ok',
-            message: 'hackathon obtenido',
+            message: 'Hackathon obtenido',
             data: hackathon,
         });
     } catch (err) {
         next(err);
     }
 };
-export default getHackathonDetailsController;
+export default getHackathonController;

@@ -1,4 +1,4 @@
-import verifyTokenUtil from '../utils/index.js';
+import { verifyTokenUtil } from '../utils/index.js';
 
 /////////////////////////////////////////////////////////////////
 // Este middleware llama a verifyTokenUtil
