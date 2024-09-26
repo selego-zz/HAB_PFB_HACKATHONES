@@ -21,7 +21,7 @@ const SQL_USERS_TABLE = `
         lastName VARCHAR(50) NOT NULL,
         role ENUM ('administrador', 'organizador', 'desarrollador') NOT NULL,
         
-        biografía VARCHAR(300),
+        biography VARCHAR(300),
         linkedIn VARCHAR(100),
 
         recoverPassCode CHAR(30),
@@ -45,7 +45,7 @@ const SQL_HACKATHONS_TABLE = `
         hackathonEnd DATETIME NOT NULL,
 
         maxParticipants INT UNSIGNED,
-        online ENUM ('presencial', 'remoto') default 'remoto',
+        online ENUM ('presencial', 'remoto') NOT NULL,
         location VARCHAR(200),
         prizes DECIMAL(9, 2),
         logo VARCHAR(100),

@@ -1,5 +1,5 @@
 // Importamos los errores.
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import { generateErrorUtil } from '../../utils/index.js';
 
 // Importamos los modelos.
 import { selectUserByIdModel } from '../../models/users/index.js';

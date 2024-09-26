@@ -1,5 +1,5 @@
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
-import getHackathonTechnologiesModel from '../../models/hackathons/getHackathonTechnologiesModel.js';
+import { generateErrorUtil } from '../../utils/index.js';
+import { getHackathonTechnologiesModel } from '../../models/index.js';
 
 //////
 

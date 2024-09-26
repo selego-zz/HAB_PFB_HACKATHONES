@@ -24,7 +24,7 @@ const router = express.Router();
 router.post('/users/register', newUserController);
 
 //Middleware para que el administrador registre un organizador
-router.post('/api/users/addOrganizer', authAdminController, newUserController);
+router.post('/users/addOrganizer', authAdminController, newUserController);
 
 //Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:validationCode', validateUserController);

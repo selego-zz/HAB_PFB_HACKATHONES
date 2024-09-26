@@ -2,13 +2,16 @@
 import path from 'path';
 import sharp from 'sharp';
 import { updateUserModel } from '../../models/users/index.js';
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import { generateErrorUtil, validateSchema } from '../../utils/index.js';
+import { updateUserSchema } from '../../schemas/index.js';
 
 //////
 
 // Función controladora que le permite a un usuario cambiar sus datos personales.
 const updateUserController = async (req, res, next) => {
     try {
+        await validateSchema(updateUserSchema, req.body);
+
         // Obtenemos los datos necesarios.
         // eslint-disable-next-line no-unused-vars
         const { username, email, firstName, lastName } = req.body;

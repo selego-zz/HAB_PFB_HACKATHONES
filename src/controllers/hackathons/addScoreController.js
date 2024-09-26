@@ -1,14 +1,13 @@
-import { insertScoreModel } from '../../models/hackathons/index.js';
+import { insertScoreModel } from '../../models/index.js';
+import { validateSchema } from '../../utils/index.js';
+import { userScoreSchema } from '../../schemas/index.js';
 
 //////
 
 const addScoreController = async (req, res, next) => {
     try {
+        await validateSchema(userScoreSchema, req.body);
         const { userId, hackathonId, score } = req.body;
-
-        /* if (!userId || !score) {
-            throw generateErrorUtil('Faltan campos', 400);
-        } */ // FALTA SUSTITUIR ESTO POR EL SCHEMA
 
         const newScore = await insertScoreModel(userId, hackathonId, score);
 

@@ -1,5 +1,6 @@
 import { resetPassModel } from '../../models/users/index.js';
-import { generateErrorUtil } from '../../utils/index.js';
+import { recoverPassSchema } from '../../schemas/index.js';
+import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 
 /////////////////////////////////////////////////////////////////
 // Controlador que actualiza la contraseña por una nueva
@@ -12,6 +13,8 @@ import { generateErrorUtil } from '../../utils/index.js';
 
 const recoverPasswordController = async (req, res, next) => {
     try {
+        await validateSchema(recoverPassSchema, req.body);
+
         const recoverPassCode = req.params.recoverPassCode;
         const { newPass, repeatNewPass } = req.body;
 

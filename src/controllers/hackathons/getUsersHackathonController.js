@@ -1,3 +1,3 @@
-const addScoreController = () => {};
+const getUsersHackathonController = () => {};
 
-export default addScoreController;
+export default getUsersHackathonController;
