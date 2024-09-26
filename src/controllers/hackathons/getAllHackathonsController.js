@@ -2,7 +2,7 @@ import { validateSchema } from '../../utils/index.js';
 import {
     getAllHackathonsModel,
     getFilteredHackathonsModel,
-} from '../../models/hackathons/index.js';
+} from '../../models/index.js';
 import { hackathonFilterSchema } from '../../schemas/index.js';
 
 /////////////////////////////////////////////////////////////////

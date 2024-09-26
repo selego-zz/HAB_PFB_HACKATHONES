@@ -1,6 +1,6 @@
 // Importamos los modelos.
-import insertHackathonModel from '../../models/hackathons/insertHackathonModel.js';
-import validateSchema from '../../utils/validateSchema.js';
+import { insertHackathonModel } from '../../models/index.js';
+import { validateSchema } from '../../utils/index.js';
 import { hackathonSchema } from '../../schemas/index.js';
 
 const addHackathonController = async (req, res, next) => {

@@ -7,10 +7,8 @@ import joiErrorMessages from '../joiErrorMessages.js';
 // el resto de datos no se saben hasta que acabe el hackathon
 /////////////////////////////////////////////////////////////
 
-const enrollsInSchema = Joi.object().keys({
-    hackathonId: Joi.number().required().messages(joiErrorMessages),
-    userId: Joi.number().required().messages(joiErrorMessages),
-    date: Joi.date().required().messages(joiErrorMessages),
+const rateHackathonSchema = Joi.object().keys({
+    rating: Joi.number().required().messages(joiErrorMessages),
 });
 
-export default enrollsInSchema;
+export default rateHackathonSchema;
