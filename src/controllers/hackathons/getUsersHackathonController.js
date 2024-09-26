@@ -1,3 +1,3 @@
-const addRankingController = () => {};
+const addScoreController = () => {};
 
-export default addRankingController;
+export default addScoreController;
