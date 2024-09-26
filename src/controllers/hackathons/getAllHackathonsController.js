@@ -1,6 +1,6 @@
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 import getAllHackathonsModel from '../../models/hackathons/getAllHackathonsModel.js';
-import hackathonFilterSchema from '../../schemas/index.js';
+import { hackathonFilterSchema } from '../../schemas/index.js';
 
 //////
 

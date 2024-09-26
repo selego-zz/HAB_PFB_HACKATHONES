@@ -9,7 +9,7 @@ import { selectUserByEmailModel } from '../../models/users/index.js';
 // Importamos los errores.
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 // Importamos el esquema de Joi.
-import loginUserSchema from '../../schemas/index.js';
+import { loginUserSchema } from '../../schemas/index.js';
 
 // Importamos las variables de entorno.
 const { SECRET } = process.env;

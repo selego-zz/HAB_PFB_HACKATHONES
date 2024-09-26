@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////
 // JSON con los posibles mensjaes de error de Joi,
 // para ponerlos en español.
-// Los que no se definan aquí saltarán en inglues
+// Los que no se definan aquí saltarán en inglés
 /////////////////////////////////////////////////////////////
 
 const joiErrorMessages = {
