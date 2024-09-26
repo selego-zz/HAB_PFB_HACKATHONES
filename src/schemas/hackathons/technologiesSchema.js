@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-import joiErrorMessages from './hackathons/joiErrorMessages.js';
+import joiErrorMessages from '../joiErrorMessages.js';
 
 //////////////////////////////////////////////////////////////
 // Esquema de etiquetas que se ajusta a la base de datos
