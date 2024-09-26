@@ -1,3 +1,6 @@
+// Importamos las dependencias.
+import bcrypt from 'bcrypt';
+
 // Importamos la función que genera un error.
 import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
@@ -19,8 +22,11 @@ const changePassController = async (req, res, next) => {
             generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
         }
 
-        // Actualizamos la base de datos, comprobando que la vieja contraseña introducida por el usuario coincide con la ya existente.
-        await updatePassModel(userId, oldPass, newPass);
+        // Encriptamos la nueva contraseña.
+        const hashedNewPass = await bcrypt.hash(newPass, 10);
+
+        // Actualizamos la base de datos.
+        await updatePassModel(userId, oldPass, hashedNewPass);
 
         // Enviamos una respuesta al cliente.
         res.send({
