@@ -10,7 +10,4 @@ TO-DO: añadir ruta de usuario:
 router.post('/api/users/addhost', authAdminController, newUserController);
 sí, usamos la misma función que para registrar a un usuario comun, pero al poner el middleware de authAdminController, solo puede ejecutarla el administrador
 
-TO DO: Crear funcion  const inscription = await createHackathonInscriptionModel(hackathonId, userId);
 TO DO: Crear funcion const hackathons = await getAllHackathonsModel(req.body);
-TO DO: Crear funcion const technologies = await getHackathonTechnologies();
-TO DO: Crear funcion const hackathon=getHackathonById(hackathonId)
