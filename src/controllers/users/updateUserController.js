@@ -1,3 +1,6 @@
+// Importamos dependencias.
+import fileUpload from 'express-fileupload';
+
 // Importamos los modelos.
 import updateUserModel from '../../models/users/index.js';
 
@@ -9,9 +12,12 @@ const updateUserController = async (req, res, next) => {
         // Obtenemos los datos necesarios.
         const { username, email, firstName, lastName } = req.body;
         const userId = req.user.id;
+        req.body.id = req.user.id;
+
+        req.body.avatar = await file;
 
         // Actualizamos la base de datos.
-        await updateUserModel(userId, username, email, firstName, lastName);
+        await updateUserModel(req.body);
 
         // Enviamos una respuesta al cliente.
         res.send({
