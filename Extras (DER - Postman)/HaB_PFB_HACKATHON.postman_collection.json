@@ -74,7 +74,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n}",
+							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,6 +143,29 @@
 								"users",
 								"password",
 								"recover"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validateUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/users/register/validate/4948b4bb5f22e2fd6133beb48ee0b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"register",
+								"validate",
+								"4948b4bb5f22e2fd6133beb48ee0b6"
 							]
 						}
 					},
