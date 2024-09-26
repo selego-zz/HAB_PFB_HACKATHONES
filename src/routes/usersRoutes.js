@@ -11,7 +11,10 @@ import {
     recoverPasswordController,
 } from '../controllers/users/index.js';
 
-import { authUserController } from '../middlewares/index.js';
+import {
+    authUserController,
+    authAdminController,
+} from '../middlewares/index.js';
 
 //////
 
@@ -19,6 +22,9 @@ const router = express.Router();
 
 //Middleware que registra un nuevo usuario
 router.post('/users/register', newUserController);
+
+//Middleware para que el administrador registre un organizador
+router.post('/api/users/addhost', authAdminController, newUserController);
 
 //Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:validationCode', validateUserController);
