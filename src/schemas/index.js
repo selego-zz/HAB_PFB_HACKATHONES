@@ -1,3 +1,27 @@
-import hackathonSchema from './hackathonSchema.js';
+import {
+    enrollsInSchema,
+    hackathonFilterSchema,
+    hackathonSchema,
+    technologiesSchema,
+    themesSchema,
+} from './hackathons/index.js';
 
-export { hackathonSchema };
+import {
+    changePassSchema,
+    loginUserSchema,
+    updateUserSchema,
+    userSchema,
+} from './users/index.js';
+export {
+    //hackathon schemas
+    enrollsInSchema,
+    hackathonFilterSchema,
+    hackathonSchema,
+    technologiesSchema,
+    themesSchema,
+    //user Schemas
+    changePassSchema,
+    loginUserSchema,
+    updateUserSchema,
+    userSchema,
+};

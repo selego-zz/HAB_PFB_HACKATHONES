@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-import joiErrorMessages from './joiErrorMessages.js';
+import joiErrorMessages from '../joiErrorMessages.js';
 
 /*
  *    CREATE TABLE IF NOT EXISTS hackathons(
@@ -29,35 +29,20 @@ import joiErrorMessages from './joiErrorMessages.js';
 // Tiene todos los campos no automáticos de la tabla hackathon
 //////////////////////////////////////////////////////////////
 
-const hackathonSchema = Joi.object().keys({
-    organizerId: Joi.number().required(),
-    //los mensajes de date.greater las pongo aquí por que dependen de la variable
-    inscriptionDate: Joi.date().required().messages(joiErrorMessages),
-    inscriptionEnd: Joi.date()
-        .greater(Joi.ref('inscriptionDate'))
-        .required()
-        .messages({
-            ...joiErrorMessages,
-            'date.greater':
-                'La fecha de finalización de inscripción debe ser posterior a la fecha de inicio de inscripción',
-        }),
-    //permito que se inscriba gente aunque haya empezado el hackathon
-    date: Joi.date().required().messages(joiErrorMessages),
-    end: Joi.date()
-        .greater(Joi.ref('date'))
-        .required()
-        .messages({
-            ...joiErrorMessages,
-            'date.greater':
-                'La fecha de finalización debe ser posterior a la fecha de inicio',
-        }),
-
+const hackathonFilterSchema = Joi.object().keys({
+    organizerId: Joi.number().optional(),
+    inscriptionDate: Joi.date().optional().messages(joiErrorMessages),
+    inscriptionEnd: Joi.date().optional().messages(joiErrorMessages),
+    hackathonDate: Joi.date().optional().messages(joiErrorMessages),
+    hackathonEnd: Joi.date().optional().messages(joiErrorMessages),
     maxParticipants: Joi.number().optional().messages(joiErrorMessages),
     prices: Joi.number().optional().messages(joiErrorMessages),
     logo: Joi.string().max(100).optional().messages(joiErrorMessages),
     online: Joi.boolean().optional().messages(joiErrorMessages),
     location: Joi.string().max(200).optional().messages(joiErrorMessages),
     documentation: Joi.string().max(100).optional().messages(joiErrorMessages),
+    themes,
+    technologies,
 });
 
-export default hackathonSchema;
+export default hackathonFilterSchema;
