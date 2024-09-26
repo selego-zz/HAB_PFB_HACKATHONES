@@ -2,12 +2,10 @@ import getPool from '../../db/getPool.js';
 
 //////
 
-const getHackathonByIdModel = async (hackathonId) => {
+const getAllHackathonsModel = async () => {
     const pool = await getPool();
 
-    const [res] = await pool.query('GET * FROM hackathons WHERE id = ?', [
-        hackathonId,
-    ]);
+    const [res] = await pool.query('SELECT * FROM hackathons');
     return res;
 };
-export default getHackathonByIdModel;
+export default getAllHackathonsModel;
