@@ -57,3 +57,16 @@ Permitimos subir avatar en la creación del usuario?
 updateUserController:
 mejor extraer la función de savePhotoUtil para reaprovecharla en otras partes?
 habría que borrar el avatar anterior con removePhotoUtil?
+
+---
+
+Registrar usuario falla por nombre de columna incorrecto, os dejo como deberes corregirla para que practiquéis.
+una vez corregida el correo llega perfecto. PERO hasta que no tengamos el front, la dirección que deberíamos poner es la del back:
+http://localhost:8000/api/users/validate/4948b4bb5f22e2fd6133beb48ee0b6 (el codigo final el que sea)
+
+una vez que la pongáis, updateActiveUserModel tiene el mismo fallo que registrar usuario en el nombre de columna
+una vez que lo corrijáis os seguirá sin funcionar. es por que en el controlador tomáis mal el parámetro:
+no podéis poner cualquier nombre en el nombre de la variable, hay que poner el nombre que se le da en la ruta:
+/users/register/validate/:validationCode
+estáis usando registrationCode
+para no estar poniendo una cosa distinta cada vez, os recomiendo que pongáis el nombre que tiene el campo en la base de datos en todas partes, con lo que os ahorráis pensar

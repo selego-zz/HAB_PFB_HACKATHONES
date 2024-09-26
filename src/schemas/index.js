@@ -10,6 +10,7 @@ import {
 import {
     changePassSchema,
     loginUserSchema,
+    recoverPassSchema,
     updateUserSchema,
     userSchema,
     userScoreSchema,
@@ -25,6 +26,7 @@ export {
     //user Schemas
     changePassSchema,
     loginUserSchema,
+    recoverPassSchema,
     updateUserSchema,
     userSchema,
     userScoreSchema,

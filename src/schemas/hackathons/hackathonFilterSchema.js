@@ -1,6 +1,9 @@
 import Joi from '@hapi/joi';
 import joiErrorMessages from '../joiErrorMessages.js';
-import { themesSchema, technologiesSchema } from './index.js';
+
+//si se importan desde index no se inicializan bien. hay que importarlos directamente
+import themesSchema from './themesSchema.js';
+import technologiesSchema from './technologiesSchema.js';
 
 ///////////////////////////////////////////////////////////////
 // Esquema de hackaton que se ajusta a la base de datos
