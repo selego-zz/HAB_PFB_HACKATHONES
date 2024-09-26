@@ -22,7 +22,7 @@ import {
     updateHackathonController,
 } from '../controllers/hackathons/index.js';
 
-//Middleware que devuelve el listado de eventos de hackathones.
+//Middleware que devuelve el listado de eventos de hackathones. Puede aceptar filtros y orden en el body
 router.get('/hackathons', getAllHackathonsController);
 
 //Middleware que añade un evento de hackathon.

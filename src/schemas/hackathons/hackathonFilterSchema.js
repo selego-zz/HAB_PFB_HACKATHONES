@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi';
 import joiErrorMessages from '../joiErrorMessages.js';
+import { themesSchema, technologiesSchema } from './index.js';
 
 /*
  *    CREATE TABLE IF NOT EXISTS hackathons(
@@ -41,8 +42,27 @@ const hackathonFilterSchema = Joi.object().keys({
     online: Joi.boolean().optional().messages(joiErrorMessages),
     location: Joi.string().max(200).optional().messages(joiErrorMessages),
     documentation: Joi.string().max(100).optional().messages(joiErrorMessages),
-    themes,
-    technologies,
+    themes: Joi.array().items(themesSchema).optional(),
+    technologies: Joi.array().items(technologiesSchema).optional(),
+    orderBy: Joi.array()
+        .items(
+            Joi.string().valid(
+                'organizerId',
+                'inscriptionDate',
+                'inscriptionEnd',
+                'hackathonDate',
+                'hackathonEnd',
+                'maxParticipants',
+                'prices',
+                'logo',
+                'online',
+                'location',
+                'documentation',
+                'themes',
+                'technologies',
+            ),
+        )
+        .optional(),
 });
 
 export default hackathonFilterSchema;

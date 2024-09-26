@@ -2,18 +2,18 @@ import getPool from '../../db/getPool.js';
 
 import { getAllHackathonsModel } from './index.js';
 
-//////
-
 /////////////////////////////////////////////////////////////////
-// Controlador que devuelve información de los hackathones
+// Modelo que devuelve información de los hackathones
 //
 // Si body está vacío, devuelve información de todos los hackathones
 //
 // Si body no está vacío, puede contener una combinación de
 //       los siguientes campos, que pueden estar o no:
-//       req.body.orderBy que es un array de string
-//             los string que se pongan aquí serán los nombres de
-//             las columnas por las que queremos que ordene
+//       req.body.orderBy que es un array de JSON
+//             los JSON tendrán 2 string:
+//                   field: es el nombre del campo por el que se ordenara
+//                   type: tiene 2 posibles valores: ASC o DESC
+//                   corresponde a ascendente o descendente
 //       req.body.themes que es un array de string de temas
 //             se filtrará el resultado devolviendo solo los que
 //             tengan un tema que contenga esa cadena
@@ -57,18 +57,9 @@ const getFilteredHackathonsModel = async (filters) => {
     const args = [];
 
     // ahora tenemos 3 posibles filtros, 2 de ellos requieren un join, y un posible array de orderby
-
-    //si alguno de los posibles filtros existe, metemos where
-    if (
-        Object.keys(filters).length > 0 ||
-        themes.length > 0 ||
-        technologies.length > 0
-    ) {
-        //meto un mini retraso en la query, pero facilita mucho la construcción dinámica luego
-        sqlWhere = ' WHERE';
-    }
-
-    if (themes) {
+    //por cuestiones de optimización, meto el where después de construir sqlJoins (pero al principio de la cadena ^^' )
+    if (themes && themes.length > 0) {
+        sqlSelect += ', theme';
         sqlJoins += `
             LEFT JOIN
                 hackathonTemes ht ON h.id = ht.hackathonId
@@ -77,12 +68,13 @@ const getFilteredHackathonsModel = async (filters) => {
         `;
 
         for (const theme of themes) {
-            sqlWhere += ` and theme like '%?%'`;
-            args.push(theme);
+            sqlWhere += ` and theme like `;
+            args.push('%' + theme + '%');
         }
     }
 
-    if (technologies) {
+    if (technologies && technologies.length > 0) {
+        sqlSelect += ', technology';
         sqlJoins += `
             LEFT JOIN 
                 hackathonTechnologies htech ON h.id = htech.hackathonId
@@ -91,9 +83,29 @@ const getFilteredHackathonsModel = async (filters) => {
         `;
 
         for (const technology of technologies) {
-            sqlWhere += ` and theme like '%?%'`;
-            args.push(technology);
+            sqlWhere += ` and technology like ?`;
+            args.push('%' + technology + '%');
         }
+    }
+
+    //en este no hago comprobación, por que si no entra al for no mete nada antes
+    for (const filter in filters) {
+        sqlWhere += ` and ?? like ?`;
+        args.push(filter);
+        args.push('%' + filters[filter] + '%');
+    }
+
+    //si hemos metido filters, metemos where
+    if (sqlWhere.length > 0) sqlWhere = ' WHERE' + sqlWhere.slice(4);
+
+    if (orderBy && orderBy.length() > 0) {
+        for (const order of orderBy) {
+            sqlOrderBy += ', ?? ?';
+            args.push(order.field);
+            args.push(order.type);
+        }
+        //quitamos la coma inicial
+        sqlOrderBy = ' order by' + orderBy.slice(2);
     }
 
     const [res] = await pool.query(
