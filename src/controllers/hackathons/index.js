@@ -13,12 +13,12 @@ import updateScoreController from './updateScoreController.js';
 export {
     addHackathonController,
     addHackathonInscriptionController,
-    deleteHackathonController, // FALTA
+    deleteHackathonController,
     getAllHackathonsController,
     getHackathonController,
     getTechnologiesController,
     getThemesController,
-    getUsersHackathonController, // FALTA
+    getUsersHackathonController,
     updateHackathonController,
     updateRatingController,
     updateScoreController,
