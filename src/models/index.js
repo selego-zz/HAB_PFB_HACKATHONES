@@ -1,5 +1,6 @@
 import {
     addHackathonInscriptionModel,
+    deleteHackathonModel,
     getAllHackathonsModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
@@ -21,9 +22,13 @@ import {
     updatePassModel,
     updateUserModel,
 } from './users/index.js';
+
+////////////////////////
+
 export {
     //hackathons
     addHackathonInscriptionModel,
+    deleteHackathonModel,
     getAllHackathonsModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
@@ -33,6 +38,7 @@ export {
     updateHackathonModel,
     updateRatingModel,
     updateScoreModel,
+
     //users
     addUserModel,
     updateResetPassModel,
