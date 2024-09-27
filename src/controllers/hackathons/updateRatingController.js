@@ -1,5 +1,8 @@
 // Importamos los modelos.
-import { getHackathonByIdModel, addRatingModel } from '../../models/index.js';
+import {
+    getHackathonByIdModel,
+    updateRatingModel,
+} from '../../models/index.js';
 
 // Importamos la función que valida esquemas y el esquema de Joi.
 import validateSchema from '../../utils/validateSchema.js';
@@ -24,12 +27,9 @@ const updateRatingController = async (req, res, next) => {
         // Obtenemos la entrada del hackathon por su id.
         const hackathon = await getHackathonByIdModel(hackathonId);
 
-        // Si somos los dueños de la entrada lanzamos un error.
-        if (hackathon.userId === req.user.id) {
-            throw generateErrorUtil(
-                'No puedes votar tu propio hackathon.',
-                403,
-            );
+        // Si somos los dueños del hackathon lanzamos un error.
+        if (hackathon.organizerId === req.user.id) {
+            generateErrorUtil('No puedes votar tu propio hackathon.', 403);
         }
 
         // Comprobamos si la fecha actual es posterior a la fecha de finalización del hackathon.
@@ -43,15 +43,17 @@ const updateRatingController = async (req, res, next) => {
             );
         }
 
-        // Insertamos el voto y obtenemos la media de votos.
-        const votesAvg = await addRatingModel(rating, hackathonId, req.user.id);
+        // Actualizamos el voto y obtenemos la media de votos.
+        const votesAvg = await updateRatingModel(
+            rating,
+            hackathonId,
+            req.user.id,
+        );
 
-        res.status(201).send({
+        res.send({
             status: 'ok',
             data: {
-                entry: {
-                    votes: votesAvg,
-                },
+                votes: votesAvg,
             },
         });
     } catch (err) {
