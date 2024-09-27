@@ -1,4 +1,5 @@
 import addHackathonInscriptionModel from './addHackathonInscriptionModel.js';
+import deleteHackathonModel from './deleteHackathonModel.js';
 import getAllHackathonsModel from './getAllHackathonsModel.js';
 import getEnrollmentModel from './getEnrollmentModel.js';
 import getFilteredHackathonsModel from './getFilteredHackathonsModel.js';
@@ -13,6 +14,7 @@ import updateScoreModel from './updateScoreModel.js';
 
 export {
     addHackathonInscriptionModel,
+    deleteHackathonModel,
     getAllHackathonsModel,
     getEnrollmentModel,
     getFilteredHackathonsModel,
