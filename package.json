@@ -6,7 +6,8 @@
     "main": "app.js",
     "scripts": {
         "dev": "nodemon app.js",
-        "initdb": "node ./src/db/initDb.js"
+        "initdb": "node ./src/db/initDb.js",
+        "initdummydb": "node ./src/db/initDbWithDummyData.js"
     },
     "keywords": [],
     "author": "",

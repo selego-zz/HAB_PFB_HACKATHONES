@@ -6,11 +6,20 @@ _Hackathon_ es un proyecto web basado en **Node.js** y **React**. Se trata de un
 
 La web permite registro de usuarios, con rol a escoger entre **desarrolladores** y **organizadores**. Los desarrolladores podrán inscribirse como participantes en cuantos desafíos deseen, cancelar sus inscripciones dentro de los plazos establecidos y dejar valoraciones de 1 a 5 estrellas a los eventos en los que hayan participado. A su vez, los organizadores podrán añadir sus _hackathones_ al calendario de la página, con los detalles, objetivos, premios, requerimientos, etc. Todos los usuarios registrados tendrán la posibilidad de gestionar y modificar sus perfiles a conveniencia.
 
+Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express** y la dependencia **Nodemon**, entre otros.
+
 ## Instalación y ejecución
 
-Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express** y la dependencia **Nodemon**, entre otros. Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el directorio de la carpeta raíz del proyecto. A continuación, se ejecutará `npm install` para instalar automáticamente todas las dependencias necesarias.
+1. Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el directorio de la carpeta raíz del proyecto. A continuación, se ejecutará `npm install` para instalar automáticamente todas las dependencias necesarias.
 
-Para arrancar la base de datos ejecutaremos el comando `npm run initdb`; y para arrancar el servidor con Nodemon ejecutaremos `npm run dev`, el cual por defecto estará disponible en `http://localhost:3000`. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
+2. Se ha de guardar el archivo `.env.example` como `.env` y rellenar los datos necesarios para la ejecución, prestando especial atención a los que comienzan por ADMIN_USER, pues sus datos serán los del administrador de la plataforma
+
+3. Para crear la base de datos presentamos 2 opciones:
+   a. Con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`
+   b. Con un conjunto de datos de prueba además del usuario administrador: ejecutaremos el comando `npm run initdummydb`
+4. Para arrancar el servidor ejecutaremos `npm run dev`, el cual estará disponible en `http://localhost:PUERTO` siendo puerto el valor asignado en .env, por ejemplo, para un valor de puerto de 8000, sería `http://localhost:8000`.
+
+5. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
 
 ## Endpoints Users
 
