@@ -1,5 +1,4 @@
-lo pongo aquí no en notion por que es algo que hay que hablar.
-
+//////// YA ESTÁ /////////
 Si necesitamos un código consistente, tenemos que darle un poco de mejor forma a los nombres de los archivos:
 
 Todo lo que inserte a la base de datos que empiece por lo mismo. Yo voto por add, pero aceptaría lo que queráis...
@@ -16,8 +15,6 @@ con respecto a las lecturas de la base de datos voto por get
 
 tenemos
 selectUserByEmailModel, getHackathonByIdModel, 2 formas diferentes que yo haya visto
-
----
 
 OJO:
 
@@ -44,6 +41,8 @@ id, userId, hackathonId, inscriptionDate,
 createdAt, updatedAt,
 hay que hacer un update. no hace falta hacer un select por si está puntuado. una nueva puntuación sobrescribe la anterior, Tampoco hace falta hacer un select para ver si el usuario se apuntó al hackathon, se incluye en el where como mucho habría que comprobar si fue al evento, lo cual tampoco requiere un select, tambiénpodemos hacerlo directamente en el where:
 update enrollsIn set rating = ? where userId = ? and hackathonId = ? and attended = true
+
+///////////////////////////////
 
 createHackathonInscriptionController
 El usuario debería ser el que viene con el token no? si ponemos el del token hay que borrar la línea de userid del schema

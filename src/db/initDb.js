@@ -169,7 +169,7 @@ const initDB = async () => {
         console.log('Tabla users');
         await pool.query(SQL_USERS_TABLE);
 
-        console.log('Tabla hackatons');
+        console.log('Tabla hackathons');
         await pool.query(SQL_HACKATHONS_TABLE);
 
         console.log('Tabla enrollsIn');
@@ -181,10 +181,10 @@ const initDB = async () => {
         console.log('Tabla hackathonThemes');
         await pool.query(SQL_HACKATHONTHEMES_TABLE);
 
-        console.log('Tabla technologíes');
+        console.log('Tabla technologies');
         await pool.query(SQL_TECHNOLOGIES_TABLE);
 
-        console.log('Tabla hackathoneTechnologies');
+        console.log('Tabla hackathonsTechnologies');
         await pool.query(SQL_HACKATHONTECHNOLOGIES_TABLE);
 
         console.log('Tabla userTechnologies');
