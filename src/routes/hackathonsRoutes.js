@@ -9,7 +9,7 @@ import {
 } from '../middlewares/index.js';
 
 import {
-    addScoreController,
+    updateScoreController,
     addHackathonController,
     deleteHackathonController,
     getAllHackathonsController,
@@ -17,8 +17,8 @@ import {
     getTechnologiesController,
     getThemesController,
     getUsersHackathonController,
-    hackathonEnrollController,
-    rateHackathonController,
+    addHackathonInscriptionController,
+    updateRatingController,
     updateHackathonController,
 } from '../controllers/hackathons/index.js';
 
@@ -46,7 +46,7 @@ router.get(
 router.post(
     '/hackathons/registration/:hackathonsId',
     authDeveloperController,
-    hackathonEnrollController,
+    addHackathonInscriptionController,
 );
 
 //Middleware que devuelve una lista de los eventos de hackathon donde el usuario está registrado.
@@ -67,14 +67,14 @@ router.delete(
 router.put(
     '/hackathons/:hackathonsId/rating',
     authDeveloperController,
-    rateHackathonController,
+    updateRatingController,
 );
 
 //Middleware que clasifica a los participantes después del evento de hackathon.
 router.put(
     '/hackathons/:hacakathonId/:developerId/classification',
     authOrganizerController,
-    addScoreController,
+    updateScoreController,
 );
 
 router.get('/technologies', getTechnologiesController);

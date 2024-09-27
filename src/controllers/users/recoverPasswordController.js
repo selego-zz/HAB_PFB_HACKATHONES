@@ -1,4 +1,4 @@
-import { resetPassModel } from '../../models/users/index.js';
+import { updateResetPassModel } from '../../models/users/index.js';
 import { recoverPassSchema } from '../../schemas/index.js';
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 
@@ -23,7 +23,7 @@ const recoverPasswordController = async (req, res, next) => {
             generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
         }
 
-        const affectedRows = resetPassModel(recoverPassCode, newPass);
+        const affectedRows = updateResetPassModel(recoverPassCode, newPass);
         if (affectedRows < 1) generateErrorUtil('Código no encontrado', 404);
         res.send({
             status: 'ok',

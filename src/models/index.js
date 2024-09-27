@@ -6,8 +6,9 @@ import {
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     addHackathonModel,
-    addRatingModel,
-    addScoreModel,
+    updateHackathonModel,
+    updateRatingModel,
+    updateScoreModel,
 } from './hackathons/index.js';
 
 import {
@@ -29,8 +30,9 @@ export {
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     addHackathonModel,
-    addRatingModel,
-    addScoreModel,
+    updateHackathonModel,
+    updateRatingModel,
+    updateScoreModel,
     //users
     addUserModel,
     updateResetPassModel,
