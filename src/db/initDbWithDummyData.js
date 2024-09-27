@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import getPool from './getPool.js';
 import bcrypt from 'bcrypt';
+import addDummyData from './dummyData.js';
 //////
 
 // Declaramos las tablas que generaremos.
@@ -156,7 +157,7 @@ const SQL_THECHNOLOGY_INSERT = `
 // no recibe parámetros
 // no devuelve nada
 ////////////////////////////////////////////////////
-const initDB = async () => {
+const initDbWithDummyData = async () => {
     try {
         // Obtenemos una conexión con la base de datos.
         const pool = await getPool();
@@ -194,15 +195,6 @@ const initDB = async () => {
 
         console.log('¡Tablas creadas!');
 
-        console.log('Insertando usuario administrador');
-        await pool.query(SQL_ADMIN_INSERT, [
-            process.env.ADMIN_USER_USERNAME,
-            process.env.ADMIN_USER_EMAIL,
-            await bcrypt.hash(process.env.ADMIN_USER_PASSWORD, 10),
-            process.env.ADMIN_USER_FIRTNAME,
-            process.env.ADMIN_USER_LASTNAME,
-        ]);
-
         console.log('Insertando temas y tecnologías');
 
         const themes = process.env.DB_THEMES.split(',').map((theme) =>
@@ -221,6 +213,18 @@ const initDB = async () => {
             await pool.query(SQL_THECHNOLOGY_INSERT, [technology]);
         }
 
+        console.log('Insertando dummy data');
+        await addDummyData();
+
+        console.log('Insertando usuario administrador');
+        await pool.query(SQL_ADMIN_INSERT, [
+            process.env.ADMIN_USER_USERNAME,
+            process.env.ADMIN_USER_EMAIL,
+            await bcrypt.hash(process.env.ADMIN_USER_PASSWORD, 10),
+            process.env.ADMIN_USER_FIRTNAME,
+            process.env.ADMIN_USER_LASTNAME,
+        ]);
+
         console.log('Proceso finalizado');
 
         //falta añadir tecnologías y temáticas.... que diferencia hay entre una y otra? añadimos unas pocas? añadimos un montón?....
@@ -232,6 +236,6 @@ const initDB = async () => {
     }
 };
 
-initDB();
+initDbWithDummyData();
 
-export default initDB;
+export default initDbWithDummyData;
