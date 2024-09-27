@@ -1,11 +1,11 @@
 import express from 'express';
 
 import {
-    newUserController,
+    addUserController,
     validateUserController,
     loginUserController,
     getOwnUserController,
-    changePassController,
+    updatePassController,
     updateUserController,
     generateRecoverCodeController,
     recoverPasswordController,
@@ -21,10 +21,10 @@ import {
 const router = express.Router();
 
 //Middleware que registra un nuevo usuario
-router.post('/users/register', newUserController);
+router.post('/users/register', addUserController);
 
 //Middleware para que el administrador registre un organizador
-router.post('/users/addOrganizer', authAdminController, newUserController);
+router.post('/users/addOrganizer', authAdminController, addUserController);
 
 //Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:validationCode', validateUserController);
@@ -38,7 +38,7 @@ router.get('/user', authUserController, getOwnUserController);
 
 //MIdelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);
-router.put('api/users/password', authUserController, changePassController);
+router.put('api/users/password', authUserController, updatePassController);
 
 //Middleware que envía códico de recuperación de contraseña
 router.put('/users/password/recover', generateRecoverCodeController);

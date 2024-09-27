@@ -1,5 +1,5 @@
 // Importaciones
-import { insertHackathonModel } from '../../models/index.js';
+import { addHackathonModel } from '../../models/index.js';
 
 import { savePhotoUtil, validateSchema } from '../../utils/index.js';
 
@@ -39,7 +39,7 @@ const addHackathonController = async (req, res, next) => {
         }
 
         // Insertamos el nuevo hackathon en la base de datos.
-        await insertHackathonModel(
+        await addHackathonModel(
             inscriptionDate,
             inscriptionEnd,
             hackathonDate,

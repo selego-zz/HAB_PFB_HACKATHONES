@@ -7,6 +7,7 @@ import getHackathonOrganizerModel from './getHackathonOrganizerModel.js';
 import getHackathonTechnologiesModel from './getHackathonTechnologiesModel.js';
 import getHackathonThemesModel from './getHackathonThemesModel.js';
 import addHackathonModel from './addHackathonModel.js';
+import updateHackathonModel from './updateHackathonModel.js';
 import updateRatingModel from './updateRatingModel.js';
 import updateScoreModel from './updateScoreModel.js';
 
@@ -20,6 +21,7 @@ export {
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     addHackathonModel,
+    updateHackathonModel,
     updateRatingModel,
     updateScoreModel,
 };
