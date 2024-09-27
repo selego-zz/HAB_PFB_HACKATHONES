@@ -8,7 +8,7 @@ import getPool from '../../db/getPool.js';
 // Recibe por recoverPassCode, y la nueva contraseña
 /////////////////////////////////////////////////////////////////
 
-const resetPassModel = async (recoverPassCode, newPass) => {
+const updateResetPassModel = async (recoverPassCode, newPass) => {
     const pool = await getPool();
 
     // Activamos al usuario.
@@ -20,4 +20,4 @@ const resetPassModel = async (recoverPassCode, newPass) => {
     return res.affectedRows;
 };
 
-export default resetPassModel;
+export default updateResetPassModel;

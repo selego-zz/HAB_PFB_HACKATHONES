@@ -1,5 +1,5 @@
 // Importamos los modelos.
-import { insertHackathonModel } from '../../models/index.js';
+import { addHackathonModel } from '../../models/index.js';
 import { validateSchema } from '../../utils/index.js';
 import { hackathonSchema } from '../../schemas/index.js';
 
@@ -20,7 +20,7 @@ const addHackathonController = async (req, res, next) => {
             documentation,
         } = req.body;
 
-        await insertHackathonModel(
+        await addHackathonModel(
             inscriptionDate,
             inscriptionEnd,
             hackathonDate,

@@ -1,18 +1,18 @@
-import changePassController from './changePassController.js';
+import updatePassController from './updatePassController.js';
 import generateRecoverCodeController from './generateRecoverCodeController.js';
 import getOwnUserController from './getOwnUserController.js';
 import loginUserController from './loginUserController.js';
-import newUserController from './newUserController.js';
+import addUserController from './addUserController.js';
 import recoverPasswordController from './recoverPasswordController.js';
 import updateUserController from './updateUserController.js';
 import validateUserController from './validateUserController.js';
 
 export {
-    changePassController,
+    updatePassController,
     generateRecoverCodeController,
     getOwnUserController,
     loginUserController,
-    newUserController,
+    addUserController,
     recoverPasswordController,
     updateUserController,
     validateUserController,

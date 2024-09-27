@@ -12,7 +12,7 @@ import {
 import {
     selectUserByUsernameModel,
     selectUserByEmailModel,
-    insertUserModel,
+    addUserModel,
 } from '../../models/users/index.js';
 
 //importamos el esquema
@@ -20,7 +20,7 @@ import { userSchema } from '../../schemas/index.js';
 //////
 
 // Función controladora que permite crear un usuario.
-const newUserController = async (req, res, next) => {
+const addUserController = async (req, res, next) => {
     try {
         await validateSchema(userSchema, req.body);
 
@@ -45,7 +45,7 @@ const newUserController = async (req, res, next) => {
         const registrationCode = crypto.randomBytes(15).toString('hex');
 
         // Insertamos el usuario.
-        await insertUserModel(
+        await addUserModel(
             firstName,
             lastName,
             username,
@@ -80,4 +80,4 @@ const newUserController = async (req, res, next) => {
     }
 };
 
-export default newUserController;
+export default addUserController;

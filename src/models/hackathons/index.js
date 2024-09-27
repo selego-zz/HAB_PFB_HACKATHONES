@@ -1,21 +1,21 @@
-import createHackathonInscriptionModel from './createHackathonInscriptionModel.js';
+import addHackathonInscriptionModel from './addHackathonInscriptionModel.js';
 import getAllHackathonsModel from './getAllHackathonsModel.js';
 import getFilteredHackathonsModel from './getFilteredHackathonsModel.js';
 import getHackathonByIdModel from './getHackathonByIdModel.js';
 import getHackathonTechnologiesModel from './getHackathonTechnologiesModel.js';
 import getHackathonThemesModel from './getHackathonThemesModel.js';
-import insertHackathonModel from './insertHackathonModel.js';
-import insertRatingModel from './insertRatingModel.js';
-import insertScoreModel from './insertScoreModel.js';
+import addHackathonModel from './addHackathonModel.js';
+import addRatingModel from './addRatingModel.js';
+import addScoreModel from './addScoreModel.js';
 
 export {
-    createHackathonInscriptionModel,
+    addHackathonInscriptionModel,
     getAllHackathonsModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
-    insertHackathonModel,
-    insertRatingModel,
-    insertScoreModel,
+    addHackathonModel,
+    addRatingModel,
+    addScoreModel,
 };

@@ -7,7 +7,7 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //////
 
 // Consulta a la BD para añadir puntuación a los participantes del hackathon.
-const insertScoreModel = async (userId, hackathonId, score) => {
+const addScoreModel = async (userId, hackathonId, score) => {
     const pool = await getPool();
 
     // Comprobamos si ya existe una puntuación para ese usuario.
@@ -28,4 +28,4 @@ const insertScoreModel = async (userId, hackathonId, score) => {
     );
 };
 
-export default insertScoreModel;
+export default addScoreModel;

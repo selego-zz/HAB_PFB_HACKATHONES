@@ -7,7 +7,7 @@ import { generateErrorUtil } from '../../utils/index.js';
 //////
 
 // Función que realiza una consulta a la base de datos votar una entrada.
-const insertRatingModel = async (rating, hackathonId, userId) => {
+const addRatingModel = async (rating, hackathonId, userId) => {
     const pool = await getPool();
 
     // Comprobamos si ya existe un valoración previa por parte del usuario que está intentando votar.
@@ -37,4 +37,4 @@ const insertRatingModel = async (rating, hackathonId, userId) => {
     return Number(ratingsAvg[0].avg);
 };
 
-export default insertRatingModel;
+export default addRatingModel;

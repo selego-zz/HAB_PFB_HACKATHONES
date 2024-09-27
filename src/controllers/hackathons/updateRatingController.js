@@ -1,8 +1,5 @@
 // Importamos los modelos.
-import {
-    getHackathonByIdModel,
-    insertRatingModel,
-} from '../../models/index.js';
+import { getHackathonByIdModel, addRatingModel } from '../../models/index.js';
 
 // Importamos la función que valida esquemas y el esquema de Joi.
 import validateSchema from '../../utils/validateSchema.js';
@@ -13,7 +10,7 @@ import { generateErrorUtil } from '../../utils/index.js';
 
 //////
 
-const rateHackathonController = async (req, res, next) => {
+const updateRatingController = async (req, res, next) => {
     try {
         // Validamos los datos con Joi.
         await validateSchema(rateHackathonSchema, req.body);
@@ -47,11 +44,7 @@ const rateHackathonController = async (req, res, next) => {
         }
 
         // Insertamos el voto y obtenemos la media de votos.
-        const votesAvg = await insertRatingModel(
-            rating,
-            hackathonId,
-            req.user.id,
-        );
+        const votesAvg = await addRatingModel(rating, hackathonId, req.user.id);
 
         res.status(201).send({
             status: 'ok',
@@ -66,4 +59,4 @@ const rateHackathonController = async (req, res, next) => {
     }
 };
 
-export default rateHackathonController;
+export default updateRatingController;

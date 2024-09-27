@@ -6,15 +6,15 @@ import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 
 // Importamos los modelos.
 import { updatePassModel } from '../../models/users/index.js';
-import { changePassSchema } from '../../schemas/index.js';
+import { updatePassSchema } from '../../schemas/index.js';
 
 // importamos el esquema
 //////
 
 // Función controladora que le permite a un usuario cambiar su contraseña.
-const changePassController = async (req, res, next) => {
+const updatePassController = async (req, res, next) => {
     try {
-        await validateSchema(changePassSchema, req.body);
+        await validateSchema(updatePassSchema, req.body);
 
         // Obtenemos los datos necesarios.
         const { oldPass, newPass, repeatNewPass } = req.body;
@@ -42,4 +42,4 @@ const changePassController = async (req, res, next) => {
     }
 };
 
-export default changePassController;
+export default updatePassController;

@@ -1,18 +1,18 @@
 import {
-    createHackathonInscriptionModel,
+    addHackathonInscriptionModel,
     getAllHackathonsModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
-    insertHackathonModel,
-    insertRatingModel,
-    insertScoreModel,
+    addHackathonModel,
+    addRatingModel,
+    addScoreModel,
 } from './hackathons/index.js';
 
 import {
-    insertUserModel,
-    resetPassModel,
+    addUserModel,
+    updateResetPassModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,
@@ -22,18 +22,18 @@ import {
 } from './users/index.js';
 export {
     //hackathons
-    createHackathonInscriptionModel,
+    addHackathonInscriptionModel,
     getAllHackathonsModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
-    insertHackathonModel,
-    insertRatingModel,
-    insertScoreModel,
+    addHackathonModel,
+    addRatingModel,
+    addScoreModel,
     //users
-    insertUserModel,
-    resetPassModel,
+    addUserModel,
+    updateResetPassModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,

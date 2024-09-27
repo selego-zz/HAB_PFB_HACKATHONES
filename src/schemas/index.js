@@ -8,7 +8,7 @@ import {
 } from './hackathons/index.js';
 
 import {
-    changePassSchema,
+    updatePassSchema,
     loginUserSchema,
     recoverPassSchema,
     updateUserSchema,
@@ -24,7 +24,7 @@ export {
     technologiesSchema,
     themesSchema,
     //user Schemas
-    changePassSchema,
+    updatePassSchema,
     loginUserSchema,
     recoverPassSchema,
     updateUserSchema,

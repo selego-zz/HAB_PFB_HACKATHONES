@@ -7,7 +7,7 @@ import getPool from '../../db/getPool.js';
 //////
 
 // Función que realiza una consulta a la base de datos para insertar un nuevo usuario.
-const insertUserModel = async (
+const addUserModel = async (
     firstName,
     lastName,
     username,
@@ -27,4 +27,4 @@ const insertUserModel = async (
     );
 };
 
-export default insertUserModel;
+export default addUserModel;

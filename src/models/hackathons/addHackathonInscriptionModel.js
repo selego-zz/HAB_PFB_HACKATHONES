@@ -3,7 +3,7 @@ import getPool from '../../db/getPool.js';
 //////
 
 // Función que realiza una consulta a la base de datos para insertar un nuevo usuario.
-const createHackathonInscriptionModel = async (
+const addHackathonInscriptionModel = async (
     hackathonId,
     userId,
     inscriptionDate,
@@ -20,4 +20,4 @@ const createHackathonInscriptionModel = async (
     return res.insertId;
 };
 
-export default createHackathonInscriptionModel;
+export default addHackathonInscriptionModel;
