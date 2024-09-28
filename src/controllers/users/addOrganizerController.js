@@ -1,7 +1,7 @@
 import addOrganizerModel from '../../models/users/addOrganizerModel';
 import { generateErrorUtil } from '../../utils';
 
-const addOrganizer = async (req, res, next) => {
+const addOrganizerController = async (req, res, next) => {
     try {
         const { username, email, password, firstName, lastName } = req.body;
 
@@ -22,4 +22,4 @@ const addOrganizer = async (req, res, next) => {
     }
 };
 
-export default addOrganizer;
+export default addOrganizerController;

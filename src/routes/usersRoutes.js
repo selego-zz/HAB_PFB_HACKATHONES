@@ -9,6 +9,7 @@ import {
     updateUserController,
     generateRecoverCodeController,
     recoverPasswordController,
+    addOrganizerController,
 } from '../controllers/users/index.js';
 
 import {
@@ -27,7 +28,7 @@ router.post('/users/register', addUserController);
 router.post('/users/addOrganizer', authAdminController, addUserController);
 
 //Middleware de solicitud de alta al administrador para registrarse como organizadores
-router.post('/users/organizers/request');
+router.post('/users/organizers/request', addOrganizerController);
 
 //Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:activationCode', validateUserController);

@@ -6,6 +6,7 @@ import addUserController from './addUserController.js';
 import recoverPasswordController from './recoverPasswordController.js';
 import updateUserController from './updateUserController.js';
 import validateUserController from './validateUserController.js';
+import addOrganizerController from './addOrganizerController.js';
 
 export {
     updatePassController,
@@ -16,4 +17,5 @@ export {
     recoverPasswordController,
     updateUserController,
     validateUserController,
+    addOrganizerController,
 };
