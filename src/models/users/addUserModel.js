@@ -13,17 +13,28 @@ const addUserModel = async (
     username,
     email,
     password,
-    registrationCode,
+    activationCode,
+    role,
 ) => {
     const pool = await getPool();
 
     // Encriptamos la contraseña.
     const hashedPass = await bcrypt.hash(password, 10);
 
+    if (!role) role = 'desarrollador';
+
     // Insertamos el usuario.
     await pool.query(
-        `INSERT INTO users(firstName, lastName, username, email, password, registrationCode) VALUES (?, ?, ?, ?, ?, ?)`,
-        [firstName, lastName, username, email, hashedPass, registrationCode],
+        `INSERT INTO users(firstName, lastName, username, email, password, activationCode, role) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [
+            firstName,
+            lastName,
+            username,
+            email,
+            hashedPass,
+            activationCode,
+            role,
+        ],
     );
 };
 

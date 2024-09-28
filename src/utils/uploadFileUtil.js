@@ -28,7 +28,7 @@ const uploadFileUtil = async (dbPath, destinationName) => {
         await fs.copyFile(dbPath, dbUploadPath);
     } catch (err) {
         console.error(err);
-        generateErrorUtil('Error al guardar el archivo en disco');
+        generateErrorUtil('Error al guardar el archivo en disco', 500);
     }
 };
 

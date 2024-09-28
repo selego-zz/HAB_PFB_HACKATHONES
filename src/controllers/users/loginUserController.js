@@ -12,7 +12,7 @@ import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 import { loginUserSchema } from '../../schemas/index.js';
 
 // Importamos las variables de entorno.
-const { SECRET } = process.env;
+const SECRET = process.env.SECRET;
 
 //////
 
@@ -55,7 +55,7 @@ const loginUserController = async (req, res, next) => {
 
         // Creamos el token.
         const token = jwt.sign(tokenInfo, SECRET, {
-            expiresIn: '1m',
+            expiresIn: '30d',
         });
 
         res.send({

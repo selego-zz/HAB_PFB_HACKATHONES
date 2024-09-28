@@ -7,13 +7,13 @@ import generateErrorUtil from '../../utils/generateErrorUtil.js';
 //////
 
 // Función que realiza una consulta a la base de datos para activar un usuario.
-const updateActiveUserModel = async (registrationCode) => {
+const updateActiveUserModel = async (activationCode) => {
     const pool = await getPool();
 
     // Activamos al usuario.
     const [res] = await pool.query(
-        `UPDATE users SET active = true, registrationCode = null, updatedAt = NOW() WHERE registrationCode = ?`,
-        [registrationCode],
+        `UPDATE users SET active = true, activationCode = null, updatedAt = NOW() WHERE activationCode = ?`,
+        [activationCode],
     );
 
     // Comprobamos el número de filas afectadas por la actualización. Si es 0, significa que no se ha encontrado el usuario y por tanto no existe.

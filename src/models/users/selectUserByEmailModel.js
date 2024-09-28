@@ -8,10 +8,9 @@ const selectUserByEmailModel = async (email) => {
     const pool = await getPool();
 
     // Comprobamos si hay algún usuario con el email proporcionado.
-    const [users] = await pool.query(
-        `SELECT id, username, email, recoverPassCode FROM users WHERE email = ?`,
-        [email],
-    );
+    const [users] = await pool.query(`SELECT * FROM users WHERE email = ?`, [
+        email,
+    ]);
 
     // Por motivos de seguridad trataremos de no darle ninguna pista al usuario que está tratando de logearse así que no indicaremos si lo que está mal es el email o es la contraseña.
 

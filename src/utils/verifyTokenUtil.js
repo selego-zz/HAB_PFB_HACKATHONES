@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import generateErrorUtil from './generateErrorUtil.js';
 
 // tomamos la clave para desencriptar el token
-const { SECRET } = process.env;
+const SECRET = process.env.SECRET;
 
 ////////////////////////////////////////////////////////////////////////
 // Función que controla si un usuario está correctamente autenticado

@@ -25,7 +25,7 @@ Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express
 
 ✅- **POST** - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación.
 
-✅- **PATCH** - ["/api/users/register/validate/:validationCode"] - Validar usuario con un código. No requiere autenticación.
+✅- **PATCH** - ["/api/users/register/validate/:activationCode"] - Validar usuario con un código. No requiere autenticación.
 //mientras desarrollemos la api será GET
 
 ✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
