@@ -6,6 +6,7 @@ import selectUserByUsernameModel from './selectUserByUsernameModel.js';
 import updateActiveUserModel from './updateActiveUserModel.js';
 import updatePassModel from './updatePassModel.js';
 import updateUserModel from './updateUserModel.js';
+import addOrganizerModel from './addOrganizerModel.js';
 
 export {
     addUserModel,
@@ -16,4 +17,5 @@ export {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
+    addOrganizerModel,
 };

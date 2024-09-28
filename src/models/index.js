@@ -23,6 +23,7 @@ import {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
+    addOrganizerModel,
 } from './users/index.js';
 
 ////////////////////////
@@ -52,4 +53,5 @@ export {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
+    addOrganizerModel,
 };
