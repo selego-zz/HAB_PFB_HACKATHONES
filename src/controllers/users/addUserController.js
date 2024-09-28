@@ -25,7 +25,8 @@ const addUserController = async (req, res, next) => {
         await validateSchema(userSchema, req.body);
 
         // Obtenemos los datos necesarios del body.
-        const { firstName, lastName, username, email, password } = req.body;
+        const { firstName, lastName, username, email, password, role } =
+            req.body;
 
         // Comprobamos si existe usuario con ese nombre de usuario y lanzamos un error si lo hay.
         const usernameUserExists = await selectUserByUsernameModel(username);
@@ -41,8 +42,17 @@ const addUserController = async (req, res, next) => {
             generateErrorUtil('Email no disponible.', 409);
         }
 
+        if (
+            role &&
+            role !== 'desarrollador' &&
+            req.user?.role !== 'administrador'
+        )
+            generateErrorUtil(
+                'no tienes permisos para realizar esa acción',
+                401,
+            );
         // Una vez completaedas las comprobaciones, procedemos a generar un código de registro.
-        const registrationCode = crypto.randomBytes(15).toString('hex');
+        const activationCode = crypto.randomBytes(15).toString('hex');
 
         // Insertamos el usuario.
         await addUserModel(
@@ -51,19 +61,29 @@ const addUserController = async (req, res, next) => {
             username,
             email,
             password,
-            registrationCode,
+            activationCode,
+            role,
         );
 
         // Asunto del email de verificación.
         const emailSubject = 'Activa tu usuario en Hackathon';
 
-        // Cuerpo del email de verificación.
+        // Cuerpo del email de verificación. final
+        // const emailBody = `
+        //     ¡Hola, ${username}!
+
+        //     Gracias por registrarte en Hackathon. Para activar tu cuenta, haz click en el siguiente enlace:
+
+        //     <a href="${process.env.CLIENT_URL}/users/validate/${activationCode}">¡Activa tu usuario!</a>
+        // `;
+
+        //hasta tener el front end, tenemos que usar esta dirección
         const emailBody = `
             ¡Hola, ${username}!
 
             Gracias por registrarte en Hackathon. Para activar tu cuenta, haz click en el siguiente enlace:
 
-            <a href="${process.env.CLIENT_URL}/users/validate/${registrationCode}">¡Activa tu usuario!</a>
+            <a href="http://localhost:${process.env.PORT}/api/users/register/validate/${activationCode}">¡Activa tu usuario!</a>
         `;
 
         // Enviamos el email.

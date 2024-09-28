@@ -42,16 +42,8 @@ createdAt, updatedAt,
 hay que hacer un update. no hace falta hacer un select por si está puntuado. una nueva puntuación sobrescribe la anterior, Tampoco hace falta hacer un select para ver si el usuario se apuntó al hackathon, se incluye en el where como mucho habría que comprobar si fue al evento, lo cual tampoco requiere un select, tambiénpodemos hacerlo directamente en el where:
 update enrollsIn set rating = ? where userId = ? and hackathonId = ? and attended = true
 
-///////////////////////////////
-
 createHackathonInscriptionController
 El usuario debería ser el que viene con el token no? si ponemos el del token hay que borrar la línea de userid del schema
-
-hackathonEnrollController
-puede ser que sea lo mismo que createHackathonInscriptionController???
-
-newUserController
-Permitimos subir avatar en la creación del usuario?
 
 updateUserController:
 mejor extraer la función de savePhotoUtil para reaprovecharla en otras partes?
@@ -61,7 +53,7 @@ habría que borrar el avatar anterior con removePhotoUtil?
 
 Registrar usuario falla por nombre de columna incorrecto, os dejo como deberes corregirla para que practiquéis.
 una vez corregida el correo llega perfecto. PERO hasta que no tengamos el front, la dirección que deberíamos poner es la del back:
-http://localhost:8000/api/users/validate/4948b4bb5f22e2fd6133beb48ee0b6 (el codigo final el que sea)
+localhost:8000/api/users/register/validate/8930694796940f768eb6b9bf395c03 (el codigo final el que sea)
 
 una vez que la pongáis, updateActiveUserModel tiene el mismo fallo que registrar usuario en el nombre de columna
 una vez que lo corrijáis os seguirá sin funcionar. es por que en el controlador tomáis mal el parámetro:
@@ -69,3 +61,5 @@ no podéis poner cualquier nombre en el nombre de la variable, hay que poner el 
 /users/register/validate/:validationCode
 estáis usando registrationCode
 para no estar poniendo una cosa distinta cada vez, os recomiendo que pongáis el nombre que tiene el campo en la base de datos en todas partes, con lo que os ahorráis pensar
+
+///////////////////////////////

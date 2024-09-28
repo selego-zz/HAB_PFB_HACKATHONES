@@ -1,4 +1,7 @@
+import bcrypt from 'bcrypt';
+
 import getPool from './getPool.js';
+
 import {
     enrollsIn,
     hackathonTechnologies,
@@ -30,7 +33,7 @@ const addDummyData = async () => {
             [
                 data.username,
                 data.email,
-                data.password,
+                await bcrypt.hash(data.password, 10),
                 data.firstName,
                 data.lastName,
                 data.role,
@@ -61,7 +64,7 @@ const addDummyData = async () => {
                 prizes,
                 logo
                 )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 data.organizerId,
                 data.name,

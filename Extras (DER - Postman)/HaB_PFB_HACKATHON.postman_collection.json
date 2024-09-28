@@ -34,26 +34,19 @@
 								"users",
 								"register"
 							]
-						}
+						},
+						"description": "Añade un nuevo usuario a la base de datos"
 					},
 					"response": []
 				},
 				{
-					"name": "addOrganizer",
+					"name": "register validate",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"organizador\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8000/api/users/addorganizer",
+							"raw": "http://localhost:8000/api/users/register/validate/108b74b54ae1ec03f0784065f713fc",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -61,7 +54,9 @@
 							"path": [
 								"api",
 								"users",
-								"addorganizer"
+								"register",
+								"validate",
+								"108b74b54ae1ec03f0784065f713fc"
 							]
 						}
 					},
@@ -97,13 +92,95 @@
 					"response": []
 				},
 				{
+					"name": "login root",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOrganizer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autPedrito}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Jorjito\", \r\n    \"email\": \"facturacion@ich-online.eu\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Jorge\",\r\n    \"lastName\": \"Rastrejo\", \r\n    \"role\": \"organizador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/addorganizer",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"addorganizer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "user",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autPedrito}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -171,7 +248,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Carpeta para probar los controladores de usuario"
 		},
 		{
 			"name": "HACKATHONS",
@@ -268,6 +346,40 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "autPedrito",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjIsInVzZXJuYW1lIjoiUGVkcml0byIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJoYWIucGZiLmhhY2thdGhvbmVzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzQ4MjQzOCwiZXhwIjoxNzI3NDgyNDk4fQ.rfqJ96bsK6hck_uu7yG6aFSPIC1hk30am9TcYOCqRZM",
+			"type": "string"
+		},
+		{
+			"key": "autAdmin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjEsInVzZXJuYW1lIjoicm9vdCIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJraWxsdGVhbXNhbGFtYW5jYUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc0ODI2MjgsImV4cCI6MTcyNzQ4MjY4OH0.crs75qKanhfISu-Ml_eRS39L6Tjtb5pg7WKLrD3MknI",
+			"type": "string"
 		}
 	]
 }

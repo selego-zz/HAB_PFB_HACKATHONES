@@ -13,6 +13,11 @@ const addHackathonInscriptionController = async (req, res, next) => {
         const { userId } = req.body;
         const { date } = req.body;
 
+        if (req.user.role !== 'administrador' && req.user.id !== userId)
+            generateErrorUtil(
+                `El usuario ${req.user.id} no tiene permisos para realizar esa acción con el usuario ${userId}`,
+            );
+
         const inscription = await addHackathonInscriptionModel(
             hackathonId,
             userId,
