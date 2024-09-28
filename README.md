@@ -30,6 +30,8 @@ Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express
 
 ✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
 
+✅- **POST** - ["/api/users/organizers/request] - Solicitud al administrador para registrarse como organizador. No requiere autenticación.
+
 ✅- **GET** - ["/api/user/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
 
 ✅- **PUT** - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
