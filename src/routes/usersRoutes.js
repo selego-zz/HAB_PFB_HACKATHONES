@@ -26,6 +26,9 @@ router.post('/users/register', addUserController);
 //Middleware para que el administrador registre un organizador
 router.post('/users/addOrganizer', authAdminController, addUserController);
 
+//Middleware de solicitud de alta al administrador para registrarse como organizadores
+router.post('/users/organizers/request');
+
 //Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:activationCode', validateUserController);
 //al principio get
@@ -33,10 +36,10 @@ router.get('/users/register/validate/:activationCode', validateUserController);
 //Middleware que logea un usuario ya creado.
 router.post('/users/login', loginUserController);
 
-//MIddleware que devuelve el perfil del usuario
+//Middleware que devuelve el perfil del usuario
 router.get('/user', authUserController, getOwnUserController);
 
-//MIdelware que actualiza el perfil del usuario
+//Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);
 router.put('api/users/password', authUserController, updatePassController);
 
