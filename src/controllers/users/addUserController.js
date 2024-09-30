@@ -24,6 +24,16 @@ const addUserController = async (req, res, next) => {
     try {
         await validateSchema(userSchema, req.body);
 
+        if (
+            role &&
+            role !== 'desarrollador' &&
+            req.user?.role !== 'administrador'
+        )
+            generateErrorUtil(
+                'no tienes permisos para realizar esa acción',
+                401,
+            );
+
         // Obtenemos los datos necesarios del body.
         const { firstName, lastName, username, email, password, role } =
             req.body;
@@ -42,15 +52,6 @@ const addUserController = async (req, res, next) => {
             generateErrorUtil('Email no disponible.', 409);
         }
 
-        if (
-            role &&
-            role !== 'desarrollador' &&
-            req.user?.role !== 'administrador'
-        )
-            generateErrorUtil(
-                'no tienes permisos para realizar esa acción',
-                401,
-            );
         // Una vez completaedas las comprobaciones, procedemos a generar un código de registro.
         const activationCode = crypto.randomBytes(15).toString('hex');
 

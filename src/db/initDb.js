@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 // Declaramos las tablas que generaremos.
 
 const SQL_DROP_TABLE =
-    'DROP TABLE IF EXISTS HackatonTemes, userTechnologies, hackathonTechnologies, technologies, hackathonThemes, themes, enrollsIn, hackathons, users';
+    'DROP TABLE IF EXISTS userTechnologies, hackathonTechnologies, technologies, hackathonThemes, themes, enrollsIn, hackathons, users';
 
 const SQL_USERS_TABLE = `
     CREATE TABLE IF NOT EXISTS users(

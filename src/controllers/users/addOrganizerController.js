@@ -1,5 +1,5 @@
-import addOrganizerModel from '../../models/users/addOrganizerModel';
-import { generateErrorUtil } from '../../utils';
+import { addOrganizerModel } from '../../models/index.js';
+import { generateErrorUtil } from '../../utils/index.js';
 
 const addOrganizerController = async (req, res, next) => {
     try {
