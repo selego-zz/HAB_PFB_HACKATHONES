@@ -18,7 +18,7 @@ const addHackathonModel = async (
     const pool = await getPool();
 
     // Insertamos el hackathon.
-    await pool.query(
+    const [res] = await pool.query(
         `INSERT INTO hackathons(inscriptionDate,
             inscriptionEnd,
             hackathonDate,
@@ -43,6 +43,7 @@ const addHackathonModel = async (
             documentation,
         ],
     );
+    return res.insertId;
 };
 
 export default addHackathonModel;

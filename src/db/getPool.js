@@ -1,5 +1,6 @@
 // Importamos dependencias.
 import mysql from 'mysql2/promise';
+import { generateErrorUtil } from '../utils/index.js';
 
 // Variables de entorno para la conexión con la base de datos.
 const { MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB } = process.env;
@@ -33,6 +34,12 @@ const getPool = async () => {
                 timezone: 'Z',
             });
         }
+
+        if (!pool)
+            generateErrorUtil(
+                'No se ha podido establecer conexión con la base de datos',
+                503,
+            );
 
         return pool;
     } catch (err) {

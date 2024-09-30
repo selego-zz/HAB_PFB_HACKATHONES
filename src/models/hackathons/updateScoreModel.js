@@ -25,10 +25,11 @@ const updateScoreModel = async (userId, hackathonId, score) => {
     }
 
     // Actualizamos la puntuación.
-    await pool.query(
+    const [res] = await pool.query(
         `UPDATE enrollsIn SET score = ?, updatedAt = NOW() WHERE hackathonId = ? AND userId = ?`,
         [score, hackathonId, userId],
     );
+    return res.affectedRows;
 };
 
 export default updateScoreModel;

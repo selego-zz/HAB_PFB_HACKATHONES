@@ -14,7 +14,7 @@ const updateResetPassModel = async (recoverPassCode, newPass) => {
 
     // Activamos al usuario.
     const [res] = await pool.query(
-        `UPDATE users SET password = ? WHERE recoverPassCode = ?`,
+        `UPDATE users SET updatedAt = NOW(), password = ? WHERE recoverPassCode = ?`,
         [await bcrypt.hash(newPass, 10), recoverPassCode],
     );
 

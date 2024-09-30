@@ -56,15 +56,18 @@ const addUserController = async (req, res, next) => {
         const activationCode = crypto.randomBytes(15).toString('hex');
 
         // Insertamos el usuario.
-        await addUserModel(
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-            activationCode,
-            role,
-        );
+        if (
+            (await addUserModel(
+                firstName,
+                lastName,
+                username,
+                email,
+                password,
+                activationCode,
+                role,
+            )) < 1
+        )
+            generateErrorUtil('Error de inserción en base de datos', 400);
 
         // Asunto del email de verificación.
         const emailSubject = 'Activa tu usuario en Hackathon';
