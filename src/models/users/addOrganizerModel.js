@@ -22,13 +22,14 @@ const addOrganizerModel = async (
         VALUES (?, ?, ?, ?, ?, 'organizador', true)
     `;
 
-    await pool.query(SQL_INSERT_ORGANIZER, [
+    const [res] = await pool.query(SQL_INSERT_ORGANIZER, [
         firstName,
         lastName,
         username,
         email,
         hashedPass,
     ]);
+    return res.insertId;
 };
 
 export default addOrganizerModel;

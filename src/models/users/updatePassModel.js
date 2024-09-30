@@ -40,6 +40,7 @@ const updatePassModel = async (userId, oldPass, newPass) => {
             400,
         );
     }
+    return res.affectedRows;
 };
 
 export default updatePassModel;

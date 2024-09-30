@@ -20,6 +20,7 @@ const updateActiveUserModel = async (activationCode) => {
     if (res.affectedRows === 0) {
         generateErrorUtil('El usuario no existe', 404);
     }
+    return res.affectedRows;
 };
 
 export default updateActiveUserModel;

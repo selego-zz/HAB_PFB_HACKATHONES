@@ -24,7 +24,7 @@ const addUserModel = async (
     if (!role) role = 'desarrollador';
 
     // Insertamos el usuario.
-    await pool.query(
+    const [res] = await pool.query(
         `INSERT INTO users(firstName, lastName, username, email, password, activationCode, role) VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
             firstName,
@@ -36,6 +36,7 @@ const addUserModel = async (
             role,
         ],
     );
+    return res.insertId;
 };
 
 export default addUserModel;

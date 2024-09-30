@@ -8,7 +8,10 @@ const deleteHackathonModel = async (hackathonId) => {
     const pool = await getPool();
 
     // Eliminamos el hackathon por su ID.
-    await pool.query(`DELETE FROM hackathons WHERE id = ?`, [hackathonId]);
+    const [res] = await pool.query(`DELETE FROM hackathons WHERE id = ?`, [
+        hackathonId,
+    ]);
+    return res.affectedRows;
 };
 
 export default deleteHackathonModel;
