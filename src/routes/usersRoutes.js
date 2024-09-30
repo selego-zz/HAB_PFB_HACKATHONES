@@ -42,7 +42,7 @@ router.get('/user', authUserController, getOwnUserController);
 
 //Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);
-router.put('api/users/password', authUserController, updatePassController);
+router.put('/users/password', authUserController, updatePassController);
 
 //Middleware que envía códico de recuperación de contraseña
 router.put('/users/password/recover', generateRecoverCodeController);

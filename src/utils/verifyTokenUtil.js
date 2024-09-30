@@ -19,6 +19,7 @@ const verifyTokenUtil = (req, res, next, role) => {
         //tomamos el token de la cabecera
         const { authorization } = req.headers;
         //si no nos manda el token, lanzamos un error
+
         if (!authorization)
             generateErrorUtil('Ha de iniciar sesión para continuar', 401);
 
@@ -40,7 +41,7 @@ const verifyTokenUtil = (req, res, next, role) => {
             next();
         } catch (err) {
             console.error(err);
-            generateErrorUtil('token inválido', 401);
+            generateErrorUtil(err.message, 401);
         }
     } catch (err) {
         next(err);

@@ -24,6 +24,10 @@ const addUserController = async (req, res, next) => {
     try {
         await validateSchema(userSchema, req.body);
 
+        // Obtenemos los datos necesarios del body.
+        const { firstName, lastName, username, email, password, role } =
+            req.body;
+
         if (
             role &&
             role !== 'desarrollador' &&
@@ -33,10 +37,6 @@ const addUserController = async (req, res, next) => {
                 'no tienes permisos para realizar esa acción',
                 401,
             );
-
-        // Obtenemos los datos necesarios del body.
-        const { firstName, lastName, username, email, password, role } =
-            req.body;
 
         // Comprobamos si existe usuario con ese nombre de usuario y lanzamos un error si lo hay.
         const usernameUserExists = await selectUserByUsernameModel(username);
