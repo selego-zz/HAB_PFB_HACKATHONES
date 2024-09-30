@@ -1,5 +1,8 @@
 // Importaciones
-import { updateUserModel } from '../../models/users/index.js';
+import {
+    selectUserByIdModel,
+    updateUserModel,
+} from '../../models/users/index.js';
 
 import {
     savePhotoUtil,
@@ -18,10 +21,10 @@ const updateUserController = async (req, res, next) => {
         // Validamos el esquema de los datos que se están actualizando
         await validateSchema(updateUserSchema, req.body);
 
-        // Obtenemos los datos necesarios del cuerpo de la petición
-        // eslint-disable-next-line no-unused-vars
-        const { username, email, firstName, lastName } = req.body;
-        const userId = req.user.id; // ID del usuario que está haciendo la solicitud
+        if (Object.keys(req.body).length === 0 && !req.files)
+            generateErrorUtil('No hay campos que actualizar', 400);
+
+        const userId = req.user.id;
 
         // Variable para guardar el nombre del avatar actual (si es reemplazado)
         let previousAvatar = null;
@@ -31,7 +34,8 @@ const updateUserController = async (req, res, next) => {
             const avatar = req.files.avatar;
 
             // Antes de guardar la nueva imagen, guardamos el nombre del avatar anterior para eliminarlo después
-            const user = await updateUserModel({ id: userId });
+            const user = await selectUserByIdModel(userId);
+
             if (user && user.avatar) {
                 previousAvatar = user.avatar;
             }
@@ -41,6 +45,11 @@ const updateUserController = async (req, res, next) => {
 
             // Añadimos el nuevo nombre de avatar a req.body para actualizar la base de datos
             req.body.avatar = avatarName;
+
+            // Si el usuario tenía un avatar anterior y fue reemplazado, eliminamos el archivo anterior.
+            if (previousAvatar) {
+                await removePhotoUtil(previousAvatar);
+            }
         }
 
         // Añadimos el id del usuario al cuerpo de la solicitud para identificar qué usuario se está actualizando.
@@ -55,11 +64,6 @@ const updateUserController = async (req, res, next) => {
                 'No se encontró el usuario o no se realizaron cambios.',
                 400,
             );
-        }
-
-        // Si el usuario tenía un avatar anterior y fue reemplazado, eliminamos el archivo anterior.
-        if (previousAvatar) {
-            await removePhotoUtil(previousAvatar);
         }
 
         // Enviamos una respuesta al cliente.

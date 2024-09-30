@@ -28,6 +28,16 @@ const addUserController = async (req, res, next) => {
         const { firstName, lastName, username, email, password, role } =
             req.body;
 
+        if (
+            role &&
+            role !== 'desarrollador' &&
+            req.user?.role !== 'administrador'
+        )
+            generateErrorUtil(
+                'no tienes permisos para realizar esa acción',
+                401,
+            );
+
         // Comprobamos si existe usuario con ese nombre de usuario y lanzamos un error si lo hay.
         const usernameUserExists = await selectUserByUsernameModel(username);
 
@@ -42,15 +52,6 @@ const addUserController = async (req, res, next) => {
             generateErrorUtil('Email no disponible.', 409);
         }
 
-        if (
-            role &&
-            role !== 'desarrollador' &&
-            req.user?.role !== 'administrador'
-        )
-            generateErrorUtil(
-                'no tienes permisos para realizar esa acción',
-                401,
-            );
         // Una vez completaedas las comprobaciones, procedemos a generar un código de registro.
         const activationCode = crypto.randomBytes(15).toString('hex');
 
