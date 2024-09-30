@@ -221,7 +221,7 @@ const initDbWithDummyData = async () => {
             process.env.ADMIN_USER_USERNAME,
             process.env.ADMIN_USER_EMAIL,
             await bcrypt.hash(process.env.ADMIN_USER_PASSWORD, 10),
-            process.env.ADMIN_USER_FIRTNAME,
+            process.env.ADMIN_USER_FIRSTNAME,
             process.env.ADMIN_USER_LASTNAME,
         ]);
 
