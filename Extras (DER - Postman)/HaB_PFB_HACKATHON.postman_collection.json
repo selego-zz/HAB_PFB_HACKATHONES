@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4ac4e40a-5265-4576-a085-005a1d4ef50a",
+		"_postman_id": "c324fbda-be6a-4922-933f-446dc34f4d19",
 		"name": "HaB_PFB_HACKATHON",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34220642"
+		"_exporter_id": "37787415"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -57,64 +57,6 @@
 								"register",
 								"validate",
 								"108b74b54ae1ec03f0784065f713fc"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/login",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login root",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/login",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"login"
 							]
 						}
 					},
@@ -162,12 +104,9 @@
 					"response": []
 				},
 				{
-					"name": "user",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "organizers request",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -179,6 +118,109 @@
 								"key": "Authorization",
 								"value": "{{autAdmin}}",
 								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Jorjito\", \r\n    \"email\": \"facturacion@ich-online.eu\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Jorge\",\r\n    \"lastName\": \"Rastrejo\", \r\n    \"role\": \"organizador\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/organizers/request",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"organizers",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login root",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autPedrito}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -205,10 +247,100 @@
 					"response": []
 				},
 				{
-					"name": "Recover password",
+					"name": "update",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autPedrito}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstName",
+									"value": "novale",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "otra",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Amanda/Desktop/Repositorios HACK A BOSS/06-node/Docs/images/Postman_attach_file.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autPedrito}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPass\": \"123456\",\r\n    \"newPass\": \"1234567\",\r\n    \"repeatNewPass\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/password",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "password recover",
+					"request": {
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8000/api/users/password/recover",
 							"host": [
@@ -226,12 +358,21 @@
 					"response": []
 				},
 				{
-					"name": "validateUser",
+					"name": "password recover passcode",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"newPass\": \"123456\",\r\n    \"repeatNewPass\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8000/api/users/register/validate/4948b4bb5f22e2fd6133beb48ee0b6",
+							"raw": "http://localhost:8000/api/users/password/recover/f0f0ed4b2b01dbd5ea5dc4b4f2bfff",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -240,9 +381,9 @@
 							"path": [
 								"api",
 								"users",
-								"register",
-								"validate",
-								"4948b4bb5f22e2fd6133beb48ee0b6"
+								"password",
+								"recover",
+								"f0f0ed4b2b01dbd5ea5dc4b4f2bfff"
 							]
 						}
 					},
