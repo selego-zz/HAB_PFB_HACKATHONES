@@ -1,5 +1,6 @@
 // Importamos la función que devuelve una conexión con la base de datos.
 import getPool from '../../db/getPool.js';
+import bcrypt from 'bcrypt';
 
 /////////////////////////////////////////////////////////////////
 // Modelo que actualiza la contraseña en la base de datos
@@ -14,7 +15,7 @@ const updateResetPassModel = async (recoverPassCode, newPass) => {
     // Activamos al usuario.
     const [res] = await pool.query(
         `UPDATE users SET password = ? WHERE recoverPassCode = ?`,
-        [newPass, recoverPassCode],
+        [await bcrypt.hash(newPass, 10), recoverPassCode],
     );
 
     return res.affectedRows;
