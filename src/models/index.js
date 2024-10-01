@@ -1,6 +1,7 @@
 import {
     addHackathonInscriptionModel,
     deleteHackathonModel,
+    deleteHackathonInscriptionModel,
     getAllHackathonsModel,
     getAllInscriptionsModel,
     getFilteredHackathonsModel,
@@ -32,6 +33,7 @@ export {
     //hackathons
     addHackathonInscriptionModel,
     deleteHackathonModel,
+    deleteHackathonInscriptionModel,
     getAllHackathonsModel,
     getAllInscriptionsModel,
     getFilteredHackathonsModel,
