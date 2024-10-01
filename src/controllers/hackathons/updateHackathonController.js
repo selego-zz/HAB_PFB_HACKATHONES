@@ -5,9 +5,11 @@ import {
 } from '../../models/index.js';
 
 import {
-    savePhotoUtil,
-    removePhotoUtil,
     generateErrorUtil,
+    removeFileUtil,
+    removePhotoUtil,
+    saveFileUtil,
+    savePhotoUtil,
     validateSchema,
 } from '../../utils/index.js';
 
@@ -30,23 +32,35 @@ const updateHackathonController = async (req, res, next) => {
             generateErrorUtil('No se encontró el hackathon', 404);
         }
 
-        // Variable para guardar el nuevo nombre del logo si se actualiza.
-        let newLogoName = existingHackathon.logo;
-
         // Verificamos si hay un archivo de logo subido para actualizarlo.
         if (req.files && req.files.logo) {
             const newLogo = req.files.logo;
 
             // Guardamos el nuevo logo y obtenemos su nombre.
-            newLogoName = await savePhotoUtil(newLogo, 300);
+            const newLogoName = await savePhotoUtil(newLogo, 300);
 
             // Eliminamos el logo anterior si existía.
             if (existingHackathon.logo) {
                 await removePhotoUtil(existingHackathon.logo);
             }
+            req.body.logo = newLogoName;
         }
 
-        req.body.logo = newLogoName;
+        // Verificamos si hay un archivo de documentación adicional.
+        if (req.files && req.files.documentation) {
+            const documentation = req.files.documentation;
+
+            // Guardamos
+            const documentationFilename = saveFileUtil(documentation);
+
+            //borramos la documentación anterior
+            if (existingHackathon.documentation) {
+                await removeFileUtil(existingHackathon.documentation);
+            }
+
+            // Añadimos el nombre del logo a req.body para guardarlo en la base de datos.
+            req.body.documentation = documentationFilename;
+        }
 
         // Actualizamos la base de datos con los nuevos datos del hackathon.
         const updatedRows = await updateHackathonModel(req.body);
