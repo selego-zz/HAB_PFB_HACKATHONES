@@ -4,7 +4,6 @@ import { addHackathonModel } from '../../models/index.js';
 import { savePhotoUtil, validateSchema } from '../../utils/index.js';
 
 import { hackathonSchema } from '../../schemas/index.js';
-import uploadFileUtil from '../../utils/uploadFileUtil.js';
 
 //////
 
@@ -17,6 +16,7 @@ const addHackathonController = async (req, res, next) => {
 
         // Extraemos los datos del cuerpo de la solicitud.
         const {
+            name,
             inscriptionDate,
             inscriptionEnd,
             hackathonDate,
@@ -53,6 +53,7 @@ const addHackathonController = async (req, res, next) => {
 
         // Insertamos el nuevo hackathon en la base de datos.
         await addHackathonModel(
+            name,
             organizerId,
             inscriptionDate,
             inscriptionEnd,
@@ -63,7 +64,7 @@ const addHackathonController = async (req, res, next) => {
             logoName, // Pasamos el nombre del logo si se subió, de lo contrario será null
             online,
             location,
-            documentation,
+            documentationFile,
         );
 
         // Respondemos al cliente con un estado 201 (creado) y un mensaje de éxito.

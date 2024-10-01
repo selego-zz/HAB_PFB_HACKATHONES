@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c324fbda-be6a-4922-933f-446dc34f4d19",
+		"_postman_id": "6c1883af-c09e-4577-a790-44c49dfe9ff2",
 		"name": "HaB_PFB_HACKATHON",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37787415"
+		"_exporter_id": "37790932"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"emiliosansanchez@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -152,7 +152,36 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emiliosansanchez@gmail.com\",\r\n    \"password\": \"123456 \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login organizador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"org15@example.com\",\r\n    \"password\": \"password59\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -181,7 +210,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -214,7 +243,8 @@
 							{
 								"key": "Authorization",
 								"value": "{{autPedrito}}",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							},
 							{
 								"key": "Authorization",
@@ -394,7 +424,400 @@
 		},
 		{
 			"name": "HACKATHONS",
-			"item": []
+			"item": [
+				{
+					"name": "hackathons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/hackathons",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hackathons",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Hola",
+									"type": "text"
+								},
+								{
+									"key": "inscriptionDate",
+									"value": "2024-11-15T10:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "inscriptionEnd",
+									"value": "2024-11-15T10:00:01.000Z",
+									"type": "text"
+								},
+								{
+									"key": "hackathonDate",
+									"value": "2024-11-15T10:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "hackathonEnd",
+									"value": "2024-11-15T10:00:01.000Z",
+									"type": "text"
+								},
+								{
+									"key": "maxParticipants",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "online",
+									"value": "presencial",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Madrid",
+									"type": "text"
+								},
+								{
+									"key": "prizes",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/hackathons",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hackathons update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Adiós",
+									"type": "text"
+								},
+								{
+									"key": "inscriptionDate",
+									"value": "2024-11-15T10:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "inscriptionEnd",
+									"value": "2024-11-15T10:00:01.000Z",
+									"type": "text"
+								},
+								{
+									"key": "hackathonDate",
+									"value": "2024-11-15T10:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "hackathonEnd",
+									"value": "2024-11-15T10:00:01.000Z",
+									"type": "text"
+								},
+								{
+									"key": "maxParticipants",
+									"value": "40",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "online",
+									"value": "presencial",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "Madrid",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "prizes",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "logo",
+									"type": "file",
+									"src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/api/hackathons/:id/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons",
+								":id",
+								"update"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hackathons hackathonId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/hackathons/:hackathonId",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons",
+								":hackathonId"
+							],
+							"variable": [
+								{
+									"key": "hackathonId",
+									"value": "17"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/hackathons/:hackathonId/registration",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons",
+								":hackathonId",
+								"registration"
+							],
+							"variable": [
+								{
+									"key": "hackathonId",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hackathons userHackathons",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/hackathons/user/hackathons",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"hackathons",
+								"user",
+								"hackathons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Pruebas de Joi con register",
@@ -487,6 +910,30 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "recurso estático",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/:nombre",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						":nombre"
+					],
+					"variable": [
+						{
+							"key": "nombre",
+							"value": "fbe0f049-f54f-4b7b-b46f-542ece0ea727.jpg"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -513,13 +960,18 @@
 	],
 	"variable": [
 		{
-			"key": "autPedrito",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjIsInVzZXJuYW1lIjoiUGVkcml0byIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJoYWIucGZiLmhhY2thdGhvbmVzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzQ4MjQzOCwiZXhwIjoxNzI3NDgyNDk4fQ.rfqJ96bsK6hck_uu7yG6aFSPIC1hk30am9TcYOCqRZM",
+			"key": "autDesarrollador",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjIsInVzZXJuYW1lIjoiUGVkcml0byIsInJvbGUiOiJkZXNhcnJvbGxhZG9yIiwiZW1haWwiOiJlbWlsaW9zYW5zYW5jaGV6QGdtYWlsLmNvbSIsImlhdCI6MTcyNzc3NTA0MCwiZXhwIjoxNzMwMzY3MDQwfQ.JxNipE7cNVYMcKXPzAbuvLq5Qv3XCiWa70hM7jVkmR8",
 			"type": "string"
 		},
 		{
 			"key": "autAdmin",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjEsInVzZXJuYW1lIjoicm9vdCIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJraWxsdGVhbXNhbGFtYW5jYUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc0ODI2MjgsImV4cCI6MTcyNzQ4MjY4OH0.crs75qKanhfISu-Ml_eRS39L6Tjtb5pg7WKLrD3MknI",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjEsInVzZXJuYW1lIjoicm9vdCIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJraWxsdGVhbXNhbGFtYW5jYUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc3Nzg3NjIsImV4cCI6MTczMDM3MDc2Mn0.ryW8U61M9JLR5pp0Bdk-alVlEP9SQPlOdi5QwD_mJrw",
+			"type": "string"
+		},
+		{
+			"key": "autOrganizador",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTksInVzZXJuYW1lIjoib3JnVXNlcjE1Iiwicm9sZSI6Im9yZ2FuaXphZG9yIiwiZW1haWwiOiJvcmcxNUBleGFtcGxlLmNvbSIsImlhdCI6MTcyNzc3NTA3MiwiZXhwIjoxNzMwMzY3MDcyfQ.s0xYCFzdAb74JP1MA4xihp-SxnceOClIZzsF6h-FTeA",
 			"type": "string"
 		}
 	]

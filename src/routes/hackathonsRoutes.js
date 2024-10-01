@@ -31,62 +31,62 @@ router.post('/hackathons', authOrganizerController, addHackathonController);
 
 //Middleware que actualiza un evento de hackathon.
 router.put(
-    '/hackathons/update',
+    '/hackathons/:hackathonId/update',
     authOrganizerController,
     updateHackathonController,
 );
 
 //Middleware que devuelve información sobre un evento de hackathon.
 router.get(
-    '/hackathons/:hackatonsId',
+    '/hackathons/:hackathonId',
     authUserController,
     getHackathonController,
 );
 
 //Middleware que realiza la inscripción a un evento de hackathon.
 router.post(
-    '/hackathons/registration/:hackathonsId',
+    '/hackathons/:hackathonId/registration',
     authDeveloperController,
     addHackathonInscriptionController,
 );
 
 //Middleware que devuelve una lista de los eventos de hackathon donde el usuario está registrado.
 router.get(
-    '/hackathons/userHackathons',
+    '/hackathons/user/hackathons',
     authDeveloperController,
     getUsersHackathonController,
 );
 
 //Middleware que elimina un hackathon.
 router.delete(
-    '/hackathons/:hackathonsId/delete',
+    '/hackathons/:hackathonId/delete',
     authDeveloperController,
     deleteHackathonController,
 );
 
 //Middleware que elimina una inscripción a un evento de hackathon.
 router.delete(
-    '/hackathons/cancel/:hackathonsId',
+    '/hackathons/:hackathonId/cancel',
     authDeveloperController,
     deleteHackathonInscriptionController,
 );
 
 //Middleware para valorar el evento de hackaton.
 router.put(
-    '/hackathons/:hackathonsId/rating',
+    '/hackathons/:hackathonId/rating',
     authDeveloperController,
     updateRatingController,
 );
 
 //Middleware que clasifica a los participantes después del evento de hackathon.
 router.put(
-    '/hackathons/:hacakathonId/:developerId/classification',
+    '/hackathons/:hackathonId/:developerId/classification',
     authOrganizerController,
     updateScoreController,
 );
 
 router.get('/technologies', getTechnologiesController);
 
-router.get('/theme', getThemesController);
+router.get('/themes', getThemesController);
 
 export default router;

@@ -35,7 +35,10 @@ const getAllHackathonsController = async (req, res, next) => {
         await validateSchema(hackathonFilterSchema, req.body);
 
         let hackathons;
-        if (req.body) hackathons = await getFilteredHackathonsModel(req.body);
+        console.log(req.body);
+
+        if (Object.keys(req.body).length)
+            hackathons = await getFilteredHackathonsModel(req.body);
         else hackathons = await getAllHackathonsModel();
 
         let message =
