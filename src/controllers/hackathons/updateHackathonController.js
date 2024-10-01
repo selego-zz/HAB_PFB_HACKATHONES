@@ -11,7 +11,7 @@ import {
     validateSchema,
 } from '../../utils/index.js';
 
-import { hackathonSchema } from '../../schemas/index.js';
+import { updateHackathonSchema } from '../../schemas/index.js';
 
 //////
 
@@ -19,26 +19,15 @@ import { hackathonSchema } from '../../schemas/index.js';
 const updateHackathonController = async (req, res, next) => {
     try {
         // Validamos los datos enviados en el cuerpo de la solicitud.
-        await validateSchema(hackathonSchema, req.body);
+        await validateSchema(updateHackathonSchema, req.body);
 
         // Obtenemos los datos del cuerpo de la solicitud y el id del hackathon.
-        const {
-            inscriptionDate,
-            inscriptionEnd,
-            hackathonDate,
-            hackathonEnd,
-            maxParticipants,
-            prizes,
-            online,
-            location,
-            documentation,
-        } = req.body;
-        const hackathonId = req.params.id;
+        req.body.id = req.params.hackathonId;
 
         // Verificamos si el hackathon existe en la base de datos.
-        const existingHackathon = await getHackathonByIdModel(hackathonId);
+        const existingHackathon = await getHackathonByIdModel(req.body.id);
         if (!existingHackathon) {
-            throw generateErrorUtil('No se encontró el hackathon', 404);
+            generateErrorUtil('No se encontró el hackathon', 404);
         }
 
         // Variable para guardar el nuevo nombre del logo si se actualiza.
@@ -57,23 +46,13 @@ const updateHackathonController = async (req, res, next) => {
             }
         }
 
+        req.body.logo = newLogoName;
+
         // Actualizamos la base de datos con los nuevos datos del hackathon.
-        const updatedRows = await updateHackathonModel({
-            id: hackathonId,
-            inscriptionDate,
-            inscriptionEnd,
-            hackathonDate,
-            hackathonEnd,
-            maxParticipants,
-            prizes,
-            logo: newLogoName, // Pasamos el nuevo logo si fue actualizado
-            online,
-            location,
-            documentation,
-        });
+        const updatedRows = await updateHackathonModel(req.body);
 
         // Verificamos si se realizó alguna actualización.
-        if (updatedRows === 0) {
+        if (updatedRows && updatedRows < 1) {
             throw generateErrorUtil(
                 'No se realizaron cambios en los datos del hackathon.',
                 400,

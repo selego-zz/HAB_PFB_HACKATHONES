@@ -49,7 +49,8 @@ const getFilteredHackathonsModel = async (filters) => {
         delete filters.technologies;
     }
 
-    let sqlSelect = 'SELECT h.*';
+    let sqlSelect =
+        'SELECT h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd';
     let sqlFrom = ' FROM hackathons h';
     let sqlJoins = '';
     let sqlWhere = '';
@@ -62,13 +63,13 @@ const getFilteredHackathonsModel = async (filters) => {
         sqlSelect += ', theme';
         sqlJoins += `
             LEFT JOIN
-                hackathonTemes ht ON h.id = ht.hackathonId
+                hackathonThemes ht ON h.id = ht.hackathonId
             LEFT JOIN 
                 themes t ON ht.themeId = t.id
         `;
 
         for (const theme of themes) {
-            sqlWhere += ` and theme like `;
+            sqlWhere += ` and theme like ?`;
             args.push('%' + theme + '%');
         }
     }
@@ -98,14 +99,15 @@ const getFilteredHackathonsModel = async (filters) => {
     //si hemos metido filters, metemos where
     if (sqlWhere.length > 0) sqlWhere = ' WHERE' + sqlWhere.slice(4);
 
-    if (orderBy && orderBy.length() > 0) {
+    if (orderBy && orderBy.length > 0) {
         for (const order of orderBy) {
-            sqlOrderBy += ', ?? ?';
-            args.push(order.field);
-            args.push(order.type);
+            console.log(order);
+
+            sqlOrderBy += ', ??';
+            args.push(order);
         }
         //quitamos la coma inicial
-        sqlOrderBy = ' order by' + orderBy.slice(2);
+        sqlOrderBy = ' order by ' + sqlOrderBy.slice(2);
     }
 
     const [res] = await pool.query(

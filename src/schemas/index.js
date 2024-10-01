@@ -1,10 +1,10 @@
 import {
-    enrollsInSchema,
     hackathonFilterSchema,
     hackathonSchema,
     rateHackathonSchema,
     technologiesSchema,
     themesSchema,
+    updateHackathonSchema,
 } from './hackathons/index.js';
 
 import {
@@ -15,14 +15,18 @@ import {
     userSchema,
     userScoreSchema,
 } from './users/index.js';
+
+//////
+
 export {
     //hackathon schemas
-    enrollsInSchema,
     hackathonFilterSchema,
     hackathonSchema,
     rateHackathonSchema,
     technologiesSchema,
     themesSchema,
+    updateHackathonSchema,
+
     //user Schemas
     updatePassSchema,
     loginUserSchema,

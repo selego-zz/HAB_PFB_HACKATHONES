@@ -1,33 +1,40 @@
-import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-import { addHackathonInscriptionModel } from '../../models/hackathons/index.js';
-import { enrollsInSchema } from '../../schemas/index.js';
+import { generateErrorUtil } from '../../utils/index.js';
+import {
+    addHackathonInscriptionModel,
+    getHackathonByIdModel,
+} from '../../models/index.js';
+import getEnrollmentModel from '../../models/hackathons/getEnrollmentModel.js';
 
 //////
 
 // recibe id de hackaton, id de usuario y fecha y devuelve id de inscripcion
 const addHackathonInscriptionController = async (req, res, next) => {
     try {
-        await validateSchema(enrollsInSchema, req.body);
+        // No hay que validar datos porque nada va por body.
 
         const { hackathonId } = req.params;
-        const { userId } = req.body;
-        const { date } = req.body;
+        const userId = req.user.id;
 
-        if (req.user.role !== 'administrador' && req.user.id !== userId)
-            generateErrorUtil(
-                `El usuario ${req.user.id} no tiene permisos para realizar esa acción con el usuario ${userId}`,
-            );
+        // Comprobaciones de existencia en la BD.
+        const hackathon = await getHackathonByIdModel(hackathonId);
+        if (!hackathon) {
+            generateErrorUtil('Hackathon no encontrado', 404);
+        }
+
+        const alreadyRegistered = await getEnrollmentModel(userId, hackathonId);
+        if (alreadyRegistered) {
+            generateErrorUtil('Ya estás inscrito en ese hackathon', 409);
+        }
 
         const inscription = await addHackathonInscriptionModel(
             hackathonId,
             userId,
-            date,
         );
-
         if (!inscription) {
-            throw generateErrorUtil('No se pudo crear la inscripción', 500);
+            generateErrorUtil('No se pudo crear la inscripción', 500);
         }
 
+        // Respuesta.
         res.status(201).send({
             status: 'ok',
             message: 'Inscripción realizada con éxito',

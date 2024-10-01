@@ -9,10 +9,10 @@ const MAX_CANCELATION_HOURS = process.env.MAX_CANCELATION_HOURS; // Limite de ho
 // Recibe id de hackatón, id de inscripción y fecha actual
 const deleteHackathonInscriptionController = async (req, res, next) => {
     try {
-        const { hackathonsId } = req.params;
+        const { hackathonId } = req.params;
         const usersId = req.user.id;
         // Pilla la inscripción de la base de datos
-        const hackathon = await getHackathonByIdModel(hackathonsId);
+        const hackathon = await getHackathonByIdModel(hackathonId);
 
         if (!hackathon) {
             generateErrorUtil('Hackathon no encontrado', 404);
@@ -33,7 +33,7 @@ const deleteHackathonInscriptionController = async (req, res, next) => {
 
         const result = await deleteHackathonInscriptionModel(
             usersId,
-            hackathonsId,
+            hackathonId,
         );
 
         if (!result) {

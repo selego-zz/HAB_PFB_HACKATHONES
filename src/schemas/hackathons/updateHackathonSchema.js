@@ -6,23 +6,23 @@ import joiErrorMessages from '../joiErrorMessages.js';
 // Tiene todos los campos no automáticos de la tabla hackathon
 //////////////////////////////////////////////////////////////
 
-const hackathonSchema = Joi.object().keys({
+const updateHackathonSchema = Joi.object().keys({
     //los mensajes de date.greater las pongo aquí por que dependen de la variable
-    name: Joi.string().max(100).required().messages(joiErrorMessages),
-    inscriptionDate: Joi.date().required().messages(joiErrorMessages),
+    name: Joi.string().max(100).optional().messages(joiErrorMessages),
+    inscriptionDate: Joi.date().optional().messages(joiErrorMessages),
     inscriptionEnd: Joi.date()
         .greater(Joi.ref('inscriptionDate'))
-        .required()
+        .optional()
         .messages({
             ...joiErrorMessages,
             'date.greater':
                 'La fecha de finalización de inscripción debe ser posterior a la fecha de inicio de inscripción',
         }),
     //permito que se inscriba gente aunque haya empezado el hackathon
-    hackathonDate: Joi.date().required().messages(joiErrorMessages),
+    hackathonDate: Joi.date().optional().messages(joiErrorMessages),
     hackathonEnd: Joi.date()
         .greater(Joi.ref('hackathonDate'))
-        .required()
+        .optional()
         .messages({
             ...joiErrorMessages,
             'date.greater':
@@ -32,7 +32,7 @@ const hackathonSchema = Joi.object().keys({
     maxParticipants: Joi.number().optional().messages(joiErrorMessages),
     online: Joi.string()
         .valid('presencial', 'remoto')
-        .required()
+        .optional()
         .messages(joiErrorMessages),
     location: Joi.string().max(200).optional().messages(joiErrorMessages),
     prizes: Joi.number().optional().messages(joiErrorMessages),
@@ -40,4 +40,4 @@ const hackathonSchema = Joi.object().keys({
     documentation: Joi.string().max(100).optional().messages(joiErrorMessages),
 });
 
-export default hackathonSchema;
+export default updateHackathonSchema;

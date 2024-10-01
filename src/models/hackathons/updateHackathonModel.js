@@ -20,6 +20,43 @@ const updateHackathonModel = async (hackathon) => {
     const hackathonId = hackathon.id;
     delete hackathon.id;
 
+    // Comprobamos que las fechas están en el formato correcto para la inserción.
+    if (
+        hackathon.inscriptionDate &&
+        hackathon.inscriptionDate[
+            hackathon.inscriptionDate.length - 1
+        ].toUpperCase() === 'Z'
+    ) {
+        hackathon.inscriptionDate = hackathon.inscriptionDate.slice(0, -1);
+    }
+
+    if (
+        hackathon.inscriptionEnd &&
+        hackathon.inscriptionEnd[
+            hackathon.inscriptionEnd.length - 1
+        ].toUpperCase() === 'Z'
+    ) {
+        hackathon.inscriptionEnd = hackathon.inscriptionEnd.slice(0, -1);
+    }
+
+    if (
+        hackathon.hackathonDate &&
+        hackathon.hackathonDate[
+            hackathon.hackathonDate.length - 1
+        ].toUpperCase() === 'Z'
+    ) {
+        hackathon.hackathonDate = hackathon.hackathonDate.slice(0, -1);
+    }
+
+    if (
+        hackathon.hackathonEnd &&
+        hackathon.hackathonEnd[
+            hackathon.hackathonEnd.length - 1
+        ].toUpperCase() === 'Z'
+    ) {
+        hackathon.hackathonEnd = hackathon.hackathonEnd.slice(0, -1);
+    }
+
     // Cada vez que hacemos un update hay que actualizar updatedAt
     let sql = 'UPDATE hackathons SET updatedAt = NOW()';
     let args = [];
