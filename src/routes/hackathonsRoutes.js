@@ -12,6 +12,7 @@ import {
     updateScoreController,
     addHackathonController,
     deleteHackathonController,
+    deleteHackathonInscriptionController,
     getAllHackathonsController,
     getHackathonController,
     getTechnologiesController,
@@ -56,11 +57,18 @@ router.get(
     getUsersHackathonController,
 );
 
-//Middleware que elimina una inscripción a un evento de hackathon.
+//Middleware que elimina un hackathon.
 router.delete(
     '/hackathons/:hackathonsId/delete',
     authDeveloperController,
     deleteHackathonController,
+);
+
+//Middleware que elimina una inscripción a un evento de hackathon.
+router.delete(
+    '/hackathons/cancel/:hackathonsId',
+    authDeveloperController,
+    deleteHackathonInscriptionController,
 );
 
 //Middleware para valorar el evento de hackaton.
