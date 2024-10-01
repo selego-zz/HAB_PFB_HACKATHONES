@@ -1,7 +1,11 @@
 // Importaciones
 import { addHackathonModel } from '../../models/index.js';
 
-import { savePhotoUtil, validateSchema } from '../../utils/index.js';
+import {
+    saveFileUtil,
+    savePhotoUtil,
+    validateSchema,
+} from '../../utils/index.js';
 
 import { hackathonSchema } from '../../schemas/index.js';
 
@@ -28,7 +32,7 @@ const addHackathonController = async (req, res, next) => {
         } = req.body;
 
         let logoName = null; // Variable para almacenar el nombre del logo
-        let documentationFile = null; // Variable para almacenar el nombre de la documentación
+        let documentationFilename = null; // Variable para almacenar el nombre de la documentación
 
         // Verificamos si hay un archivo de logo subido.
         if (req.files && req.files.logo) {
@@ -40,16 +44,13 @@ const addHackathonController = async (req, res, next) => {
             // Añadimos el nombre del logo a req.body para guardarlo en la base de datos.
             req.body.logo = logoName;
         }
-        /*  // Verificamos si hay un archivo de documentación adicional.
+        // Verificamos si hay un archivo de documentación adicional.
         if (req.files && req.files.documentation) {
             const documentation = req.files.documentation;
 
-            // Guardamos 
-            documentationFile = uploadFileUtil()
-
-            // Añadimos el nombre del logo a req.body para guardarlo en la base de datos.
-            req.body.logo = logoName;
-        } */
+            // Guardamos el archivo en uploads
+            documentationFilename = saveFileUtil(documentation);
+        }
 
         // Insertamos el nuevo hackathon en la base de datos.
         await addHackathonModel(
@@ -64,7 +65,7 @@ const addHackathonController = async (req, res, next) => {
             logoName, // Pasamos el nombre del logo si se subió, de lo contrario será null
             online,
             location,
-            documentationFile,
+            documentationFilename, // Pasamos el nombre del fichero de documentación si se subió, de lo contrario será null
         );
 
         // Respondemos al cliente con un estado 201 (creado) y un mensaje de éxito.
