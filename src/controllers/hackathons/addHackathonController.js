@@ -4,6 +4,7 @@ import { addHackathonModel } from '../../models/index.js';
 import { savePhotoUtil, validateSchema } from '../../utils/index.js';
 
 import { hackathonSchema } from '../../schemas/index.js';
+import uploadFileUtil from '../../utils/uploadFileUtil.js';
 
 //////
 
@@ -11,6 +12,8 @@ const addHackathonController = async (req, res, next) => {
     try {
         // Validamos los datos del cuerpo de la solicitud según el esquema del hackathon.
         await validateSchema(hackathonSchema, req.body);
+
+        const organizerId = req.user.id;
 
         // Extraemos los datos del cuerpo de la solicitud.
         const {
@@ -22,10 +25,10 @@ const addHackathonController = async (req, res, next) => {
             prizes,
             online,
             location,
-            documentation,
         } = req.body;
 
         let logoName = null; // Variable para almacenar el nombre del logo
+        let documentationFile = null; // Variable para almacenar el nombre de la documentación
 
         // Verificamos si hay un archivo de logo subido.
         if (req.files && req.files.logo) {
@@ -37,9 +40,20 @@ const addHackathonController = async (req, res, next) => {
             // Añadimos el nombre del logo a req.body para guardarlo en la base de datos.
             req.body.logo = logoName;
         }
+        /*  // Verificamos si hay un archivo de documentación adicional.
+        if (req.files && req.files.documentation) {
+            const documentation = req.files.documentation;
+
+            // Guardamos 
+            documentationFile = uploadFileUtil()
+
+            // Añadimos el nombre del logo a req.body para guardarlo en la base de datos.
+            req.body.logo = logoName;
+        } */
 
         // Insertamos el nuevo hackathon en la base de datos.
         await addHackathonModel(
+            organizerId,
             inscriptionDate,
             inscriptionEnd,
             hackathonDate,

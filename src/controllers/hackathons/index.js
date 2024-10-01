@@ -1,6 +1,7 @@
 import addHackathonController from './addHackathonController.js';
 import addHackathonInscriptionController from './addHackathonInscriptionController.js';
 import deleteHackathonController from './deleteHackathonController.js';
+import deleteHackathonInscriptionController from './deleteHackathonInscriptionController.js';
 import getAllHackathonsController from './getAllHackathonsController.js';
 import getHackathonController from './getHackathonController.js';
 import getTechnologiesController from './getTechnologiesController.js';
@@ -14,6 +15,7 @@ export {
     addHackathonController,
     addHackathonInscriptionController,
     deleteHackathonController,
+    deleteHackathonInscriptionController,
     getAllHackathonsController,
     getHackathonController,
     getTechnologiesController,

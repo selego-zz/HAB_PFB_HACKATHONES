@@ -1,9 +1,8 @@
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
 import {
-    cancelHackathonInscriptionModel,
+    deleteHackathonInscriptionModel,
     getHackathonByIdModel,
-} from '../../models/hackathons/index.js';
-import { cancelInscriptionSchema } from '../../schemas/index.js';
+} from '../../models/index.js';
 
 const MAX_CANCELATION_HOURS = process.env.MAX_CANCELATION_HOURS; // Limite de horas para cancelar
 

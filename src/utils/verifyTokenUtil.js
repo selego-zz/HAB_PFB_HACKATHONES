@@ -27,7 +27,7 @@ const verifyTokenUtil = (req, res, next, role) => {
             //desencriptamos el token
 
             const tokenInfo = jwt.verify(authorization, SECRET);
-            //si hemos lllegado aquí, el token es correcto
+            //si hemos llegado aquí, el token es correcto
             //es momento de comprobar el rol
             if (role && tokenInfo.role !== role) {
                 return generateErrorUtil(

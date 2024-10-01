@@ -4,6 +4,7 @@ import getPool from '../../db/getPool.js';
 
 // Función que realiza una consulta a la base de datos para insertar un nuevo usuario.
 const addHackathonModel = async (
+    organizerid,
     inscriptionDate,
     inscriptionEnd,
     hackathonDate,
@@ -19,7 +20,9 @@ const addHackathonModel = async (
 
     // Insertamos el hackathon.
     const [res] = await pool.query(
-        `INSERT INTO hackathons(inscriptionDate,
+        `INSERT INTO hackathons(
+            organizerId,    
+            inscriptionDate,
             inscriptionEnd,
             hackathonDate,
             hackathonEnd,
@@ -29,8 +32,9 @@ const addHackathonModel = async (
             online,
             location,
             documentation,
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
+            organizerid,
             inscriptionDate,
             inscriptionEnd,
             hackathonDate,
