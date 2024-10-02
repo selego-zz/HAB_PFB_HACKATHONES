@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 import generateErrorUtil from './generateErrorUtil.js';
 import { getLastAuthUpdateModel } from '../models/index.js';
 
+// para poder comparar la hora del token, (en UTC) con la de la base de datos (en local) necesitamos usar moment para convertir la utc en local
+import moment from 'moment-timezone';
+
 // tomamos la clave para desencriptar el token
 const SECRET = process.env.SECRET;
 
@@ -28,14 +31,21 @@ const verifyTokenUtil = async (req, res, next, role) => {
             //desencriptamos el token
             const tokenInfo = jwt.verify(authorization, SECRET);
 
-            // Comprobamos que la fecha del token sea válida.
+            //Comprobamos que la fecha del token sea válida.
             const lastAuthUpdate = new Date(
                 await getLastAuthUpdateModel(tokenInfo.id),
             );
 
-            const tokenEmissionDate = new Date(tokenInfo.iat * 1000);
+            //tomamos la fecha de creación del token, en segundos,
+            //la pasamos a milisegundos
+            //usamos moment para convertirla de utc a local de Europa/Madrid
+            //convertimos el resultado en Date para operar con el con facilidad
+            const tokenEmissionDate = new Date(
+                moment.tz(tokenInfo.iat * 1000, 'Europe/Madrid').utc(true),
+            );
 
             if (tokenEmissionDate < lastAuthUpdate) {
+                // if (tokenEmissionDate < lastAuthUpdate) {
                 generateErrorUtil('Token no válido', 401);
             }
 
