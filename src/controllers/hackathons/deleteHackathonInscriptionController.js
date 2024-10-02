@@ -22,9 +22,6 @@ const deleteHackathonInscriptionController = async (req, res, next) => {
         const hackathonStart = new Date(hackathon.hackathonDate);
         const now = new Date();
         const hoursRemaining = Math.abs(now - hackathonStart) / 36e5; // Convertir ms a horas
-        console.log(hoursRemaining, MAX_CANCELLATION_HOURS);
-        console.log(hackathonStart, now);
-        console.log(hackathon.hackathonDate);
 
         if (hoursRemaining < MAX_CANCELLATION_HOURS) {
             generateErrorUtil(

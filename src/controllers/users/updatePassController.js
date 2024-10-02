@@ -24,7 +24,11 @@ const updatePassController = async (req, res, next) => {
         }
 
         // Actualizamos la base de datos.
-        await updatePassModel(userId, oldPass, newPass);
+
+        const affectedRows = await updatePassModel(userId, oldPass, newPass);
+        console.log(affectedRows);
+        if (affectedRows === 0)
+            generateErrorUtil('No se ha posiso cambiar la contraseña', 400);
 
         // Enviamos una respuesta al cliente.
         res.send({

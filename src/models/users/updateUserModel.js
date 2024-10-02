@@ -26,6 +26,8 @@ const updateUserModel = async (user) => {
     //también quitamos password
     const password = user.password; //al final pondremos la contraseña sin encriptar nuevamente en el JSON, por si se requiere para algo
 
+    delete user.password;
+
     //cada vez que hacemos un update hay que actualziar updatedAt
     let sql = 'UPDATE users SET updatedAt = NOW()';
     let args = [];

@@ -101,8 +101,6 @@ const getFilteredHackathonsModel = async (filters) => {
 
     if (orderBy && orderBy.length > 0) {
         for (const order of orderBy) {
-            console.log(order);
-
             sqlOrderBy += ', ??';
             args.push(order);
         }
