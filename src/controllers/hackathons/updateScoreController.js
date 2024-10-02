@@ -14,11 +14,14 @@ const updateScoreController = async (req, res, next) => {
     try {
         // Validamos los datos del body.
         await validateSchema(userScoreSchema, req.body);
-        const { userId, hackathonId, score } = req.body;
+        const { score } = req.body;
+        const organizerId = req.user.id;
+        const { hackathonId, developerId } = req.params;
 
         // Verificamos que el organizador del hackathon sea el mismo usuario que hace la solicitud.
-        const organizer = await getHackathonOrganizerModel(hackathonId);
-        if (organizer.id !== req.user.id) {
+        const organizerDb = await getHackathonOrganizerModel(hackathonId);
+
+        if (organizerDb !== organizerId) {
             generateErrorUtil(
                 'No tienes permiso para puntuar este hackathon',
                 403,
@@ -26,7 +29,7 @@ const updateScoreController = async (req, res, next) => {
         }
 
         // Verificamos que el desarrollador esté inscrito en el hackathon.
-        const enrollment = await getEnrollmentModel(userId, hackathonId);
+        const enrollment = await getEnrollmentModel(developerId, hackathonId);
         if (!enrollment) {
             generateErrorUtil(
                 'El usuario no está inscrito en este hackathon',
@@ -35,7 +38,7 @@ const updateScoreController = async (req, res, next) => {
         }
 
         // Actualizamos la puntuación.
-        await updateScoreModel(userId, hackathonId, score);
+        await updateScoreModel(developerId, hackathonId, score);
 
         // Enviamos la respuesta.
         res.send({

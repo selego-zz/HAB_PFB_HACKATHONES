@@ -49,7 +49,7 @@ const addHackathonController = async (req, res, next) => {
             const documentation = req.files.documentation;
 
             // Guardamos el archivo en uploads
-            documentationFilename = saveFileUtil(documentation);
+            documentationFilename = await saveFileUtil(documentation);
         }
 
         // Insertamos el nuevo hackathon en la base de datos.

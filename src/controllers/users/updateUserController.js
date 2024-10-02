@@ -60,7 +60,7 @@ const updateUserController = async (req, res, next) => {
 
         // Si no se encuentra el usuario o no se realizaron cambios.
         if (updatedRows === 0) {
-            throw generateErrorUtil(
+            generateErrorUtil(
                 'No se encontró el usuario o no se realizaron cambios.',
                 400,
             );

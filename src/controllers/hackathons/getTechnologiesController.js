@@ -8,7 +8,7 @@ const getTechnologiesController = async (req, res, next) => {
         const technologies = await getHackathonTechnologiesModel();
 
         if (!technologies || technologies.length === 0) {
-            throw generateErrorUtil('No se encontraron tecnologías', 404);
+            generateErrorUtil('No se encontraron tecnologías', 404);
         }
 
         res.send({

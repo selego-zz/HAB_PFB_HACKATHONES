@@ -53,14 +53,14 @@ router.post(
 //Middleware que devuelve una lista de los eventos de hackathon donde el usuario está registrado.
 router.get(
     '/hackathons/user/hackathons',
-    authDeveloperController,
+    authUserController,
     getUsersHackathonController,
 );
 
 //Middleware que elimina un hackathon.
 router.delete(
     '/hackathons/:hackathonId/delete',
-    authDeveloperController,
+    authOrganizerController,
     deleteHackathonController,
 );
 
