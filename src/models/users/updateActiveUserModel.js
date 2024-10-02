@@ -12,7 +12,7 @@ const updateActiveUserModel = async (activationCode) => {
 
     // Activamos al usuario.
     const [res] = await pool.query(
-        `UPDATE users SET active = true, activationCode = null, updatedAt = NOW() WHERE activationCode = ?`,
+        `UPDATE users SET active = true, activationCode = null, updatedAt = NOW(), lastAuthUpdate = NOW() WHERE activationCode = ?`,
         [activationCode],
     );
 

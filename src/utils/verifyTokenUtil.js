@@ -1,6 +1,7 @@
 //importamos las dependencias
 import jwt from 'jsonwebtoken';
 import generateErrorUtil from './generateErrorUtil.js';
+import { getLastAuthUpdateModel } from '../models/index.js';
 
 // tomamos la clave para desencriptar el token
 const SECRET = process.env.SECRET;
@@ -14,7 +15,7 @@ const SECRET = process.env.SECRET;
 //      que son quienes llaman a esta función
 ////////////////////////////////////////////////////////////////////////
 
-const verifyTokenUtil = (req, res, next, role) => {
+const verifyTokenUtil = async (req, res, next, role) => {
     try {
         //tomamos el token de la cabecera
         const { authorization } = req.headers;
@@ -25,8 +26,19 @@ const verifyTokenUtil = (req, res, next, role) => {
 
         try {
             //desencriptamos el token
-
             const tokenInfo = jwt.verify(authorization, SECRET);
+
+            // Comprobamos que la fecha del token sea válida.
+            const lastAuthUpdate = new Date(
+                await getLastAuthUpdateModel(tokenInfo.id),
+            );
+
+            const tokenEmissionDate = new Date(tokenInfo.iat * 1000);
+
+            if (tokenEmissionDate < lastAuthUpdate) {
+                generateErrorUtil('Token no válido', 401);
+            }
+
             //si hemos llegado aquí, el token es correcto
             //es momento de comprobar el rol
             if (role && tokenInfo.role !== role) {

@@ -29,7 +29,7 @@ const updatePassModel = async (userId, oldPass, newPass) => {
 
     // Actualizamos la base de datos.
     const [res] = await pool.query(
-        `UPDATE users SET updatedAt = now(), password = ? WHERE id = ?`,
+        `UPDATE users SET updatedAt = NOW(), lastAuthUpdate = NOW(), password = ? WHERE id = ?`,
         [hashedNewPass, userId],
     );
 

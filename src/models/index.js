@@ -19,6 +19,7 @@ import {
 
 import {
     addUserModel,
+    getLastAuthUpdateModel,
     updateResetPassModel,
     selectUserByEmailModel,
     selectUserByIdModel,
@@ -52,6 +53,7 @@ export {
 
     //users
     addUserModel,
+    getLastAuthUpdateModel,
     updateResetPassModel,
     selectUserByEmailModel,
     selectUserByIdModel,

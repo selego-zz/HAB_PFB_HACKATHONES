@@ -8,7 +8,6 @@ const getHackathonController = async (req, res, next) => {
         if (!hackathon) {
             generateErrorUtil('Hackathon no encontrado', 404);
         }
-        console.log(hackathon);
 
         res.send({
             status: 'ok',
