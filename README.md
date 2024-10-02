@@ -1,2 +1,67 @@
-HACKATONES
+# Hackathon
 
+## Descripción
+
+_Hackathon_ es un proyecto web basado en **Node.js** y **React**. Se trata de una plataforma que muestra un calendario de eventos competitivos de programación a los visitantes, quienes podrán acceder a los detalles concretos de cada uno y realizar una búsqueda filtrada de los mismos según sus preferencias, así como comprobar los _rankings_ de ganadores una vez concluyen.
+
+La web permite registro de usuarios, con rol a escoger entre **desarrolladores** y **organizadores**. Los desarrolladores podrán inscribirse como participantes en cuantos desafíos deseen, cancelar sus inscripciones dentro de los plazos establecidos y dejar valoraciones de 1 a 5 estrellas a los eventos en los que hayan participado. A su vez, los organizadores podrán añadir sus _hackathones_ al calendario de la página, con los detalles, objetivos, premios, requerimientos, etc. Todos los usuarios registrados tendrán la posibilidad de gestionar y modificar sus perfiles a conveniencia.
+
+Para el _back-end_, junto con Node.js, se han utilizado el _framework_ **Express** y la dependencia **Nodemon**, entre otros.
+
+## Instalación y ejecución
+
+1. Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el directorio de la carpeta raíz del proyecto. A continuación, se ejecutará `npm install` para instalar automáticamente todas las dependencias necesarias.
+
+2. Se ha de guardar el archivo `.env.example` como `.env` y rellenar los datos necesarios para la ejecución, prestando especial atención a los que comienzan por ADMIN_USER, pues sus datos serán los del administrador de la plataforma
+
+3. Para crear la base de datos presentamos 2 opciones:
+   a. Con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`
+   b. Con un conjunto de datos de prueba además del usuario administrador: ejecutaremos el comando `npm run initdummydb`
+4. Para arrancar el servidor ejecutaremos `npm run dev`, el cual estará disponible en `http://localhost:PUERTO` siendo puerto el valor asignado en .env, por ejemplo, para un valor de puerto de 8000, sería `http://localhost:8000`.
+
+5. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
+
+## Endpoints Users
+
+✅- **POST** - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación.
+
+✅- **PATCH** - ["/api/users/register/validate/:activationCode"] - Validar usuario con un código. No requiere autenticación.
+//mientras desarrollemos la api será GET
+
+✅- **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
+
+✅- **POST** - ["/api/users/organizers/request] - Solicitud al administrador para registrarse como organizador. No requiere autenticación.
+
+✅- **GET** - ["/api/user/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
+
+✅- **PUT** - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
+
+✅- **PUT** - ["api/users/password"] - Actualiza la contraseña. Sí requiere autenticación.
+
+✅- **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
+
+✅- **PUT** - ["/api/users/password/recover/:recoverPassCode"] - Cambia la contraseña. No requiere autenticación.
+
+## Endpoints Hackathons
+
+✅- **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackathons filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
+
+✅- **POST** - ["/api/hackathons"] - Añadir un evento de hackathon. Sí require autenticación de organizador.
+
+✅- **PUT** - ["/api/hackathons/update"] - Actualizar evento de hackathon. Requiere auntenticación de organizador.
+
+✅- **GET** - ["/api/hackathons/:hackatonsId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
+
+✅- **POST** - ["/api/hackathons/registration/:hackatonsId"] - Inscripción a un evento de hackathon. Requiere autenticación de desarrollador.
+
+✅- **GET** - ["/api/hackathons/userHackathons"] - Devuelve una lista de los eventos de hackathons en los que el usuario está registrado. Requiere autenticación de desarrollador.
+
+✅- **DELETE** - ["/api/hackathons/:hackatonsId/delete"] - Eliminar una inscripción hasta un límite máximo. Requieren autenticación del desarrollador.
+
+✅- **PUT** - ["/api/hackathons/:hackatonsId/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
+
+✅- **PUT** - ["/api/hackathons/:hackatonsId/:developerId/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+
+✅- **GET** - ["/api/technologies"] -
+
+✅- **GET** - ["/api/themes"] -
