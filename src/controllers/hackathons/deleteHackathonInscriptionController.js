@@ -1,10 +1,10 @@
-import { generateErrorUtil, validateSchema } from '../../utils/index.js';
+import { generateErrorUtil } from '../../utils/index.js';
 import {
     deleteHackathonInscriptionModel,
     getHackathonByIdModel,
 } from '../../models/index.js';
 
-const MAX_CANCELATION_HOURS = process.env.MAX_CANCELATION_HOURS; // Limite de horas para cancelar
+const MAX_CANCELLATION_HOURS = process.env.MAX_CANCELLATION_HOURS; // Limite de horas para cancelar
 
 // Recibe id de hackatón, id de inscripción y fecha actual
 const deleteHackathonInscriptionController = async (req, res, next) => {
@@ -19,14 +19,16 @@ const deleteHackathonInscriptionController = async (req, res, next) => {
         }
 
         // Calcula el tiempo transcurrido desde la fecha de inscripción hasta ahora
-        const hackathonStart = new Date(hackathon.date);
+        const hackathonStart = new Date(hackathon.hackathonDate);
         const now = new Date();
-        const hoursRemaining =
-            Math.abs(now - hackathonStart) / (1000 * 60 * 60); // Convertir ms a horas
+        const hoursRemaining = Math.abs(now - hackathonStart) / 36e5; // Convertir ms a horas
+        console.log(hoursRemaining, MAX_CANCELLATION_HOURS);
+        console.log(hackathonStart, now);
+        console.log(hackathon.hackathonDate);
 
-        if (hoursRemaining > MAX_CANCELATION_HOURS) {
+        if (hoursRemaining < MAX_CANCELLATION_HOURS) {
             generateErrorUtil(
-                `No se puede cancelar la inscripción. Faltan menos de ${MAX_CANCELATION_HOURS} horas.`,
+                `No se puede cancelar la inscripción. Faltan menos de ${MAX_CANCELLATION_HOURS} horas.`,
                 400,
             );
         }

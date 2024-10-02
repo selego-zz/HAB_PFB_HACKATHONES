@@ -8,7 +8,7 @@ import joiErrorMessages from '../joiErrorMessages.js';
 /////////////////////////////////////////////////////////////
 
 const rateHackathonSchema = Joi.object().keys({
-    rating: Joi.number().required().messages(joiErrorMessages),
+    rating: Joi.number().min(1).max(5).required().messages(joiErrorMessages),
 });
 
 export default rateHackathonSchema;

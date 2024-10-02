@@ -2,6 +2,7 @@
 import {
     getHackathonByIdModel,
     updateRatingModel,
+    getEnrollmentModel,
 } from '../../models/index.js';
 
 // Importamos la función que valida esquemas y el esquema de Joi.
@@ -27,9 +28,11 @@ const updateRatingController = async (req, res, next) => {
         // Obtenemos la entrada del hackathon por su id.
         const hackathon = await getHackathonByIdModel(hackathonId);
 
-        // Si somos los dueños del hackathon lanzamos un error.
-        if (hackathon.organizerId === req.user.id) {
-            generateErrorUtil('No puedes votar tu propio hackathon.', 403);
+        // Comprobamos que el desarrollador esté inscrito en el hackathon que pretende votar.
+        const enrollment = await getEnrollmentModel(req.user.id, hackathonId);
+
+        if (!enrollment) {
+            generateErrorUtil('No estás inscrito en este hackathon', 403);
         }
 
         // Comprobamos si la fecha actual es posterior a la fecha de finalización del hackathon.

@@ -6,7 +6,7 @@ const getThemesController = async (req, res, next) => {
         const themes = await getHackathonThemesModel();
 
         if (!themes || themes.length === 0) {
-            throw generateErrorUtil('No se encontraron temas', 404);
+            generateErrorUtil('No se encontraron temas', 404);
         }
 
         res.send({

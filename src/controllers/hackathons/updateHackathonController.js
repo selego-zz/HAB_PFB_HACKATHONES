@@ -51,7 +51,7 @@ const updateHackathonController = async (req, res, next) => {
             const documentation = req.files.documentation;
 
             // Guardamos
-            const documentationFilename = saveFileUtil(documentation);
+            const documentationFilename = await saveFileUtil(documentation);
 
             //borramos la documentación anterior
             if (existingHackathon.documentation) {
@@ -67,7 +67,7 @@ const updateHackathonController = async (req, res, next) => {
 
         // Verificamos si se realizó alguna actualización.
         if (updatedRows && updatedRows < 1) {
-            throw generateErrorUtil(
+            generateErrorUtil(
                 'No se realizaron cambios en los datos del hackathon.',
                 400,
             );
