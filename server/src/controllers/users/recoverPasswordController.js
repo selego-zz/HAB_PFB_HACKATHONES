@@ -1,6 +1,7 @@
-import { updateResetPassModel } from '../../models/users/index.js';
+// Importanciones
 import { recoverPassSchema } from '../../schemas/index.js';
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
+import { updateResetPassModel } from '../../models/index.js';
 
 /////////////////////////////////////////////////////////////////
 // Controlador que actualiza la contraseña por una nueva

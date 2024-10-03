@@ -2,7 +2,7 @@
 import nodemailer from 'nodemailer';
 
 // Importamos la función que genera un error.
-import generateErrorUtil from './generateErrorUtil.js';
+import { generateErrorUtil } from './index.js';
 
 // Importamos las variables de entorno necesarias.
 const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;

@@ -19,7 +19,7 @@ import {
 //////
 
 export {
-    //hackathon schemas
+    // hackathons
     hackathonFilterSchema,
     hackathonSchema,
     rateHackathonSchema,
@@ -27,7 +27,7 @@ export {
     themesSchema,
     updateHackathonSchema,
 
-    //user Schemas
+    // users
     updatePassSchema,
     loginUserSchema,
     recoverPassSchema,

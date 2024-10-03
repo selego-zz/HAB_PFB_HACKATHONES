@@ -1,3 +1,4 @@
+// Importaciones
 import { generateErrorUtil } from '../../utils/index.js';
 import { getHackathonTechnologiesModel } from '../../models/index.js';
 

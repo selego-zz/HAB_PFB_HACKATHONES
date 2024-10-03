@@ -40,7 +40,7 @@ const deleteHackathonController = async (req, res, next) => {
         // Eliminamos el hackathon de la base de datos.
         await deleteHackathonModel(hackathonId);
 
-        // Respondemos con éxito.
+        // Respuesta.
         res.send({
             status: 'ok',
             message: 'Hackathon eliminado correctamente',

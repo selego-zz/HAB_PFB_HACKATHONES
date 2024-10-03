@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "17d63962-4675-4625-9574-d136f5a77ebd",
+		"_postman_id": "4f47276a-2d64-499c-a2e9-574808e59ab5",
 		"name": "HaB_PFB_HACKATHON",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "37787415"
+		"_exporter_id": "37790932"
 	},
 	"item": [
 		{
@@ -1158,98 +1158,6 @@
 							"path": [
 								"api",
 								"themes"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Pruebas de Joi con register",
-			"item": [
-				{
-					"name": "register-Tipo de dato incorrecto",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": 37, \r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/register",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "register-Sobran Campos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Pedrito\", \r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"middleName\": \"del\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/register",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "register-Faltan campos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/users/register",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"users",
-								"register"
 							]
 						}
 					},

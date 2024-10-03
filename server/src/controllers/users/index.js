@@ -1,21 +1,21 @@
-import updatePassController from './updatePassController.js';
+import addOrganizerController from './addOrganizerController.js';
+import addUserController from './addUserController.js';
 import generateRecoverCodeController from './generateRecoverCodeController.js';
 import getOwnUserController from './getOwnUserController.js';
 import loginUserController from './loginUserController.js';
-import addUserController from './addUserController.js';
 import recoverPasswordController from './recoverPasswordController.js';
 import updateUserController from './updateUserController.js';
+import updatePassController from './updatePassController.js';
 import validateUserController from './validateUserController.js';
-import addOrganizerController from './addOrganizerController.js';
 
 export {
-    updatePassController,
+    addOrganizerController,
+    addUserController,
     generateRecoverCodeController,
     getOwnUserController,
     loginUserController,
-    addUserController,
     recoverPasswordController,
     updateUserController,
+    updatePassController,
     validateUserController,
-    addOrganizerController,
 };

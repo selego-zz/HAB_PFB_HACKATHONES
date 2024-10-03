@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import sharp from 'sharp';
 
 // Función que genera un error.
-import generateErrorUtil from './generateErrorUtil.js';
+import { generateErrorUtil } from './index.js';
 
 // Función que guarda una foto en la carpeta uploads. Recibe como argumentos la imagen y un ancho en píxeles.
 const savePhotoUtil = async (img, width) => {

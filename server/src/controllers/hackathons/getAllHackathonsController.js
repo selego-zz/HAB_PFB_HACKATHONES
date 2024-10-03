@@ -1,9 +1,11 @@
+// Importaciones
 import { validateSchema } from '../../utils/index.js';
+import { hackathonFilterSchema } from '../../schemas/index.js';
+
 import {
     getAllHackathonsModel,
     getFilteredHackathonsModel,
 } from '../../models/index.js';
-import { hackathonFilterSchema } from '../../schemas/index.js';
 
 /////////////////////////////////////////////////////////////////
 // Controlador que devuelve información de los hackathones
@@ -30,6 +32,7 @@ import { hackathonFilterSchema } from '../../schemas/index.js';
 // Devuelve un array de JSON con los hackathon que cumplan los filtros
 //             en el orden determinado
 /////////////////////////////////////////////////////////////////
+
 const getAllHackathonsController = async (req, res, next) => {
     try {
         await validateSchema(hackathonFilterSchema, req.body);

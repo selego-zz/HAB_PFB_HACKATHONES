@@ -27,6 +27,7 @@ import { getAllHackathonsModel } from './index.js';
 // Devuelve un array de JSON con los hackathon que cumplan los filtros
 //             en el orden determinado
 /////////////////////////////////////////////////////////////////
+
 const getFilteredHackathonsModel = async (filters) => {
     if (!filters) return await getAllHackathonsModel();
 

@@ -1,16 +1,18 @@
+// Importaciones
 import { generateErrorUtil } from '../../utils/index.js';
+
 import {
+    getEnrollmentModel,
     addHackathonInscriptionModel,
     getHackathonByIdModel,
 } from '../../models/index.js';
-import getEnrollmentModel from '../../models/hackathons/getEnrollmentModel.js';
 
 //////
 
-// recibe id de hackaton, id de usuario y fecha y devuelve id de inscripcion
+// Recibe id de hackaton, id de usuario y fecha y devuelve id de inscripcion.
 const addHackathonInscriptionController = async (req, res, next) => {
     try {
-        // No hay que validar datos porque nada va por body.
+        // No hay que validar datos porque nada va por body. //
 
         const { hackathonId } = req.params;
         const userId = req.user.id;

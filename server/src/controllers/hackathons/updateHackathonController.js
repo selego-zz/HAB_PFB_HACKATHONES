@@ -50,10 +50,10 @@ const updateHackathonController = async (req, res, next) => {
         if (req.files && req.files.documentation) {
             const documentation = req.files.documentation;
 
-            // Guardamos
+            // Guardamos.
             const documentationFilename = await saveFileUtil(documentation);
 
-            //borramos la documentación anterior
+            // Borramos la documentación anterior.
             if (existingHackathon.documentation) {
                 await removeFileUtil(existingHackathon.documentation);
             }
@@ -73,7 +73,7 @@ const updateHackathonController = async (req, res, next) => {
             );
         }
 
-        // Respondemos al cliente.
+        // Respuesta.
         res.send({
             status: 'ok',
             message: 'Datos del hackathon actualizados con éxito.',

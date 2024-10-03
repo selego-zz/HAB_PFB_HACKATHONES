@@ -1,12 +1,12 @@
-//importamos las dependencias
+// Importaciones
 import jwt from 'jsonwebtoken';
-import generateErrorUtil from './generateErrorUtil.js';
+import { generateErrorUtil } from './index.js';
 import { getLastAuthUpdateModel } from '../models/index.js';
 
-// para poder comparar la hora del token, (en UTC) con la de la base de datos (en local) necesitamos usar moment para convertir la utc en local
+// Para poder comparar la hora del token, (en UTC) con la de la base de datos (en local) necesitamos usar moment para convertir la utc en local
 import moment from 'moment-timezone';
 
-// tomamos la clave para desencriptar el token
+// Tomamos la clave para desencriptar el token
 const SECRET = process.env.SECRET;
 
 ////////////////////////////////////////////////////////////////////////

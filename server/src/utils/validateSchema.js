@@ -7,6 +7,7 @@
 // no devuelve nada
 // lanza una excepción si los datos no se ajustan al esquema
 ///////////////////////////////////////////////////////////
+
 const validateSchema = async (schema, data) => {
     try {
         await schema.validateAsync(data);

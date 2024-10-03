@@ -1,9 +1,7 @@
-// Importamos la función que devuelve una conexión con la base de datos.
+// Importaciones
 import getPool from '../../db/getPool.js';
 
-// Importamos los errores.
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
-
+import { generateErrorUtil } from '../../utils/index.js';
 import bcrypt from 'bcrypt';
 
 //////

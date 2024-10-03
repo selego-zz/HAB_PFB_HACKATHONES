@@ -1,10 +1,8 @@
-/* import { addOrganizerModel } from '../../models/index.js'; */
+// Importaciones
 import { userSchema } from '../../schemas/index.js';
-import {
-    /*   generateErrorUtil, */
-    validateSchema,
-    sendMailUtil,
-} from '../../utils/index.js';
+import { validateSchema, sendMailUtil } from '../../utils/index.js';
+
+//////
 
 const addOrganizerController = async (req, res, next) => {
     try {
@@ -22,12 +20,9 @@ const addOrganizerController = async (req, res, next) => {
 
         await sendMailUtil(
             process.env.ADMIN_USER_EMAIL,
-            'Un nuevo organizador quiere registrarse',
+            `Un nuevo organizador quiere registrarse | ${process.env.APP_NAME}`,
             emailBody,
         );
-
-        // Crear el organizador
-        /* await addOrganizerModel(username, email, password, firstName, lastName); */
 
         res.status(201).send({
             status: 'ok',

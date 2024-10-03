@@ -1,16 +1,12 @@
-// Importamos los modelos.
+// Importaciones
 import {
     getHackathonByIdModel,
     updateRatingModel,
     getEnrollmentModel,
 } from '../../models/index.js';
 
-// Importamos la función que valida esquemas y el esquema de Joi.
-import validateSchema from '../../utils/validateSchema.js';
+import { validateSchema, generateErrorUtil } from '../../utils/index.js';
 import { rateHackathonSchema } from '../../schemas/index.js';
-
-// Importamos los errores.
-import { generateErrorUtil } from '../../utils/index.js';
 
 //////
 

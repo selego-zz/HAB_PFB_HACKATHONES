@@ -5,7 +5,7 @@ import {
     getOrganizerHackathonsModel,
 } from '../../models/index.js';
 
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
+import { generateErrorUtil } from '../../utils/index.js';
 
 //////
 

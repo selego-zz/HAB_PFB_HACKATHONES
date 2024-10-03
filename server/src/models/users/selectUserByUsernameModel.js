@@ -1,4 +1,3 @@
-// Importamos la función que devuelve una conexión con la base de datos.
 import getPool from '../../db/getPool.js';
 
 //////

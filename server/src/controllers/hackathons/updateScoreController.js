@@ -2,7 +2,7 @@ import {
     updateScoreModel,
     getHackathonOrganizerModel,
     getEnrollmentModel,
-} from '../../models/hackathons/index.js';
+} from '../../models/index.js';
 
 import { validateSchema, generateErrorUtil } from '../../utils/index.js';
 
@@ -14,6 +14,7 @@ const updateScoreController = async (req, res, next) => {
     try {
         // Validamos los datos del body.
         await validateSchema(userScoreSchema, req.body);
+
         const { score } = req.body;
         const organizerId = req.user.id;
         const { hackathonId, developerId } = req.params;

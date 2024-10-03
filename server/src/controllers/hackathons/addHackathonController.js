@@ -31,8 +31,9 @@ const addHackathonController = async (req, res, next) => {
             location,
         } = req.body;
 
-        let logoName = null; // Variable para almacenar el nombre del logo
-        let documentationFilename = null; // Variable para almacenar el nombre de la documentación
+        // Variables para almacenar el nombre del logo y de la documentación.
+        let logoName = null;
+        let documentationFilename = null;
 
         // Verificamos si hay un archivo de logo subido.
         if (req.files && req.files.logo) {
@@ -62,10 +63,10 @@ const addHackathonController = async (req, res, next) => {
             hackathonEnd,
             maxParticipants,
             prizes,
-            logoName, // Pasamos el nombre del logo si se subió, de lo contrario será null
+            logoName, // Pasamos el nombre del logo si se subió, de lo contrario será null.
             online,
             location,
-            documentationFilename, // Pasamos el nombre del fichero de documentación si se subió, de lo contrario será null
+            documentationFilename, // Pasamos el nombre del fichero de documentación si se subió, de lo contrario será null.
         );
 
         // Respondemos al cliente con un estado 201 (creado) y un mensaje de éxito.
@@ -74,7 +75,6 @@ const addHackathonController = async (req, res, next) => {
             message: 'Se ha añadido correctamente el hackathon',
         });
     } catch (err) {
-        // Si ocurre algún error, lo pasamos al middleware de manejo de errores.
         next(err);
     }
 };

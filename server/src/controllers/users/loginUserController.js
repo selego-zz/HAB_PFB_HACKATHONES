@@ -1,15 +1,11 @@
-// Importamos las dependencias.
+// Importaciones
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-// Importamos los modelos.
-import { selectUserByEmailModel } from '../../models/users/index.js';
-
-// Importamos la función que valida esquemas.
-// Importamos los errores.
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-// Importamos el esquema de Joi.
 import { loginUserSchema } from '../../schemas/index.js';
+
+import { selectUserByEmailModel } from '../../models/index.js';
 
 // Importamos las variables de entorno.
 const SECRET = process.env.SECRET;

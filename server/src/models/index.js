@@ -7,6 +7,7 @@ import {
     getEnrollmentModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
+    getHackathonOrganizerModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     getOrganizerHackathonsModel,
@@ -27,13 +28,12 @@ import {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
-    addOrganizerModel,
 } from './users/index.js';
 
 ////////////////////////
 
 export {
-    //hackathons
+    // hackathons
     addHackathonInscriptionModel,
     deleteHackathonModel,
     deleteHackathonInscriptionModel,
@@ -42,6 +42,7 @@ export {
     getEnrollmentModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
+    getHackathonOrganizerModel,
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     getOrganizerHackathonsModel,
@@ -51,7 +52,7 @@ export {
     updateRatingModel,
     updateScoreModel,
 
-    //users
+    // users
     addUserModel,
     getLastAuthUpdateModel,
     updateResetPassModel,
@@ -61,5 +62,4 @@ export {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
-    addOrganizerModel,
 };

@@ -1,5 +1,8 @@
+// Importaciones
 import { generateErrorUtil } from '../../utils/index.js';
 import { getHackathonThemesModel } from '../../models/index.js';
+
+//////
 
 const getThemesController = async (req, res, next) => {
     try {

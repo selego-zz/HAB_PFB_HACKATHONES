@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs/promises';
-import generateErrorUtil from './generateErrorUtil.js';
+import { generateErrorUtil } from './index.js';
 
 /**
  * Función que guarda un archivo en la carpeta uploads/files
@@ -8,6 +8,9 @@ import generateErrorUtil from './generateErrorUtil.js';
  * @description - comprueba que exista la carpeta uploads, en caso contrario la crea, graba el archivo con un nombre aleatorio, y devuelve el nombre
  * @returns {string} Devuelve el nombre con el que se ha grabado al imagen en la carpeta uploads
  */
+
+//////
+
 const saveFileUtil = async (file) => {
     try {
         // Generamos la ruta absoluta al directorio de subida de archivos.

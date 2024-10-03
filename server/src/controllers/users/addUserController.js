@@ -1,22 +1,20 @@
-// Importamos las dependencias.
+// Importaciones
 import crypto from 'crypto';
 
-// Importamos las utilidades.
 import {
     sendMailUtil,
     validateSchema,
     generateErrorUtil,
 } from '../../utils/index.js';
 
-// Importamos los modelos.
+import { userSchema } from '../../schemas/index.js';
+
 import {
     selectUserByUsernameModel,
     selectUserByEmailModel,
     addUserModel,
 } from '../../models/users/index.js';
 
-//importamos el esquema
-import { userSchema } from '../../schemas/index.js';
 //////
 
 // Función controladora que permite crear un usuario.

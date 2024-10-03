@@ -1,10 +1,13 @@
-import generateErrorUtil from '../../utils/generateErrorUtil.js';
-import getHackathonById from '../../models/hackathons/getHackathonByIdModel.js';
+// Importaciones
+import { generateErrorUtil } from '../../utils/index.js';
+import { getHackathonByIdModel } from '../../models/index.js';
+
+//////
 
 const getHackathonController = async (req, res, next) => {
     try {
         const { hackathonId } = req.params;
-        const hackathon = await getHackathonById(hackathonId);
+        const hackathon = await getHackathonByIdModel(hackathonId);
         if (!hackathon) {
             generateErrorUtil('Hackathon no encontrado', 404);
         }

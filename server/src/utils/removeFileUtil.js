@@ -3,7 +3,9 @@ import path from 'path';
 import fs from 'fs/promises';
 
 // Función que genera un error.
-import generateErrorUtil from './generateErrorUtil.js';
+import { generateErrorUtil } from './index.js';
+
+//////
 
 // Función que elimina una foto de la carpeta uploads.
 const removeFileUtil = async (fileName) => {

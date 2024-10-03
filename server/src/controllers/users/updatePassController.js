@@ -1,11 +1,9 @@
-// Importamos la función que genera un error.
+// Importaciones
 import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-
-// Importamos los modelos.
-import { updatePassModel } from '../../models/users/index.js';
 import { updatePassSchema } from '../../schemas/index.js';
 
-// importamos el esquema
+import { updatePassModel } from '../../models/users/index.js';
+
 //////
 
 // Función controladora que le permite a un usuario cambiar su contraseña.
@@ -24,12 +22,11 @@ const updatePassController = async (req, res, next) => {
         }
 
         // Actualizamos la base de datos.
-
         const affectedRows = await updatePassModel(userId, oldPass, newPass);
         if (affectedRows === 0)
             generateErrorUtil('No se ha posiso cambiar la contraseña', 400);
 
-        // Enviamos una respuesta al cliente.
+        // Enviamos respuesta.
         res.send({
             status: 'ok',
             message: 'Contraseña actualizada con éxito.',

@@ -1,10 +1,14 @@
+// Importaciones
 import { generateErrorUtil } from '../../utils/index.js';
+
 import {
     deleteHackathonInscriptionModel,
     getHackathonByIdModel,
 } from '../../models/index.js';
 
 const MAX_CANCELLATION_HOURS = process.env.MAX_CANCELLATION_HOURS; // Limite de horas para cancelar
+
+//////
 
 // Recibe id de hackatón, id de inscripción y fecha actual
 const deleteHackathonInscriptionController = async (req, res, next) => {

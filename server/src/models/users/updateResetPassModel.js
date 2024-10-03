@@ -1,4 +1,4 @@
-// Importamos la función que devuelve una conexión con la base de datos.
+// Importaciones
 import getPool from '../../db/getPool.js';
 import bcrypt from 'bcrypt';
 

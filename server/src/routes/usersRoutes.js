@@ -21,33 +21,33 @@ import {
 
 const router = express.Router();
 
-//Middleware que registra un nuevo usuario
+// Middleware que registra un nuevo usuario
 router.post('/users/register', addUserController);
 
-//Middleware para que el administrador registre un organizador
+// Middleware para que el administrador registre un organizador
 router.post('/users/addOrganizer', authAdminController, addUserController);
 
-//Middleware de solicitud de alta al administrador para registrarse como organizadores
+// Middleware de solicitud de alta al administrador para registrarse como organizadores
 router.post('/users/organizers/request', addOrganizerController);
 
-//Middleware que valida un nuevo usuario
+// Middleware que valida un nuevo usuario
 router.get('/users/register/validate/:activationCode', validateUserController);
-//al principio get
+// al principio get
 
-//Middleware que logea un usuario ya creado.
+// Middleware que logea un usuario ya creado.
 router.post('/users/login', loginUserController);
 
-//Middleware que devuelve el perfil del usuario
+// Middleware que devuelve el perfil del usuario
 router.get('/user', authUserController, getOwnUserController);
 
-//Midelware que actualiza el perfil del usuario
+// Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);
 router.put('/users/password', authUserController, updatePassController);
 
-//Middleware que envía códico de recuperación de contraseña
+// Middleware que envía códico de recuperación de contraseña
 router.put('/users/password/recover', generateRecoverCodeController);
 
-//Middleware que cambia la contraseña recuperada
+// Middleware que cambia la contraseña recuperada
 router.put(
     '/users/password/recover/:recoverPassCode',
     recoverPasswordController,

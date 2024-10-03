@@ -1,8 +1,5 @@
 // Importaciones
-import {
-    selectUserByIdModel,
-    updateUserModel,
-} from '../../models/users/index.js';
+import { selectUserByIdModel, updateUserModel } from '../../models/index.js';
 
 import {
     savePhotoUtil,

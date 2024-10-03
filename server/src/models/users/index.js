@@ -1,4 +1,3 @@
-import addOrganizerModel from './addOrganizerModel.js';
 import addUserModel from './addUserModel.js';
 import getLastAuthUpdateModel from './getLastAuthUpdateModel.js';
 import selectUserByEmailModel from './selectUserByEmailModel.js';
@@ -10,7 +9,6 @@ import updateResetPassModel from './updateResetPassModel.js';
 import updateUserModel from './updateUserModel.js';
 
 export {
-    addOrganizerModel,
     addUserModel,
     getLastAuthUpdateModel,
     selectUserByEmailModel,

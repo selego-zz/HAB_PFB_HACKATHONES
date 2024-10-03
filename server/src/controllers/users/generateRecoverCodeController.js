@@ -5,10 +5,8 @@ import {
     generateRecoverPassMailUtil,
     sendMailUtil,
 } from '../../utils/index.js';
-import {
-    selectUserByEmailModel,
-    updateUserModel,
-} from '../../models/users/index.js';
+
+import { selectUserByEmailModel, updateUserModel } from '../../models/index.js';
 
 /////////////////////////////////////////////////////////////////
 // Controlador que crea un código de recuperación de contraseña
@@ -33,7 +31,9 @@ const generateRecoverCodeController = async (req, res, next) => {
             const recoverPassCode = await crypto
                 .randomBytes(15)
                 .toString('hex');
+
             user.recoverPassCode = recoverPassCode;
+
             // Lo guardamos en la base de datos
             await updateUserModel({
                 id: user.id,
@@ -50,7 +50,7 @@ const generateRecoverCodeController = async (req, res, next) => {
         // Enviamos mail
         await sendMailUtil(
             user.email,
-            'Recuperación de contraseña en programa almacén',
+            `Recuperación de contraseña en ${process.env.APP_NAME}`,
             mail,
         );
 
