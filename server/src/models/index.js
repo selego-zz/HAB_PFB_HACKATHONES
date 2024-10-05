@@ -21,13 +21,14 @@ import {
 import {
     addUserModel,
     getLastAuthUpdateModel,
-    updateResetPassModel,
+    selectAllUsersModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
+    updateResetPassModel,
 } from './users/index.js';
 
 ////////////////////////
@@ -55,11 +56,12 @@ export {
     // users
     addUserModel,
     getLastAuthUpdateModel,
-    updateResetPassModel,
+    selectAllUsersModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
+    updateResetPassModel,
 };

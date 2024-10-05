@@ -4,6 +4,7 @@ import {
     addUserController,
     validateUserController,
     loginUserController,
+    getAllUserController,
     getOwnUserController,
     updatePassController,
     updateUserController,
@@ -39,6 +40,7 @@ router.post('/users/login', loginUserController);
 
 // Middleware que devuelve el perfil del usuario
 router.get('/user', authUserController, getOwnUserController);
+router.get('/user/getAllUsers', authAdminController, getAllUserController);
 
 // Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);

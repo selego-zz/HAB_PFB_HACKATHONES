@@ -1,5 +1,4 @@
 import generateErrorUtil from './generateErrorUtil.js';
-import generateRecoverPassMailUtil from './generateRecoverPassMailUtil.js';
 import removeFileUtil from './removeFileUtil.js';
 import removePhotoUtil from './removePhotoUtil.js';
 import saveFileUtil from './saveFileUtil.js';
@@ -8,9 +7,14 @@ import sendMailUtil from './sendMailUtil.js';
 import validateSchema from './validateSchema.js';
 import verifyTokenUtil from './verifyTokenUtil.js';
 
+import {
+    generateAddOrganizerMailUtil,
+    generateAddUserMailUtil,
+    generateRecoverPassMailUtil,
+} from './mails/index.js';
+
 export {
     generateErrorUtil,
-    generateRecoverPassMailUtil,
     removeFileUtil,
     removePhotoUtil,
     saveFileUtil,
@@ -18,4 +22,9 @@ export {
     sendMailUtil,
     validateSchema,
     verifyTokenUtil,
+
+    //mails
+    generateAddOrganizerMailUtil,
+    generateAddUserMailUtil,
+    generateRecoverPassMailUtil,
 };

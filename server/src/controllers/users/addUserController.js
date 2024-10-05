@@ -5,6 +5,7 @@ import {
     sendMailUtil,
     validateSchema,
     generateErrorUtil,
+    generateAddUserMailUtil,
 } from '../../utils/index.js';
 
 import { userSchema } from '../../schemas/index.js';
@@ -80,13 +81,7 @@ const addUserController = async (req, res, next) => {
         // `;
 
         //hasta tener el front end, tenemos que usar esta dirección
-        const emailBody = `
-            ¡Hola, ${username}!
-
-            Gracias por registrarte en Hackathon. Para activar tu cuenta, haz click en el siguiente enlace:
-
-            <a href="http://localhost:${process.env.PORT}/api/users/register/validate/${activationCode}">¡Activa tu usuario!</a>
-        `;
+        const emailBody = generateAddUserMailUtil(username, activationCode);
 
         // Enviamos el email.
         await sendMailUtil(email, emailSubject, emailBody);

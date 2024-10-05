@@ -1,7 +1,7 @@
 // Importaciones
 import { userSchema } from '../../schemas/index.js';
 import { validateSchema, sendMailUtil } from '../../utils/index.js';
-
+import { generateAddOrganizerMailUtil } from '../../utils/index.js';
 //////
 
 const addOrganizerController = async (req, res, next) => {
@@ -9,14 +9,13 @@ const addOrganizerController = async (req, res, next) => {
         await validateSchema(userSchema, req.body);
         const { username, email, password, firstName, lastName } = req.body;
 
-        const emailBody = `Hola, estás recibiendo este correo porque un organizador ha tratado de darse de alta en ${process.env.APP_NAME}. Sus datos son: 
-        <ul>
-        <li> Nombre de usuario: ${username} </li>
-        <li> E-mail: ${email} </li>
-        <li> Contraseña: ${password} </li>
-        <li> Nombre: ${firstName} </li>
-        <li> Apellido: ${lastName} </li> 
-        </ul>`;
+        const emailBody = generateAddOrganizerMailUtil(
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+        );
 
         await sendMailUtil(
             process.env.ADMIN_USER_EMAIL,
