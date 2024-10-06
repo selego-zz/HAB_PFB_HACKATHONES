@@ -1,6 +1,7 @@
 import addOrganizerController from './addOrganizerController.js';
 import addUserController from './addUserController.js';
 import generateRecoverCodeController from './generateRecoverCodeController.js';
+import getAllUsersController from './getAllUsersController.js';
 import getOwnUserController from './getOwnUserController.js';
 import loginUserController from './loginUserController.js';
 import recoverPasswordController from './recoverPasswordController.js';
@@ -12,6 +13,7 @@ export {
     addOrganizerController,
     addUserController,
     generateRecoverCodeController,
+    getAllUsersController,
     getOwnUserController,
     loginUserController,
     recoverPasswordController,
