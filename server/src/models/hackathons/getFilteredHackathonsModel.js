@@ -50,11 +50,14 @@ const getFilteredHackathonsModel = async (filters) => {
         delete filters.technologies;
     }
 
-    let sqlSelect =
-        'SELECT h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd';
+    const camposADevolver =
+        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd';
+    let sqlSelect = `SELECT ${camposADevolver}, AVG(e.rating) AS average_rating`;
     let sqlFrom = ' FROM hackathons h';
-    let sqlJoins = '';
+    let sqlJoins = ` LEFT JOIN
+                enrollsIn e ON h.id = e.hackathonId`;
     let sqlWhere = '';
+    let groupBy = ' group by ' + camposADevolver;
     let sqlOrderBy = '';
     const args = [];
 
@@ -62,6 +65,7 @@ const getFilteredHackathonsModel = async (filters) => {
     //por cuestiones de optimización, meto el where después de construir sqlJoins (pero al principio de la cadena ^^' )
     if (themes && themes.length > 0) {
         sqlSelect += ', theme';
+        groupBy += ', theme';
         sqlJoins += `
             LEFT JOIN
                 hackathonThemes ht ON h.id = ht.hackathonId
@@ -77,6 +81,7 @@ const getFilteredHackathonsModel = async (filters) => {
 
     if (technologies && technologies.length > 0) {
         sqlSelect += ', technology';
+        groupBy += ', technology';
         sqlJoins += `
             LEFT JOIN 
                 hackathonTechnologies htech ON h.id = htech.hackathonId
@@ -110,7 +115,7 @@ const getFilteredHackathonsModel = async (filters) => {
     }
 
     const [res] = await pool.query(
-        sqlSelect + sqlFrom + sqlJoins + sqlWhere + sqlOrderBy,
+        sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
         args,
     );
     return res;
