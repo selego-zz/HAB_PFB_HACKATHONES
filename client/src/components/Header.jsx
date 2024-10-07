@@ -4,7 +4,7 @@ const Header = () => {
   const role = 'desarrollador';
   const user = '';
   return (
-    <header className='bg-green-300'>
+    <header className='bg-azuloscuro'>
       <h1> {VITE_APP_NAME} </h1>
       {role === 'desarrollador' && <button>Eventos</button>}
       {role === 'organizador' && <button>Crea un Hackathon</button>}
