@@ -3,6 +3,8 @@ import { AuthContext } from '../contexts/AuthContext.jsx';
 import { NavLink } from 'react-router-dom';
 const { VITE_APP_NAME } = import.meta.env;
 
+//////
+
 const Header = () => {
   const authContext = useContext(AuthContext);
   if (!authContext) {
@@ -30,7 +32,7 @@ const Header = () => {
           )}
           {isOrganizer() && (
             <NavLink
-              to='/create-hackathon'
+              to='/hackathons/create'
               className='bg-verdemarino text-negro py-2 px-4 rounded-3xl hover:bg-verdeagua'
             >
               <button>Crea un Hackathon</button>
@@ -70,12 +72,14 @@ const Header = () => {
               >
                 <button>Perfil</button>
               </NavLink>
-              <button
-                onClick={authLogoutState}
-                className='bg-casiblanco text-negro py-2 px-4 rounded-3xl hover:bg-rojoclaro'
-              >
-                Cerrar sesión
-              </button>
+              <NavLink to='/'>
+                <button
+                  onClick={authLogoutState}
+                  className='bg-casiblanco text-negro py-2 px-4 rounded-3xl hover:bg-rojoclaro'
+                >
+                  Cerrar sesión
+                </button>
+              </NavLink>
             </>
           )}
         </nav>
