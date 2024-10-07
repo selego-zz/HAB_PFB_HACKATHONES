@@ -11,6 +11,7 @@ export default {
       casiblanco: '#C7F9CC',
       blanco: '#ffffff',
       negro: '#000000',
+      rojoclaro: '#FF6B6B',
     },
   },
   plugins: [],
