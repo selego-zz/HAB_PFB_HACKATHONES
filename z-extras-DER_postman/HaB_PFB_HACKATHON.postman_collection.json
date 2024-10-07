@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4f47276a-2d64-499c-a2e9-574808e59ab5",
+		"_postman_id": "c7925637-30bb-4640-b084-bd06af5ac43a",
 		"name": "HaB_PFB_HACKATHON",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "37790932"
@@ -240,7 +240,7 @@
 					"response": []
 				},
 				{
-					"name": "user",
+					"name": "users",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -275,14 +275,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/user",
+							"raw": "localhost:8000/api/users",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"api",
-								"user"
+								"users"
 							]
 						}
 					},
