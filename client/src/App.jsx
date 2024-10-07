@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import HomePage from './pages/HomePage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import PruebaPage from './pages/pruebaPage.jsx';
 
 //Importamos otras funciones
 import { Toaster } from 'react-hot-toast';
@@ -20,6 +21,7 @@ const App = () => {
       <section className='flex-grow'>
         <Routes>
           <Route path='/' element={<HomePage />} />
+          <Route path='/prueba' element={<PruebaPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </section>
