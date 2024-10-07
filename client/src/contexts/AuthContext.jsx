@@ -81,13 +81,28 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem(VITE_AUTH_TOKEN);
   };
 
-  // Función que actualiza el avatar en el State.
-  const authUpdateAvatarState = (avatar) => {
-    // Para que React refresque el componente con el nuevo avatar tenemos que introducir un nuevo objeto.
-    setAuthUser({
-      ...authUser,
+  // Función que actualiza el usuario en el State.
+  const authUpdateUserState = (
+    username,
+    email,
+    firstName,
+    lastName,
+    role,
+    biography,
+    linkedIn,
+    avatar
+  ) => {
+    setAuthUser((prevAuthUser) => ({
+      ...prevAuthUser,
+      username,
+      email,
+      firstName,
+      lastName,
+      role,
+      biography,
+      linkedIn,
       avatar,
-    });
+    }));
   };
 
   return (
@@ -97,7 +112,7 @@ export const AuthProvider = ({ children }) => {
         authUser,
         authLoginState,
         authLogoutState,
-        authUpdateAvatarState,
+        authUpdateUserState,
       }}
     >
       {children}
