@@ -39,8 +39,8 @@ router.get('/users/register/validate/:activationCode', validateUserController);
 router.post('/users/login', loginUserController);
 
 // Middleware que devuelve el perfil del usuario
-router.get('/user', authUserController, getOwnUserController);
-router.get('/user/getAllUsers', authAdminController, getAllUsersController);
+router.get('/users', authUserController, getOwnUserController);
+router.get('/users/getAllUsers', authAdminController, getAllUsersController);
 
 // Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);

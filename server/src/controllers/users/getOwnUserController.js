@@ -15,7 +15,7 @@ const getOwnUserController = async (req, res, next) => {
 
         // Si no existe ningún usuario con ese id lanzamos un error.
         if (!user) {
-            generateErrorUtil('El usuario no existe.', 404);
+            generateErrorUtil('Token no válido', 404);
         }
 
         res.send({
