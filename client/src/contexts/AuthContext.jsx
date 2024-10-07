@@ -14,7 +14,7 @@ export const AuthContext = createContext(null);
 
 // Creamos el componente AuthProvider.
 export const AuthProvider = ({ children }) => {
-  // Declaramos una variable en el state para manejar el token. Tratamos de obtener el valor del almacenamiento local. Si no existe, establecemos un valor null.
+  // Declaramos una variable en el state para manejar el token.
   const [authToken, setAuthToken] = useState(
     localStorage.getItem(VITE_AUTH_TOKEN) || null
   );
@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
 
   // Solicitamos los datos del usuario si existe un token.
   useEffect(() => {
-    // Función que obtiene los datos del usuario.
     const fetchUser = async () => {
       try {
         // Obtenemos una respuesta del servidor.
@@ -52,26 +51,20 @@ export const AuthProvider = ({ children }) => {
 
         // Si hay un error eliminamos el usuario y lanzamos error.
         setAuthUser(null);
-
         throw new Error(err.message);
       }
     };
 
-    // Si existe un token, buscamos los datos del usuario.
     if (authToken) {
       fetchUser();
     } else {
-      // Vaciamos los datos del usuario.
       setAuthUser(null);
     }
   }, [authToken]);
 
   // Función que guarda el token.
   const authLoginState = (token) => {
-    // Guardamos el token en el State.
     setAuthToken(token);
-
-    // Guardamos el token en el localStorage.
     localStorage.setItem(VITE_AUTH_TOKEN, token);
   };
 
@@ -105,6 +98,16 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
+  // Función para verificar si el usuario tiene un rol específico.
+  const hasRole = (role) => {
+    return authUser?.role === role;
+  };
+
+  // Funciones para verificar qué rol tiene el usuario, si lo tiene.
+  const isAdmin = () => hasRole('administrador');
+  const isDeveloper = () => hasRole('desarrollador');
+  const isOrganizer = () => hasRole('organizador');
+
   return (
     <AuthContext.Provider
       value={{
@@ -113,6 +116,9 @@ export const AuthProvider = ({ children }) => {
         authLoginState,
         authLogoutState,
         authUpdateUserState,
+        isAdmin,
+        isDeveloper,
+        isOrganizer,
       }}
     >
       {children}
