@@ -26,7 +26,10 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
+                if (authUser) return;
                 // Obtenemos una respuesta del servidor.
+                console.log(authUser);
+
                 const res = await fetch(`${VITE_API_URL}/users`, {
                     headers: {
                         Authorization: authToken,
@@ -60,7 +63,7 @@ export const AuthProvider = ({ children }) => {
         } else {
             setAuthUser(null);
         }
-    }, [authToken]);
+    }, [authToken, authUser]);
 
     // Función que guarda el token.
     const authLoginState = (token) => {

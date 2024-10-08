@@ -217,7 +217,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"hab.pfb.hackathones@gmail.com\",\r\n    \"password\": \"jsb40rt-123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,9 +241,6 @@
 				},
 				{
 					"name": "users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -265,15 +262,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:8000/api/users",
 							"host": [
@@ -283,6 +271,44 @@
 							"path": [
 								"api",
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{autDesarrollador}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autAdmin}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{autOrganizador}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/users/getAllUsers",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"getAllUsers"
 							]
 						}
 					},
@@ -519,7 +545,8 @@
 							{
 								"key": "Authorization",
 								"value": "{{autOrganizador}}",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							},
 							{
 								"key": "Authorization",
@@ -836,7 +863,7 @@
 					"response": []
 				},
 				{
-					"name": "hackathons userHackathons",
+					"name": "hackathons user hackathons",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},

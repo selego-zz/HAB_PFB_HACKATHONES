@@ -1,16 +1,21 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import { StrictMode } from 'react';
 import { AuthProvider } from './contexts/AuthContext.jsx';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+
+// Estilos CSS
+import './styles/tailwind.css';
+import './styles/scrollbar.css';
+
+//////
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
-  </StrictMode>
+    <StrictMode>
+        <AuthProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </AuthProvider>
+    </StrictMode>,
 );

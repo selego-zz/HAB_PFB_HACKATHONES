@@ -13,39 +13,57 @@ const CreateHackathonForm = ({ formData, handleChange, handleSubmit }) => {
         const hackathonEnd = new Date(formData.hackathonEnd);
 
         // Verificar fechas
-        if (inscriptionDate < currentDate) {
+        if (inscriptionDate && inscriptionDate < currentDate) {
             throw new Error(
                 'La fecha de inscripción no puede ser una fecha pasada.',
+                {
+                    id: 'createhackathonform',
+                },
             );
         }
-        if (inscriptionEnd < inscriptionDate) {
+        if (inscriptionEnd && inscriptionEnd < inscriptionDate) {
             throw new Error(
                 'La fecha de fin de inscripción no puede ser anterior a la fecha de inicio.',
+                {
+                    id: 'createhackathonform',
+                },
             );
         }
-        if (hackathonDate < inscriptionEnd) {
+        if (hackathonDate && hackathonDate < inscriptionEnd) {
             throw new Error(
                 'La fecha del hackathon no puede ser anterior a la fecha de fin de inscripción.',
+                {
+                    id: 'createhackathonform',
+                },
             );
         }
-        if (hackathonEnd < hackathonDate) {
+        if (hackathonEnd && hackathonEnd < hackathonDate) {
             throw new Error(
                 'La fecha de finalización del hackathon no puede ser anterior a la fecha de inicio.',
+                {
+                    id: 'createhackathonform',
+                },
             );
         }
 
         // Verificar que los premios y participantes no sean negativos
         if (formData.prizes && formData.prizes < 0) {
-            throw new Error('El valor de los premios no puede ser negativo.');
+            throw new Error('El valor de los premios no puede ser negativo.', {
+                id: 'createhackathonform',
+            });
         }
-        if (formData.maxParticipants < 1) {
+        if (formData.maxParticipants && formData.maxParticipants < 1) {
             throw new Error(
                 'El número máximo de participantes debe ser mayor a 0.',
+                {
+                    id: 'createhackathonform',
+                },
             );
         }
     } catch (err) {
-        toast.error(err.message);
-        return;
+        toast.error(err.message, {
+            id: 'createhackathonform',
+        });
     }
 
     return (
@@ -239,8 +257,8 @@ CreateHackathonForm.propTypes = {
         inscriptionEnd: PropTypes.string.isRequired,
         hackathonDate: PropTypes.string.isRequired,
         hackathonEnd: PropTypes.string.isRequired,
-        prizes: PropTypes.number,
-        maxParticipants: PropTypes.number.isRequired,
+        prizes: PropTypes.string.isRequired,
+        maxParticipants: PropTypes.string.isRequired,
         location: PropTypes.string,
         online: PropTypes.string.isRequired,
         logo: PropTypes.any,

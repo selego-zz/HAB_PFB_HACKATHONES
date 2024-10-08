@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import CreateHackathonForm from '../../forms/CreateHackathonForm.jsx'; // Importamos el formulario
-import useHackathons from '../../hooks/useHackathons.js';
-
-//////
+import { useHackathons, useDocumentTitle } from '../../hooks/index.js'; // Importamos hooks
 
 const CreateHackathonPage = () => {
+    // Título de pestaña
+    useDocumentTitle('Crea un Hackathon');
+
     const { authUser, isOrganizer } = useContext(AuthContext);
     const navigate = useNavigate();
-
-    const { addHackathon } = useHackathons;
+    const { addHackathon } = useHackathons();
 
     // Estado para los datos del formulario
     const [formData, setFormData] = useState({
@@ -32,6 +32,9 @@ const CreateHackathonPage = () => {
     // Verificación de acceso al cargar el componente
     useEffect(() => {
         if (!authUser || !isOrganizer()) {
+            console.log(authUser);
+            console.log(isOrganizer);
+
             toast.error('Solo los organizadores pueden crear hackathons');
             navigate('/');
         }
@@ -52,7 +55,7 @@ const CreateHackathonPage = () => {
             toast.success(res);
             navigate('/');
         } catch (err) {
-            toast.error(`Error: ${err.message}`);
+            toast.error(err.message);
         }
     };
 
@@ -61,11 +64,15 @@ const CreateHackathonPage = () => {
     }
 
     return (
-        <CreateHackathonForm
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-        />
+        <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
+            <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
+                <CreateHackathonForm
+                    formData={formData}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                />
+            </div>
+        </div>
     );
 };
 

@@ -1,8 +1,9 @@
-//importamos hooks
+// Importamos hooks
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDocumentTitle } from '../../hooks/index.js';
 
-//importamos contexts
+// Importamos contexts
 import { AuthContext } from '../../contexts/AuthContext.jsx';
 
 import toast from 'react-hot-toast';
@@ -10,6 +11,9 @@ import toast from 'react-hot-toast';
 /////////////////////////////////
 
 const RegisterPage = () => {
+    // Título de pestaña
+    useDocumentTitle('Registro');
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
