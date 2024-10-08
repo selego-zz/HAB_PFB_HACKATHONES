@@ -1,6 +1,7 @@
 //importamos los hooks
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 // Importamos la URL del servidor.
 const { VITE_API_URL } = import.meta.env;
@@ -9,6 +10,18 @@ const { VITE_API_URL } = import.meta.env;
 // Con este Hook controlaremos todo lo relacionado con los hackathons
 //
 //   hackathons - contiene el listado de los hackathon filtrado o no
+//       addHackathon
+//       recibe un objeto hackathon que tiene exclusivamente
+//         los siguientes campos:
+//            name,
+//            inscriptionDate,
+//            inscriptionEnd,
+//            hackathonDate,
+//            hackathonEnd,
+//            maxParticipants,
+//            prizes,
+//            online,
+//            location,
 //
 //   filter - Variable de estado que contiene los filtros que se aplicarán a los hackaton
 //     es un array de json de la forma {clave: valor} donde
@@ -40,6 +53,8 @@ const { VITE_API_URL } = import.meta.env;
 //        automáticamente a "asc"
 ////////////////////////////////////////////////////////////////////////
 const useHackathons = () => {
+    const { authToken } = useContext(AuthContext);
+
     const [hackathons, setHackathons] = useState([]);
     const [query, setQuery] = useState([]);
     const [filter, setFilters] = useState([]);
@@ -98,6 +113,28 @@ const useHackathons = () => {
         };
         fetchHackathons();
     }, [hackathons, query]);
+
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    const addHackathon = async (hackathon) => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/hackathons`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: authToken,
+                },
+                body: JSON.stringify(hackathon),
+            });
+            const body = await res.json();
+
+            if (body.status === 'error') body.message;
+
+            return 'Hackathon creado exitosamente';
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
 
     ////////////////////////////////////////////////////////////
     // De aquí en adelante será lo relativo a todo lo que se
@@ -196,7 +233,7 @@ const useHackathons = () => {
         // Variables relaccionadas con el hackathon
         hackathons,
         hackathonLoading,
-
+        addHackathon,
         // de aquí en adelante es para añadir y quitar filtros y ordenes
         //Consultar los filtros, añadir nuevo filtro, eliminar filtro
         filter,
