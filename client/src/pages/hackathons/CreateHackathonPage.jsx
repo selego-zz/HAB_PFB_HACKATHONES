@@ -12,7 +12,7 @@ const CreateHackathonPage = () => {
     const { authUser, isOrganizer } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const { addHackathon } = useHackathons;
+    const { addHackathon } = useHackathons();
 
     // Estado para los datos del formulario
     const [formData, setFormData] = useState({
@@ -32,6 +32,9 @@ const CreateHackathonPage = () => {
     // Verificación de acceso al cargar el componente
     useEffect(() => {
         if (!authUser || !isOrganizer()) {
+            console.log(authUser);
+            console.log(isOrganizer);
+
             toast.error('Solo los organizadores pueden crear hackathons');
             navigate('/');
         }
@@ -52,7 +55,7 @@ const CreateHackathonPage = () => {
             toast.success(res);
             navigate('/');
         } catch (err) {
-            toast.error(`Error: ${err.message}`);
+            toast.error(err.message);
         }
     };
 
