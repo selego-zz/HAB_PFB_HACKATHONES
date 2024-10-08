@@ -115,6 +115,7 @@ const useHackathons = () => {
     }, [hackathons, query]);
 
     ////////////////////////////////////////////////////////////
+    // Diferentes fetch de hackathons
     ////////////////////////////////////////////////////////////
     const addHackathon = async (hackathon) => {
         try {
@@ -131,6 +132,27 @@ const useHackathons = () => {
             if (body.status === 'error') throw new Error(body.message);
             setHackathons([]);
             return 'Hackathon creado exitosamente';
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+    const updateHackathon = async (hackathon) => {
+        const id = hackathon.id;
+        delete hackathon.id;
+        try {
+            const res = await fetch(`${VITE_API_URL}/${id}/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: authToken,
+                },
+                body: JSON.stringify(hackathon),
+            });
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+
+            return body.message;
         } catch (err) {
             throw new Error(err);
         }
@@ -234,6 +256,7 @@ const useHackathons = () => {
         hackathons,
         hackathonLoading,
         addHackathon,
+        updateHackathon,
         // de aquí en adelante es para añadir y quitar filtros y ordenes
         //Consultar los filtros, añadir nuevo filtro, eliminar filtro
         filter,
