@@ -14,6 +14,9 @@ export const AuthContext = createContext(null);
 
 // Creamos el componente AuthProvider.
 export const AuthProvider = ({ children }) => {
+    // inicializo authLoading a true por que nada más crear no tenemos user todavía
+    const [authLoading, setAuthLoading] = useState(true);
+
     // Declaramos una variable en el state para manejar el token.
     const [authToken, setAuthToken] = useState(
         localStorage.getItem(VITE_AUTH_TOKEN) || null,
@@ -25,10 +28,10 @@ export const AuthProvider = ({ children }) => {
     // Solicitamos los datos del usuario si existe un token.
     useEffect(() => {
         const fetchUser = async () => {
+            setAuthLoading(true);
             try {
                 if (authUser) return;
                 // Obtenemos una respuesta del servidor.
-                console.log(authUser);
 
                 const res = await fetch(`${VITE_API_URL}/users`, {
                     headers: {
@@ -55,6 +58,8 @@ export const AuthProvider = ({ children }) => {
                 // Si hay un error eliminamos el usuario y lanzamos error.
                 setAuthUser(null);
                 throw new Error(err.message);
+            } finally {
+                setAuthLoading(false);
             }
         };
 
@@ -144,6 +149,7 @@ export const AuthProvider = ({ children }) => {
             value={{
                 authToken,
                 authUser,
+                authLoading,
                 authLoginState,
                 authLogoutState,
                 authUpdateUserState,

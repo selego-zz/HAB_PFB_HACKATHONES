@@ -77,11 +77,11 @@ const useHackathons = () => {
                 let res;
                 if (query.length < 1)
                     res = await fetch(`${VITE_API_URL}/hackathons`);
-                else
-                    res = await fetch(`${VITE_API_URL}/hackathons`, {
+                else res = await fetch(`${VITE_API_URL}/hackathons`);
+                /*                    res = await fetch(`${VITE_API_URL}/hackathons`, {
                         body: JSON.stringify(query),
                     });
-                const body = await res.json();
+*/ const body = await res.json();
 
                 if (body.status === 'error') throw new Error(body.message);
 
