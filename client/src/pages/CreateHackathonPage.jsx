@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import CreateHackathonForm from '../forms/CreateHackathonForm.jsx'; // Importamos el formulario
+import useHackathons from '../hooks/useHackathons.js';
 
 //////
 
@@ -11,7 +12,7 @@ const CreateHackathonPage = () => {
     const { authUser, isOrganizer } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const { VITE_API_URL, VITE_AUTH_TOKEN } = import.meta.env; // Variables de entorno
+    const { addHackathon } = useHackathons;
 
     // Estado para los datos del formulario
     const [formData, setFormData] = useState({
@@ -47,22 +48,10 @@ const CreateHackathonPage = () => {
         e.preventDefault();
 
         try {
-            const res = await fetch(`${VITE_API_URL}/hackathons`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${VITE_AUTH_TOKEN}`,
-                },
-                body: JSON.stringify({ ...formData, organizerId: authUser.id }),
-            });
+            addHackathon(formData);
 
-            if (res.ok) {
-                toast.success('Hackathon creado exitosamente');
-                navigate('/');
-            } else {
-                const data = await res.json();
-                throw new Error(data.message || 'Error al crear el hackathon');
-            }
+            toast.success('Hackathon creado exitosamente');
+            navigate('/');
         } catch (err) {
             toast.error(`Error: ${err.message}`);
         }
