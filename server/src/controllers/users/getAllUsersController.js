@@ -3,15 +3,15 @@ import { selectAllUsersModel } from '../../models/index.js';
 
 //////
 
-// Función controladora final que retorna los datos del usuario del token.
+// Función que retorna todos los usuarios.
 const getAllUsersController = async (req, res, next) => {
     try {
-        const user = await selectAllUsersModel();
+        const users = await selectAllUsersModel();
 
         res.send({
             status: 'ok',
             data: {
-                user,
+                users,
             },
         });
     } catch (err) {

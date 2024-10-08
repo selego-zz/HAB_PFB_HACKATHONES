@@ -3,7 +3,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import CreateHackathonForm from '../forms/CreateHackathonForm'; // Importamos el formulario
+import CreateHackathonForm from '../forms/CreateHackathonForm.jsx'; // Importamos el formulario
 
 //////
 
