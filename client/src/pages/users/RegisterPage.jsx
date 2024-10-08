@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 //importamos contexts
-import { AuthContext } from '../../../contexts/AuthContext.jsx';
+import { AuthContext } from '../../contexts/AuthContext.jsx';
 
 import toast from 'react-hot-toast';
 
