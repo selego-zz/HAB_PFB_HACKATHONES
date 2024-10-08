@@ -48,9 +48,8 @@ const CreateHackathonPage = () => {
         e.preventDefault();
 
         try {
-            addHackathon(formData);
-
-            toast.success('Hackathon creado exitosamente');
+            const res = await addHackathon(formData);
+            toast.success(res);
             navigate('/');
         } catch (err) {
             toast.error(`Error: ${err.message}`);

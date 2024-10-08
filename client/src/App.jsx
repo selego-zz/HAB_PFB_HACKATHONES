@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 
 // Importamos los componentes
 import Header from './components/Header.jsx';
-import HomePage from './pages/HomePage.jsx';
-import RegisterPage from './pages/RegisterPage.jsx';
-import CreateHackathonPage from './pages/CreateHackathonPage.jsx';
+import HomePage from './pages/users/HomePage.jsx';
+import RegisterPage from './pages/users/RegisterPage.jsx';
+import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
 import PruebaPage from './pages/pruebaPage.jsx';
@@ -25,12 +25,12 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="users/register" element={<RegisterPage />} />
-                    <Route path="/prueba" element={<PruebaPage />} />
                     <Route
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}
                     />
                     <Route path="*" element={<NotFoundPage />} />
+                    <Route path="/prueba" element={<PruebaPage />} />
                 </Routes>
             </section>
             <Footer />
