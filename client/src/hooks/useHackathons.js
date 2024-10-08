@@ -1,7 +1,7 @@
 //importamos los hooks
 
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext.jsx';
 
 // Importamos la URL del servidor.
 const { VITE_API_URL } = import.meta.env;
@@ -128,8 +128,8 @@ const useHackathons = () => {
             });
             const body = await res.json();
 
-            if (body.status === 'error') body.message;
-
+            if (body.status === 'error') throw new Error(body.message);
+            setHackathons([]);
             return 'Hackathon creado exitosamente';
         } catch (err) {
             throw new Error(err);
