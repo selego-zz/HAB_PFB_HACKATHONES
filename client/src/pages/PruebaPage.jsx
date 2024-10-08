@@ -1,4 +1,4 @@
-import useHackathons from './hooks/useHackathons';
+import useHackathons from '../hooks/useHackathons';
 
 const PruebaPage = () => {
     const { hackathons } = useHackathons();

@@ -1,10 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../contexts/AuthContext.jsx';
+import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-import CreateHackathonForm from '../forms/CreateHackathonForm.jsx'; // Importamos el formulario
-import useHackathons from '../hooks/useHackathons.js';
+import CreateHackathonForm from '../../forms/CreateHackathonForm.jsx'; // Importamos el formulario
+import useHackathons from '../../hooks/useHackathons.js';
 
 //////
 
