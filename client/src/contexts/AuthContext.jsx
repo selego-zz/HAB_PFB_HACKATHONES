@@ -14,119 +14,148 @@ export const AuthContext = createContext(null);
 
 // Creamos el componente AuthProvider.
 export const AuthProvider = ({ children }) => {
-  // Declaramos una variable en el state para manejar el token.
-  const [authToken, setAuthToken] = useState(
-    localStorage.getItem(VITE_AUTH_TOKEN) || null
-  );
+    // Declaramos una variable en el state para manejar el token.
+    const [authToken, setAuthToken] = useState(
+        localStorage.getItem(VITE_AUTH_TOKEN) || null,
+    );
 
-  // Declaramos una variable en el State para almacenar los datos del usuario.
-  const [authUser, setAuthUser] = useState(null);
+    // Declaramos una variable en el State para almacenar los datos del usuario.
+    const [authUser, setAuthUser] = useState(null);
 
-  // Solicitamos los datos del usuario si existe un token.
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        // Obtenemos una respuesta del servidor.
-        const res = await fetch(`${VITE_API_URL}/users`, {
-          headers: {
-            Authorization: authToken,
-          },
-        });
+    // Solicitamos los datos del usuario si existe un token.
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                // Obtenemos una respuesta del servidor.
+                const res = await fetch(`${VITE_API_URL}/users`, {
+                    headers: {
+                        Authorization: authToken,
+                    },
+                });
 
-        // Obtenemos el body, y si hubo algún error lo lanzamos.
-        const body = await res.json();
+                // Obtenemos el body, y si hubo algún error lo lanzamos.
+                const body = await res.json();
 
-        if (body.status === 'error') {
-          throw new Error(body.message);
+                if (body.status === 'error') {
+                    throw new Error(body.message);
+                }
+
+                // Establecemos los datos del usuario.
+                setAuthUser(body.data.user);
+            } catch (err) {
+                // Si el token no es correcto lo eliminamos del State y del almacenamiento local.
+                if (err.message === 'Token no válido') {
+                    setAuthToken(null);
+                    localStorage.removeItem(VITE_AUTH_TOKEN);
+                }
+
+                // Si hay un error eliminamos el usuario y lanzamos error.
+                setAuthUser(null);
+                throw new Error(err.message);
+            }
+        };
+
+        if (authToken) {
+            fetchUser();
+        } else {
+            setAuthUser(null);
         }
+    }, [authToken]);
 
-        // Establecemos los datos del usuario.
-        setAuthUser(body.data.user);
-      } catch (err) {
-        // Si el token no es correcto lo eliminamos del State y del almacenamiento local.
-        if (err.message === 'Token no válido') {
-          setAuthToken(null);
-          localStorage.removeItem(VITE_AUTH_TOKEN);
-        }
-
-        // Si hay un error eliminamos el usuario y lanzamos error.
-        setAuthUser(null);
-        throw new Error(err.message);
-      }
+    // Función que guarda el token.
+    const authLoginState = (token) => {
+        setAuthToken(token);
+        localStorage.setItem(VITE_AUTH_TOKEN, token);
     };
 
-    if (authToken) {
-      fetchUser();
-    } else {
-      setAuthUser(null);
-    }
-  }, [authToken]);
+    // Función que elimina el token.
+    const authLogoutState = () => {
+        setAuthToken(null);
+        localStorage.removeItem(VITE_AUTH_TOKEN);
+    };
 
-  // Función que guarda el token.
-  const authLoginState = (token) => {
-    setAuthToken(token);
-    localStorage.setItem(VITE_AUTH_TOKEN, token);
-  };
+    // Función que actualiza el usuario en el State.
+    const authUpdateUserState = (
+        username,
+        email,
+        firstName,
+        lastName,
+        role,
+        biography,
+        linkedIn,
+        avatar,
+    ) => {
+        setAuthUser((prevAuthUser) => ({
+            ...prevAuthUser,
+            username,
+            email,
+            firstName,
+            lastName,
+            role,
+            biography,
+            linkedIn,
+            avatar,
+        }));
+    };
 
-  // Función que elimina el token.
-  const authLogoutState = () => {
-    setAuthToken(null);
-    localStorage.removeItem(VITE_AUTH_TOKEN);
-  };
+    // Función para verificar si el usuario tiene un rol específico.
+    const hasRole = (role) => {
+        return authUser?.role === role;
+    };
 
-  // Función que actualiza el usuario en el State.
-  const authUpdateUserState = (
-    username,
-    email,
-    firstName,
-    lastName,
-    role,
-    biography,
-    linkedIn,
-    avatar
-  ) => {
-    setAuthUser((prevAuthUser) => ({
-      ...prevAuthUser,
-      username,
-      email,
-      firstName,
-      lastName,
-      role,
-      biography,
-      linkedIn,
-      avatar,
-    }));
-  };
+    // Funciones para verificar qué rol tiene el usuario, si lo tiene.
+    const isAdmin = () => hasRole('administrador');
+    const isDeveloper = () => hasRole('desarrollador');
+    const isOrganizer = () => hasRole('organizador');
 
-  // Función para verificar si el usuario tiene un rol específico.
-  const hasRole = (role) => {
-    return authUser?.role === role;
-  };
+    // Función para registrar un nuevo usuario.
+    const registerUser = async (userData) => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/users/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
 
-  // Funciones para verificar qué rol tiene el usuario, si lo tiene.
-  const isAdmin = () => hasRole('administrador');
-  const isDeveloper = () => hasRole('desarrollador');
-  const isOrganizer = () => hasRole('organizador');
+            const body = await res.json();
 
-  return (
-    <AuthContext.Provider
-      value={{
-        authToken,
-        authUser,
-        authLoginState,
-        authLogoutState,
-        authUpdateUserState,
-        isAdmin,
-        isDeveloper,
-        isOrganizer,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+            if (body.status === 'error') {
+                throw new Error(body.message);
+            }
+
+            // Si el registro es exitoso, se guarda el token y se establece el usuario.
+            const { token, user } = body.data;
+            authLoginState(token);
+            setAuthUser(user);
+
+            return body.data;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    };
+
+    return (
+        <AuthContext.Provider
+            value={{
+                authToken,
+                authUser,
+                authLoginState,
+                authLogoutState,
+                authUpdateUserState,
+                isAdmin,
+                isDeveloper,
+                isOrganizer,
+                registerUser,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 // Validamos las props.
 AuthProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 };
