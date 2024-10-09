@@ -11,7 +11,7 @@ import { generateErrorUtil } from '../../utils/index.js';
 
 const getUsersHackathonController = async (req, res, next) => {
     try {
-        // Obtenemos el rol del usuario desde el token (administrador o usuario normal).
+        // Obtenemos el rol del usuario desde el token.
         const { role, id: userId } = req.user;
 
         let hackathons;

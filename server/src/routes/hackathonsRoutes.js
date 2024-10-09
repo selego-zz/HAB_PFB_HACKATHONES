@@ -82,7 +82,7 @@ router.put(
 
 // Middleware que clasifica a los participantes después del evento de hackathon.
 router.put(
-    '/hackathons/:hackathonId/:developerId/classification',
+    '/hackathons/:hackathonId/:developerId/ranking',
     authOrganizerController,
     updateScoreController,
 );
