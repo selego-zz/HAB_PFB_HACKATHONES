@@ -24,7 +24,7 @@ const Header = () => {
                         <img
                             src="/Logo/logo1.png"
                             alt="Logo"
-                            className="h-16 w-16 ml-7 mt-2 sm:h-14 sm:w-32 sm:ml-10 sm:mt-4 "
+                            className="h-16 w-16 ml-7 mt-2 sm:h-16 sm:w-36 sm:ml-10 sm:mt-4 "
                         />
                     </picture>
                 </NavLink>
