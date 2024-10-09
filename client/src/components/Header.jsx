@@ -2,8 +2,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 import { NavLink } from 'react-router-dom';
 
-const { VITE_APP_NAME } = import.meta.env;
-
 const Header = () => {
     const authContext = useContext(AuthContext);
     if (!authContext) {
@@ -14,15 +12,25 @@ const Header = () => {
         authContext;
 
     return (
-        <header className="bg-blanco text-negro py-4 shadow-md">
-            <div className="container mx-auto px-6 flex flex-col sm:flex-row justify-between items-center">
+        <header className=" bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro p-1">
+            <div className="flex justify-between items-center">
                 {/* Logo */}
                 <NavLink to="/" className="text-2xl font-bold mb-2 sm:mb-0">
-                    <h1>{VITE_APP_NAME}</h1>
+                    <picture>
+                        <source
+                            media="(max-width: 640px)"
+                            srcSet="/Logo/logo.png"
+                        />
+                        <img
+                            src="/Logo/logo1.png"
+                            alt="Logo"
+                            className="h-16 ml-7 mt-2 sm:h-14 sm:w-32 sm:ml-10 sm:mt-4 "
+                        />
+                    </picture>
                 </NavLink>
 
                 {/* Botones para diferentes roles */}
-                <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mb-2 sm:mb-0">
+                <nav>
                     {isDeveloper() && (
                         <NavLink
                             to="/events"
@@ -56,7 +64,7 @@ const Header = () => {
                 </nav>
 
                 {/* Botones de autenticación */}
-                <nav className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                <nav className="flex">
                     {!authUser ? (
                         <>
                             <NavLink
