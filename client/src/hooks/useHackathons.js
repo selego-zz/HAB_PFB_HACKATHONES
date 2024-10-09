@@ -168,7 +168,7 @@ const useHackathons = () => {
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
-
+            setHackathons([]);
             return body.message;
         } catch (err) {
             throw new Error(err);
