@@ -67,7 +67,7 @@ const useHackathons = () => {
     const { authToken } = useContext(AuthContext);
 
     const [hackathons, setHackathons] = useState([]);
-    const [query, setQuery] = useState([]);
+    const [query, setQuery] = useState({});
     const [filter, setFilters] = useState({});
     const [technologies, setTechnologies] = useState([]);
     const [themes, setThemes] = useState([]);
@@ -281,9 +281,6 @@ const useHackathons = () => {
             return true;
         };
         const compareQuery = (newQuery) => {
-            if (!query || Object.keys(query).length < 1) {
-                return false;
-            }
             if (Object.keys(query).length !== Object.keys(newQuery).length)
                 return false;
             for (const key in query) {
