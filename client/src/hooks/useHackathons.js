@@ -7,7 +7,7 @@ import { AuthContext } from '../contexts/AuthContext.jsx';
 const { VITE_API_URL } = import.meta.env;
 
 /* no implemento las siguientes rutas */
-// put '/hackathons/:hackathonId/:developerId/classification',
+// put '/hackathons/:hackathonId/:developerId/ranking',
 // post '/hackathons/:hackathonId/registration',
 // delete '/hackathons/:hackathonId/cancel',
 

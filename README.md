@@ -64,7 +64,7 @@ Los **desarrolladores** podrán inscribirse como participantes en cuantos desaf�
 
 - **PUT** - ["/api/hackathons/:hackathonId/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
 
-- **PUT** - ["/api/hackathons/:hackathonId/:developerId/classification"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+- **PUT** - ["/api/hackathons/:hackathonId/:developerId/ranking"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
 
 - **GET** - ["/api/technologies"] - Devuelve un listado de tecnologías de los hackathons. Ninguna autenticación.
 

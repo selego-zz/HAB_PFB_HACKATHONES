@@ -1,10 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
+
 import toast from 'react-hot-toast';
 
-import CreateHackathonForm from '../../forms/CreateHackathonForm.jsx'; // Importamos el formulario
-import { useHackathons, useDocumentTitle } from '../../hooks/index.js'; // Importamos hooks
+import { CreateHackathonForm } from '../../forms/index.js';
+import { useHackathons, useDocumentTitle } from '../../hooks/index.js';
+
+//////
 
 const CreateHackathonPage = () => {
     // Título de pestaña

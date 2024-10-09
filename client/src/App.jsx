@@ -14,6 +14,7 @@ import PruebaPage from './pages/pruebaPage.jsx';
 //Importamos otras funciones
 import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer.jsx';
+import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -24,12 +25,20 @@ const App = () => {
             <Header />
             <section className="flex-grow">
                 <Routes>
+                    {/* Usuarios */}
                     <Route path="/" element={<HomePage />} />
                     <Route path="users/register" element={<RegisterPage />} />
                     <Route path="users" element={<ListAllUsersPage />} />
+
                     <Route
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}
+                    />
+
+                    {/* Hackathons */}
+                    <Route
+                        path="/hackathons/:hackathonId"
+                        element={<HackathonDetailsPage />}
                     />
                     <Route path="*" element={<NotFoundPage />} />
                     <Route path="/prueba" element={<PruebaPage />} />
