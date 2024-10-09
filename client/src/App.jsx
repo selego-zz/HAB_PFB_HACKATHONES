@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import HomePage from './pages/users/HomePage.jsx';
 import RegisterPage from './pages/users/RegisterPage.jsx';
+import ListAllUsersPage from './pages/users/ListAllUsersPage.jsx';
 import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
@@ -25,6 +26,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="users/register" element={<RegisterPage />} />
+                    <Route path="users" element={<ListAllUsersPage />} />
                     <Route
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}

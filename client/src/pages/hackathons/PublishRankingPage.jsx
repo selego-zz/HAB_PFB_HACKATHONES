@@ -52,7 +52,7 @@ const PublishRankingPage = () => {
             toast.success('Clasificación publicada exitosamente');
             navigate(`/hackathons/${hackathonId}`);
         } catch (err) {
-            toast.error('Hubo un error al publicar la clasificación');
+            toast.error(err.message);
         }
     };
 

@@ -1,6 +1,7 @@
 import addUserModel from './addUserModel.js';
 import getLastAuthUpdateModel from './getLastAuthUpdateModel.js';
 import selectAllUsersModel from './selectAllUsersModel.js';
+import selectPendingUsersModel from './selectPendingUsersModel.js';
 import selectUserByEmailModel from './selectUserByEmailModel.js';
 import selectUserByIdModel from './selectUserByIdModel.js';
 import selectUserByUsernameModel from './selectUserByUsernameModel.js';
@@ -13,6 +14,7 @@ export {
     addUserModel,
     getLastAuthUpdateModel,
     selectAllUsersModel,
+    selectPendingUsersModel,
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,

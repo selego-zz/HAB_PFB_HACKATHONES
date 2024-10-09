@@ -45,7 +45,7 @@ const Header = () => {
                     )}
                     {isAdmin() && (
                         <NavLink
-                            to="/user-list"
+                            to="/users"
                             className="bg-verdeagua text-negro py-2 px-4 rounded-3xl hover:bg-verdemarino mx-auto sm:mx-0"
                         >
                             <button className="w-full text-center">
