@@ -35,13 +35,20 @@ import {
 
 const getAllHackathonsController = async (req, res, next) => {
     try {
-        await validateSchema(hackathonFilterSchema, req.body);
+        // extraemos y parseamos los filtros de los query param
+        let filter = null;
+
+        if (req.query?.data?.length > 0) {
+            filter = JSON.parse(req.query.data);
+        }
+
+        if (filter) await validateSchema(hackathonFilterSchema, filter);
 
         let hackathons;
 
-        if (Object.keys(req.body).length)
-            hackathons = await getFilteredHackathonsModel(req.body);
-        else hackathons = await getAllHackathonsModel();
+        if (filter) {
+            hackathons = await getFilteredHackathonsModel(filter);
+        } else hackathons = await getAllHackathonsModel();
 
         let message =
             hackathons.length > 0
