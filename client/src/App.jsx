@@ -20,7 +20,7 @@ import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
 
 const App = () => {
     return (
-        <section className="flex flex-col gap-4 h-screen">
+        <section className="flex flex-col gap-4 min-h-screen">
             <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
             <Header />
             <section className="flex-grow">
