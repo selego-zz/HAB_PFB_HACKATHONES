@@ -23,31 +23,36 @@ const HomePage = () => {
                     presenciales.
                 </h1>
             </div>
-            <div className="flex flex-col items-center justify-center p-3 sm:items-start sm:pt-20">
-                <h2 className="font-semibold text-3xl font-jost sm:pl-20 mt-10 sm:mt-0">
-                    El hogar de los hackathones.
-                </h2>
-            </div>
-            <div className="flex flex-col items-center justify-center sm:items-start ml-10 mr-10 sm:ml-24 sm:w-2/6">
-                <p className="font-jost font-medium text-center sm:text-left">
-                    Donde las organizaciones y los desarrolladores se unen para
-                    construir, inspirar e innovar.
-                </p>
-            </div>
-            <div className="flex flex-col items-center justify-center sm:items-start mt-6">
-                <button
-                    onClick={handleOrganizacionesClick}
-                    className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
-                >
-                    Organizaciones<span className="ml-10">→</span>
-                </button>
-                <button
-                    onClick={handleParticipantesClick}
-                    className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
-                >
-                    Participantes
-                    <span className="ml-16">→</span>
-                </button>
+
+            <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
+                <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
+                    <div className="flex flex-col items-center justify-center p-3 sm:items-start sm😛t-20">
+                        <h2 className="font-semibold text-3xl font-jost sm😛l-20 mt-10 sm:mt-0">
+                            El hogar de los hackathones.
+                        </h2>
+                    </div>
+                    <div className="flex flex-col items-center justify-center sm:items-start ml-10 mr-10 sm:ml-24 sm:w-2/6">
+                        <p className="font-jost font-medium text-center sm:text-left">
+                            Donde las organizaciones y los desarrolladores se
+                            unen para construir, inspirar e innovar.
+                        </p>
+                    </div>
+                    <div className="flex flex-col items-center justify-center sm:items-start mt-6">
+                        <button
+                            onClick={handleOrganizacionesClick}
+                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                        >
+                            Organizaciones<span className="ml-10">→</span>
+                        </button>
+                        <button
+                            onClick={handleParticipantesClick}
+                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                        >
+                            Participantes
+                            <span className="ml-16">→</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </main>
     );
