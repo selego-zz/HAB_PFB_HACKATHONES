@@ -22,11 +22,14 @@ const HomePage = () => {
                 </h1>
             </div>
 
-            {/* Nueva sección para la imagen y el texto */}
-            <div className="relative">
-                <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover sm:absolute sm:left-1/2 sm:top-0 sm:w-1/2 h-full"></div>
-
-                <div className="bg-opacity-0 sm:w-1/2 sm:pr-10">
+            {/* Sección ajustada con imagen ocupando todo el alto hasta el footer */}
+            <div className="relative h-screen">
+                {' '}
+                {/* Cambiado a h-screen para ocupar toda la altura */}
+                <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center sm:absolute sm:left-1/3 sm:top-0 sm:w-2/3 h-full"></div>
+                <div className="bg-opacity-0 sm:w-1/2 sm:pr-10 relative z-10">
+                    {' '}
+                    {/* Añadido z-10 para estar por encima de la imagen */}
                     <div className="flex flex-col items-center justify-center p-3 sm:items-start sm:pt-20">
                         <h2 className="font-semibold text-3xl font-jost sm:pl-20 mt-10 sm:mt-0">
                             El hogar de los hackathones.
@@ -38,7 +41,7 @@ const HomePage = () => {
                             unen para construir, inspirar e innovar.
                         </p>
                     </div>
-                    <div className="flex flex-col items-center justify-center sm:items-start mt-6">
+                    <div className="flex flex-col items-center justify-center sm:items-start h-60">
                         <button
                             onClick={handleOrganizacionesClick}
                             className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
@@ -47,7 +50,7 @@ const HomePage = () => {
                         </button>
                         <button
                             onClick={handleParticipantesClick}
-                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 mb-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
                         >
                             Participantes<span className="ml-16">→</span>
                         </button>
