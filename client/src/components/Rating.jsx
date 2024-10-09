@@ -1,28 +1,46 @@
 // Importamos las prop-types.
 import PropTypes from 'prop-types';
 
-const getStar = (star) => {
-    return <span>{star}</span>;
+import useHackathons from '../hooks/useHackathons';
+
+const MakeStar = (star, rating, hackathonId) => {
+    const { updateRating } = useHackathons();
+    return (
+        <span
+            className="hover:text-6xl cursor-pointer"
+            onClick={() => {
+                if (confirm('¿Está seguro de que desea cambiar la puntuación?'))
+                    updateRating(hackathonId, rating);
+            }}
+        >
+            {star}
+        </span>
+    );
 };
 
-const Rating = ({ rating, ranking }) => {
+const Rating = ({ hackathonId, rating, ranking }) => {
     const _stars = [];
     for (let i = 0; i < 5; i++)
         i < rating ? _stars.push('★') : _stars.push('☆');
 
     return (
-        <article className="Rating w-48 bg-verdeclaro text-center rounded-2xl">
-            <h2>Rating</h2>
-            <div className="stars text-casiblanco hover:shadow-2xl">
-                {_stars.map((star) => getStar(star))}
+        <article className="Rating w-56 p-2 bg-verdeclaro text-center rounded-2xl">
+            <h2 className="font-bold">Rating</h2>
+            <div className="stars text-4xl text-amarillo group">
+                {_stars.map((star, index) =>
+                    MakeStar(star, index + 1, hackathonId),
+                )}
             </div>
-            <h2>Puntuacion de usuario</h2>
-            <div className="ranking">{ranking}</div>
+            <h2 className="font-bold">Puntuacion de usuario</h2>
+            <div className="ranking text-2xl text-azuloscuro font-bold">
+                {ranking}
+            </div>
         </article>
     );
 };
 // Validamos las props.
 Rating.propTypes = {
+    hackathonId: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
 };

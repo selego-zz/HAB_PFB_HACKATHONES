@@ -16,6 +16,7 @@ export default {
             blanco: '#ffffff',
             negro: '#000000',
             rojoclaro: '#FF6B6B',
+            amarillo: '#FFC107',
         },
     },
     plugins: [],

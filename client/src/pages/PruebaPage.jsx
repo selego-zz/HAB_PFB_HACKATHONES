@@ -32,8 +32,17 @@ const PruebaPage = () => {
 
     return (
         <main>
-            <p>Prueba</p>
-            <Rating rating={4} ranking={185} />
+            <p>
+                Prueba de rating: recibe HackathonId, Rating y Ranking, y si
+                cambiamos el rating, manda el mensaje a la API para
+                actualizarlo.
+            </p>
+            <p>
+                En este ejemplo estoy pasando HackathonId={10} rating={4}
+                ranking={185}. así que a menos que el usuario esté apuntado a
+                ese hackathon fallará, pero sirve para que lo veais
+            </p>
+            <Rating HackathonId={10} rating={4} ranking={185} />
         </main>
     );
 };
