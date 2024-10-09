@@ -15,7 +15,7 @@ const { VITE_API_URL } = import.meta.env;
 // Con este Hook controlaremos todo lo relacionado con los hackathons
 //
 //   hackathons - contiene el listado de los hackathon filtrado o no
-//       addHackathon
+//       addHackathon = async (hackathon)
 //       recibe un objeto hackathon que tiene exclusivamente
 //         los siguientes campos:
 //            name,
@@ -28,6 +28,12 @@ const { VITE_API_URL } = import.meta.env;
 //            online,
 //            location,
 //
+//       updateHackathon = async (hackathon) => {
+//       getHackathon = async (hackathonId) => {
+//       getUsersHackathon = async () => {
+//       deleteHackathon = async (hackathonId) => {
+//       updateRating = async (hackathonId, rating) => {
+//
 //   filter - Variable de estado que contiene los filtros que se aplicarán a los hackaton
 //     es un array de json de la forma {clave: valor} donde
 //       clave es el campo de la tabla de la base de datos por el que filtramos
@@ -38,7 +44,7 @@ const { VITE_API_URL } = import.meta.env;
 //     si la clave ya estuviera en filter la sustitute
 //
 //   removeFilter(oldFilter) Función que elimina de filter la pareja
-//     clave-valor cuya clave coincide con oldFilter
+//     clave-valor cuya clave coincide con el string oldFilter
 //
 //   technologies - Conjunto de tecnologías por los que se filtra
 //     addTechnology - Añade una tecnología al conjunto
@@ -62,10 +68,10 @@ const useHackathons = () => {
 
     const [hackathons, setHackathons] = useState([]);
     const [query, setQuery] = useState([]);
-    const [filter, setFilters] = useState([]);
+    const [filter, setFilters] = useState({});
     const [technologies, setTechnologies] = useState([]);
     const [themes, setThemes] = useState([]);
-    const [order, setOrder] = useState([]);
+    const [orderBy, setOrderBy] = useState([]);
     const [hackathonLoading, setHackathonLoading] = useState(false);
 
     // Obtenemos todos los hackathons cuando se crea el hook
@@ -75,13 +81,19 @@ const useHackathons = () => {
             try {
                 //solicitamos la información
                 let res;
-                if (query.length < 1)
+                const queryLength = Object.keys(query).length;
+
+                if (queryLength < 1) {
                     res = await fetch(`${VITE_API_URL}/hackathons`);
-                else res = await fetch(`${VITE_API_URL}/hackathons`);
-                /*                    res = await fetch(`${VITE_API_URL}/hackathons`, {
-                        body: JSON.stringify(query),
-                    });
-*/ const body = await res.json();
+                } else {
+                    const queryString = new URLSearchParams({
+                        data: JSON.stringify(query),
+                    }).toString();
+                    res = await fetch(
+                        `${VITE_API_URL}/hackathons?${queryString}`,
+                    );
+                }
+                const body = await res.json();
 
                 if (body.status === 'error') throw new Error(body.message);
 
@@ -253,30 +265,72 @@ const useHackathons = () => {
     ////////////////////////////////////////////////////////////
 
     useEffect(() => {
-        const newQuery = filter;
-        newQuery.push(themes);
-        newQuery.push(technologies);
-        newQuery.push(order);
-        setQuery(newQuery);
-    }, [filter, themes, technologies, order]);
-    const addFilter = (newFilter) => {
-        setFilters((prevFilters) => {
-            // Filtrar los filtros existentes para eliminar cualquier filtro con la misma clave
-            const updatedFilters = prevFilters.filter(
-                (filter) =>
-                    Object.keys(filter)[0] !== Object.keys(newFilter)[0],
-            );
-            // Añadir el nuevo filtro
-            return [...updatedFilters, newFilter];
-        });
-    };
+        const compareArray = (arr1, arr2) => {
+            // Compruebo si ambos arrays tienen la misma longitud
+            if (arr1.length !== arr2.length) {
+                return false;
+            }
 
+            // Comparo cada elemento
+            for (const item of arr1) {
+                if (!arr2.includes(item)) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+        const compareQuery = (newQuery) => {
+            if (!query || Object.keys(query).length < 1) {
+                return false;
+            }
+            if (Object.keys(query).length !== Object.keys(newQuery).length)
+                return false;
+            for (const key in query) {
+                //para cada elemento de query
+                //comparamos su valor con el de newQuery
+                //pero tenemos que tener en cuenta que puede ser un tema, una tecnología o un orden
+                switch (key) {
+                    case 'theme':
+                    case 'technology':
+                    case 'orderBy':
+                        if (!compareArray(query[key], newQuery[key]))
+                            return false;
+                        break;
+
+                    default:
+                        if (query[key] !== newQuery[key]) return false;
+                        break;
+                }
+            }
+
+            return true;
+        };
+
+        let newQuery = {};
+        if (Object.keys(filter).length > 0) newQuery = filter;
+        if (themes.length > 0) newQuery.themes = themes;
+        if (technologies.length > 0) newQuery.technologies = technologies;
+        if (orderBy.length > 0) newQuery.order = orderBy;
+        if (!compareQuery(newQuery)) setQuery(newQuery);
+    }, [filter, themes, technologies, orderBy, query]);
+
+    const addFilter = (newFilter) => {
+        //tomo la clave y el valor del filtro que me mandan
+        const key = Object.keys(newFilter)[0];
+        const value = newFilter[key];
+        if (filter[key] === value) return;
+        //para actualizar el valor de setFilter crearemos un nuevo objeto
+        //y añadiremos o sobreescribiremos la nueva clave
+        const updatedFilters = { ...filter };
+        updatedFilters[key] = value;
+        setFilters(updatedFilters);
+    };
     const removeFilter = (oldFilter) => {
-        setFilters((prevFilters) =>
-            prevFilters.filter(
-                (filter) => Object.keys(filter)[0] !== oldFilter,
-            ),
-        );
+        if ((!oldFilter) in filter) return;
+        const updatedFilters = { ...filter };
+        delete updatedFilters[oldFilter];
+        setFilters(updatedFilters);
     };
 
     const addTechnology = (newTechnology) => {
@@ -284,6 +338,7 @@ const useHackathons = () => {
             setTechnologies(...technologies, newTechnology);
     };
     const removeTechnology = (oldTechnology) => {
+        if (!technologies.includes(oldTechnology)) return;
         setTechnologies((prevTechnologies) => {
             prevTechnologies.filter(
                 (technology) => technology != oldTechnology,
@@ -295,6 +350,7 @@ const useHackathons = () => {
         if (!themes.includes(newTheme)) setThemes(...themes, newTheme);
     };
     const removeTheme = (oldTheme) => {
+        if (!themes.includes(oldTheme)) return;
         setThemes((prevThemes) => {
             prevThemes.filter((theme) => theme != oldTheme);
         });
@@ -313,10 +369,11 @@ const useHackathons = () => {
         if (orderDirection !== ' asc' && orderDirection !== ' desc')
             orderDirection = ' asc';
 
+        if (orderBy.includes(key + orderDirection)) return;
         // ahora, antes de meterlo en los ordenes, me aseguro de que no está
-        if (order.includes(key + ' asc')) removeOrder(key);
-        if (order.includes(key + ' desc')) removeOrder(key);
-        setOrder(...order, key + orderDirection);
+        if (orderBy.includes(key + ' asc')) removeOrder(key);
+        if (orderBy.includes(key + ' desc')) removeOrder(key);
+        setOrderBy(...orderBy, key + orderDirection);
     };
     const removeOrder = (oldOrder) => {
         let key = '';
@@ -328,16 +385,16 @@ const useHackathons = () => {
         // vamos a buscar si está tanto ascendente como descendente
         // no puede estar sin sentido por que lo añadimos si no lo incluye
         // buscamos en orden ascendente
-        index = order.indexOf(key + ' asc');
+        index = orderBy.indexOf(key + ' asc');
         // si no está, pues descendente
-        if (index < 0) index = order.indexOf(key + ' desc');
+        if (index < 0) index = orderBy.indexOf(key + ' desc');
         // si no está, no cambiamos nada
         if (index < 0) return;
 
-        order.splice(index, 1);
+        orderBy.splice(index, 1);
 
         // Actualiza el estado de la lista de órdenes
-        setOrder([...order]);
+        setOrderBy([...orderBy]);
     };
 
     return {
@@ -363,7 +420,7 @@ const useHackathons = () => {
         addTheme,
         removeTheme,
         //Consultar los ordenes, añadir nuevo orden, eliminar orden
-        order,
+        order: orderBy,
         addOrder,
         removeOrder,
     };
