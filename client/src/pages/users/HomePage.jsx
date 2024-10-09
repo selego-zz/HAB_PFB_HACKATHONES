@@ -24,7 +24,7 @@ const HomePage = () => {
                 </h1>
             </div>
             <div className="flex flex-col items-center justify-center p-3 sm:items-start sm:pt-20">
-                <h2 className="font-semibold text-3xl font-jost sm:pl-20 mt-24 sm:mt-0">
+                <h2 className="font-semibold text-3xl font-jost sm:pl-20 mt-10 sm:mt-0">
                     El hogar de los hackathones.
                 </h2>
             </div>
