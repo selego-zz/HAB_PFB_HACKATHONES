@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import useHackathons from '../hooks/useHackathons';
+import Rating from '../components/Rating';
 
 const PruebaPage = () => {
     const {
@@ -32,6 +33,7 @@ const PruebaPage = () => {
     return (
         <main>
             <p>Prueba</p>
+            <Rating rating={4} ranking={185} />
         </main>
     );
 };
