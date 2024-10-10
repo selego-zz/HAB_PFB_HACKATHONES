@@ -1,45 +1,63 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Importamos los hooks.
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+// Importamos la función toast.
 import toast from 'react-hot-toast';
 
+// Importamos la URL del servidor.
+const { VITE_API_URL } = import.meta.env;
+
+// Inicializamos el componente.
 const ValidationPage = () => {
-    const [code, setCode] = useState('');
+    // Importamos la función navigate.
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // Obtenemos el path param con el código de registro.
+    const { activationCode } = useParams();
 
-        const validCode = '123456';
+    // Utilizamos "useEffect" para validar al usuario cuando se monte el componente.
+    useEffect(() => {
+        const fetchValidateUser = async () => {
+            try {
+                // Obtenemos una respuesta.
+                const res = await fetch(
+                    `${VITE_API_URL}/users/register/validate/${activationCode}`,
+                    {
+                        method: 'PUT',
+                    },
+                );
 
-        if (code === validCode) {
-            toast.success('¡Código verificado exitosamente!');
-            setTimeout(() => {
-                navigate('/login'); // Redirige a la página de login
-            }, 2000);
-        } else {
-            toast.error('Código incorrecto. Inténtalo de nuevo.');
-        }
-    };
+                // Obtenemos el body.
+                const body = await res.json();
+
+                // Si hay algún error lo lanzamos.
+                if (body.status === 'error') {
+                    throw new Error(body.message);
+                }
+
+                // Si todo ha ido bien mostramos un mensaje al usuario.
+                toast.success(body.message, {
+                    id: 'activateUser',
+                });
+            } catch (err) {
+                toast.error(err.message, {
+                    id: 'activateUser',
+                });
+            } finally {
+                // Tanto si la activación ha sido un éxito como si no, redirigimos a login.
+                navigate('/users/login');
+            }
+        };
+
+        // Llamamos a la función anterior.
+        fetchValidateUser();
+    }, [validationCode, navigate]);
 
     return (
-        <div className="validation-container">
-            <h2>Validación de Código</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="code">
-                        Ingresa el código de validación:
-                    </label>
-                    <input
-                        type="text"
-                        id="code"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)}
-                        required
-                    />
-                </div>
-                <button>Validar Código</button>
-            </form>
-        </div>
+        <main>
+            <h2>Página activación de usuario</h2>
+        </main>
     );
 };
 
