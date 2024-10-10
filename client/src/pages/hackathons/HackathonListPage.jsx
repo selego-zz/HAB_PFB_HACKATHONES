@@ -20,7 +20,7 @@ const HackathonListPage = () => {
                 {hackathons.map((hackathon) => (
                     <li
                         key={hackathon.id}
-                        className="mb-4 p-4 border rounded"
+                        className="mb-4 p-4 border rounded cursor-pointer"
                         onClick={() => navigate(`/hackathons/${hackathon.id}`)}
                     >
                         <h2 className="text-xl font-semibold">
