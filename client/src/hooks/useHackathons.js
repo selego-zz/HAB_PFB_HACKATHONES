@@ -95,6 +95,7 @@ const useHackathons = () => {
                         `${VITE_API_URL}/hackathons?${queryString}`,
                     );
                 }
+
                 const body = await res.json();
 
                 if (body.status === 'error') throw new Error(body.message);
@@ -201,6 +202,13 @@ const useHackathons = () => {
     const getHackathon = async (hackathonId) => {
         // get '/hackathons/:hackathonId',
         try {
+            const authorization = authToken
+                ? {
+                      headers: {
+                          Authorization: authToken,
+                      },
+                  }
+                : null;
             const res = await fetch(
                 `${VITE_API_URL}/hackathons/${hackathonId}`,
                 {

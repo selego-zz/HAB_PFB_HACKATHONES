@@ -17,6 +17,7 @@ import PruebaPage from './pages/pruebaPage.jsx';
 import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer.jsx';
 import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
+import HackathonListPage from './pages/hackathons/HackathonListPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -40,6 +41,7 @@ const App = () => {
                     />
 
                     {/* Hackathons */}
+                    <Route path="/hackathons" element={<HackathonListPage />} />
                     <Route
                         path="/hackathons/:hackathonId"
                         element={<HackathonDetailsPage />}
