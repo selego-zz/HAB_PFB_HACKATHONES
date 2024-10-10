@@ -15,6 +15,7 @@ const { VITE_API_URL } = import.meta.env;
 // Con este Hook controlaremos todo lo relacionado con los hackathons
 //
 //   hackathons - contiene el listado de los hackathon filtrado o no
+//       hackathonLoading - indica si el hackathon se está cargando
 //       addHackathon = async (hackathon)
 //       recibe un objeto hackathon que tiene exclusivamente
 //         los siguientes campos:
@@ -28,10 +29,11 @@ const { VITE_API_URL } = import.meta.env;
 //            online,
 //            location,
 //
-//       updateHackathon = async (hackathon) => {
+//       deleteHackathon = async (hackathonId) => {
+//       getAllInscriptionsFromAHackathonController = async (hackathonId) => {
 //       getHackathon = async (hackathonId) => {
 //       getUsersHackathon = async () => {
-//       deleteHackathon = async (hackathonId) => {
+//       updateHackathon = async (hackathon) => {
 //       updateRating = async (hackathonId, rating) => {
 //
 //   filter - Variable de estado que contiene los filtros que se aplicarán a los hackaton
@@ -153,23 +155,44 @@ const useHackathons = () => {
             throw new Error(err);
         }
     };
-    const updateHackathon = async (hackathon) => {
-        const id = hackathon.id;
-        delete hackathon.id;
+    const deleteHackathon = async (hackathonId) => {
+        // delete '/hackathons/:hackathonId/delete',
         try {
-            const res = await fetch(`${VITE_API_URL}/hackathons/${id}/update`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: authToken,
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/delete`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: authToken,
+                    },
                 },
-                body: JSON.stringify(hackathon),
-            });
+            );
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
-            setHackathons([]);
+
             return body.message;
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+
+    const getAllInscriptionsFromAHackathonController = async (hackathonId) => {
+        /// /hackathons/: hackathonId/enrollments
+        try {
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/enrollments`,
+                {
+                    headers: {
+                        Authorization: authToken,
+                    },
+                },
+            );
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+
+            return body.data;
         } catch (err) {
             throw new Error(err);
         }
@@ -214,27 +237,6 @@ const useHackathons = () => {
             throw new Error(err);
         }
     };
-    const deleteHackathon = async (hackathonId) => {
-        // delete '/hackathons/:hackathonId/delete',
-        try {
-            const res = await fetch(
-                `${VITE_API_URL}/hackathons/${hackathonId}/delete`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: authToken,
-                    },
-                },
-            );
-            const body = await res.json();
-
-            if (body.status === 'error') throw new Error(body.message);
-
-            return body.message;
-        } catch (err) {
-            throw new Error(err);
-        }
-    };
     const updateRating = async (hackathonId, rating) => {
         // put '/hackathons/:hackathonId/rating',
         try {
@@ -253,6 +255,27 @@ const useHackathons = () => {
 
             if (body.status === 'error') throw new Error(body.message);
 
+            return body.message;
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+    const updateHackathon = async (hackathon) => {
+        const id = hackathon.id;
+        delete hackathon.id;
+        try {
+            const res = await fetch(`${VITE_API_URL}/hackathons/${id}/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: authToken,
+                },
+                body: JSON.stringify(hackathon),
+            });
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+            setHackathons([]);
             return body.message;
         } catch (err) {
             throw new Error(err);
@@ -399,10 +422,11 @@ const useHackathons = () => {
         hackathons,
         hackathonLoading,
         addHackathon,
-        updateHackathon,
+        deleteHackathon,
+        getAllInscriptionsFromAHackathonController,
         getHackathon,
         getUsersHackathon,
-        deleteHackathon,
+        updateHackathon,
         updateRating,
         // de aquí en adelante es para añadir y quitar filtros y ordenes
         //Consultar los filtros, añadir nuevo filtro, eliminar filtro
