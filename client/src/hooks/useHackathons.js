@@ -211,11 +211,7 @@ const useHackathons = () => {
                 : null;
             const res = await fetch(
                 `${VITE_API_URL}/hackathons/${hackathonId}`,
-                {
-                    headers: {
-                        Authorization: authToken,
-                    },
-                },
+                authorization,
             );
             const body = await res.json();
 

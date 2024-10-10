@@ -6,6 +6,7 @@ import {
     authUserController,
     authOrganizerController,
     authDeveloperController,
+    optionalAuthController,
 } from '../middlewares/index.js';
 
 import {
@@ -42,7 +43,7 @@ router.put(
 // Middleware que devuelve información sobre un evento de hackathon.
 router.get(
     '/hackathons/:hackathonId',
-    authUserController,
+    optionalAuthController,
     getHackathonController,
 );
 
