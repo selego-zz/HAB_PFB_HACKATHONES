@@ -441,7 +441,7 @@ const useHackathons = () => {
         addTheme,
         removeTheme,
         //Consultar los ordenes, añadir nuevo orden, eliminar orden
-        order: orderBy,
+        orderBy,
         addOrder,
         removeOrder,
     };
