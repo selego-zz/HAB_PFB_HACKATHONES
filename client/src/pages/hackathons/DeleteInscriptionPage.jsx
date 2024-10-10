@@ -3,7 +3,7 @@ import { useDocumentTitle } from '../../hooks';
 
 const DeleteInscriptionPage = () => {
     // Título de pestaña
-    useDocumentTitle('Inscripción al evento');
+    useDocumentTitle('Cancelar inscripción');
 
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
