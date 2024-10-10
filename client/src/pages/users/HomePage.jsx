@@ -10,7 +10,7 @@ const HomePage = () => {
         navigate('NotFoundPage');
     };
     const handleParticipantesClick = () => {
-        navigate('NotFoundPage');
+        navigate('/hackathons');
     };
 
     return (
