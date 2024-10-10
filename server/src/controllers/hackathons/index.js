@@ -3,6 +3,7 @@ import addHackathonInscriptionController from './addHackathonInscriptionControll
 import deleteHackathonController from './deleteHackathonController.js';
 import deleteHackathonInscriptionController from './deleteHackathonInscriptionController.js';
 import getAllHackathonsController from './getAllHackathonsController.js';
+import getAllInscriptionsFromAHackathonController from './getAllInscriptionsFromAHackathonController.js';
 import getHackathonController from './getHackathonController.js';
 import getTechnologiesController from './getTechnologiesController.js';
 import getThemesController from './getThemesController.js';
@@ -17,6 +18,7 @@ export {
     deleteHackathonController,
     deleteHackathonInscriptionController,
     getAllHackathonsController,
+    getAllInscriptionsFromAHackathonController,
     getHackathonController,
     getTechnologiesController,
     getThemesController,

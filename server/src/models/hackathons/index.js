@@ -3,6 +3,7 @@ import deleteHackathonModel from './deleteHackathonModel.js';
 import deleteHackathonInscriptionModel from './deleteHackathonInscriptionModel.js';
 import getAllHackathonsModel from './getAllHackathonsModel.js';
 import getAllInscriptionsModel from './getAllInscriptionsModel.js';
+import getAllInscriptionsFromAHackathonModel from './getAllInscriptionsFromAHackathonModel.js';
 import getEnrollmentModel from './getEnrollmentModel.js';
 import getFilteredHackathonsModel from './getFilteredHackathonsModel.js';
 import getHackathonByIdModel from './getHackathonByIdModel.js';
@@ -22,6 +23,7 @@ export {
     deleteHackathonInscriptionModel,
     getAllHackathonsModel,
     getAllInscriptionsModel,
+    getAllInscriptionsFromAHackathonModel,
     getEnrollmentModel,
     getFilteredHackathonsModel,
     getHackathonByIdModel,
