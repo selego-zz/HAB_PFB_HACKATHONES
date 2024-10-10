@@ -15,7 +15,7 @@ const HackathonListPage = () => {
 
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-bold">Hackatones</h1>
+            <h1 className="text-2xl font-bold">Eventos de Hackatones</h1>
             <ul className="mt-4">
                 {hackathons.map((hackathon) => (
                     <li
