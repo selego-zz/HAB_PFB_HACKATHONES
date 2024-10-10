@@ -62,7 +62,7 @@ const Header = () => {
                     {!authUser ? (
                         <>
                             <NavLink
-                                to="/login"
+                                to="/users/login"
                                 className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
                             >
                                 <button>Iniciar sesión</button>
