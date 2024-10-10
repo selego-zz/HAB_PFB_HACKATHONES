@@ -33,7 +33,7 @@ const Header = () => {
                 <nav>
                     {isDeveloper() && (
                         <NavLink
-                            to="/events"
+                            to="/hackathons"
                             className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
                         >
                             <button>Eventos</button>

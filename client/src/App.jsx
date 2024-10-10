@@ -32,7 +32,10 @@ const App = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="users/register" element={<RegisterPage />} />
                     <Route path="users/login" element={<LoginPage />} />
-                    <Route path="users/validate" element={<ValidationPage />} />
+                    <Route
+                        path="users/register/validate/:activationCode"
+                        element={<ValidationPage />}
+                    />
                     <Route path="users" element={<ListAllUsersPage />} />
 
                     <Route

@@ -20,6 +20,7 @@ const HackathonDetailsPage = () => {
 
     const [hackathon, setHackathon] = useState(null);
     const [participants, setParticipants] = useState([]);
+    const [oldParam, setOldParam] = useState('');
     const [scores, setScores] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -28,15 +29,23 @@ const HackathonDetailsPage = () => {
     useEffect(() => {
         const fetchHackathonDetails = async () => {
             try {
+                // Evitamos que se actualice infinitamente mientras no cambie el id de hackathon
+                if (oldParam === hackathonId) return;
+                setOldParam(hackathonId);
+
                 const data = await getHackathon(hackathonId);
                 setHackathon(data);
 
                 // Llamada para obtener los participantes inscritos
                 const userHackathons = await getUsersHackathon();
-                const enrolledParticipants =
-                    userHackathons.find((h) => h.hackathonId === hackathonId)
-                        ?.participants || [];
-                setParticipants(enrolledParticipants); // Almacenamos los participantes
+                console.log(userHackathons);
+
+                const enrolledParticipants = userHackathons.find(
+                    (h) => h.hackathonId == hackathonId,
+                );
+                console.log(enrolledParticipants);
+
+                setParticipants(enrolledParticipants || []);
             } catch (err) {
                 toast.error(err.message, { id: 'hackathondetailspage' });
             } finally {
@@ -45,7 +54,7 @@ const HackathonDetailsPage = () => {
         };
 
         fetchHackathonDetails();
-    }, [hackathonId, getHackathon, getUsersHackathon]);
+    }, [hackathonId, getHackathon, getUsersHackathon, oldParam]);
 
     const handleDelete = async () => {
         if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
@@ -99,23 +108,23 @@ const HackathonDetailsPage = () => {
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
             <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold">{hackathon.name}</h1>
+                <h1 className="text-2xl font-bold">{hackathon?.name}</h1>
                 <p>
                     <strong>Fecha de inscripción:</strong>{' '}
-                    {hackathon.inscriptionDate} - {hackathon.inscriptionEnd}
+                    {hackathon?.inscriptionDate} - {hackathon?.inscriptionEnd}
                 </p>
                 <p>
                     <strong>Fecha del hackathon:</strong>{' '}
-                    {hackathon.hackathonDate} - {hackathon.hackathonEnd}
+                    {hackathon?.hackathonDate} - {hackathon?.hackathonEnd}
                 </p>
                 <p>
-                    <strong>Ubicación:</strong> {hackathon.location}
+                    <strong>Ubicación:</strong> {hackathon?.location}
                 </p>
                 <p>
-                    <strong>Premios:</strong> {hackathon.prizes}
+                    <strong>Premios:</strong> {hackathon?.prizes}
                 </p>
                 <p>
-                    <strong>Documentación:</strong> {hackathon.documentation}
+                    <strong>Documentación:</strong> {hackathon?.documentation}
                 </p>
 
                 {/* Botones de acción */}
