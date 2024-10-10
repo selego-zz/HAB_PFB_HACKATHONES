@@ -24,7 +24,7 @@ const ValidationPage = () => {
                 const res = await fetch(
                     `${VITE_API_URL}/users/register/validate/${activationCode}`,
                     {
-                        method: 'PUT',
+                        method: 'PATCH',
                     },
                 );
 
@@ -52,7 +52,7 @@ const ValidationPage = () => {
 
         // Llamamos a la función anterior.
         fetchValidateUser();
-    }, [validationCode, navigate]);
+    }, [activationCode, navigate]);
 
     return (
         <main>

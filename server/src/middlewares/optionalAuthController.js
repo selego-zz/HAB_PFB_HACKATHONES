@@ -16,15 +16,12 @@ const optionalAuthController = async (req, res, next) => {
         //tomamos el token de la cabecera
         const { authorization } = req.headers;
         //si no nos manda el token, lanzamos un error
-        console.log(authorization);
-        console.log(!authorization);
 
         //Si desde el front mandan una autorización pero no están logeados para ellos en undefined pero al grabarlo en la variable a nosotros nos llega com ouna cadena.
         if (!authorization || authorization === 'null') {
             next();
             return;
         }
-        console.log('continuamos');
 
         try {
             //desencriptamos el token

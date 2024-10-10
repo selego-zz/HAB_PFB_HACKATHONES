@@ -32,8 +32,10 @@ router.post('/users/addOrganizer', authAdminController, addUserController);
 router.post('/users/organizers/request', addOrganizerController);
 
 // Middleware que valida un nuevo usuario
-router.get('/users/register/validate/:activationCode', validateUserController);
-// al principio get
+router.patch(
+    '/users/register/validate/:activationCode',
+    validateUserController,
+);
 
 // Middleware que logea un usuario ya creado.
 router.post('/users/login', loginUserController);
