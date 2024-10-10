@@ -18,6 +18,8 @@ import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer.jsx';
 import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
 import HackathonListPage from './pages/hackathons/HackathonListPage.jsx';
+import HackathonInscriptionPage from './pages/hackathons/HackathonInscriptionPage.jsx';
+import DeleteInscriptionPage from './pages/hackathons/DeleteInscriptionPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -38,12 +40,19 @@ const App = () => {
                     />
                     <Route path="users" element={<ListAllUsersPage />} />
 
+                    {/* Hackathons */}
                     <Route
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}
                     />
-
-                    {/* Hackathons */}
+                    <Route
+                        path="/hackathons/:hackathonId/cancel"
+                        element={<DeleteInscriptionPage />}
+                    />
+                    <Route
+                        path="/hackathons/:hackathonId/registration"
+                        element={<HackathonInscriptionPage />}
+                    />
                     <Route path="/hackathons" element={<HackathonListPage />} />
                     <Route
                         path="/hackathons/:hackathonId"
