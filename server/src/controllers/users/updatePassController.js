@@ -12,14 +12,9 @@ const updatePassController = async (req, res, next) => {
         await validateSchema(updatePassSchema, req.body);
 
         // Obtenemos los datos necesarios.
-        const { oldPass, newPass, repeatNewPass } = req.body;
+        const { oldPass, newPass } = req.body;
 
         const userId = req.user.id;
-
-        // Si las contraseñas no coinciden lanzamos un error.
-        if (newPass !== repeatNewPass) {
-            generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
-        }
 
         // Actualizamos la base de datos.
         const affectedRows = await updatePassModel(userId, oldPass, newPass);

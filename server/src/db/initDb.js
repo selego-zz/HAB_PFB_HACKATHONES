@@ -29,8 +29,8 @@ const SQL_USERS_TABLE = `
         active BOOLEAN DEFAULT FALSE,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        lastAuthUpdate DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME,
+        lastAuthUpdate DATETIME
     )`;
 
 const SQL_HACKATHONS_TABLE = `
@@ -55,7 +55,7 @@ const SQL_HACKATHONS_TABLE = `
         documentation VARCHAR(100),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_ENROLLSIN_TABLE = `
@@ -74,7 +74,7 @@ const SQL_ENROLLSIN_TABLE = `
         score INT UNSIGNED,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_THEMES_TABLE = `
@@ -84,7 +84,7 @@ const SQL_THEMES_TABLE = `
         theme varchar(200) NOT NULL,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_HACKATHONTHEMES_TABLE = `
@@ -98,7 +98,7 @@ const SQL_HACKATHONTHEMES_TABLE = `
         FOREIGN KEY (themeId) REFERENCES themes(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_TECHNOLOGIES_TABLE = `
@@ -108,7 +108,7 @@ const SQL_TECHNOLOGIES_TABLE = `
         technology varchar(200) NOT NULL,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_HACKATHONTECHNOLOGIES_TABLE = `
@@ -122,7 +122,7 @@ const SQL_HACKATHONTECHNOLOGIES_TABLE = `
         FOREIGN KEY (technologyId) REFERENCES technologies(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_USERTECHNOLOGIES_TABLE = `
@@ -136,7 +136,7 @@ const SQL_USERTECHNOLOGIES_TABLE = `
         FOREIGN KEY (technologyId) REFERENCES technologies(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_ADMIN_INSERT = `
