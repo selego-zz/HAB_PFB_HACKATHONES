@@ -17,14 +17,9 @@ const recoverPasswordController = async (req, res, next) => {
         await validateSchema(recoverPassSchema, req.body);
 
         const recoverPassCode = req.params.recoverPassCode;
-        const { newPass, repeatNewPass } = req.body;
+        const { password } = req.body;
 
-        // Si las contraseñas no coinciden lanzamos un error.
-        if (newPass !== repeatNewPass) {
-            generateErrorUtil('Las nuevas contraseñas no coinciden.', 409);
-        }
-
-        const affectedRows = updateResetPassModel(recoverPassCode, newPass);
+        const affectedRows = updateResetPassModel(recoverPassCode, password);
         if (affectedRows < 1) generateErrorUtil('Código no encontrado', 404);
         res.send({
             status: 'ok',

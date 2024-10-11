@@ -1,6 +1,6 @@
 const generateRecoverPassMailUtil = (username, recoverPassCode) => {
     const recoveryLink =
-        process.env.CLIENT_URL + '/users/recoverPass/' + recoverPassCode;
+        process.env.CLIENT_URL + '/users/recover/' + recoverPassCode;
 
     const mail = `<h2>Recuperación de contraseña</h2>
 <br>

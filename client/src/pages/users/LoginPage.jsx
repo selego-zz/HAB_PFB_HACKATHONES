@@ -1,6 +1,6 @@
 // Importamos los hooks.
 import { useContext, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { useDocumentTitle } from '../../hooks';
 
 // Importamos el contexto.
@@ -109,6 +109,9 @@ const LoginPage = () => {
                 {/* Habilitamos o deshabilitamos el botón en función de si estamos haciendo un fetch o no. */}
                 <button disabled={loading}>Loguearme</button>
             </form>
+            <NavLink to="/users/recover">
+                ¿Has olvidado tu contraseña? pulsa aqui para cambiarla
+            </NavLink>
         </main>
     );
 };
