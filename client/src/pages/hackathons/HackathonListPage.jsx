@@ -34,8 +34,6 @@ const HackathonListPage = () => {
         }
     }, [filter.name]);
     const handleSearchClick = async () => {
-        console.log(`filter: ${titleFilter}`);
-
         if (titleFilter.length < 1) removeFilter('name');
         else addFilter({ name: titleFilter });
     };

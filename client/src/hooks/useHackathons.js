@@ -293,10 +293,6 @@ const useHackathons = () => {
 
     useEffect(() => {
         const compareArray = (arr1, arr2) => {
-            console.log('Comparando arrays');
-            console.log(arr1);
-            console.log(arr2);
-
             // Compruebo si ambos arrays tienen la misma longitud
             if (arr1.length !== arr2.length) {
                 return false;
@@ -312,10 +308,6 @@ const useHackathons = () => {
             return true;
         };
         const compareQuery = (newQuery) => {
-            console.log('Comparando querys');
-            console.log(query);
-            console.log(newQuery);
-
             if (Object.keys(query).length !== Object.keys(newQuery).length)
                 return false;
             for (const key in query) {
@@ -338,23 +330,16 @@ const useHackathons = () => {
 
             return true;
         };
-        console.log('into the effect');
 
         let newQuery = {};
         if (Object.keys(filter).length > 0) newQuery = filter;
         if (themes.length > 0) newQuery.themes = themes;
         if (technologies.length > 0) newQuery.technologies = technologies;
         if (orderBy.length > 0) newQuery.order = orderBy;
-        if (!compareQuery(newQuery)) {
-            console.log('set Query');
-            setQuery(newQuery);
-        }
+        if (!compareQuery(newQuery)) setQuery(newQuery);
     }, [filter, themes, technologies, orderBy, query]);
 
     const addFilter = (newFilter) => {
-        console.log('newFilter');
-        console.log(newFilter);
-
         //tomo la clave y el valor del filtro que me mandan
         const key = Object.keys(newFilter)[0];
         const value = newFilter[key];
@@ -363,8 +348,6 @@ const useHackathons = () => {
         //y añadiremos o sobreescribiremos la nueva clave
         const updatedFilters = { ...filter };
         updatedFilters[key] = value;
-        console.log('updatedFilters');
-        console.log(updatedFilters);
         setFilters(updatedFilters);
     };
     const removeFilter = (oldFilter) => {
