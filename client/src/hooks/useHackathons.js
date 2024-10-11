@@ -332,6 +332,7 @@ const useHackathons = () => {
         };
 
         let newQuery = {};
+
         if (Object.keys(filter).length > 0) newQuery = filter;
         if (themes.length > 0) newQuery.themes = themes;
         if (technologies.length > 0) newQuery.technologies = technologies;
@@ -348,12 +349,14 @@ const useHackathons = () => {
         //y añadiremos o sobreescribiremos la nueva clave
         const updatedFilters = { ...filter };
         updatedFilters[key] = value;
+
         setFilters(updatedFilters);
     };
     const removeFilter = (oldFilter) => {
-        if ((!oldFilter) in filter) return;
+        if (!(oldFilter in filter)) return;
         const updatedFilters = { ...filter };
         delete updatedFilters[oldFilter];
+
         setFilters(updatedFilters);
     };
 
