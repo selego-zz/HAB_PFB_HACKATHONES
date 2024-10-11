@@ -1,4 +1,5 @@
 import getPool from '../../db/getPool.js';
+import generateErrorUtil from '../../utils/generateErrorUtil.js';
 
 //////
 
@@ -11,6 +12,8 @@ const getLastAuthUpdateModel = async (userId) => {
         `SELECT lastAuthUpdate FROM users WHERE id = ?`,
         [userId],
     );
+
+    if (users.length < 1) generateErrorUtil('Usuario no encontrado', 404);
 
     // Ya que el id de usuario tiene que ser único, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
     return users[0].lastAuthUpdate;

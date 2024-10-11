@@ -6,6 +6,7 @@ import joiErrorMessages from '../joiErrorMessages.js';
 /////////////////////////////////////////////////////////////
 const userScoreSchema = Joi.object().keys({
     score: Joi.number().required().messages(joiErrorMessages),
+    developerId: Joi.string().required().messages(joiErrorMessages),
 });
 
 export default userScoreSchema;
