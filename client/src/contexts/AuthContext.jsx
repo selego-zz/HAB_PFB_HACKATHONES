@@ -14,7 +14,7 @@ export const AuthContext = createContext(null);
 
 // Creamos el componente AuthProvider.
 export const AuthProvider = ({ children }) => {
-    // inicializo authLoading a true por que nada más crear no tenemos user todavía
+    // Inicializo authLoading a true por que nada más crear no tenemos user todavía
     const [authLoading, setAuthLoading] = useState(true);
 
     // Declaramos una variable en el state para manejar el token.
@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
             setAuthLoading(true);
             try {
                 if (authUser) return;
-                // Obtenemos una respuesta del servidor.
 
+                // Respuesta del servidor
                 const res = await fetch(`${VITE_API_URL}/users`, {
                     headers: {
                         Authorization: authToken,
@@ -133,7 +133,31 @@ export const AuthProvider = ({ children }) => {
                 throw new Error(body.message);
             }
 
-            // Si el registro es exitoso, se guarda el token y se establece el usuario.
+            // Si el registro es exitoso, retornamos el mensaje.
+            return body.message;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    };
+
+    // Función para iniciar sesión
+    const loginUser = async (credentials) => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(credentials),
+            });
+
+            const body = await res.json();
+
+            if (body.status === 'error') {
+                throw new Error(body.message);
+            }
+
+            // Si el login es exitoso, se guarda el token y se establece el usuario.
             const { token, user } = body.data;
             authLoginState(token);
             setAuthUser(user);
@@ -157,6 +181,7 @@ export const AuthProvider = ({ children }) => {
                 isDeveloper,
                 isOrganizer,
                 registerUser,
+                loginUser,
             }}
         >
             {children}

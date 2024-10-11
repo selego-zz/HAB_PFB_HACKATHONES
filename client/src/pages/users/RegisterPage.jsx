@@ -20,7 +20,6 @@ const RegisterPage = () => {
         username: '',
         email: '',
         password: '',
-        repeatpassword: '', // Solo lo utilizamos en el frontend
         role: 'desarrollador', // Valor por defecto
     });
 
@@ -37,24 +36,36 @@ const RegisterPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { password, repeatpassword, ...dataToSend } = formData; // Excluir repeatpassword
-
         try {
-            if (password !== repeatpassword) {
+            // Comprobamos que las contraseñas coincidan
+            const { password } = formData;
+            if (password !== formData.repeatpassword) {
                 throw new Error('Las contraseñas no coinciden');
             }
 
-            // Enviar solo los datos necesarios (sin repeatpassword)
+            // Creamos un nuevo objeto de datos sin repeatpassword
+            // eslint-disable-next-line no-unused-vars
+            const { repeatpassword, ...dataToSend } = formData;
+
+            // Enviamos los datos necesarios
             await registerUser(dataToSend);
 
-            toast.success(
-                '¡Gracias! En breve recibirás un correo de validación.',
-                { id: 'registro' },
-            );
+            // Mostrar mensaje basado en el rol
+            if (formData.role === 'desarrollador') {
+                toast.success(
+                    'Usuario registrado. En breve recibirás un enlace de verificación en tu correo electrónico.',
+                    { id: 'registro' },
+                );
+            } else if (formData.role === 'organizador') {
+                toast.success(
+                    '¡Gracias! El administrador revisará tu solicitud de registro lo antes posible.',
+                    { id: 'registro' },
+                );
+            }
 
             setTimeout(() => {
                 navigate('/');
-            }, 2000);
+            }, 500);
         } catch (err) {
             toast.error(
                 err.message ||
@@ -156,7 +167,6 @@ const RegisterPage = () => {
                         type="password"
                         id="repeatpassword"
                         name="repeatpassword"
-                        value={formData.repeatpassword}
                         onChange={handleChange}
                         className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
                         required
