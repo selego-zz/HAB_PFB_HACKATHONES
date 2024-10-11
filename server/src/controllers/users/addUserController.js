@@ -30,10 +30,11 @@ const addUserController = async (req, res, next) => {
         if (
             role &&
             role !== 'desarrollador' &&
+            role !== 'organizador' &&
             req.user?.role !== 'administrador'
         )
             generateErrorUtil(
-                'no tienes permisos para realizar esa acción',
+                'No tienes permisos para realizar esa acción',
                 401,
             );
 
