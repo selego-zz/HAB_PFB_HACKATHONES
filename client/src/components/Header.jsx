@@ -12,10 +12,10 @@ const Header = () => {
         authContext;
 
     return (
-        <header className=" bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro p-1">
+        <header className=" bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro  w-screen ">
             <div className="flex justify-between items-center">
                 {/* Logo */}
-                <NavLink to="/" className="text-2xl font-bold mb-2 sm:mb-0">
+                <NavLink to="/">
                     <picture>
                         <source
                             media="(max-width: 640px)"
@@ -24,17 +24,17 @@ const Header = () => {
                         <img
                             src="/Logo/logo1.png"
                             alt="Logo"
-                            className="h-16 w-16 ml-7 mt-2 sm:h-16 sm:w-36 sm:ml-10 sm:mt-4 "
+                            className="h-16 w-16 ml-7 mt-2 mb-2 sm:h-16 sm:w-36 sm:ml-10 sm:mb-2 "
                         />
                     </picture>
                 </NavLink>
 
-                {/* Botones para diferentes roles */}
-                <nav>
+                <nav className="flex items-center gap-2 sm:gap-4 sm:mr-10 mr-5">
+                    {/* Botones para diferentes roles */}
                     {isDeveloper() && (
                         <NavLink
                             to="/hackathons"
-                            className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-20 text-sm sm:text-lg"
                         >
                             <button>Eventos</button>
                         </NavLink>
@@ -42,7 +42,7 @@ const Header = () => {
                     {isOrganizer() && (
                         <NavLink
                             to="/hackathons/create"
-                            className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg"
                         >
                             <button>Crea un Hackathon</button>
                         </NavLink>
@@ -50,26 +50,24 @@ const Header = () => {
                     {isAdmin() && (
                         <NavLink
                             to="/users"
-                            className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg"
                         >
                             <button>Listado de usuarios</button>
                         </NavLink>
                     )}
-                </nav>
 
-                {/* Botones de autenticación */}
-                <nav className="flex gap-4">
+                    {/* Botones de autenticación */}
                     {!authUser ? (
                         <>
                             <NavLink
                                 to="/users/login"
-                                className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
                             >
                                 <button>Iniciar sesión</button>
                             </NavLink>
                             <NavLink
                                 to="/users/register"
-                                className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 -24 text-sm sm:text-lg"
                             >
                                 <button>Registrarse</button>
                             </NavLink>
@@ -78,14 +76,14 @@ const Header = () => {
                         <>
                             <NavLink
                                 to="/profile"
-                                className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-20 text-sm sm:text-lg"
                             >
                                 <button>Perfil</button>
                             </NavLink>
                             <NavLink to="/">
                                 <button
                                     onClick={authLogoutState}
-                                    className="bg-casiblanco text-azuloscuro text-center p-1.5 w-32 rounded-3xl h-9 hover:bg-verdeclaro font-jost font-semibold"
+                                    className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
                                 >
                                     Cerrar sesión
                                 </button>
@@ -93,6 +91,11 @@ const Header = () => {
                         </>
                     )}
                 </nav>
+            </div>
+            <div className="hidden sm:block">
+                <h1 className="bg-azuloscuro h-24 font-semibold text-4xl text-blanco font-jost flex justify-center items-center w-screen">
+                    Participa en los mejores hackathons en línea y presenciales.
+                </h1>
             </div>
         </header>
     );
