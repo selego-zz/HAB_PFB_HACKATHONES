@@ -20,7 +20,8 @@ const RegisterPage = () => {
         username: '',
         email: '',
         password: '',
-        repeatpassword: '',
+        repeatpassword: '', // Solo lo utilizamos en el frontend
+        role: 'desarrollador', // Valor por defecto
     });
 
     const { registerUser } = useContext(AuthContext);
@@ -36,14 +37,18 @@ const RegisterPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { password, repeatpassword } = formData;
+        const { password, repeatpassword, ...dataToSend } = formData; // Excluir repeatpassword
 
         try {
-            if (password !== repeatpassword)
+            if (password !== repeatpassword) {
                 throw new Error('Las contraseñas no coinciden');
-            registerUser(formData);
+            }
+
+            // Enviar solo los datos necesarios (sin repeatpassword)
+            await registerUser(dataToSend);
+
             toast.success(
-                '¡Te has registrado! Redirigiendo a la validación...',
+                '¡Gracias! En breve recibirás un correo de validación.',
                 { id: 'registro' },
             );
 
@@ -51,9 +56,11 @@ const RegisterPage = () => {
                 navigate('/');
             }, 2000);
         } catch (err) {
-            toast.error(err.message || 'Hubo un error en el registro.', {
-                id: 'registro',
-            });
+            toast.error(
+                err.message ||
+                    'Hubo un error en el registro, inténtalo de nuevo más tarde.',
+                { id: 'registro' },
+            );
         }
     };
 
@@ -154,6 +161,37 @@ const RegisterPage = () => {
                         className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
                         required
                     />
+                </div>
+
+                {/* Campo de selección de rol */}
+                <div className="min-w-[200px] col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 mx-2 mb-2">
+                        Me quiero registrar como...
+                    </label>
+                    <div className="flex gap-4">
+                        <label className="inline-flex items-center">
+                            <input
+                                type="radio"
+                                name="role"
+                                value="desarrollador"
+                                checked={formData.role === 'desarrollador'}
+                                onChange={handleChange}
+                                className="form-radio"
+                            />
+                            <span className="ml-2">Desarrollador</span>
+                        </label>
+                        <label className="inline-flex items-center">
+                            <input
+                                type="radio"
+                                name="role"
+                                value="organizador"
+                                checked={formData.role === 'organizador'}
+                                onChange={handleChange}
+                                className="form-radio"
+                            />
+                            <span className="ml-2">Organizador</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div className="col-span-2">

@@ -40,9 +40,10 @@ const HackathonDetailsPage = () => {
                 const userHackathons = await getUsersHackathon();
                 console.log(userHackathons);
 
-                const enrolledParticipants = userHackathons.find(
-                    (h) => h.hackathonId == hackathonId,
+                const enrolledParticipants = userHackathons.filter(
+                    (h) => String(h.hackathonId) === String(hackathonId),
                 );
+
                 console.log(enrolledParticipants);
 
                 setParticipants(enrolledParticipants || []);
@@ -68,35 +69,40 @@ const HackathonDetailsPage = () => {
         }
     };
 
-    const handleScoreChange = (devId, score) => {
+    const handleScoreChange = (userId, score) => {
         setScores((prev) => ({
             ...prev,
-            [devId]: score,
+            [userId]: score,
         }));
     };
 
     const handleSubmitScores = async () => {
         try {
-            for (const developerId in scores) {
-                const score = scores[developerId];
+            for (const userId in scores) {
+                const score = scores[userId];
+
+                console.log(
+                    `Enviando puntuación para userId: ${userId}, score: ${score}`,
+                );
 
                 const res = await fetch(
-                    `${import.meta.env.VITE_API_URL}/hackathons/${hackathonId}/${developerId}/ranking`,
+                    `${import.meta.env.VITE_API_URL}/hackathons/${hackathonId}/ranking`,
                     {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
                             Authorization: authToken,
                         },
-                        body: JSON.stringify({ score }),
+                        body: JSON.stringify({ developerId: userId, score }),
                     },
                 );
-                const body = await res.json();
 
+                const body = await res.json();
                 if (body.status === 'error') throw new Error(body.message);
             }
             toast.success('Puntuaciones guardadas');
         } catch (err) {
+            console.error('Error al enviar puntuaciones:', err);
             toast.error(err.message, { id: 'hackathondetailspage' });
         }
     };
@@ -157,7 +163,7 @@ const HackathonDetailsPage = () => {
                 {isOrganizer() && (
                     <div className="mt-6">
                         <h2 className="text-xl font-semibold">
-                            Desarrolladores Inscritos
+                            Desarrolladores inscritos
                         </h2>
                         <ul>
                             {participants.length > 0 ? (
@@ -184,11 +190,12 @@ const HackathonDetailsPage = () => {
                                 <p>No hay desarrolladores inscritos.</p>
                             )}
                         </ul>
+
                         <button
                             onClick={handleSubmitScores}
                             className="mt-4 bg-verdeclaro text-blanco p-2 rounded"
                         >
-                            Guardar Puntuaciones
+                            Guardar puntuaciones
                         </button>
                     </div>
                 )}
