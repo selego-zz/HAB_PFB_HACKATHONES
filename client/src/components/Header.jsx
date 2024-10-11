@@ -67,7 +67,7 @@ const Header = () => {
                             </NavLink>
                             <NavLink
                                 to="/users/register"
-                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 -24 text-sm sm:text-lg"
+                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
                             >
                                 <button>Registrarse</button>
                             </NavLink>
