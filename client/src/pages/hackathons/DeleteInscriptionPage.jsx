@@ -42,7 +42,7 @@ const DeleteInscriptionPage = () => {
 
     const handleCancel = () => {
         if (!isOpen) {
-            navigate('/hackathons/:hackathonId');
+            navigate(`/hackathons/${hackathonId}`);
         } else {
             setIsOpen(false);
         }
