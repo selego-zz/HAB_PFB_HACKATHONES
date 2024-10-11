@@ -1,18 +1,43 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDocumentTitle } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import toast from 'react-hot-toast';
 
-const HackathonInscriptionPage = () => {
+const { VITE_API_URL } = import.meta.env;
+
+const DeleteInscriptionPage = () => {
     // Título de pestaña
     useDocumentTitle('Inscripción al evento');
+
+    const { hackathonId } = useParams();
+    const { authToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleConfirm = () => {
-        setIsConfirmed(true);
-        setIsOpen(false);
+    const handleConfirm = async () => {
+        try {
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/cancel`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: authToken,
+                    },
+                },
+            );
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+
+            setIsConfirmed(true);
+            setIsOpen(false);
+            return body.message;
+        } catch (err) {
+            toast.error(err.message);
+        }
     };
 
     const handleCancel = () => {
@@ -73,4 +98,4 @@ const HackathonInscriptionPage = () => {
     );
 };
 
-export default HackathonInscriptionPage;
+export default DeleteInscriptionPage;
