@@ -1,40 +1,43 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDocumentTitle } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import toast from 'react-hot-toast';
+
+const { VITE_API_URL } = import.meta.env;
 
 const HackathonInscriptionPage = () => {
     // Título de pestaña
     useDocumentTitle('Inscripción al evento');
+
+    const { hackathonId } = useParams();
+    const { authToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    
-    
-   
+
     const handleConfirm = async () => {
         try {
-            const res = await fetch(`${VITE_API_URL}/hackathons/:hackathonId/registration`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: authToken,
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/registration`,
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: authToken,
+                    },
                 },
-                body: JSON.stringify(hackathon),
-            });
+            );
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
-            setHackathons([]);
+
+            setIsConfirmed(true);
+            setIsOpen(false);
             return body.message;
         } catch (err) {
-            throw new Error(err);
+            toast.error(err.message);
         }
-    };
-
-        
-        setIsConfirmed(true);
-        setIsOpen(false);
     };
 
     const handleCancel = () => {
@@ -44,8 +47,6 @@ const HackathonInscriptionPage = () => {
             setIsOpen(false);
         }
     };
-
-
 
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
