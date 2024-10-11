@@ -93,7 +93,7 @@ const Header = () => {
                 </nav>
             </div>
             <div className="hidden sm:block">
-                <h1 className="bg-azuloscuro h-24 font-semibold text-4xl text-blanco font-jost flex justify-center items-center w-screen">
+                <h1 className="bg-azuloscuro h-24 font-semibold text-4xl text-blanco font-jost flex justify-center items-center w-screen text-center">
                     Participa en los mejores hackathons en línea y presenciales.
                 </h1>
             </div>
