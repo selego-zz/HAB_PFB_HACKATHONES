@@ -7,6 +7,8 @@ import HomePage from './pages/users/HomePage.jsx';
 import RegisterPage from './pages/users/RegisterPage.jsx';
 import LoginPage from './pages/users/LoginPage.jsx';
 import ValidationPage from './pages/users/ValidationPage.jsx';
+import RecoverPass_GetCodePage from './pages/users/RecoverPass_GetCodePage.jsx';
+import RecoverPass_SendCodePage from './pages/users/RecoverPass_SendCodePage.jsx';
 import ListAllUsersPage from './pages/users/ListAllUsersPage.jsx';
 import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
@@ -37,6 +39,14 @@ const App = () => {
                     <Route
                         path="users/register/validate/:activationCode"
                         element={<ValidationPage />}
+                    />
+                    <Route
+                        path="users/recover"
+                        element={<RecoverPass_SendCodePage />}
+                    />
+                    <Route
+                        path="users/recover/:recoverPassCode"
+                        element={<RecoverPass_GetCodePage />}
                     />
                     <Route path="users" element={<ListAllUsersPage />} />
 
