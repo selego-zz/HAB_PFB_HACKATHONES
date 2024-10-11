@@ -83,7 +83,7 @@ const Header = () => {
                             <NavLink to="/">
                                 <button
                                     onClick={authLogoutState}
-                                    className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
+                                    className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-rojoclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
                                 >
                                     Cerrar sesión
                                 </button>
@@ -93,7 +93,7 @@ const Header = () => {
                 </nav>
             </div>
             <div className="hidden sm:block">
-                <h1 className="bg-azuloscuro h-24 font-semibold text-4xl text-blanco font-jost flex justify-center items-center w-screen text-center">
+                <h1 className="bg-azuloscuro h-24 font-semibold text-3xl text-center px-20 text-blanco font-jost flex justify-center items-center w-screen">
                     Participa en los mejores hackathons en línea y presenciales.
                 </h1>
             </div>
