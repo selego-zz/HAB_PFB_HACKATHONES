@@ -8,7 +8,7 @@ const { VITE_API_URL } = import.meta.env;
 
 const DeleteInscriptionPage = () => {
     // Título de pestaña
-    useDocumentTitle('Inscripción al evento');
+    useDocumentTitle('Cancelar inscripción');
 
     const { hackathonId } = useParams();
     const { authToken } = useContext(AuthContext);
