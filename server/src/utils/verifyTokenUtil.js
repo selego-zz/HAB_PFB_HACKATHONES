@@ -30,7 +30,6 @@ const verifyTokenUtil = async (req, res, next, role) => {
 
             //Comprobamos que la fecha del token sea válida.
             const res = await getLastAuthUpdateModel(tokenInfo.id);
-            console.log(res);
 
             if (res) {
                 //si res es null no hace falta hacer todo esto
