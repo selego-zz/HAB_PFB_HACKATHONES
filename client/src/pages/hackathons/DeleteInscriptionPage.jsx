@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDocumentTitle } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -16,6 +16,39 @@ const DeleteInscriptionPage = () => {
 
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [isCancellable, setIsCancellable] = useState(true); // Nuevo estado para controlar si es posible cancelar
+    const [hoursRemaining, setHoursRemaining] = useState(null); // Horas restantes para cancelar
+
+    // Obtiene los datos del hackatón y verifica si se puede cancelar la inscripción
+    useEffect(() => {
+        const checkCancellable = async () => {
+            try {
+                const res = await fetch(
+                    `${VITE_API_URL}/hackathons/${hackathonId}`,
+                    {
+                        headers: {
+                            Authorization: authToken,
+                        },
+                    },
+                );
+
+                const hackathon = await res.json();
+
+                const hackathonStart = new Date(hackathon.hackathonDate);
+                const now = new Date();
+                const hoursLeft = (hackathonStart - now) / 36e5; // Diferencia en horas
+                setHoursRemaining(hoursLeft);
+
+                if (hoursLeft < import.meta.env.VITE_MAX_CANCELLATION_HOURS) {
+                    setIsCancellable(false);
+                }
+            } catch (err) {
+                toast.error(err.message);
+            }
+        };
+
+        checkCancellable();
+    }, [hackathonId, authToken]);
 
     const handleConfirm = async () => {
         try {
@@ -31,9 +64,13 @@ const DeleteInscriptionPage = () => {
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
+            toast.success(body.message);
 
             setIsConfirmed(true);
             setIsOpen(false);
+            setTimeout(() => {
+                navigate(`/hackathons/${hackathonId}`);
+            }, 3000);
             return body.message;
         } catch (err) {
             toast.error(err.message);
@@ -65,21 +102,38 @@ const DeleteInscriptionPage = () => {
                         {isConfirmed ? (
                             <p className="font-jost font-medium text-azuloscuro">
                                 La inscripción ha sido cancelada.
+                                Redirigiendo...
                             </p>
                         ) : (
                             <>
                                 {isOpen ? (
                                     <>
-                                        <p className="mb-4 font-jost font-medium text-azuloscuro ">
-                                            ¿Quieres cancelar la inscripción al
-                                            evento?
-                                        </p>
-                                        <button
-                                            onClick={handleConfirm}
-                                            className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
-                                        >
-                                            Confirmar
-                                        </button>
+                                        {isCancellable ? (
+                                            <>
+                                                <p className="mb-4 font-jost font-medium text-azuloscuro ">
+                                                    ¿Quieres cancelar la
+                                                    inscripción al evento?
+                                                </p>
+                                                <button
+                                                    onClick={handleConfirm}
+                                                    className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
+                                                >
+                                                    Confirmar
+                                                </button>
+                                            </>
+                                        ) : (
+                                            <p className="mb-4 font-jost font-medium text-rojo ">
+                                                No se puede cancelar la
+                                                inscripción, faltan menos de{' '}
+                                                {
+                                                    import.meta.env
+                                                        .VITE_MAX_CANCELLATION_HOURS
+                                                }{' '}
+                                                horas para el evento. Quedan{' '}
+                                                {hoursRemaining.toFixed(2)}{' '}
+                                                horas.
+                                            </p>
+                                        )}
                                     </>
                                 ) : (
                                     <button
