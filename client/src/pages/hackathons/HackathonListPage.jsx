@@ -11,7 +11,6 @@ const HackathonListPage = () => {
     if (hackathonLoading) {
         return <div>Cargando...</div>;
     }
-    console.log(hackathons);
 
     return (
         <div className="p-8">

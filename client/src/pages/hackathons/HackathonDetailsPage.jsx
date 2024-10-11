@@ -14,13 +14,15 @@ const HackathonDetailsPage = () => {
     useDocumentTitle('Detalles del evento');
 
     const { hackathonId } = useParams();
-    const { authToken, isOrganizer, isDeveloper } = useContext(AuthContext);
+    const { authToken, isOrganizer, isDeveloper, user } =
+        useContext(AuthContext);
     const { getHackathon, deleteHackathon, getUsersHackathon } =
         useHackathons();
 
     const [hackathon, setHackathon] = useState(null);
     const [participants, setParticipants] = useState([]);
     const [oldParam, setOldParam] = useState('');
+    const [isRegistered, setIsRegistered] = useState(false);
     const [scores, setScores] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -38,15 +40,18 @@ const HackathonDetailsPage = () => {
 
                 // Llamada para obtener los participantes inscritos
                 const userHackathons = await getUsersHackathon();
-                console.log(userHackathons);
 
                 const enrolledParticipants = userHackathons.filter(
                     (h) => String(h.hackathonId) === String(hackathonId),
                 );
 
-                console.log(enrolledParticipants);
-
                 setParticipants(enrolledParticipants || []);
+
+                // Verificar si el usuario actual está inscrito
+                const isUserRegistered = enrolledParticipants.some(
+                    (h) => h.userId === user?.id,
+                );
+                setIsRegistered(isUserRegistered); // Actualizamos el estado
             } catch (err) {
                 toast.error(err.message, { id: 'hackathondetailspage' });
             } finally {
@@ -55,7 +60,7 @@ const HackathonDetailsPage = () => {
         };
 
         fetchHackathonDetails();
-    }, [hackathonId, getHackathon, getUsersHackathon, oldParam]);
+    }, [hackathonId, getHackathon, getUsersHackathon, oldParam, user?.id]);
 
     const handleDelete = async () => {
         if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
@@ -80,10 +85,6 @@ const HackathonDetailsPage = () => {
         try {
             for (const userId in scores) {
                 const score = scores[userId];
-
-                console.log(
-                    `Enviando puntuación para userId: ${userId}, score: ${score}`,
-                );
 
                 const res = await fetch(
                     `${import.meta.env.VITE_API_URL}/hackathons/${hackathonId}/ranking`,
@@ -135,9 +136,32 @@ const HackathonDetailsPage = () => {
 
                 {/* Botones de acción */}
                 {isDeveloper() && (
-                    <button className="mt-4 bg-blue-500 text-blanco p-2 rounded">
-                        Inscríbete
-                    </button>
+                    <div className="mt-4">
+                        {/* Si está registrado, mostrar el botón de cancelar */}
+                        {isRegistered ? (
+                            <button
+                                onClick={() =>
+                                    navigate(
+                                        `/hackathons/${hackathonId}/cancel`,
+                                    )
+                                }
+                                className="bg-rojoclaro hover:bg-rojooscuro text-blanco p-2 rounded"
+                            >
+                                Cancelar mi inscripción
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() =>
+                                    navigate(
+                                        `/hackathons/${hackathonId}/registration`,
+                                    )
+                                }
+                                className="bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded"
+                            >
+                                Inscríbete
+                            </button>
+                        )}
+                    </div>
                 )}
 
                 {isOrganizer() && (
@@ -176,10 +200,10 @@ const HackathonDetailsPage = () => {
                                         <input
                                             type="number"
                                             placeholder="Puntuación"
-                                            value={scores[dev.id] || ''}
+                                            value={scores[dev.userId] || ''}
                                             onChange={(e) =>
                                                 handleScoreChange(
-                                                    dev.id,
+                                                    dev.userId,
                                                     e.target.value,
                                                 )
                                             }

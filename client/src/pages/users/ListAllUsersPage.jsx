@@ -35,7 +35,6 @@ const ListAllUsersPage = () => {
 
                 // Hace que no se llame infinitamente
                 if (!compareUsers(body.data.users)) setUsers(body.data.users);
-                console.log(users);
             } catch (err) {
                 toast.error(err.message);
             }
