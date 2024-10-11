@@ -15,20 +15,11 @@ const HomePage = () => {
 
     return (
         <main>
-            <div className="hidden sm:block">
-                <h1 className="bg-azuloscuro h-32 font-semibold text-4xl text-blanco font-jost flex justify-center items-center p-10 text-center">
-                    Participa en los mejores hackathones en línea y
-                    presenciales.
-                </h1>
-            </div>
-
-            {/* Sección ajustada con imagen ocupando todo el alto hasta el footer */}
             <div className="relative h-screen">
-                <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center sm:absolute sm:left-1/3 sm:top-0 sm:w-2/3 h-full hidden sm:block"></div>
+                <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center sm:absolute sm:left-1/3 sm:top-0 md:w-2/3 h-full hidden sm:block"></div>
                 <div className="bg-opacity-0 sm:w-1/2 sm:pr-10 relative z-10">
-                    {/* Añadido z-10 para estar por encima de la imagen */}
                     <div className="flex flex-col items-center justify-center p-3 sm:items-start sm:pt-20">
-                        <h2 className="font-semibold text-3xl font-jost sm:pl-20 mt-10 sm:mt-0">
+                        <h2 className="font-semibold text-3xl font-jost sm:ml-20 mt-10 sm:mt-0">
                             El hogar de los hackathones.
                         </h2>
                     </div>
