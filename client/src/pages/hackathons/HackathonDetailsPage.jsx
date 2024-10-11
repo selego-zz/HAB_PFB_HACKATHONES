@@ -1,20 +1,15 @@
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
-
 import { useParams, useNavigate } from 'react-router-dom';
-
 import { useDocumentTitle, useHackathons } from '../../hooks/index.js';
-
 import toast from 'react-hot-toast';
-
-//////
 
 const HackathonDetailsPage = () => {
     // Título de pestaña
     useDocumentTitle('Detalles del evento');
 
     const { hackathonId } = useParams();
-    const { authToken, isOrganizer, isDeveloper, user } =
+    const { authToken, isOrganizer, isDeveloper, authUser } =
         useContext(AuthContext);
     const { getHackathon, deleteHackathon, getUsersHackathon } =
         useHackathons();
@@ -31,36 +26,41 @@ const HackathonDetailsPage = () => {
     useEffect(() => {
         const fetchHackathonDetails = async () => {
             try {
-                // Evitamos que se actualice infinitamente mientras no cambie el id de hackathon
                 if (oldParam === hackathonId) return;
                 setOldParam(hackathonId);
 
                 const data = await getHackathon(hackathonId);
                 setHackathon(data);
 
-                // Llamada para obtener los participantes inscritos
                 const userHackathons = await getUsersHackathon();
-
                 const enrolledParticipants = userHackathons.filter(
                     (h) => String(h.hackathonId) === String(hackathonId),
                 );
 
                 setParticipants(enrolledParticipants || []);
 
-                // Verificar si el usuario actual está inscrito
                 const isUserRegistered = enrolledParticipants.some(
-                    (h) => h.userId === user?.id,
+                    (h) => h.userId === authUser?.id,
                 );
-                setIsRegistered(isUserRegistered); // Actualizamos el estado
+                setIsRegistered(isUserRegistered);
             } catch (err) {
-                toast.error(err.message, { id: 'hackathondetailspage' });
+                err.message === 'Error: jwt malformed' ||
+                err.message === 'Error: Usuario no encontrado'
+                    ? console.warn(
+                          'El usuario no está logeado o hubo un problema de autenticación',
+                      )
+                    : err.message === 'Error: No se encontraron inscripciones'
+                      ? console.warn('No se encontraron inscripciones')
+                      : toast.error(err.message, {
+                            id: 'hackathondetailspage',
+                        });
             } finally {
                 setLoading(false);
             }
         };
 
         fetchHackathonDetails();
-    }, [hackathonId, getHackathon, getUsersHackathon, oldParam, user?.id]);
+    }, [hackathonId, getHackathon, getUsersHackathon, oldParam, authUser?.id]);
 
     const handleDelete = async () => {
         if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
@@ -134,10 +134,8 @@ const HackathonDetailsPage = () => {
                     <strong>Documentación:</strong> {hackathon?.documentation}
                 </p>
 
-                {/* Botones de acción */}
                 {isDeveloper() && (
                     <div className="mt-4">
-                        {/* Si está registrado, mostrar el botón de cancelar */}
                         {isRegistered ? (
                             <button
                                 onClick={() =>
@@ -183,45 +181,58 @@ const HackathonDetailsPage = () => {
                     </div>
                 )}
 
-                {/* Sección de puntuaciones solo para organizadores */}
-                {isOrganizer() && (
-                    <div className="mt-6">
-                        <h2 className="text-xl font-semibold">
-                            Desarrolladores inscritos
-                        </h2>
-                        <ul>
-                            {participants.length > 0 ? (
-                                participants.map((dev) => (
-                                    <li
-                                        key={dev.id}
-                                        className="flex items-center justify-between"
-                                    >
-                                        <p>{dev.username}</p>
-                                        <input
-                                            type="number"
-                                            placeholder="Puntuación"
-                                            value={scores[dev.userId] || ''}
-                                            onChange={(e) =>
-                                                handleScoreChange(
-                                                    dev.userId,
-                                                    e.target.value,
-                                                )
-                                            }
+                <div className="mt-6">
+                    <h2 className="text-xl font-semibold">
+                        Desarrolladores inscritos
+                    </h2>
+                    <ul>
+                        {participants.length > 0 ? (
+                            participants.map((dev) => (
+                                <li
+                                    key={dev.id}
+                                    className="flex items-center justify-between mb-2"
+                                >
+                                    <div className="flex items-center">
+                                        <img
+                                            src={dev.avatar}
+                                            alt={`${dev.username} avatar`}
+                                            className="w-10 h-10 rounded-full mr-2"
                                         />
-                                    </li>
-                                ))
-                            ) : (
-                                <p>No hay desarrolladores inscritos.</p>
-                            )}
-                        </ul>
+                                        <p>{dev.username}</p>
+                                    </div>
+                                    {/* Solo mostrar las puntuaciones si el usuario es el organizador del hackathon */}
+                                    {isOrganizer() &&
+                                        authUser?.id ===
+                                            hackathon?.organizerId && (
+                                            <input
+                                                type="number"
+                                                placeholder="Puntuación"
+                                                value={scores[dev.userId] || ''}
+                                                onChange={(e) =>
+                                                    handleScoreChange(
+                                                        dev.userId,
+                                                        e.target.value,
+                                                    )
+                                                }
+                                                className="border p-1 rounded"
+                                            />
+                                        )}
+                                </li>
+                            ))
+                        ) : (
+                            <p>No hay desarrolladores inscritos.</p>
+                        )}
+                    </ul>
+                </div>
 
-                        <button
-                            onClick={handleSubmitScores}
-                            className="mt-4 bg-verdeclaro text-blanco p-2 rounded"
-                        >
-                            Guardar puntuaciones
-                        </button>
-                    </div>
+                {/* Sección de puntuaciones solo para el organizador del hackathon */}
+                {isOrganizer() && authUser?.id === hackathon?.organizerId && (
+                    <button
+                        onClick={handleSubmitScores}
+                        className="mt-4 bg-verdeclaro text-blanco p-2 rounded"
+                    >
+                        Guardar puntuaciones
+                    </button>
                 )}
             </div>
         </div>
