@@ -15,30 +15,33 @@ const HomePage = () => {
 
     return (
         <main>
-            <div className="relative h-screen">
-                <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center sm:absolute sm:left-1/3 sm:top-0 md:w-2/3 h-full hidden sm:block"></div>
-                <div className="bg-opacity-0 sm:w-1/2 sm:pr-10 relative z-10">
-                    <div className="flex flex-col items-center justify-center p-3 sm:items-start sm:pt-20">
-                        <h2 className="font-semibold text-3xl font-jost sm:ml-20 mt-10 sm:mt-0">
+            <div className="relative">
+                <div className="lg:bg-[url('/assets/images/back-banner.jpg')] lg:bg-cover lg:bg-center lg:absolute lg:left-1/3 inset-0 z-0"></div>
+
+                <div className="relative z-10 flex flex-col items-center justify-center lg:items-start sm:pt-10">
+                    <div>
+                        <h2 className="font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0">
                             El hogar de los hackathones.
                         </h2>
                     </div>
-                    <div className="flex flex-col items-center justify-center sm:items-start ml-10 mr-10 sm:ml-24 sm:w-2/3">
-                        <p className="font-jost font-medium text-center sm:text-left">
+
+                    <div className="ml-10 mr-10 lg:ml-20 mt-2 lg:w-96">
+                        <p className="font-jost font-medium text-center lg:text-left">
                             Donde las organizaciones y los desarrolladores se
                             unen para construir, inspirar e innovar.
                         </p>
                     </div>
-                    <div className="flex flex-col items-center justify-center sm:items-start h-60">
+
+                    <div className="flex flex-col items-center justify-center lg:items-start h-60">
                         <button
                             onClick={handleOrganizacionesClick}
-                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
                         >
                             Organizaciones<span className="ml-10">→</span>
                         </button>
                         <button
                             onClick={handleParticipantesClick}
-                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 mb-10 text-2xl sm:ml-32 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 mb-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
                         >
                             Participantes<span className="ml-16">→</span>
                         </button>
