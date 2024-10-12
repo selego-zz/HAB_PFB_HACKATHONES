@@ -47,9 +47,8 @@ const addHackathonModel = async (
         hackathonEnd = hackathonEnd.slice(0, -1);
     }
 
-    // Insertamos el hackathon.
-    const [res] = await pool.query(
-        `INSERT INTO hackathons(
+    //
+    let sql = `INSERT INTO hackathons(
             name,
             organizerId,    
             inscriptionDate,
@@ -58,26 +57,31 @@ const addHackathonModel = async (
             hackathonEnd,
             maxParticipants,
             prizes,
-            logo,
             online,
             location,
-            documentation
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-            name,
-            organizerid,
-            inscriptionDate,
-            inscriptionEnd,
-            hackathonDate,
-            hackathonEnd,
-            maxParticipants,
-            prizes,
-            logo,
-            online,
-            location,
-            documentation,
-        ],
-    );
+            documentation`;
+    if (logo) sql += ', ' + logo;
+    sql += `) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?`;
+    if (logo) sql += ', ?';
+    sql += ')';
+
+    const args = [
+        name,
+        organizerid,
+        inscriptionDate,
+        inscriptionEnd,
+        hackathonDate,
+        hackathonEnd,
+        maxParticipants,
+        prizes,
+        online,
+        location,
+        documentation,
+    ];
+    if (logo) args.push(logo);
+
+    // Insertamos el hackathon.
+    const [res] = await pool.query(sql, args);
     return res.insertId;
 };
 

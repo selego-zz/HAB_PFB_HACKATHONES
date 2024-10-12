@@ -7,11 +7,12 @@ const getAllInscriptionsModel = async () => {
     const pool = await getPool();
 
     const [enrollments] = await pool.query(`
-        SELECT e.id, e.userId, e.hackathonId, e.inscriptionDate, e.attended, e.rating, e.score,
-        u.username, h.name AS hackathonName
+          SELECT e.id, e.hackathonId, e.inscriptionDate, e.attended, e.rating, e.score,
+        h.name AS hackathonName,
+        u.id AS userId, u.username, u.avatar
         FROM enrollsin e
-        JOIN users u ON e.userId = u.id
         JOIN hackathons h ON e.hackathonId = h.id
+        JOIN users u ON e.userId = u.id
     `);
 
     return enrollments;

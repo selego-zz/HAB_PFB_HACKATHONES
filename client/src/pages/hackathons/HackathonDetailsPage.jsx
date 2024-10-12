@@ -4,6 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDocumentTitle, useHackathons } from '../../hooks/index.js';
 import toast from 'react-hot-toast';
 
+const { VITE_API_UPLOADS } = import.meta.env;
+
+//////
+
 const HackathonDetailsPage = () => {
     // Título de pestaña
     useDocumentTitle('Detalles del evento');
@@ -11,7 +15,7 @@ const HackathonDetailsPage = () => {
     const { hackathonId } = useParams();
     const { authToken, isOrganizer, isDeveloper, authUser } =
         useContext(AuthContext);
-    const { getHackathon, deleteHackathon, getUsersHackathon } =
+    const { getHackathon, deleteHackathon, getAllInscriptionsFromAHackathon } =
         useHackathons();
 
     const [hackathon, setHackathon] = useState(null);
@@ -32,7 +36,8 @@ const HackathonDetailsPage = () => {
                 const data = await getHackathon(hackathonId);
                 setHackathon(data);
 
-                const userHackathons = await getUsersHackathon();
+                const userHackathons =
+                    await getAllInscriptionsFromAHackathon(hackathonId);
                 const enrolledParticipants = userHackathons.filter(
                     (h) => String(h.hackathonId) === String(hackathonId),
                 );
@@ -44,23 +49,22 @@ const HackathonDetailsPage = () => {
                 );
                 setIsRegistered(isUserRegistered);
             } catch (err) {
-                err.message === 'Error: jwt malformed' ||
-                err.message === 'Error: Usuario no encontrado'
-                    ? console.warn(
-                          'El usuario no está logeado o hubo un problema de autenticación',
-                      )
-                    : err.message === 'Error: No se encontraron inscripciones'
-                      ? console.warn('No se encontraron inscripciones')
-                      : toast.error(err.message, {
-                            id: 'hackathondetailspage',
-                        });
+                toast.error(err.message, {
+                    id: 'hackathondetailspage',
+                });
             } finally {
                 setLoading(false);
             }
         };
 
         fetchHackathonDetails();
-    }, [hackathonId, getHackathon, getUsersHackathon, oldParam, authUser?.id]);
+    }, [
+        hackathonId,
+        getHackathon,
+        getAllInscriptionsFromAHackathon,
+        oldParam,
+        authUser?.id,
+    ]);
 
     const handleDelete = async () => {
         if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
@@ -116,6 +120,7 @@ const HackathonDetailsPage = () => {
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
             <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
                 <h1 className="text-2xl font-bold">{hackathon?.name}</h1>
+                <img src={VITE_API_UPLOADS + '/' + hackathon?.logo} />
                 <p>
                     <strong>Fecha de inscripción:</strong>{' '}
                     {hackathon?.inscriptionDate} - {hackathon?.inscriptionEnd}
@@ -143,7 +148,7 @@ const HackathonDetailsPage = () => {
                                         `/hackathons/${hackathonId}/cancel`,
                                     )
                                 }
-                                className="bg-rojoclaro hover:bg-rojooscuro text-blanco p-2 rounded"
+                                className="bg-rojoclaro text-blanco p-2 rounded"
                             >
                                 Cancelar mi inscripción
                             </button>
@@ -192,15 +197,21 @@ const HackathonDetailsPage = () => {
                                     key={dev.id}
                                     className="flex items-center justify-between mb-2"
                                 >
+                                    {/* Avatar y nombre de usuario visibles para todos */}
                                     <div className="flex items-center">
                                         <img
-                                            src={dev.avatar}
+                                            src={
+                                                VITE_API_UPLOADS +
+                                                '/' +
+                                                dev.avatar
+                                            }
                                             alt={`${dev.username} avatar`}
                                             className="w-10 h-10 rounded-full mr-2"
                                         />
                                         <p>{dev.username}</p>
                                     </div>
-                                    {/* Solo mostrar las puntuaciones si el usuario es el organizador del hackathon */}
+
+                                    {/* Input de puntuación solo visible para organizadores */}
                                     {isOrganizer() &&
                                         authUser?.id ===
                                             hackathon?.organizerId && (

@@ -220,7 +220,6 @@ const CreateHackathonForm = ({ formData, handleChange, handleSubmit }) => {
                         onChange={handleChange}
                         className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
                         accept="image/*"
-                        required
                     />
                 </div>
 
@@ -234,7 +233,6 @@ const CreateHackathonForm = ({ formData, handleChange, handleSubmit }) => {
                         onChange={handleChange}
                         className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
                         accept=".pdf,.doc,.docx"
-                        required
                     />
                 </div>
 

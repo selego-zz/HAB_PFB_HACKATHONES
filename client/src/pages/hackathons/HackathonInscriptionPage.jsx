@@ -70,7 +70,8 @@ const HackathonInscriptionPage = () => {
             setTimeout(() => {
                 navigate(`/hackathons/${hackathonId}`);
             }, 3000);
-            return body.message;
+
+            return true;
         } catch (err) {
             toast.error(err.message);
         }

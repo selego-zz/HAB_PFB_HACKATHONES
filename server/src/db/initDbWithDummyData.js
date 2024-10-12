@@ -16,7 +16,7 @@ const SQL_USERS_TABLE = `
         username VARCHAR(50) UNIQUE,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL,
-        avatar VARCHAR(100),
+        avatar VARCHAR(100) DEFAULT 'default-avatar.png',
 
         firstName VARCHAR(50) NOT NULL,
         lastName VARCHAR(50) NOT NULL,
@@ -52,7 +52,7 @@ const SQL_HACKATHONS_TABLE = `
         online ENUM ('presencial', 'remoto') NOT NULL,
         location VARCHAR(200),
         prizes DECIMAL(9, 2),
-        logo VARCHAR(100),
+        logo VARCHAR(100) DEFAULT 'default-hackathon-logo.svg',
         documentation VARCHAR(100),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,

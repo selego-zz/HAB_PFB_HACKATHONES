@@ -30,7 +30,7 @@ const { VITE_API_URL } = import.meta.env;
 //            location,
 //
 //       deleteHackathon = async (hackathonId) => {
-//       getAllInscriptionsFromAHackathonController = async (hackathonId) => {
+//       getAllInscriptionsFromAHackathon = async (hackathonId) => {
 //       getHackathon = async (hackathonId) => {
 //       getUsersHackathon = async () => {
 //       updateHackathon = async (hackathon) => {
@@ -139,6 +139,12 @@ const useHackathons = () => {
     ////////////////////////////////////////////////////////////
     const addHackathon = async (hackathon) => {
         try {
+            if (hackathon.logo.length < 1) {
+                delete hackathon.logo;
+            }
+            if (hackathon.documentation.length < 1) {
+                delete hackathon.documentation;
+            }
             const res = await fetch(`${VITE_API_URL}/hackathons`, {
                 method: 'POST',
                 headers: {
@@ -178,7 +184,7 @@ const useHackathons = () => {
         }
     };
 
-    const getAllInscriptionsFromAHackathonController = async (hackathonId) => {
+    const getAllInscriptionsFromAHackathon = async (hackathonId) => {
         /// /hackathons/: hackathonId/enrollments
         try {
             const res = await fetch(
@@ -430,7 +436,7 @@ const useHackathons = () => {
         hackathonLoading,
         addHackathon,
         deleteHackathon,
-        getAllInscriptionsFromAHackathonController,
+        getAllInscriptionsFromAHackathon,
         getHackathon,
         getUsersHackathon,
         updateHackathon,
