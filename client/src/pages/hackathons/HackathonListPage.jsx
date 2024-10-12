@@ -118,7 +118,7 @@ const HackathonListPage = () => {
                             onChange={(e) => {
                                 setLocation(e.target.value);
                             }}
-                            className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                            className="input-box"
                         />
                     </li>
                     <li>
@@ -130,7 +130,7 @@ const HackathonListPage = () => {
                             onChange={(e) => {
                                 setMaxParticipants(e.target.value);
                             }}
-                            className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                            className="input-box"
                         />
                     </li>
                     <li>
@@ -142,7 +142,7 @@ const HackathonListPage = () => {
                             onChange={(e) => {
                                 setPrizes(e.target.value);
                             }}
-                            className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                            className="input-box"
                         />
                     </li>
                     <li>
@@ -157,7 +157,7 @@ const HackathonListPage = () => {
                                 onChange={(e) => {
                                     setInscriptionDate(e.target.value);
                                 }}
-                                className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                                className="input-box"
                             />
                         </div>
                     </li>
@@ -173,7 +173,7 @@ const HackathonListPage = () => {
                                 onChange={(e) => {
                                     setInscriptionEnd(e.target.value);
                                 }}
-                                className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                                className="input-box"
                             />
                         </div>
                     </li>
@@ -189,7 +189,7 @@ const HackathonListPage = () => {
                                 onChange={(e) => {
                                     setHackathonDate(e.target.value);
                                 }}
-                                className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                                className="input-box"
                             />
                         </div>
                     </li>
@@ -205,7 +205,7 @@ const HackathonListPage = () => {
                                 onChange={(e) => {
                                     setHackathonEnd(e.target.value);
                                 }}
-                                className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                                className="input-box"
                             />
                         </div>
                     </li>

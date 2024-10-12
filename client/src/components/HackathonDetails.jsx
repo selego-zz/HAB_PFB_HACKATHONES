@@ -21,7 +21,7 @@ const HackathonDetails = ({
 
     return (
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold">{hackathon?.name}</h1>
+            <h1 className="text-header-big">{hackathon?.name}</h1>
             <img src={VITE_API_UPLOADS + '/' + hackathon?.logo} alt="Logo" />
             <p>
                 <strong>Fecha de inscripción:</strong>{' '}
@@ -49,7 +49,7 @@ const HackathonDetails = ({
                             onClick={() =>
                                 navigate(`/hackathons/${hackathonId}/cancel`)
                             }
-                            className="bg-rojoclaro text-blanco p-2 rounded"
+                            className="button-angled-red"
                         >
                             Cancelar mi inscripción
                         </button>
@@ -60,7 +60,7 @@ const HackathonDetails = ({
                                     `/hackathons/${hackathonId}/registration`,
                                 )
                             }
-                            className="bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded"
+                            className="button-angled-green"
                         >
                             ¡Quiero inscribirme!
                         </button>
@@ -75,13 +75,13 @@ const HackathonDetails = ({
                         onClick={() =>
                             navigate(`/hackathons/update/${hackathonId}`)
                         }
-                        className="bg-verdemarino text-blanco p-2 rounded"
+                        className="button-angled-green"
                     >
                         Actualizar Hackathon
                     </button>
                     <button
                         onClick={handleDelete}
-                        className="ml-2 bg-rojoclaro text-blanco p-2 rounded"
+                        className="button-angled-red"
                     >
                         Eliminar Hackathon
                     </button>
@@ -138,7 +138,7 @@ const HackathonDetails = ({
             {isOrganizer() && authUser?.id === hackathon?.organizerId && (
                 <button
                     onClick={handleSubmitScores}
-                    className="mt-4 bg-verdeclaro text-blanco p-2 rounded"
+                    className="button-angled-green"
                 >
                     Guardar puntuaciones
                 </button>

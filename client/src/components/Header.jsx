@@ -34,7 +34,7 @@ const Header = () => {
                     {isDeveloper() && (
                         <NavLink
                             to="/hackathons"
-                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-20 text-sm sm:text-lg"
+                            className="button-rounded-green"
                         >
                             <button>Eventos</button>
                         </NavLink>
@@ -42,16 +42,13 @@ const Header = () => {
                     {isOrganizer() && (
                         <NavLink
                             to="/hackathons/create"
-                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg"
+                            className="button-rounded-green"
                         >
                             <button>Crea un Hackathon</button>
                         </NavLink>
                     )}
                     {isAdmin() && (
-                        <NavLink
-                            to="/users"
-                            className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg"
-                        >
+                        <NavLink to="/users" className="button-rounded-green">
                             <button>Listado de usuarios</button>
                         </NavLink>
                     )}
@@ -61,13 +58,13 @@ const Header = () => {
                         <>
                             <NavLink
                                 to="/users/login"
-                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
+                                className="button-rounded-green"
                             >
                                 <button>Iniciar sesión</button>
                             </NavLink>
                             <NavLink
                                 to="/users/register"
-                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
+                                className="button-rounded-green"
                             >
                                 <button>Registrarse</button>
                             </NavLink>
@@ -76,14 +73,14 @@ const Header = () => {
                         <>
                             <NavLink
                                 to="/profile"
-                                className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-20 text-sm sm:text-lg"
+                                className="button-rounded-green"
                             >
                                 <button>Perfil</button>
                             </NavLink>
                             <NavLink to="/">
                                 <button
                                     onClick={authLogoutState}
-                                    className="flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-rojoclaro font-jost font-semibold sm:h-9 sm:w-32 h-7 w-24 text-sm sm:text-lg"
+                                    className="button-rounded-green"
                                 >
                                     Cerrar sesión
                                 </button>
