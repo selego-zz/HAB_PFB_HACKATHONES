@@ -3,13 +3,11 @@ import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDocumentTitle, useHackathons } from '../../hooks/index.js';
 import toast from 'react-hot-toast';
-
-const { VITE_API_UPLOADS } = import.meta.env;
+import HackathonDetails from '../../components/HackathonDetails.jsx';
 
 //////
 
 const HackathonDetailsPage = () => {
-    // Título de pestaña
     useDocumentTitle('Detalles del evento');
 
     const { hackathonId } = useParams();
@@ -30,12 +28,15 @@ const HackathonDetailsPage = () => {
     useEffect(() => {
         const fetchHackathonDetails = async () => {
             try {
+                // Para que refresque la página si cambia el id
                 if (oldParam === hackathonId) return;
                 setOldParam(hackathonId);
 
+                // Solicitamos los datos del hackathon
                 const data = await getHackathon(hackathonId);
                 setHackathon(data);
 
+                // Solicitamos usuarios inscritos
                 const userHackathons =
                     await getAllInscriptionsFromAHackathon(hackathonId);
                 const enrolledParticipants = userHackathons.filter(
@@ -44,6 +45,7 @@ const HackathonDetailsPage = () => {
 
                 setParticipants(enrolledParticipants || []);
 
+                // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
                 const isUserRegistered = enrolledParticipants.some(
                     (h) => h.userId === authUser?.id,
                 );
@@ -52,11 +54,11 @@ const HackathonDetailsPage = () => {
                 toast.error(err.message, {
                     id: 'hackathondetailspage',
                 });
+                navigate('/hackathons');
             } finally {
                 setLoading(false);
             }
         };
-
         fetchHackathonDetails();
     }, [
         hackathonId,
@@ -64,6 +66,7 @@ const HackathonDetailsPage = () => {
         getAllInscriptionsFromAHackathon,
         oldParam,
         authUser?.id,
+        navigate,
     ]);
 
     const handleDelete = async () => {
@@ -118,134 +121,19 @@ const HackathonDetailsPage = () => {
 
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
-            <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
-                <h1 className="text-2xl font-bold">{hackathon?.name}</h1>
-                <img src={VITE_API_UPLOADS + '/' + hackathon?.logo} />
-                <p>
-                    <strong>Fecha de inscripción:</strong>{' '}
-                    {hackathon?.inscriptionDate} - {hackathon?.inscriptionEnd}
-                </p>
-                <p>
-                    <strong>Fecha del hackathon:</strong>{' '}
-                    {hackathon?.hackathonDate} - {hackathon?.hackathonEnd}
-                </p>
-                <p>
-                    <strong>Ubicación:</strong> {hackathon?.location}
-                </p>
-                <p>
-                    <strong>Premios:</strong> {hackathon?.prizes}
-                </p>
-                <p>
-                    <strong>Documentación:</strong> {hackathon?.documentation}
-                </p>
-
-                {isDeveloper() && (
-                    <div className="mt-4">
-                        {isRegistered ? (
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        `/hackathons/${hackathonId}/cancel`,
-                                    )
-                                }
-                                className="bg-rojoclaro text-blanco p-2 rounded"
-                            >
-                                Cancelar mi inscripción
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() =>
-                                    navigate(
-                                        `/hackathons/${hackathonId}/registration`,
-                                    )
-                                }
-                                className="bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded"
-                            >
-                                Inscríbete
-                            </button>
-                        )}
-                    </div>
-                )}
-
-                {isOrganizer() && (
-                    <div className="mt-4">
-                        <button
-                            onClick={() =>
-                                navigate(`/hackathons/update/${hackathonId}`)
-                            }
-                            className="bg-verdemarino text-blanco p-2 rounded"
-                        >
-                            Actualizar Hackathon
-                        </button>
-                        <button
-                            onClick={handleDelete}
-                            className="ml-2 bg-rojoclaro text-blanco p-2 rounded"
-                        >
-                            Eliminar Hackathon
-                        </button>
-                    </div>
-                )}
-
-                <div className="mt-6">
-                    <h2 className="text-xl font-semibold">
-                        Desarrolladores inscritos
-                    </h2>
-                    <ul>
-                        {participants.length > 0 ? (
-                            participants.map((dev) => (
-                                <li
-                                    key={dev.id}
-                                    className="flex items-center justify-between mb-2"
-                                >
-                                    {/* Avatar y nombre de usuario visibles para todos */}
-                                    <div className="flex items-center">
-                                        <img
-                                            src={
-                                                VITE_API_UPLOADS +
-                                                '/' +
-                                                dev.avatar
-                                            }
-                                            alt={`${dev.username} avatar`}
-                                            className="w-10 h-10 rounded-full mr-2"
-                                        />
-                                        <p>{dev.username}</p>
-                                    </div>
-
-                                    {/* Input de puntuación solo visible para organizadores */}
-                                    {isOrganizer() &&
-                                        authUser?.id ===
-                                            hackathon?.organizerId && (
-                                            <input
-                                                type="number"
-                                                placeholder="Puntuación"
-                                                value={scores[dev.userId] || ''}
-                                                onChange={(e) =>
-                                                    handleScoreChange(
-                                                        dev.userId,
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="border p-1 rounded"
-                                            />
-                                        )}
-                                </li>
-                            ))
-                        ) : (
-                            <p>No hay desarrolladores inscritos.</p>
-                        )}
-                    </ul>
-                </div>
-
-                {/* Sección de puntuaciones solo para el organizador del hackathon */}
-                {isOrganizer() && authUser?.id === hackathon?.organizerId && (
-                    <button
-                        onClick={handleSubmitScores}
-                        className="mt-4 bg-verdeclaro text-blanco p-2 rounded"
-                    >
-                        Guardar puntuaciones
-                    </button>
-                )}
-            </div>
+            <HackathonDetails
+                hackathon={hackathon}
+                participants={participants}
+                isRegistered={isRegistered}
+                isDeveloper={isDeveloper}
+                isOrganizer={isOrganizer}
+                handleDelete={handleDelete}
+                handleScoreChange={handleScoreChange}
+                handleSubmitScores={handleSubmitScores}
+                scores={scores}
+                authUser={authUser}
+                hackathonId={hackathonId}
+            />
         </div>
     );
 };

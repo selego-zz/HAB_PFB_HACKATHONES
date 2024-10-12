@@ -19,11 +19,11 @@ const Header = () => {
                     <picture>
                         <source
                             media="(max-width: 640px)"
-                            srcSet="/Logo/logo.png"
+                            srcSet="/logo/app-logo-small.png"
                         />
                         <img
-                            src="/Logo/logo1.png"
-                            alt="Logo"
+                            src="/logo/app-logo.png"
+                            alt="Logo de la página reducido."
                             className="h-16 w-16 ml-7 mt-2 mb-2 sm:h-16 sm:w-36 sm:ml-10 sm:mb-2 "
                         />
                     </picture>
