@@ -14,7 +14,7 @@ const getAllInscriptionsFromAHackathonController = async (req, res, next) => {
         let message =
             hackathons.length > 0
                 ? 'Hackatones obtenidos'
-                : 'No se encontraron hackatones que cumplan los criterios de búsqueda';
+                : 'No se encontraron hackathones que cumplan los criterios de búsqueda';
         res.send({
             status: 'ok',
             message,
