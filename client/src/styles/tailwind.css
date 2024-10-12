@@ -3,3 +3,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .button-rounded-green {
+        @apply flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg;
+    }
+    .button-angled-green {
+        @apply bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded;
+    }
+    .button-angled-red {
+        @apply bg-rojoclaro text-blanco p-2 rounded;
+    }
+    .button-big-rounded-green {
+        @apply bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco;
+    }
+    .input-box {
+        @apply mt-1 block w-11/12 mx-auto rounded-md shadow-sm bg-verdeclaro p-2;
+    }
+    .text-header-big {
+        @apply font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0;
+    }
+    .text-common {
+        @apply font-jost font-medium text-center lg:text-left;
+    }
+}

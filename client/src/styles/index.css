@@ -1,0 +1,11 @@
+@layer components {
+    .greenButton {
+        @apply bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco;
+    }
+    .mainTittle {
+        @apply font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0;
+    }
+    .commonText {
+        @apply font-jost font-medium text-center lg:text-left;
+    }
+}

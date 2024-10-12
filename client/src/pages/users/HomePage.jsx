@@ -20,13 +20,13 @@ const HomePage = () => {
 
                 <div className="relative z-10 flex flex-col items-center justify-center lg:items-start sm:pt-10">
                     <div>
-                        <h2 className="font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0">
+                        <h2 className="text-header-big">
                             El hogar de los hackathones.
                         </h2>
                     </div>
 
                     <div className="ml-10 mr-10 lg:ml-20 mt-2 lg:w-96">
-                        <p className="font-jost font-medium text-center lg:text-left">
+                        <p className="text-common">
                             Donde las organizaciones y los desarrolladores se
                             unen para construir, inspirar e innovar.
                         </p>
@@ -35,13 +35,13 @@ const HomePage = () => {
                     <div className="flex flex-col items-center justify-center lg:items-start h-60">
                         <button
                             onClick={handleOrganizacionesClick}
-                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                            className="button-big-rounded-green"
                         >
                             Organizaciones<span className="ml-10">→</span>
                         </button>
                         <button
                             onClick={handleParticipantesClick}
-                            className="bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 mb-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco"
+                            className="button-big-rounded-green"
                         >
                             Participantes<span className="ml-16">→</span>
                         </button>
