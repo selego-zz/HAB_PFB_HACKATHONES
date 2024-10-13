@@ -8,6 +8,9 @@
     .button-rounded-green {
         @apply flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg;
     }
+    .button-rounded-red {
+        @apply flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-rojoclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-36 text-sm sm:text-lg;
+    }
     .button-angled-green {
         @apply bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded;
     }

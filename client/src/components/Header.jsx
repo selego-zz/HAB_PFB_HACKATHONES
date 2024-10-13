@@ -1,19 +1,48 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 import { NavLink } from 'react-router-dom';
 
+const { VITE_API_UPLOADS } = import.meta.env;
+
 const Header = () => {
     const authContext = useContext(AuthContext);
+    const [isMenuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    // useEffect se ejecuta siempre que el menú se abra o cierre
+    useEffect(() => {
+        // Solo añade el listener si el menú está abierto
+        if (isMenuOpen) {
+            window.addEventListener('mousedown', handleClickOutside);
+        }
+
+        // Cleanup para evitar fugas de memoria
+        return () => {
+            window.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMenuOpen]); // useEffect depende de isMenuOpen
+
+    // Verifica que el contexto de autenticación no sea nulo
     if (!authContext) {
-        return null;
+        return null; // Retorna null si no hay contexto
     }
 
     const { authUser, isAdmin, isDeveloper, isOrganizer, authLogoutState } =
         authContext;
 
+    const toggleMenu = () => {
+        setMenuOpen((prev) => !prev);
+    };
+
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setMenuOpen(false);
+        }
+    };
+
     return (
-        <header className=" bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro  w-screen ">
-            <div className="flex justify-between items-center">
+        <header className="bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro w-full relative">
+            <div className="flex justify-between items-center max-w-full mx-auto px-4 sm:px-10">
                 {/* Logo */}
                 <NavLink to="/">
                     <picture>
@@ -24,13 +53,13 @@ const Header = () => {
                         <img
                             src="/logo/app-logo.png"
                             alt="Logo de la página reducido."
-                            className="h-16 w-16 ml-7 mt-2 mb-2 sm:h-16 sm:w-36 sm:ml-10 sm:mb-2 "
+                            className="h-16 w-16 sm:h-16 sm:w-36"
                         />
                     </picture>
                 </NavLink>
 
-                <nav className="flex items-center gap-2 sm:gap-4 sm:mr-10 mr-5">
-                    {/* Botones para diferentes roles */}
+                {/* Navegación de botones */}
+                <nav className="flex items-center gap-2">
                     {isDeveloper() && (
                         <NavLink
                             to="/hackathons"
@@ -52,8 +81,10 @@ const Header = () => {
                             <button>Listado de usuarios</button>
                         </NavLink>
                     )}
+                </nav>
 
-                    {/* Botones de autenticación */}
+                {/* Icono de avatar (menú hamburguesa o botones de inicio de sesión) */}
+                <div className="flex items-center">
                     {!authUser ? (
                         <>
                             <NavLink
@@ -70,27 +101,59 @@ const Header = () => {
                             </NavLink>
                         </>
                     ) : (
-                        <>
+                        <button onClick={toggleMenu} className="text-blanco">
+                            <img
+                                src={
+                                    VITE_API_UPLOADS + '/' + authUser.avatar ||
+                                    VITE_API_UPLOADS + '/default-avatar.png'
+                                }
+                                alt="Avatar del usuario"
+                                className="h-12 w-12 rounded-full"
+                            />
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Fondo oscurecido cuando el menú hamburguesa está abierto */}
+            {isMenuOpen && (
+                <div className="fixed inset-0 bg-negro bg-opacity-50 z-40"></div>
+            )}
+
+            {/* Menú hamburguesa con "Perfil" y "Cerrar sesión" */}
+            {isMenuOpen && (
+                <nav
+                    ref={menuRef}
+                    className="absolute top-16 right-7 bg-azuloscuro text-blanco w-fit rounded-lg shadow-lg z-50 p-6"
+                >
+                    <ul className="flex flex-col items-center">
+                        <li className="py-2">
                             <NavLink
                                 to="/profile"
                                 className="button-rounded-green"
+                                onClick={toggleMenu}
                             >
-                                <button>Perfil</button>
+                                Perfil
                             </NavLink>
-                            <NavLink to="/">
-                                <button
-                                    onClick={authLogoutState}
-                                    className="button-rounded-green"
-                                >
-                                    Cerrar sesión
-                                </button>
-                            </NavLink>
-                        </>
-                    )}
+                        </li>
+                        <li className="py-2">
+                            <button
+                                onClick={() => {
+                                    toggleMenu();
+                                    authLogoutState();
+                                }}
+                                className="button-rounded-red"
+                            >
+                                Cerrar sesión
+                            </button>
+                        </li>
+                    </ul>
                 </nav>
-            </div>
-            <div className="hidden sm:block">
-                <h1 className="bg-azuloscuro h-24 font-semibold text-3xl text-center px-20 text-blanco font-jost flex justify-center items-center w-screen">
+            )}
+
+            {/* Texto promocional */}
+            <div className="hidden items-center justify-center h-24 sm:block">
+                <h1 className="bg-azuloscuro font-semibold text-3xl text-center px-4 sm:px-20 text-blanco font-jost">
                     Participa en los mejores hackathons en línea y presenciales.
                 </h1>
             </div>
