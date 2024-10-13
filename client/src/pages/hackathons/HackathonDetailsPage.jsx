@@ -54,7 +54,6 @@ const HackathonDetailsPage = () => {
                 toast.error(err.message, {
                     id: 'hackathondetailspage',
                 });
-                navigate('/hackathons');
             } finally {
                 setLoading(false);
             }
