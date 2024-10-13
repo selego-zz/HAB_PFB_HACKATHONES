@@ -28,7 +28,6 @@ const HackathonDetails = ({
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
-                    {/* Margen lateral para pantallas grandes */}
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
                         <h1 className="text-header-big">{hackathon?.name}</h1>
                         {isOrganizer() &&
@@ -81,7 +80,7 @@ const HackathonDetails = ({
                         )}
                     </div>
 
-                    {/* Conditionally render participants section */}
+                    {/* Si el usuario es el organizador del hackathon, muestra lista de participantes */}
                     {isOrganizer() &&
                         authUser?.id === hackathon?.organizerId && (
                             <div className="bg-casiblanco p-4 rounded-lg shadow-md">
@@ -137,7 +136,6 @@ const HackathonDetails = ({
                 </div>
 
                 <aside className="bg-casiblanco p-4 rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
-                    {/* Margen lateral para pantallas grandes */}
                     <p>
                         <strong>Ubicación:</strong> {hackathon?.location}
                     </p>

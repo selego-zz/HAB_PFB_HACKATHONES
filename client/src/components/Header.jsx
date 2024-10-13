@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 const { VITE_API_UPLOADS } = import.meta.env;
 
+//////
+
 const Header = () => {
     const authContext = useContext(AuthContext);
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -20,7 +22,7 @@ const Header = () => {
         return () => {
             window.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isMenuOpen]); // useEffect depende de isMenuOpen
+    }, [isMenuOpen]);
 
     // Verifica que el contexto de autenticación no sea nulo
     if (!authContext) {
@@ -83,7 +85,7 @@ const Header = () => {
                     )}
                 </nav>
 
-                {/* Icono de avatar (menú hamburguesa o botones de inicio de sesión) */}
+                {/* Icono de avatar (menú hamburguesa) o botones de inicio de sesión */}
                 <div className="flex items-center">
                     {!authUser ? (
                         <>
