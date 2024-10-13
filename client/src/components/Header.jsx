@@ -42,17 +42,17 @@ const Header = () => {
 
     return (
         <header className="bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro w-full relative">
-            <div className="flex justify-between items-center max-w-full mx-auto px-4 sm:px-10">
+            <div className="flex justify-between items-center max-w-full mx-auto px-4 py-2 sm:px-10">
                 {/* Logo */}
                 <NavLink to="/">
                     <picture>
                         <source
-                            media="(max-width: 640px)"
+                            media="(max-width: 639px)"
                             srcSet="/logo/app-logo-small.png"
                         />
                         <img
                             src="/logo/app-logo.png"
-                            alt="Logo de la página reducido."
+                            alt="Logo de la página."
                             className="h-16 w-16 sm:h-16 sm:w-36"
                         />
                     </picture>
@@ -152,8 +152,8 @@ const Header = () => {
             )}
 
             {/* Texto promocional */}
-            <div className="hidden items-center justify-center h-24 sm:block">
-                <h1 className="bg-azuloscuro font-semibold text-3xl text-center px-4 sm:px-20 text-blanco font-jost">
+            <div className="hidden items-center justify-center h-fit sm:block">
+                <h1 className="bg-azuloscuro font-semibold text-3xl text-center px-4 py-2 sm:px-20 text-blanco font-jost">
                     Participa en los mejores hackathons en línea y presenciales.
                 </h1>
             </div>
