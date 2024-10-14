@@ -29,7 +29,7 @@ const getUsersHackathonController = async (req, res, next) => {
         }
 
         // Si no se encuentran inscripciones, lanzamos un error.
-        if (!hackathons || hackathons.length === 0) {
+        if (!hackathons) {
             generateErrorUtil('No se encontraron inscripciones', 404);
         }
 

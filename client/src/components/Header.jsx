@@ -131,7 +131,7 @@ const Header = () => {
                     <ul className="flex flex-col items-center">
                         <li className="py-2">
                             <NavLink
-                                to="/profile"
+                                to="/users"
                                 className="button-rounded-green"
                                 onClick={toggleMenu}
                             >
