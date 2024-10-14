@@ -79,7 +79,10 @@ const Header = () => {
                         </NavLink>
                     )}
                     {isAdmin() && (
-                        <NavLink to="/users" className="button-rounded-green">
+                        <NavLink
+                            to="users/getAllUsers"
+                            className="button-rounded-green"
+                        >
                             <button>Listado de usuarios</button>
                         </NavLink>
                     )}
