@@ -13,6 +13,7 @@ import toast from 'react-hot-toast';
 const UpdateUserPage = () => {
     // Título de pestaña
     useDocumentTitle('Actualización de perfil');
+
     //id, rol y email no pueden cambiarse
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
