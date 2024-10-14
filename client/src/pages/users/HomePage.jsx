@@ -7,7 +7,7 @@ const HomePage = () => {
     const navigate = useNavigate(); // Hook para la navegación
 
     const handleOrganizacionesClick = () => {
-        navigate('NotFoundPage');
+        navigate('/promotion');
     };
     const handleParticipantesClick = () => {
         navigate('/hackathons');

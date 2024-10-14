@@ -7,6 +7,7 @@ import App from './App.jsx';
 // Estilos CSS
 import './styles/tailwind.css';
 import './styles/scrollbar.css';
+import './styles/logoscarousel.css';
 
 //////
 
