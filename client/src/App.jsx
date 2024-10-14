@@ -50,7 +50,7 @@ const App = () => {
                         path="users/recover/:recoverPassCode"
                         element={<RecoverPass_GetCodePage />}
                     />
-                    <Route path="users" element={<ListAllUsersPage />} />
+
                     <Route
                         path="promotion"
                         element={<OrganizerPromotionPage />}
