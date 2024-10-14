@@ -258,7 +258,7 @@ const useHackathons = () => {
                         'Content-Type': 'application/json',
                         Authorization: authToken,
                     },
-                    body: JSON.stringify(rating),
+                    body: JSON.stringify({ rating }),
                 },
             );
             const body = await res.json();

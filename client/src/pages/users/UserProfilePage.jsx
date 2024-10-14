@@ -75,7 +75,7 @@ const UserProfilePage = () => {
                                     </p>
                                     <Rating
                                         hackathonId={hackathon.hackathonId}
-                                        rating={
+                                        initialRating={
                                             hackathon.rating
                                                 ? hackathon.rating
                                                 : 0
