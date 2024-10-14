@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 // Importamos los componentes
 import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 import HomePage from './pages/users/HomePage.jsx';
 import RegisterPage from './pages/users/RegisterPage.jsx';
 import LoginPage from './pages/users/LoginPage.jsx';
@@ -17,7 +18,6 @@ import PruebaPage from './pages/pruebaPage.jsx';
 
 //Importamos otras funciones
 import { Toaster } from 'react-hot-toast';
-import Footer from './components/Footer.jsx';
 import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
 import HackathonListPage from './pages/hackathons/HackathonListPage.jsx';
 import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';

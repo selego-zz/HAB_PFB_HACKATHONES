@@ -29,6 +29,11 @@ const HackathonDetails = ({
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
+                        <img
+                            className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
+                            src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                            alt="Logo del hackathon."
+                        />
                         <h1 className="text-header-big">{hackathon?.name}</h1>
                         {isOrganizer() &&
                             authUser?.id === hackathon?.organizerId && (

@@ -1,3 +1,4 @@
+// Componente auxiliar para carrusel de logos
 const LogosCarousel = () => {
     return (
         <div className="relative overflow-hidden h-min bg-blanco bg-opacity-50 w-screen max-w-full">

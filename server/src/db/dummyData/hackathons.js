@@ -11,7 +11,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Calle Falsa 123, Madrid, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo1.jpg',
         documentation: '',
     },
     {
@@ -26,7 +26,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto1.com',
         prizes: 5000.0,
-        logo: '',
+        logo: 'logo2.jpg',
         documentation: '',
     },
     {
@@ -41,7 +41,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Avenida Siempre Viva 742, Barcelona, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo3.jpg',
         documentation: '',
     },
     {
@@ -56,7 +56,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto2.com',
         prizes: 10000.0,
-        logo: '',
+        logo: 'logo4.jpg',
         documentation: '',
     },
     {
@@ -71,7 +71,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Calle Mayor 456, Valencia, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo5.jpg',
         documentation: '',
     },
     {
@@ -86,7 +86,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto3.com',
         prizes: 15000.0,
-        logo: '',
+        logo: 'logo6.jpg',
         documentation: '',
     },
     {
@@ -101,7 +101,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Plaza Central 789, Sevilla, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo7.jpg',
         documentation: '',
     },
     {
@@ -116,7 +116,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto4.com',
         prizes: 20000.0,
-        logo: '',
+        logo: 'logo8.jpg',
         documentation: '',
     },
     {
@@ -131,7 +131,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Calle Nueva 101, Bilbao, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo9.jpg',
         documentation: '',
     },
     {
@@ -146,7 +146,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto5.com',
         prizes: 25000.0,
-        logo: '',
+        logo: 'logo10.jpg',
         documentation: '',
     },
     {
@@ -161,7 +161,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Avenida del Sol 202, Zaragoza, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo11.jpg',
         documentation: '',
     },
     {
@@ -176,7 +176,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto6.com',
         prizes: 30000.0,
-        logo: '',
+        logo: 'logo12.jpg',
         documentation: '',
     },
     {
@@ -191,7 +191,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Calle del Mar 303, Málaga, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo13.jpg',
         documentation: '',
     },
     {
@@ -206,7 +206,7 @@ const hackathons = [
         online: 'remoto',
         location: 'https://hackathonremoto7.com',
         prizes: 35000.0,
-        logo: '',
+        logo: 'logo14.jpg',
         documentation: '',
     },
     {
@@ -221,7 +221,7 @@ const hackathons = [
         online: 'presencial',
         location: 'Calle de la Luna 404, Granada, España',
         prizes: 0,
-        logo: '',
+        logo: 'logo15.jpg',
         documentation: '',
     },
 ];
