@@ -7,6 +7,7 @@ const MakeStar = (star, rating, hackathonId) => {
     const { updateRating } = useHackathons();
     return (
         <span
+            key={rating}
             className="hover:text-6xl cursor-pointer"
             onClick={() => {
                 if (confirm('¿Está seguro de que desea cambiar la puntuación?'))

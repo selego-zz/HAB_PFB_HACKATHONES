@@ -1,17 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHackathons } from '../../hooks/index.js';
+import Rating from '../../components/Rating.jsx';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
 const UserProfilePage = () => {
     const { authUser } = useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
-    const { getUsersHackathon } = useHackathons();
+    const { getUsersHackathon, compareHackathons } = useHackathons();
+    const { historico, setHistorico } = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                setHackathons(await getUsersHackathon());
+                const newHackathons = await getUsersHackathon();
+                if (!compareHackathons(hackathons, newHackathons))
+                    setHackathons(newHackathons);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -38,22 +42,54 @@ const UserProfilePage = () => {
                 <p>{authUser.biography}</p>
             </div>
 
-            {/* Hackathons activos */}
+            {/* Historial de hackathons */}
+            <div>
+                <h2>Historial de hackathons</h2>
+                {hackathons.map((hackathon, index) => {
+                    if (new Date(hackathon.hackathonEnd) <= Date.now())
+                        return (
+                            <div key={index}>
+                                <h3>{hackathon.name}</h3>
+                                <p>Comienza el: {hackathon.hackathonDate}</p>
+                                <p>Premios: {hackathon.prizes}</p>
+                                <p>
+                                    {hackathon.maxParticipants} Participantes
+                                    como máximo
+                                </p>
+                                <Rating
+                                    hackathonId={hackathon.hackathonId}
+                                    rating={
+                                        hackathon.rating ? hackathon.rating : 0
+                                    }
+                                    ranking={
+                                        hackathon.score ? hackathon.score : 0
+                                    }
+                                />
+                            </div>
+                        );
+                })}
+            </div>
+
+            {/* Hackathons Activos */}
             <div>
                 <h2>Hackathons activos</h2>
-                {hackathons.map((hackathon, index) => (
-                    <div key={index}>
-                        <h3>{hackathon.name}</h3>
-                        <p>Faltan {hackathon.remainingTime} días</p>
-                        <p>Premios: {hackathon.prizes}</p>
-                        <p>{hackathon.maxParticipants} participantes</p>
-                        <div>
-                            {hackathon.technologies.map((technology, idx) => (
-                                <span key={idx}>{technology}</span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
+                {hackathons.map((hackathon, index) => {
+                    if (new Date(hackathon.hackathonEnd) > Date.now())
+                        return (
+                            <div key={index}>
+                                <h3>{hackathon.name}</h3>
+                                <p>Comienza el: {hackathon.hackathonDate}</p>
+                                <p>Premios: {hackathon.prizes}</p>
+                                <p>
+                                    {hackathon.maxParticipants} Participantes
+                                    como máximo
+                                </p>
+                                <button className="button-rounded-green">
+                                    Eliminar inscripción
+                                </button>
+                            </div>
+                        );
+                })}
             </div>
         </div>
     );
