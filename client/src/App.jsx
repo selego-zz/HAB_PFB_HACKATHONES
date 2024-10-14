@@ -10,7 +10,7 @@ import ValidationPage from './pages/users/ValidationPage.jsx';
 import RecoverPass_GetCodePage from './pages/users/RecoverPass_GetCodePage.jsx';
 import RecoverPass_SendCodePage from './pages/users/RecoverPass_SendCodePage.jsx';
 import ListAllUsersPage from './pages/users/ListAllUsersPage.jsx';
-import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
+import OrganizerPromotionPage from './pages/users/OrganizerPromotionPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
 import PruebaPage from './pages/pruebaPage.jsx';
@@ -20,6 +20,7 @@ import { Toaster } from 'react-hot-toast';
 import Footer from './components/Footer.jsx';
 import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
 import HackathonListPage from './pages/hackathons/HackathonListPage.jsx';
+import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
 import HackathonInscriptionPage from './pages/hackathons/HackathonInscriptionPage.jsx';
 import DeleteInscriptionPage from './pages/hackathons/DeleteInscriptionPage.jsx';
 
@@ -49,6 +50,10 @@ const App = () => {
                         element={<RecoverPass_GetCodePage />}
                     />
                     <Route path="users" element={<ListAllUsersPage />} />
+                    <Route
+                        path="promotion"
+                        element={<OrganizerPromotionPage />}
+                    />
 
                     {/* Hackathons */}
                     <Route
