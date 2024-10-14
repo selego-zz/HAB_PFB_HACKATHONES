@@ -29,15 +29,21 @@ const HackathonDetails = ({
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
-                        <img
-                            className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
-                            src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
-                            alt="Logo del hackathon."
-                        />
-                        <h1 className="text-header-big">{hackathon?.name}</h1>
+                        {/* Logo y nombre de hackathon */}
+                        <div className="flex items-center justify-start space-x-4">
+                            <img
+                                className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
+                                src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                                alt="Logo del hackathon."
+                            />
+                            <h1 className="text-header-big mt-0">
+                                {hackathon?.name}
+                            </h1>
+                        </div>
+
                         {isOrganizer() &&
                             authUser?.id === hackathon?.organizerId && (
-                                <div className="mt-4 flex space-x-4">
+                                <div className="mt-4 flex space-x-4 justify-center">
                                     <button
                                         onClick={() =>
                                             navigate(
@@ -57,7 +63,7 @@ const HackathonDetails = ({
                                 </div>
                             )}
                         {isDeveloper() && (
-                            <div className="mt-4">
+                            <div className="flex mt-4 justify-center">
                                 {isRegistered ? (
                                     <button
                                         onClick={() =>
@@ -140,7 +146,7 @@ const HackathonDetails = ({
                         )}
                 </div>
 
-                <aside className="bg-casiblanco p-4 rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
+                <aside className="bg-casiblanco p-4 w-fit rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
                     <p>
                         <strong>Ubicación:</strong> {hackathon?.location}
                     </p>

@@ -3,12 +3,17 @@ import { useHackathons } from '../../hooks/index.js';
 import Rating from '../../components/Rating.jsx';
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfilePage = () => {
     const { authUser } = useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
     const { getUsersHackathon, compareHackathons } = useHackathons();
     const [historico, setHistorico] = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
+
+    const navigate = useNavigate();
+    // Si no hay usuario logeado, redirigimos a home.
+    if (!authUser) navigate('/');
 
     useEffect(() => {
         const fetchUserData = async () => {
