@@ -34,7 +34,9 @@ const UserProfilePage = () => {
         <div>
             {/* Información del usuario */}
             <div>
-                <h1>{authUser.firstName} (Cuenta)</h1>
+                <h1>
+                    {authUser.firstName} ({authUser.userName})
+                </h1>
                 <button>Actualizar perfil</button>
             </div>
             <div>
