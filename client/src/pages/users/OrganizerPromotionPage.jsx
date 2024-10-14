@@ -91,8 +91,8 @@ const OrganizerPromotionPage = () => {
                     {/* Texto final */}
                     <div className="bg-blanco bg-opacity-75 rounded-2xl shadow-xl p-8 mb-8 max-w-xl w-auto">
                         <p className="text-lg text-gray-600">
-                            Únase a las empresas líderes que confían en
-                            HACK-A-TON para llevar sus hackathones al siguiente
+                            Únete a las empresas líderes que confían en
+                            HACK-A-TON para llevar tus hackathones al siguiente
                             nivel.
                         </p>
                     </div>
