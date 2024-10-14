@@ -100,7 +100,8 @@ const useHackathons = () => {
 
                 if (body.status === 'error') throw new Error(body.message);
 
-                if (!compareHackathons(body.data)) setHackathons(body.data);
+                if (!compareHackathons(hackathons, body.data))
+                    setHackathons(body.data);
             } catch (err) {
                 console.error(err);
                 throw new Error(err.message);
@@ -109,34 +110,33 @@ const useHackathons = () => {
             }
         };
 
-        const compareHackathons = (newHackathons) => {
-            if (!hackathons) {
-                return false;
-            }
-            if (hackathons?.length !== newHackathons?.length) return false;
-            for (const hackathon of hackathons) {
-                //para cada hackathon del state
-                //buscamos un hackathon con id equivalente en newHackathons. si no lo hay, devolvemos false
-
-                const newHackathon = newHackathons.find(
-                    (newHackathon) => newHackathon.id === hackathon.id,
-                );
-
-                if (!newHackathon) return false;
-
-                // si el hackathon de newHackathons tiene una fecha de modificación distinta, devolvemos false
-                if (hackathon.updatedAt !== newHackathon.updatedAt)
-                    return false;
-            }
-
-            return true;
-        };
         fetchHackathons();
     }, [hackathons, query]);
 
     ////////////////////////////////////////////////////////////
     // Diferentes fetch de hackathons
     ////////////////////////////////////////////////////////////
+    const compareHackathons = (hackathons, newHackathons) => {
+        if (!hackathons) {
+            return false;
+        }
+        if (hackathons?.length !== newHackathons?.length) return false;
+        for (const hackathon of hackathons) {
+            //para cada hackathon del state
+            //buscamos un hackathon con id equivalente en newHackathons. si no lo hay, devolvemos false
+
+            const newHackathon = newHackathons.find(
+                (newHackathon) => newHackathon.id === hackathon.id,
+            );
+
+            if (!newHackathon) return false;
+
+            // si el hackathon de newHackathons tiene una fecha de modificación distinta, devolvemos false
+            if (hackathon.updatedAt !== newHackathon.updatedAt) return false;
+        }
+
+        return true;
+    };
     const addHackathon = async (hackathon) => {
         try {
             if (hackathon.logo.length < 1) {
@@ -434,6 +434,7 @@ const useHackathons = () => {
         // Variables relaccionadas con el hackathon
         hackathons,
         hackathonLoading,
+        compareHackathons,
         addHackathon,
         deleteHackathon,
         getAllInscriptionsFromAHackathon,
