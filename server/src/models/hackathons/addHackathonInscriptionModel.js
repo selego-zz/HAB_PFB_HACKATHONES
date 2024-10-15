@@ -40,7 +40,9 @@ const addHackathonInscriptionModel = async (hackathonId, userId) => {
 
     // Comprobamos si se ha alcanzado el número máximo de participantes.
     if (currentParticipants >= maxParticipants) {
-        throw new Error('El número máximo de participantes ha sido alcanzado');
+        throw new Error(
+            'Lo sentimos, todas las plazas para este hackathon ya están llenas',
+        );
     }
 
     // Insertamos la inscripción.

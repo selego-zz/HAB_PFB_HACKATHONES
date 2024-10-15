@@ -4,9 +4,9 @@ import {
 } from '../../models/index.js';
 import { generateErrorUtil } from '../../utils/index.js';
 
-const deleteUserController = async (req, res) => {
+const deleteUserController = async (req, res, next) => {
     const { userId } = req.params;
-    console.log(userId);
+
     try {
         const user = await selectUserByIdModel(userId);
         if (!user) {
@@ -19,8 +19,8 @@ const deleteUserController = async (req, res) => {
             status: 'ok',
             message: 'Usuario desactivado correctamente',
         });
-    } catch (error) {
-        generateErrorUtil('Error al desactivar el usuario', 500);
+    } catch (err) {
+        next(err);
     }
 };
 
