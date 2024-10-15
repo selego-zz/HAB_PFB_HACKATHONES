@@ -195,6 +195,7 @@ export const AuthProvider = ({ children }) => {
             userProfile.avatar = avatar;
             // Si la actualización fue exitosa, establecemos los nuevos datos del usuario.
             setAuthUser(body.data.user);
+            return body.message;
         } catch (err) {
             throw new Error(err.message);
         }
@@ -226,6 +227,30 @@ export const AuthProvider = ({ children }) => {
 
             // Si la actualización fue exitosa, establecemos los nuevos datos del usuario.
             setAuthUser(body.data.user);
+            return body.message;
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    };
+    // función para actualizar el usuario. OJO: no actualiza el avatar
+    const updatePassword = async (oldPass, newPass) => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/users/password`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: authToken,
+                },
+                body: JSON.stringify({ oldPass, newPass }),
+            });
+
+            const body = await res.json();
+            console.log(body);
+
+            if (body.status === 'error') {
+                throw new Error(body.message);
+            }
+            return body.message;
         } catch (err) {
             throw new Error(err.message);
         }
@@ -247,6 +272,7 @@ export const AuthProvider = ({ children }) => {
                 loginUser,
                 updateUser,
                 updateUserWithAvatar,
+                updatePassword,
             }}
         >
             {children}
