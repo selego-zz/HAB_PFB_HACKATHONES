@@ -101,7 +101,12 @@ const UserProfilePage = () => {
                 <h2>Biografía: </h2>
                 <p>{authUser.biography}</p>
             </div>
-            <button className="bg-azuloscuro m-3 h-10 w-32 rounded-md text-blanco ">
+            <button
+                onClick={() => {
+                    navigate('/users/update');
+                }}
+                className="bg-azuloscuro m-3 h-10 w-32 rounded-md text-blanco "
+            >
                 Actualizar perfil
             </button>
 
