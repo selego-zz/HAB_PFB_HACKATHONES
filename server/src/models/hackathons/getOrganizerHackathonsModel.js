@@ -8,7 +8,7 @@ const getOrganizerHackathonsModel = async (organizerId) => {
     const pool = await getPool();
 
     const [enrollments] = await pool.query(
-        getInscriptions() + `WHERE h.organizerId = ?`,
+        getInscriptions(`WHERE h.organizerId = ?`),
         [organizerId],
     );
 

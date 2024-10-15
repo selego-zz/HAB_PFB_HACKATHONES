@@ -6,7 +6,7 @@ import { getInscriptions } from '../../utils/index.js';
 const getAllInscriptionsModel = async () => {
     const pool = await getPool();
 
-    const [enrollments] = await pool.query(getInscriptions);
+    const [enrollments] = await pool.query(getInscriptions(''));
 
     return enrollments;
 };
