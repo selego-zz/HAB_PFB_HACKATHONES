@@ -41,9 +41,11 @@ const ValidationPage = () => {
                     id: 'activateUser',
                 });
             } catch (err) {
-                toast.error(err.message, {
-                    id: 'activateUser',
-                });
+                err.message === 'El usuario no existe'
+                    ? console.warn('El usuario se ha activado correctamente')
+                    : toast.error(err.message, {
+                          id: 'activateUser',
+                      });
             } finally {
                 // Tanto si la activación ha sido un éxito como si no, redirigimos a login.
                 navigate('/users/login');

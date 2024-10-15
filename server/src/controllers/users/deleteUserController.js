@@ -6,6 +6,7 @@ import { generateErrorUtil } from '../../utils/index.js';
 
 const deleteUserController = async (req, res) => {
     const { userId } = req.params;
+    console.log(userId);
     try {
         const user = await selectUserByIdModel(userId);
         if (!user) {

@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
-import { useHackathons } from '../../hooks/index.js';
-import Rating from '../../components/Rating.jsx';
-
 import { AuthContext } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
-const { VITE_API_UPLOADS } = import.meta.env;
+import { useHackathons } from '../../hooks/index.js';
+import { useNavigate } from 'react-router-dom';
+import Rating from '../../components/Rating.jsx';
 import toast from 'react-hot-toast';
+
+const { VITE_API_UPLOADS, VITE_API_URL } = import.meta.env;
+
+////////////////
+
 const UserProfilePage = () => {
-    const { authUser, authToken } = useContext(AuthContext);
+    const { authUser, authToken, authLogoutState } = useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
     const { getUsersHackathon, compareHackathons } = useHackathons();
     const [historico, setHistorico] = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
@@ -33,15 +36,21 @@ const UserProfilePage = () => {
 
     const handleRemoveUser = async () => {
         try {
-            const res = await fetch(`${VITE_API_URL}/users/delete`, {
+            const userId = authUser.id;
+
+            const res = await fetch(`${VITE_API_URL}/users/delete/${userId}`, {
                 method: 'DELETE',
                 headers: { Authorization: authToken },
             });
             const body = await res.json();
+            console.log(body);
             if (body.status === 'error') throw new Error(body.message);
+            authLogoutState();
             toast.success(body.message);
+            navigate('/');
+            console.log(body);
         } catch (err) {
-            toast.error(err, { id: 'userprofile' });
+            toast.error(err.message, { id: 'userprofile' });
         }
     };
 
@@ -150,12 +159,7 @@ const UserProfilePage = () => {
                             );
                     })}
             </div>
-            <button
-                onClick={() => {
-                    handleRemoveUser();
-                }}
-                className="button-angled-red"
-            >
+            <button onClick={handleRemoveUser} className="button-angled-red">
                 Eliminar Usario
             </button>
         </div>

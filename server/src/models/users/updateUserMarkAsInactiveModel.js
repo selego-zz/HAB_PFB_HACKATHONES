@@ -12,17 +12,17 @@ const updateUserMarkAsInactiveModel = async (userId) => {
     // Actualizamos la base de datos.
     const [res] = await pool.query(
         `UPDATE users SET updatedAt = NOW(), lastAuthUpdate = NOW(),
-         password = "oqwuhe3kqw",
-         username = "Usuario eliminado",
-         email = "Usuario eliminado",
+         password = "usuario eliminado",
+         username = ?,
+         email = ?,
          avatar = "",
-         firstname = "Usuario eliminado",
-         lastname = "Usuario eliminado",
+         firstName = "Usuario eliminado",
+         lastName = "Usuario eliminado",
          biography = "Usuario eliminado",
-         linkedin = "Usuario eliminado",
+         linkedIn = "Usuario eliminado",
          active = false
          WHERE id = ?`,
-        [userId],
+        [crypto.randomUUID(), crypto.randomUUID(), userId],
     );
 
     return res.affectedRows;

@@ -58,5 +58,9 @@ router.put(
     recoverPasswordController,
 );
 // Middlware para eliminar un usuario
-router.delete('/users/delete', authUserController, deleteUserController);
+router.delete(
+    '/users/delete/:userId',
+    authUserController,
+    deleteUserController,
+);
 export default router;
