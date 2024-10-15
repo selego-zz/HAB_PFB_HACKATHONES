@@ -11,6 +11,7 @@ import {
     generateRecoverCodeController,
     recoverPasswordController,
     addOrganizerController,
+    deleteUserController,
 } from '../controllers/users/index.js';
 
 import {
@@ -56,5 +57,6 @@ router.put(
     '/users/password/recover/:recoverPassCode',
     recoverPasswordController,
 );
-
+// Middlware para eliminar un usuario
+router.delete('/users/delete', authUserController, deleteUserController);
 export default router;

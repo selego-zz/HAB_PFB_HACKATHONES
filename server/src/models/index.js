@@ -30,7 +30,7 @@ import {
     updateActiveUserModel,
     updatePassModel,
     updateUserModel,
-    updateUserMarkAsInactive,
+    updateUserMarkAsInactiveModel,
     updateResetPassModel,
 } from './users/index.js';
 
@@ -69,5 +69,5 @@ export {
     updatePassModel,
     updateResetPassModel,
     updateUserModel,
-    updateUserMarkAsInactive,
+    updateUserMarkAsInactiveModel,
 };

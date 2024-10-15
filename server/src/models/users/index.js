@@ -8,7 +8,7 @@ import selectUserByUsernameModel from './selectUserByUsernameModel.js';
 import updateActiveUserModel from './updateActiveUserModel.js';
 import updatePassModel from './updatePassModel.js';
 import updateResetPassModel from './updateResetPassModel.js';
-import updateUserMarkAsInactive from './updateUserMarkAsInactive.js';
+import updateUserMarkAsInactiveModel from './updateUserMarkAsInactiveModel.js';
 import updateUserModel from './updateUserModel.js';
 
 export {
@@ -23,5 +23,5 @@ export {
     updatePassModel,
     updateResetPassModel,
     updateUserModel,
-    updateUserMarkAsInactive,
+    updateUserMarkAsInactiveModel,
 };

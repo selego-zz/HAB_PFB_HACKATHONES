@@ -6,7 +6,7 @@ import { generateErrorUtil } from '../../utils/index.js';
 //////
 
 // Función que inhabilita un usuario.
-const updateUserMarkAsInactive = async (userId) => {
+const updateUserMarkAsInactiveModel = async (userId) => {
     const pool = await getPool();
 
     // Actualizamos la base de datos.
@@ -28,4 +28,4 @@ const updateUserMarkAsInactive = async (userId) => {
     return res.affectedRows;
 };
 
-export default updateUserMarkAsInactive;
+export default updateUserMarkAsInactiveModel;

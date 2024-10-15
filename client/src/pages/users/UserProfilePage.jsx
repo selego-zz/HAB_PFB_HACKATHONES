@@ -6,9 +6,9 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const { VITE_API_UPLOADS } = import.meta.env;
-
+import toast from 'react-hot-toast';
 const UserProfilePage = () => {
-    const { authUser } = useContext(AuthContext);
+    const { authUser, authToken } = useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
     const { getUsersHackathon, compareHackathons } = useHackathons();
     const [historico, setHistorico] = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
@@ -30,6 +30,20 @@ const UserProfilePage = () => {
 
         fetchUserData();
     });
+
+    const handleRemoveUser = async () => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/users/delete`, {
+                method: 'DELETE',
+                headers: { Authorization: authToken },
+            });
+            const body = await res.json();
+            if (body.status === 'error') throw new Error(body.message);
+            toast.success(body.message);
+        } catch (err) {
+            toast.error(err, { id: 'userprofile' });
+        }
+    };
 
     if (!authUser || !hackathons) {
         console.log(authUser);
@@ -136,6 +150,14 @@ const UserProfilePage = () => {
                             );
                     })}
             </div>
+            <button
+                onClick={() => {
+                    handleRemoveUser();
+                }}
+                className="button-angled-red"
+            >
+                Eliminar Usario
+            </button>
         </div>
     );
 };

@@ -1,10 +1,10 @@
 import {
     selectUserByIdModel,
-    updateUserMarkAsInactive,
+    updateUserMarkAsInactiveModel,
 } from '../../models/index.js';
-import { generateErrorUtil } from '../../utils';
+import { generateErrorUtil } from '../../utils/index.js';
 
-const deleteUser = async (req, res) => {
+const deleteUserController = async (req, res) => {
     const { userId } = req.params;
     try {
         const user = await selectUserByIdModel(userId);
@@ -12,7 +12,7 @@ const deleteUser = async (req, res) => {
             generateErrorUtil('Usuario no encontrado', 404);
         }
 
-        updateUserMarkAsInactive(userId);
+        updateUserMarkAsInactiveModel(userId);
         res.send({
             status: 'ok',
             message: 'Usuario desactivado correctamente',
@@ -21,3 +21,4 @@ const deleteUser = async (req, res) => {
         generateErrorUtil('Error al desactivar el usuario', 500);
     }
 };
+export default deleteUserController;
