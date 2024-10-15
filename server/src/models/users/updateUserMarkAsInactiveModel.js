@@ -1,8 +1,6 @@
 // Importaciones
 import getPool from '../../db/getPool.js';
 
-import { generateErrorUtil } from '../../utils/index.js';
-
 //////
 
 // Función que inhabilita un usuario.
