@@ -56,14 +56,14 @@ const UserProfilePage = () => {
                 </div>
                 <p> Email: {authUser.email} </p>
                 <p> Linkedin: {authUser.linkedIn} </p>
-                <button className="bg-azuloscuro m-3 h-10 w-32 rounded-md text-blanco ">
-                    Actualizar perfil
-                </button>
             </div>
             <div>
                 <h2>Biografía: </h2>
                 <p>{authUser.biography}</p>
             </div>
+            <button className="bg-azuloscuro m-3 h-10 w-32 rounded-md text-blanco ">
+                Actualizar perfil
+            </button>
 
             {/* Historial de hackathons */}
             <div>
