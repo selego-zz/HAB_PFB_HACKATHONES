@@ -8,7 +8,8 @@ import { generateErrorUtil } from '../../utils/index.js';
 // Función que inhabilita un usuario.
 const updateUserMarkAsInactiveModel = async (userId) => {
     const pool = await getPool();
-
+    const deletedUsername = crypto.randomUUID();
+    const deletedEmail = crypto.randomUUID();
     // Actualizamos la base de datos.
     const [res] = await pool.query(
         `UPDATE users SET updatedAt = NOW(), lastAuthUpdate = NOW(),
@@ -22,7 +23,7 @@ const updateUserMarkAsInactiveModel = async (userId) => {
          linkedIn = "Usuario eliminado",
          active = false
          WHERE id = ?`,
-        [crypto.randomUUID(), crypto.randomUUID(), userId],
+        [deletedUsername, deletedEmail, userId],
     );
 
     return res.affectedRows;
