@@ -168,6 +168,31 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // función para actualizar el usuario
+    const updateUser = async (userProfile) => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/users/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: authToken,
+                },
+                body: JSON.stringify(userProfile),
+            });
+
+            const body = await res.json();
+
+            if (body.status === 'error') {
+                throw new Error(body.message);
+            }
+
+            // Si la actualización fue exitosa, borramos los datos del usuario para qeu haga un nuevo fetch.
+            setAuthUser({});
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    };
+
     return (
         <AuthContext.Provider
             value={{
@@ -182,6 +207,7 @@ export const AuthProvider = ({ children }) => {
                 isOrganizer,
                 registerUser,
                 loginUser,
+                updateUser,
             }}
         >
             {children}
