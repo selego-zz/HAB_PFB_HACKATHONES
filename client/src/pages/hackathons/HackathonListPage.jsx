@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { useDocumentTitle, useHackathons } from '../../hooks';
+import HackathonList from '../../components/HackathonList';
 
 const HackathonListPage = () => {
     // Título de pestaña
@@ -16,7 +17,6 @@ const HackathonListPage = () => {
     const [hackathonEnd, setHackathonEnd] = useState('');
     const [prizes, setPrizes] = useState('');
 
-    const navigate = useNavigate();
     const {
         hackathons,
         hackathonLoading,
@@ -92,6 +92,7 @@ const HackathonListPage = () => {
 
     return (
         <main className="flex">
+            {/* Sección para poner los filtros */}
             <section>
                 <ul>
                     <li>
@@ -226,29 +227,7 @@ const HackathonListPage = () => {
                     />
                     <button onClick={handleSearchClick}>Buscar</button>
                 </section>
-                <ul className="mt-4">
-                    {hackathons.map((hackathon) => (
-                        <li
-                            key={hackathon.id}
-                            className="mb-4 p-4 border rounded cursor-pointer"
-                            onClick={() =>
-                                navigate(`/hackathons/${hackathon.id}`)
-                            }
-                        >
-                            <h2 className="text-xl font-semibold">
-                                {hackathon.name}
-                            </h2>
-                            <p>
-                                <strong>Fecha:</strong>{' '}
-                                {hackathon.hackathonDate} -{' '}
-                                {hackathon.hackathonEnd}
-                            </p>
-                            <p>
-                                <strong>Ubicación:</strong> {hackathon.location}
-                            </p>
-                        </li>
-                    ))}
-                </ul>
+                <HackathonList hackathons={hackathons} />
             </div>
         </main>
     );
