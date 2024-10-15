@@ -14,8 +14,6 @@ import ListAllUsersPage from './pages/users/ListAllUsersPage.jsx';
 import OrganizerPromotionPage from './pages/users/OrganizerPromotionPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
-import PruebaPage from './pages/pruebaPage.jsx';
-
 //Importamos otras funciones
 import { Toaster } from 'react-hot-toast';
 import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
@@ -81,7 +79,6 @@ const App = () => {
                         element={<HackathonDetailsPage />}
                     />
                     <Route path="*" element={<NotFoundPage />} />
-                    <Route path="/prueba" element={<PruebaPage />} />
                 </Routes>
             </section>
             <Footer />
