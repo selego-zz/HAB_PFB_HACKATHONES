@@ -13,6 +13,7 @@ const deleteUserController = async (req, res) => {
         }
 
         updateUserMarkAsInactiveModel(userId);
+
         res.send({
             status: 'ok',
             message: 'Usuario desactivado correctamente',
@@ -21,4 +22,5 @@ const deleteUserController = async (req, res) => {
         generateErrorUtil('Error al desactivar el usuario', 500);
     }
 };
+
 export default deleteUserController;
