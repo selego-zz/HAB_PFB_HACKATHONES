@@ -5,6 +5,8 @@ import Rating from '../../components/Rating.jsx';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+const { VITE_API_UPLOADS } = import.meta.env;
+
 const UserProfilePage = () => {
     const { authUser } = useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
@@ -39,13 +41,27 @@ const UserProfilePage = () => {
         <div>
             {/* Información del usuario */}
             <div>
-                <h1>
-                    {authUser.firstName} ({authUser.userName})
-                </h1>
-                <button>Actualizar perfil</button>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    {authUser.avatar && (
+                        <img
+                            src={`${VITE_API_UPLOADS}/${authUser.avatar}`}
+                            alt={`${authUser.firstName} avatar`}
+                            className="w-20 h-20 rounded-full mr-2"
+                        />
+                    )}
+                    <h1>
+                        {authUser.firstName} {authUser.lastName} (
+                        {authUser.username})
+                    </h1>
+                </div>
+                <p> Email: {authUser.email} </p>
+                <p> Linkedin: {authUser.linkedIn} </p>
+                <button className="bg-azuloscuro m-3 h-10 w-32 rounded-md text-blanco ">
+                    Actualizar perfil
+                </button>
             </div>
             <div>
-                <h2>Biografía</h2>
+                <h2>Biografía: </h2>
                 <p>{authUser.biography}</p>
             </div>
 
@@ -65,14 +81,9 @@ const UserProfilePage = () => {
                             return (
                                 <div key={index}>
                                     <h3>{hackathon.name}</h3>
-                                    <p>
-                                        Comienza el: {hackathon.hackathonDate}
-                                    </p>
-                                    <p>Premios: {hackathon.prizes}</p>
-                                    <p>
-                                        {hackathon.maxParticipants}{' '}
-                                        Participantes como máximo
-                                    </p>
+
+                                    <p>Finalizó el: {hackathon.hackathonEnd}</p>
+
                                     <Rating
                                         hackathonId={hackathon.hackathonId}
                                         initialRating={
@@ -110,10 +121,13 @@ const UserProfilePage = () => {
                                     <p>
                                         Comienza el: {hackathon.hackathonDate}
                                     </p>
+                                    <p>Termina el: {hackathon.hackathonEnd} </p>
+                                    <p> {hackathon.location} </p>
+
                                     <p>Premios: {hackathon.prizes}</p>
                                     <p>
-                                        {hackathon.maxParticipants}{' '}
-                                        Participantes como máximo
+                                        Límite de participantes:
+                                        {hackathon.maxParticipants}
                                     </p>
                                     <button className="button-rounded-green">
                                         Eliminar inscripción
