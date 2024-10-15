@@ -13,14 +13,15 @@ import toast from 'react-hot-toast';
 const UpdateUserPage = () => {
     // Título de pestaña
     useDocumentTitle('Actualización de perfil');
-
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    //id, rol y email no pueden cambiarse
     const [username, setUsername] = useState('');
-    // no permitiremos cambiar el mail
-    //    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
+    const [avatar, setAvatar] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [biography, setBiography] = useState('');
+    const [linkedIn, setLinkedIn] = useState('');
 
     const navigate = useNavigate();
 
@@ -32,9 +33,17 @@ const UpdateUserPage = () => {
             if (password !== repeatedPassword) {
                 throw new Error('Las contraseñas no coinciden');
             }
+            const user = {};
+            if (username.length) user.username = username;
+            if (password.length) user.password = password;
+            if (avatar.length) user.avatar = avatar;
+            if (firstName.length) user.firstName = firstName;
+            if (lastName.length) user.lastName = lastName;
+            if (biography.length) user.biography = biography;
+            if (linkedIn.length) user.linkedIn = linkedIn;
 
             setTimeout(() => {
-                navigate('/');
+                navigate('/profile');
             }, 500);
         } catch (err) {
             toast.error(
@@ -46,141 +55,132 @@ const UpdateUserPage = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-8 px-4">
-            <h2 className="text-center text-2xl font-bold text-gray-700 mb-6">
-                Registro de Usuario
+        <main>
+            <h2 className="text-header-big">
+                Actualización de datos de usuario
             </h2>
             <form
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-4 sm:grid sm:grid-cols-2"
             >
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Nombre
-                    </label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Apellido
-                    </label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
+                <div>
+                    <label className="text-common" htmlFor="username">
                         Nombre de usuario
                     </label>
                     <input
                         type="text"
                         id="username"
                         name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        className="input-box"
                         required
                     />
                 </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Correo Electrónico
+                <div>
+                    <label className="text-common" htmlFor="linkedIn">
+                        enlace a LinkedIn
                     </label>
                     <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        type="text"
+                        id="linkedIn"
+                        name="linkedIn"
+                        value={linkedIn}
+                        onChange={(e) => setLinkedIn(e.target.value)}
+                        className="input-box"
                         required
                     />
                 </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
+                <div>
+                    <label className="text-common" htmlFor="firstName">
+                        Nombre
+                    </label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="input-box"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="text-common" htmlFor="lastName">
+                        Apellidos
+                    </label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="input-box"
+                        required
+                    />
+                </div>
+                <div>
+                    <label className="text-common" htmlFor="password">
                         Contraseña
                     </label>
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="input-box"
                     />
                 </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Repetir Contraseña
+                <div>
+                    <label className="text-common" htmlFor="repeatedPassword">
+                        Repite la contraseña
                     </label>
                     <input
                         type="password"
-                        id="repeatpassword"
-                        name="repeatpassword"
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        id="repeatedPassword"
+                        name="repeatedPassword"
+                        value={repeatedPassword}
+                        onChange={(e) => setRepeatedPassword(e.target.value)}
+                        className="input-box"
+                    />
+                </div>
+                <div>
+                    <label className="text-common" htmlFor="avatar">
+                        Avatar
+                    </label>
+                    <input
+                        type="file"
+                        id="avatar"
+                        name="avatar"
+                        value={avatar}
+                        accept="image/jpeg, image/png"
+                        onChange={(e) => setAvatar(e.target.files[0])}
+                        className="input-box"
+                    />
+                </div>
+                <div>
+                    <label className="text-common" htmlFor="biography">
+                        Biografía
+                    </label>
+                    <input
+                        type="text"
+                        id="biography"
+                        name="biography"
+                        value={biography}
+                        onChange={(e) => setBiography(e.target.value)}
+                        className="input-box"
                         required
                     />
                 </div>
 
-                {/* Campo de selección de rol */}
-                <div className="min-w-[200px] col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mx-2 mb-2">
-                        Me quiero registrar como...
-                    </label>
-                    <div className="flex gap-4">
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                name="role"
-                                value="desarrollador"
-                                checked={formData.role === 'desarrollador'}
-                                onChange={handleChange}
-                                className="form-radio"
-                            />
-                            <span className="ml-2">Desarrollador</span>
-                        </label>
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                name="role"
-                                value="organizador"
-                                checked={formData.role === 'organizador'}
-                                onChange={handleChange}
-                                className="form-radio"
-                            />
-                            <span className="ml-2">Organizador</span>
-                        </label>
-                    </div>
-                </div>
-
                 <div className="col-span-2">
-                    <button className="mt-4 font-bold bg-verdeagua py-2 px-4 rounded-lg hover:bg-verdemarino w-1/3 mx-auto block">
-                        Registrarse
+                    <button className="button-rounded-green">
+                        Actualizar Datos
                     </button>
                 </div>
             </form>
-        </div>
+        </main>
     );
 };
 
