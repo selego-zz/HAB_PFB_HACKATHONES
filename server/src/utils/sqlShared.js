@@ -1,7 +1,7 @@
-const getInscriptions = (WHERE) => {
-    const campos = `e.rating, e.score,
-    e.inscriptionDate,
-    e.attended,
+const getInscriptions = (WHERE, role) => {
+    let campos = ``;
+
+    campos += `
     h.id, 
     h.name, 
     h.logo, 
@@ -9,11 +9,21 @@ const getInscriptions = (WHERE) => {
     h.hackathonDate, 
     h.hackathonEnd, 
     h.location, 
-    h.updatedAt,         
+    h.updatedAt `;
+
+    if (role === 'desarrollador')
+        campos += `, 
+    e.rating,
+    e.score,
+    e.inscriptionDate,
+    e.attended,
     u.username, 
-    u.avatar `;
-    const sql = `SELECT  ${campos}, u.id AS userId, 
-    AVG(e.rating) AS average_rating
+    u.avatar,
+    u.id `;
+
+    const sql = `SELECT  ${campos + (role === 'desarrollador' ? 'AS userId ' : '')}, 
+    AVG(e.rating) AS average_rating,
+    AVG(e.score) AS average_score
         FROM 
     enrollsin e
     JOIN 
@@ -21,7 +31,7 @@ const getInscriptions = (WHERE) => {
     JOIN 
     users u ON e.userId = u.id
         ${WHERE}
-        GROUP BY ${campos}, u.id `;
+        GROUP BY ${campos}`;
 
     return sql;
 };

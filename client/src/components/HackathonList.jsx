@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Rating from './Rating';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 const HackathonList = ({ hackathons, showRating }) => {
     const navigate = useNavigate();
+    const { isDeveloper } = useContext(AuthContext);
 
     useEffect(() => {
         hackathons.forEach((hackathon) => {
@@ -37,13 +39,28 @@ const HackathonList = ({ hackathons, showRating }) => {
                             <strong>Ubicación:</strong> {hackathon.location}
                         </p>
                     </section>
-                    {showRating && (
+                    {showRating && isDeveloper() && (
                         <Rating
                             hackathonId={hackathon.id}
                             initialRating={
                                 hackathon.rating ? hackathon.rating : 0
                             }
-                            ranking={hackathon.score ? hackathon.score : 0}
+                            ranking={hackathon.rating ? hackathon.rating : 0}
+                        />
+                    )}
+                    {showRating && !isDeveloper() && (
+                        <Rating
+                            hackathonId={hackathon.id}
+                            initialRating={
+                                hackathon.average_rating
+                                    ? hackathon.average_rating
+                                    : 0
+                            }
+                            ranking={
+                                hackathon.average_rating
+                                    ? hackathon.average_rating
+                                    : 0
+                            }
                         />
                     )}
                 </li>
