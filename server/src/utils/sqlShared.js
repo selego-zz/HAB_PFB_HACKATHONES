@@ -1,10 +1,39 @@
-const getInscriptions = () => {
-    return `SELECT e.id, e.hackathonId, e.inscriptionDate, e.attended, e.rating, e.score,
-        h.name AS hackathonName, h.hackathonDate, h.hackathonEnd, h.prizes, 
-        u.id AS userId, u.username, u.avatar
-        FROM enrollsin e
-        JOIN hackathons h ON e.hackathonId = h.id
-        JOIN users u ON e.userId = u.id `;
+const getInscriptions = (WHERE, role) => {
+    let campos = ``;
+
+    campos += `
+    h.id, 
+    h.name, 
+    h.logo, 
+    h.online, 
+    h.hackathonDate, 
+    h.hackathonEnd, 
+    h.location, 
+    h.updatedAt `;
+
+    if (role === 'desarrollador')
+        campos += `, 
+    e.rating,
+    e.score,
+    e.inscriptionDate,
+    e.attended,
+    u.username, 
+    u.avatar,
+    u.id `;
+
+    const sql = `SELECT  ${campos + (role === 'desarrollador' ? 'AS userId ' : '')}, 
+    AVG(e.rating) AS average_rating,
+    AVG(e.score) AS average_score
+        FROM 
+    enrollsin e
+    JOIN 
+    hackathons h ON e.hackathonId = h.id
+    JOIN 
+    users u ON e.userId = u.id
+        ${WHERE}
+        GROUP BY ${campos}`;
+
+    return sql;
 };
 
 export { getInscriptions };

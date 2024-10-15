@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import useHackathons from '../hooks/useHackathons';
 import { useState } from 'react';
 
-const MakeStar = (star, rating, setRating, hackathonId) => {
+const MakeStar = (star, rating, setRating, hackathonId, editable) => {
     const { updateRating } = useHackathons();
     return (
         <span
             key={rating}
             className="hover:text-6xl cursor-pointer"
             onClick={() => {
-                if (confirm('¿Está seguro de que desea cambiar la puntuación?'))
+                if (
+                    editable &&
+                    confirm('¿Está seguro de que desea cambiar la puntuación?')
+                )
                     updateRating(hackathonId, rating);
                 setRating(rating);
             }}
@@ -21,7 +24,7 @@ const MakeStar = (star, rating, setRating, hackathonId) => {
     );
 };
 
-const Rating = ({ hackathonId, initialRating, ranking }) => {
+const Rating = ({ hackathonId, initialRating, ranking, editable }) => {
     const [rating, setRating] = useState(initialRating);
     const _stars = [];
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');
@@ -31,7 +34,7 @@ const Rating = ({ hackathonId, initialRating, ranking }) => {
             <h2 className="font-bold">Rating</h2>
             <div className="stars text-4xl text-amarillo group">
                 {_stars.map((star, index) =>
-                    MakeStar(star, index + 1, setRating, hackathonId),
+                    MakeStar(star, index + 1, setRating, hackathonId, editable),
                 )}
             </div>
             <h2 className="font-bold">Puntuacion de usuario</h2>
@@ -46,6 +49,7 @@ Rating.propTypes = {
     hackathonId: PropTypes.number.isRequired,
     initialRating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
+    editable: PropTypes.bool.isRequired,
 };
 
 export default Rating;
