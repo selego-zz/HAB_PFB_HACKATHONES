@@ -16,7 +16,7 @@ const updateUserSchema = Joi.object().keys({
         .valid('administrador', 'organizador', 'desarrollador')
         .optional()
         .messages(joiErrorMessages),
-    biography: Joi.string().max(50).optional().messages(joiErrorMessages),
+    biography: Joi.string().max(300).optional().messages(joiErrorMessages),
     linkedIn: Joi.string().max(50).optional().messages(joiErrorMessages),
 });
 

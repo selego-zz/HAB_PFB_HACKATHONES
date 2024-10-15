@@ -168,9 +168,15 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // función para actualizar el usuario
+    // función para actualizar el usuario. OJO: no actualiza el avatar
     const updateUser = async (userProfile) => {
         try {
+            let avatar = null;
+            if (userProfile.avatar) {
+                avatar = userProfile.avatar;
+                delete userProfile.avatar;
+            }
+
             const res = await fetch(`${VITE_API_URL}/users/update`, {
                 method: 'PUT',
                 headers: {
@@ -186,8 +192,40 @@ export const AuthProvider = ({ children }) => {
                 throw new Error(body.message);
             }
 
-            // Si la actualización fue exitosa, borramos los datos del usuario para qeu haga un nuevo fetch.
-            setAuthUser({});
+            userProfile.avatar = avatar;
+            // Si la actualización fue exitosa, establecemos los nuevos datos del usuario.
+            setAuthUser(body.data.user);
+        } catch (err) {
+            throw new Error(err.message);
+        }
+    };
+    // función para actualizar el avatar
+    const updateUserWithAvatar = async (userProfile) => {
+        try {
+            // Creamos un objeto FormData.
+            const formData = new FormData();
+
+            // Adjuntamos todos los elementos de userProfile al formData.
+            for (const [key, value] of Object.entries(userProfile)) {
+                formData.append(key, value);
+            }
+
+            const res = await fetch(`${VITE_API_URL}/users/update`, {
+                method: 'put',
+                headers: {
+                    Authorization: authToken,
+                },
+                body: formData,
+            });
+
+            const body = await res.json();
+
+            if (body.status === 'error') {
+                throw new Error(body.message);
+            }
+
+            // Si la actualización fue exitosa, establecemos los nuevos datos del usuario.
+            setAuthUser(body.data.user);
         } catch (err) {
             throw new Error(err.message);
         }
@@ -208,6 +246,7 @@ export const AuthProvider = ({ children }) => {
                 registerUser,
                 loginUser,
                 updateUser,
+                updateUserWithAvatar,
             }}
         >
             {children}

@@ -1,5 +1,5 @@
 // Importamos hooks
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDocumentTitle } from '../../hooks/index.js';
 
@@ -14,6 +14,10 @@ const UpdateUserPage = () => {
     // Título de pestaña
     useDocumentTitle('Actualización de perfil');
 
+    //tomamos la función del contexto de usuario que se encarga del update
+    const { updateUser, updateUserWithAvatar, authUser } =
+        useContext(AuthContext);
+
     //id, rol y email no pueden cambiarse
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,25 +30,42 @@ const UpdateUserPage = () => {
 
     const navigate = useNavigate();
 
+    // UseEffect para establecer los valores iniciales de estado
+    useEffect(() => {
+        if (authUser) {
+            setUsername(authUser.username || '');
+            setFirstName(authUser.firstName || '');
+            setLastName(authUser.lastName || '');
+            setBiography(authUser.biography || '');
+            setLinkedIn(authUser.linkedIn || '');
+        }
+    }, [authUser]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             // Comprobamos que las contraseñas coincidan
-            if (password !== repeatedPassword) {
+            if (
+                (password || repeatedPassword) &&
+                password !== repeatedPassword
+            ) {
                 throw new Error('Las contraseñas no coinciden');
             }
             const user = {};
             if (username.length) user.username = username;
             if (password.length) user.password = password;
-            if (avatar.length) user.avatar = avatar;
+            if (avatar !== '') user.avatar = avatar;
             if (firstName.length) user.firstName = firstName;
             if (lastName.length) user.lastName = lastName;
             if (biography.length) user.biography = biography;
             if (linkedIn.length) user.linkedIn = linkedIn;
 
+            if (avatar !== '') updateUserWithAvatar(user);
+            else updateUser(user);
+
             setTimeout(() => {
-                navigate('/profile');
+                navigate('/users');
             }, 500);
         } catch (err) {
             toast.error(
@@ -75,7 +96,6 @@ const UpdateUserPage = () => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="input-box"
-                        required
                     />
                 </div>
                 <div>
@@ -89,7 +109,6 @@ const UpdateUserPage = () => {
                         value={linkedIn}
                         onChange={(e) => setLinkedIn(e.target.value)}
                         className="input-box"
-                        required
                     />
                 </div>
                 <div>
@@ -103,7 +122,6 @@ const UpdateUserPage = () => {
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         className="input-box"
-                        required
                     />
                 </div>
                 <div>
@@ -117,7 +135,6 @@ const UpdateUserPage = () => {
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         className="input-box"
-                        required
                     />
                 </div>
                 <div>
@@ -154,7 +171,6 @@ const UpdateUserPage = () => {
                         type="file"
                         id="avatar"
                         name="avatar"
-                        value={avatar}
                         accept="image/jpeg, image/png"
                         onChange={(e) => setAvatar(e.target.files[0])}
                         className="input-box"
@@ -171,7 +187,6 @@ const UpdateUserPage = () => {
                         value={biography}
                         onChange={(e) => setBiography(e.target.value)}
                         className="input-box"
-                        required
                     />
                 </div>
 

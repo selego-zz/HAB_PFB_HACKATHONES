@@ -62,11 +62,16 @@ const updateUserController = async (req, res, next) => {
                 400,
             );
         }
+        // Comprobamos la base de datos con el id proporcionado.
+        const user = await selectUserByIdModel(userId);
 
         // Enviamos una respuesta al cliente.
         res.send({
             status: 'ok',
             message: 'Datos actualizados con éxito.',
+            data: {
+                user,
+            },
         });
     } catch (err) {
         next(err);

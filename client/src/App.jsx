@@ -22,6 +22,7 @@ import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
 import HackathonInscriptionPage from './pages/hackathons/HackathonInscriptionPage.jsx';
 import DeleteInscriptionPage from './pages/hackathons/DeleteInscriptionPage.jsx';
 import UserProfilePage from './pages/users/UserProfilePage.jsx';
+import UpdateUserPage from './pages/users/UpdateUserPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -34,8 +35,8 @@ const App = () => {
                 <Routes>
                     {/* Usuarios */}
                     <Route path="/" element={<HomePage />} />
-                    <Route path="users/register" element={<RegisterPage />} />
                     <Route path="users/login" element={<LoginPage />} />
+                    <Route path="users/register" element={<RegisterPage />} />
                     <Route
                         path="users/register/validate/:activationCode"
                         element={<ValidationPage />}
@@ -48,7 +49,7 @@ const App = () => {
                         path="users/recover/:recoverPassCode"
                         element={<RecoverPass_GetCodePage />}
                     />
-
+                    <Route path="users/update" element={<UpdateUserPage />} />
                     <Route
                         path="promotion"
                         element={<OrganizerPromotionPage />}
