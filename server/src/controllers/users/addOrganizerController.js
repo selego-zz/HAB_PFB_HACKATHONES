@@ -27,7 +27,7 @@ const addOrganizerController = async (req, res, next) => {
             username,
             email,
             password,
-            crypto.randomBytes(15).toString('hex'), // acivationCode
+            crypto.randomBytes(15).toString('hex'), // activationCode
             'organizador',
         );
 
