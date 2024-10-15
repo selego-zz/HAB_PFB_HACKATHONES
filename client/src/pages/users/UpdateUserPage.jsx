@@ -15,13 +15,14 @@ const UpdateUserPage = () => {
     useDocumentTitle('Actualización de perfil');
 
     //tomamos la función del contexto de usuario que se encarga del update
-    const { updateUser, updateUserWithAvatar, authUser } =
+    const { updateUser, updateUserWithAvatar, updatePassword, authUser } =
         useContext(AuthContext);
 
     //id, rol y email no pueden cambiarse
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
     const [avatar, setAvatar] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -52,9 +53,14 @@ const UpdateUserPage = () => {
             ) {
                 throw new Error('Las contraseñas no coinciden');
             }
+            if (password.length > 0 && oldPassword.length < 1) {
+                throw new Error(
+                    'No puedes cambiar la contraseña si no pones la contraseña actual',
+                );
+            }
+
             const user = {};
             if (username.length) user.username = username;
-            if (password.length) user.password = password;
             if (avatar !== '') user.avatar = avatar;
             if (firstName.length) user.firstName = firstName;
             if (lastName.length) user.lastName = lastName;
@@ -64,14 +70,20 @@ const UpdateUserPage = () => {
             if (avatar !== '') updateUserWithAvatar(user);
             else updateUser(user);
 
+            try {
+                if (password.length) updatePassword(oldPassword, password);
+            } catch (err) {
+                toast.error(err, { id: 'UpdateUser' });
+            }
+
             setTimeout(() => {
                 navigate('/users');
-            }, 500);
+            }, 3000);
         } catch (err) {
             toast.error(
                 err.message ||
                     'Hubo un error en el registro, inténtalo de nuevo más tarde.',
-                { id: 'registro' },
+                { id: 'UpdateUser' },
             );
         }
     };
@@ -138,6 +150,32 @@ const UpdateUserPage = () => {
                     />
                 </div>
                 <div>
+                    <label className="text-common" htmlFor="avatar">
+                        Avatar
+                    </label>
+                    <input
+                        type="file"
+                        id="avatar"
+                        name="avatar"
+                        accept="image/jpeg, image/png"
+                        onChange={(e) => setAvatar(e.target.files[0])}
+                        className="input-box"
+                    />
+                </div>
+                <div>
+                    <label className="text-common" htmlFor="biography">
+                        Biografía
+                    </label>
+                    <input
+                        type="text"
+                        id="biography"
+                        name="biography"
+                        value={biography}
+                        onChange={(e) => setBiography(e.target.value)}
+                        className="input-box"
+                    />
+                </div>
+                <div>
                     <label className="text-common" htmlFor="password">
                         Contraseña
                     </label>
@@ -164,28 +202,18 @@ const UpdateUserPage = () => {
                     />
                 </div>
                 <div>
-                    <label className="text-common" htmlFor="avatar">
-                        Avatar
+                    <label className="text-common" htmlFor="oldPassword">
+                        Como medida de seguridad: si cambias la contraseña
+                        tienes que indicarnos la contraseña actual.
+                        <br />
+                        Solo es necesario si quieres cambiar la contraseña
                     </label>
                     <input
-                        type="file"
-                        id="avatar"
-                        name="avatar"
-                        accept="image/jpeg, image/png"
-                        onChange={(e) => setAvatar(e.target.files[0])}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="biography">
-                        Biografía
-                    </label>
-                    <input
-                        type="text"
-                        id="biography"
-                        name="biography"
-                        value={biography}
-                        onChange={(e) => setBiography(e.target.value)}
+                        type="password"
+                        id="oldPassword"
+                        name="oldPassword"
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
                         className="input-box"
                     />
                 </div>
