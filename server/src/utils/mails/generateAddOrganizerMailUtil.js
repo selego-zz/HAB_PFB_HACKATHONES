@@ -1,5 +1,5 @@
 const generateAddOrganizerMailUtil = (username, email, firstName, lastName) => {
-    const reviewUsersLink = process.env.CLIENT_URL + '/users';
+    const reviewUsersLink = process.env.CLIENT_URL + '/users/getAllUsers';
 
     const mail = `Hola, estás recibiendo este correo porque un organizador ha tratado de darse de alta en ${process.env.APP_NAME}. Sus datos son: 
         <ul>

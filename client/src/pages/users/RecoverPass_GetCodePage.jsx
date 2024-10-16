@@ -49,7 +49,7 @@ const RecoverPass_GetCodePage = () => {
             setPassChanged(true);
 
             // Redirigimos a la página principal.
-            toast.success('Contraseña Actualizada', {
+            toast.success('Contraseña actualizada', {
                 id: 'getRecoverPassword',
             });
             navigate('/users/login');

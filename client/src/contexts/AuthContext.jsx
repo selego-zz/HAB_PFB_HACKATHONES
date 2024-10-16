@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 // Importamos la función que genera un contexto y los hooks.
 import { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Importamos el nombre que le daremos al token.
 const { VITE_AUTH_TOKEN, VITE_API_URL } = import.meta.env;
@@ -24,11 +25,13 @@ export const AuthProvider = ({ children }) => {
 
     // Declaramos una variable en el State para almacenar los datos del usuario.
     const [authUser, setAuthUser] = useState(null);
+    const navigate = useNavigate();
 
     // Solicitamos los datos del usuario si existe un token.
     useEffect(() => {
         const fetchUser = async () => {
             setAuthLoading(true);
+
             try {
                 if (authUser) return;
 
@@ -80,6 +83,7 @@ export const AuthProvider = ({ children }) => {
     const authLogoutState = () => {
         setAuthToken(null);
         localStorage.removeItem(VITE_AUTH_TOKEN);
+        navigate('/');
     };
 
     // Función que actualiza el usuario en el State.
@@ -119,7 +123,11 @@ export const AuthProvider = ({ children }) => {
     // Función para registrar un nuevo usuario.
     const registerUser = async (userData) => {
         try {
-            const res = await fetch(`${VITE_API_URL}/users/register`, {
+            const apiUrl =
+                userData.role === 'desarrollador'
+                    ? `${VITE_API_URL}/users/register`
+                    : `${VITE_API_URL}/users/organizers/request`;
+            const res = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -245,7 +253,6 @@ export const AuthProvider = ({ children }) => {
             });
 
             const body = await res.json();
-            console.log(body);
 
             if (body.status === 'error') {
                 throw new Error(body.message);
