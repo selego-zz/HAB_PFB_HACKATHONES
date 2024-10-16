@@ -60,7 +60,7 @@ const addHackathonModel = async (
             online,
             location,
             documentation`;
-    if (logo) sql += ', ' + logo;
+    if (logo) sql += ', logo';
     sql += `) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?`;
     if (logo) sql += ', ?';
     sql += ')';

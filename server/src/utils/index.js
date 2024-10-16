@@ -11,6 +11,7 @@ import verifyTokenUtil from './verifyTokenUtil.js';
 import {
     generateAddOrganizerMailUtil,
     generateAddUserMailUtil,
+    generateConfirmActivationMailUtil,
     generateRecoverPassMailUtil,
 } from './mails/index.js';
 
@@ -30,5 +31,6 @@ export {
     //mails
     generateAddOrganizerMailUtil,
     generateAddUserMailUtil,
+    generateConfirmActivationMailUtil,
     generateRecoverPassMailUtil,
 };

@@ -70,16 +70,7 @@ const addUserController = async (req, res, next) => {
             generateErrorUtil('Error de inserción en base de datos', 400);
 
         // Asunto del email de verificación.
-        const emailSubject = 'Activa tu usuario en Hackathon';
-
-        // Cuerpo del email de verificación. final
-        // const emailBody = `
-        //     ¡Hola, ${username}!
-
-        //     Gracias por registrarte en Hackathon. Para activar tu cuenta, haz click en el siguiente enlace:
-
-        //     <a href="${process.env.CLIENT_URL}/users/validate/${activationCode}">¡Activa tu usuario!</a>
-        // `;
+        const emailSubject = `Activa tu usuario en ${process.env.APP_NAME}!`;
 
         //hasta tener el front end, tenemos que usar esta dirección
         const emailBody = generateAddUserMailUtil(username, activationCode);

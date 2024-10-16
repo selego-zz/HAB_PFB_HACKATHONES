@@ -7,7 +7,7 @@ const selectAllUsersModel = async () => {
     const pool = await getPool();
 
     const [users] = await pool.query(
-        `SELECT id, username, email, avatar, firstName, lastName, role, biography, linkedIn, active, updatedAt, lastAuthUpdate FROM users`,
+        `SELECT id, username, email, avatar, firstName, lastName, role, biography, linkedIn, active, updatedAt, lastAuthUpdate FROM users WHERE password <> "usuario eliminado"`,
     );
 
     // En caso de que no se haya encontrado a ningún usuario retornará undefined.

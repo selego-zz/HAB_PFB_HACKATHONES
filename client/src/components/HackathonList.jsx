@@ -43,6 +43,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                     {showRating && isDeveloper() && (
                         <Rating
                             hackathonId={hackathon.id}
+                            editable={true}
                             scoreText={'Puntuación obtenida'}
                             initialRating={
                                 hackathon.rating ? hackathon.rating : 0
@@ -53,6 +54,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                     {showRating && !isDeveloper() && (
                         <Rating
                             hackathonId={hackathon.id}
+                            editable={false}
                             scoreText={'Puntuación media'}
                             initialRating={
                                 hackathon.average_rating

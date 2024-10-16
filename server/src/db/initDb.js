@@ -71,7 +71,7 @@ const SQL_ENROLLSIN_TABLE = `
         inscriptionDate DATETIME NOT NULL,
         attended BOOLEAN,
         rating TINYINT UNSIGNED,
-        score INT UNSIGNED,
+        score INT UNSIGNED DEFAULT 0,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME

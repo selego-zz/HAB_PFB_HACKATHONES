@@ -16,6 +16,7 @@ export default {
             blanco: '#ffffff',
             negro: '#000000',
             rojoclaro: '#FFAFAF',
+            rojo: '#FF3333',
             amarillo: '#FFC107',
         },
     },

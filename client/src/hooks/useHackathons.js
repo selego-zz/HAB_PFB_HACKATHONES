@@ -145,14 +145,22 @@ const useHackathons = () => {
             if (hackathon.documentation.length < 1) {
                 delete hackathon.documentation;
             }
+
+            const formData = new FormData();
+
+            // Adjuntamos todos los elementos de userProfile al formData.
+            for (const [key, value] of Object.entries(hackathon)) {
+                formData.append(key, value);
+            }
+
             const res = await fetch(`${VITE_API_URL}/hackathons`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: authToken,
                 },
-                body: JSON.stringify(hackathon),
+                body: formData,
             });
+
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
@@ -275,7 +283,6 @@ const useHackathons = () => {
         delete hackathon.id;
 
         const formData = new FormData();
-        console.log(hackathon);
 
         // Adjuntamos todos los elementos de userProfile al formData.
         for (const [key, value] of Object.entries(hackathon)) {

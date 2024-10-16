@@ -14,9 +14,10 @@ const MakeStar = (star, rating, setRating, hackathonId, editable) => {
                 if (
                     editable &&
                     confirm('¿Está seguro de que desea cambiar la puntuación?')
-                )
+                ) {
                     updateRating(hackathonId, rating);
-                setRating(rating);
+                    setRating(rating);
+                }
             }}
         >
             {star}

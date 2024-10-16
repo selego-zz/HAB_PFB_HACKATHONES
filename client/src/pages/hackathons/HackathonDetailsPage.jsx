@@ -71,6 +71,16 @@ const HackathonDetailsPage = () => {
     const handleDelete = async () => {
         if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
             try {
+                const participants =
+                    await getAllInscriptionsFromAHackathon(hackathonId);
+
+                if (participants.length > 0) {
+                    toast.error(
+                        'No se puede eliminar un hackathon si hay gente inscrita',
+                    );
+                    return;
+                }
+
                 await deleteHackathon(hackathonId);
                 toast.success('Hackathon eliminado');
                 navigate('/');
