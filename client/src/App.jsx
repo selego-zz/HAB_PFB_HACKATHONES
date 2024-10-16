@@ -23,6 +23,7 @@ import HackathonInscriptionPage from './pages/hackathons/HackathonInscriptionPag
 import DeleteInscriptionPage from './pages/hackathons/DeleteInscriptionPage.jsx';
 import UserProfilePage from './pages/users/UserProfilePage.jsx';
 import UpdateUserPage from './pages/users/UpdateUserPage.jsx';
+import UpdateHackathonPage from './pages/hackathons/UpdateHackathonPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -78,6 +79,10 @@ const App = () => {
                     <Route
                         path="/hackathons/:hackathonId"
                         element={<HackathonDetailsPage />}
+                    />
+                    <Route
+                        path="/hackathons/:hackathonId/update"
+                        element={<UpdateHackathonPage />}
                     />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>

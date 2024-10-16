@@ -22,6 +22,7 @@ const updateHackathonController = async (req, res, next) => {
     try {
         // Validamos los datos enviados en el cuerpo de la solicitud.
         await validateSchema(updateHackathonSchema, req.body);
+        console.log(req.body);
 
         // Obtenemos los datos del cuerpo de la solicitud y el id del hackathon.
         req.body.id = req.params.hackathonId;
