@@ -3,6 +3,10 @@ import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useDocumentTitle } from '../../hooks/index.js';
 import toast from 'react-hot-toast';
 
+const { VITE_API_URL } = import.meta.env;
+
+//////
+
 const ListAllUsersPage = () => {
     useDocumentTitle('Gestión de usuarios'); // Título de pestaña
     const { authToken } = useContext(AuthContext);
@@ -12,7 +16,7 @@ const ListAllUsersPage = () => {
         const fetchUsers = async () => {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_API_URL}/users/getAllUsers?type=pending`,
+                    `${import.meta.env.VITE_API_URL}/users/getAllUsers`,
                     {
                         headers: {
                             Authorization: authToken,
@@ -62,6 +66,64 @@ const ListAllUsersPage = () => {
         fetchUsers();
     }, [authToken, users]);
 
+    const handleRemoveUser = async (user) => {
+        try {
+            const userId = user.id;
+
+            const res = await fetch(`${VITE_API_URL}/users/delete/${userId}`, {
+                method: 'DELETE',
+                headers: { Authorization: authToken },
+            });
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+            toast.success(body.message);
+        } catch (err) {
+            toast.error(err.message, { id: 'alluserspage' });
+        }
+    };
+
+    const handleButtonClick = async (user) => {
+        try {
+            if (user.active) {
+                if (
+                    !confirm(
+                        `¿Está seguro de que desea eliminar al usuario ${user.username}?`,
+                    )
+                )
+                    return;
+                handleRemoveUser(user);
+            } else {
+                const res = await fetch(
+                    `${import.meta.env.VITE_API_URL}/users/addOrganizer/${user.id}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: authToken,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(user),
+                    },
+                );
+
+                const body = await res.json();
+
+                if (body.status === 'error') {
+                    throw new Error(body.message);
+                }
+
+                toast.success('Usuario activado correctamente', {
+                    id: 'alluserspage',
+                });
+
+                // Forzamos que la página se refresque automáticamente
+                window.location.reload();
+            }
+        } catch (err) {
+            toast.error(err.message, { id: 'alluserspage' });
+        }
+    };
+
     return (
         <div className="w-full px-4 lg:px-24 py-8">
             <h1 className="text-header-big text-center ml-0">
@@ -91,25 +153,32 @@ const ListAllUsersPage = () => {
                     <tbody className="text-gray-700">
                         {users.length > 0 ? (
                             users.map((user) => (
-                                <tr
-                                    key={user.id}
-                                    className="border-b border-gray-200"
-                                >
+                                <tr key={user.id} className="border-b">
                                     <td className="py-3 px-4">{user.id}</td>
-                                    <td className="py-3 px-4">{user.name}</td>
+                                    <td className="py-3 px-4">
+                                        {user.firstName + ' ' + user.lastName}
+                                    </td>
                                     <td className="py-3 px-4">{user.email}</td>
                                     <td className="py-3 px-4">
-                                        {user.activated
-                                            ? 'Activado'
-                                            : 'Pendiente'}
+                                        {user.active ? 'Activado' : 'Pendiente'}
                                     </td>
                                     <td className="py-3 px-4">
-                                        {user.activated ? (
-                                            <button className="button-rounded-red">
+                                        {user.active ? (
+                                            <button
+                                                onClick={() => {
+                                                    handleButtonClick(user);
+                                                }}
+                                                className="button-rounded-red"
+                                            >
                                                 Eliminar usuario
                                             </button>
                                         ) : (
-                                            <button className="button-rounded-green">
+                                            <button
+                                                onClick={() => {
+                                                    handleButtonClick(user);
+                                                }}
+                                                className="button-rounded-green"
+                                            >
                                                 Activar usuario
                                             </button>
                                         )}

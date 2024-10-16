@@ -15,7 +15,7 @@
         @apply bg-azuloscuro hover:bg-verdeagua text-blanco p-2 rounded;
     }
     .button-angled-red {
-        @apply bg-rojoclaro text-blanco p-2 rounded;
+        @apply bg-rojo text-blanco p-2 hover:bg-rojoclaro rounded;
     }
     .button-big-rounded-green {
         @apply bg-verdemarino text-azuloscuro font-semibold font-jost h-12 w-72 rounded-3xl mt-10 text-2xl lg:ml-24 transition duration-100 hover:bg-azuloscuro hover:text-blanco;

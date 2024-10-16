@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+    activateOrganizerController,
     addUserController,
     validateUserController,
     loginUserController,
@@ -27,7 +28,11 @@ const router = express.Router();
 router.post('/users/register', addUserController);
 
 // Middleware para que el administrador registre un organizador
-router.post('/users/addOrganizer', authAdminController, addUserController);
+router.put(
+    '/users/addOrganizer/:userId',
+    authAdminController,
+    activateOrganizerController,
+);
 
 // Middleware de solicitud de alta al administrador para registrarse como organizadores
 router.post('/users/organizers/request', addOrganizerController);
