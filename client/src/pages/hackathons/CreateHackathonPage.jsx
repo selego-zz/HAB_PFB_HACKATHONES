@@ -43,7 +43,9 @@ const CreateHackathonPage = () => {
 
     // Manejador de cambios en el formulario
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
+        if (name === 'logo' || name === 'documentation')
+            value = e.target.files[0];
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 

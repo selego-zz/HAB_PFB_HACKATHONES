@@ -70,11 +70,7 @@ const UpdateUserPage = () => {
             if (avatar !== '') updateUserWithAvatar(user);
             else updateUser(user);
 
-            try {
-                if (password.length) updatePassword(oldPassword, password);
-            } catch (err) {
-                toast.error(err, { id: 'UpdateUser' });
-            }
+            if (password.length) await updatePassword(oldPassword, password);
 
             setTimeout(() => {
                 navigate('/users');

@@ -40,7 +40,7 @@ const RecoverPass_SendCodePage = () => {
             }
 
             // Redirigimos a la página principal.
-            toast.success('Correo Enviado', { id: 'sendRecoverPassword' });
+            toast.success('Correo enviado', { id: 'sendRecoverPassword' });
             navigate('/');
         } catch (err) {
             toast.error(err.message, {

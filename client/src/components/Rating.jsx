@@ -24,7 +24,13 @@ const MakeStar = (star, rating, setRating, hackathonId, editable) => {
     );
 };
 
-const Rating = ({ hackathonId, initialRating, ranking, editable }) => {
+const Rating = ({
+    hackathonId,
+    initialRating,
+    ranking,
+    scoreText,
+    editable,
+}) => {
     const [rating, setRating] = useState(initialRating);
     const _stars = [];
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');
@@ -37,7 +43,7 @@ const Rating = ({ hackathonId, initialRating, ranking, editable }) => {
                     MakeStar(star, index + 1, setRating, hackathonId, editable),
                 )}
             </div>
-            <h2 className="font-bold">Puntuacion de usuario</h2>
+            <h2 className="font-bold">{scoreText} </h2>
             <div className="ranking text-2xl text-azuloscuro font-bold">
                 {ranking}
             </div>
@@ -49,6 +55,7 @@ Rating.propTypes = {
     hackathonId: PropTypes.number.isRequired,
     initialRating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
+    scoreText: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
 };
 

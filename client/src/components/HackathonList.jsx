@@ -25,7 +25,7 @@ const HackathonList = ({ hackathons, showRating }) => {
             {hackathons.map((hackathon) => (
                 <li
                     key={hackathon.id}
-                    className="flex justify-between  mb-4 p-4 border rounded cursor-pointer"
+                    className="flex justify-between  mb-4 p-4 border rounded cursor-pointer md:w-3/5"
                 >
                     <section id={`section-${hackathon.id}`}>
                         <h2 className="text-xl font-semibold">
@@ -39,26 +39,29 @@ const HackathonList = ({ hackathons, showRating }) => {
                             <strong>Ubicación:</strong> {hackathon.location}
                         </p>
                     </section>
+
                     {showRating && isDeveloper() && (
                         <Rating
                             hackathonId={hackathon.id}
+                            scoreText={'Puntuación obtenida'}
                             initialRating={
                                 hackathon.rating ? hackathon.rating : 0
                             }
-                            ranking={hackathon.rating ? hackathon.rating : 0}
+                            ranking={hackathon.score ? hackathon.score : 0}
                         />
                     )}
                     {showRating && !isDeveloper() && (
                         <Rating
                             hackathonId={hackathon.id}
+                            scoreText={'Puntuación media'}
                             initialRating={
                                 hackathon.average_rating
-                                    ? hackathon.average_rating
+                                    ? parseInt(hackathon.average_rating)
                                     : 0
                             }
                             ranking={
-                                hackathon.average_rating
-                                    ? hackathon.average_rating
+                                hackathon.average_score
+                                    ? parseInt(hackathon.average_score)
                                     : 0
                             }
                         />

@@ -6,6 +6,7 @@ import {
     sendMailUtil,
     generateAddOrganizerMailUtil,
 } from '../../utils/index.js';
+import crypto from 'crypto';
 //////
 
 const addOrganizerController = async (req, res, next) => {
