@@ -273,14 +273,21 @@ const useHackathons = () => {
     const updateHackathon = async (hackathon) => {
         const id = hackathon.id;
         delete hackathon.id;
+
+        const formData = new FormData();
+        console.log(hackathon);
+
+        // Adjuntamos todos los elementos de userProfile al formData.
+        for (const [key, value] of Object.entries(hackathon)) {
+            formData.append(key, value);
+        }
         try {
             const res = await fetch(`${VITE_API_URL}/hackathons/${id}/update`, {
-                method: 'PUT',
+                method: 'put',
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: authToken,
                 },
-                body: JSON.stringify(hackathon),
+                body: formData,
             });
             const body = await res.json();
 

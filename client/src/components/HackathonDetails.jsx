@@ -47,7 +47,7 @@ const HackathonDetails = ({
                                     <button
                                         onClick={() =>
                                             navigate(
-                                                `/hackathons/update/${hackathonId}`,
+                                                `/hackathons/${hackathonId}/update`,
                                             )
                                         }
                                         className="button-angled-green"

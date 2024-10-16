@@ -71,6 +71,7 @@ const CreateHackathonPage = () => {
                     formData={formData}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    buttonMessage={'Crear hackathon'}
                 />
             </div>
         </div>
