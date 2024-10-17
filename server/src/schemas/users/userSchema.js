@@ -9,7 +9,11 @@ import joiErrorMessages from '../joiErrorMessages.js';
 const userSchema = Joi.object().keys({
     username: Joi.string().max(50).required().messages(joiErrorMessages),
     email: Joi.string().email().max(100).required().messages(joiErrorMessages),
-    password: Joi.string().max(100).required().messages(joiErrorMessages),
+    password: Joi.string()
+        .min(6)
+        .max(100)
+        .required()
+        .messages(joiErrorMessages),
     firstName: Joi.string().max(50).required().messages(joiErrorMessages),
     lastName: Joi.string().max(50).required().messages(joiErrorMessages),
     role: Joi.string()
