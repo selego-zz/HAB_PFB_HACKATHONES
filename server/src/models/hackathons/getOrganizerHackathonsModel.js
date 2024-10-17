@@ -1,4 +1,5 @@
 import getPool from '../../db/getPool.js';
+import { getInscriptions } from '../../utils/index.js';
 
 //////
 
@@ -7,13 +8,7 @@ const getOrganizerHackathonsModel = async (organizerId) => {
     const pool = await getPool();
 
     const [enrollments] = await pool.query(
-        `
-        SELECT e.id, e.hackathonId, e.inscriptionDate, e.attended, e.rating, e.score,
-        h.name AS hackathonName
-        FROM enrollsin e
-        JOIN hackathons h ON e.hackathonId = h.id
-        WHERE h.organizerId = ?
-    `,
+        getInscriptions(`WHERE h.organizerId = ?`, 'organizador'),
         [organizerId],
     );
 

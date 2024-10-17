@@ -6,7 +6,7 @@ const getAllHackathonsModel = async () => {
     const pool = await getPool();
 
     const camposADevolver =
-        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd';
+        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd, h.location, h.updatedAt';
     let sql = `
         SELECT
             ${camposADevolver}, AVG(e.rating) AS average_rating 

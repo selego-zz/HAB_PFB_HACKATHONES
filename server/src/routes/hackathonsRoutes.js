@@ -14,6 +14,7 @@ import {
     deleteHackathonController,
     deleteHackathonInscriptionController,
     getAllHackathonsController,
+    getAllInscriptionsFromAHackathonController,
     getHackathonController,
     getTechnologiesController,
     getThemesController,
@@ -39,10 +40,13 @@ router.put(
 );
 
 // Middleware que devuelve información sobre un evento de hackathon.
+router.get('/hackathons/:hackathonId', getHackathonController);
+
+// Middleware que devuelve los inscritos de hackathon.
 router.get(
-    '/hackathons/:hackathonId',
+    '/hackathons/:hackathonId/enrollments',
     authUserController,
-    getHackathonController,
+    getAllInscriptionsFromAHackathonController,
 );
 
 // Middleware que realiza la inscripción a un evento de hackathon.
@@ -82,7 +86,7 @@ router.put(
 
 // Middleware que clasifica a los participantes después del evento de hackathon.
 router.put(
-    '/hackathons/:hackathonId/:developerId/classification',
+    '/hackathons/:hackathonId/ranking',
     authOrganizerController,
     updateScoreController,
 );

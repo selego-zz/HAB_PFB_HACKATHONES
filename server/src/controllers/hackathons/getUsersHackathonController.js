@@ -11,24 +11,25 @@ import { generateErrorUtil } from '../../utils/index.js';
 
 const getUsersHackathonController = async (req, res, next) => {
     try {
-        // Obtenemos el rol del usuario desde el token (administrador o usuario normal).
-        const { role, id: userId } = req.user;
+        // Obtenemos el rol del usuario desde el token.
+        const { role } = req.user;
+        const userId = req.user.id;
 
         let hackathons;
 
         // Si el usuario es administrador, listamos todas las inscripciones.
         if (role === 'administrador') {
             hackathons = await getAllInscriptionsModel();
+            // Si es desarrollador, listamos solo las inscripciones del usuario autenticado.
         } else if (role === 'desarrollador') {
-            // Si no es administrador, listamos solo las inscripciones del usuario autenticado.
             hackathons = await getUserHackathonsModel(userId);
         } else {
-            // Si no es desarrollador ni administrador es organizador.
+            // Si no es desarrollador ni administrador pero está logeado es organizador.
             hackathons = await getOrganizerHackathonsModel(userId);
         }
 
         // Si no se encuentran inscripciones, lanzamos un error.
-        if (!hackathons || hackathons.length === 0) {
+        if (!hackathons) {
             generateErrorUtil('No se encontraron inscripciones', 404);
         }
 

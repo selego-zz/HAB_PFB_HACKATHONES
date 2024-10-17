@@ -3,9 +3,6 @@ import jwt from 'jsonwebtoken';
 import { generateErrorUtil } from './index.js';
 import { getLastAuthUpdateModel } from '../models/index.js';
 
-// Para poder comparar la hora del token, (en UTC) con la de la base de datos (en local) necesitamos usar moment para convertir la utc en local
-import moment from 'moment-timezone';
-
 // Tomamos la clave para desencriptar el token
 const SECRET = process.env.SECRET;
 
@@ -32,24 +29,22 @@ const verifyTokenUtil = async (req, res, next, role) => {
             const tokenInfo = jwt.verify(authorization, SECRET);
 
             //Comprobamos que la fecha del token sea válida.
-            const lastAuthUpdate = new Date(
-                await getLastAuthUpdateModel(tokenInfo.id),
-            );
+            const res = await getLastAuthUpdateModel(tokenInfo.id);
 
-            //tomamos la fecha de creación del token, en segundos,
-            //la pasamos a milisegundos
-            //usamos moment para convertirla de utc a local de Europa/Madrid
-            //convertimos el resultado en Date para operar con el con facilidad
-            const tokenEmissionDate = new Date(
-                moment.tz(tokenInfo.iat * 1000, 'Europe/Madrid').utc(true),
-            );
+            if (res) {
+                //si res es null no hace falta hacer todo esto
+                const lastAuthUpdate = new Date(res);
 
-            if (tokenEmissionDate < lastAuthUpdate) {
-                // if (tokenEmissionDate < lastAuthUpdate) {
-                generateErrorUtil('Token no válido', 401);
-            }
+                //tomamos la fecha de creación del token, en segundos,
+                //la pasamos a milisegundos
+                //convertimos el resultado en Date para operar con el con facilidad
+                const tokenEmissionDate = new Date(tokenInfo.iat * 1000);
 
-            //si hemos llegado aquí, el token es correcto
+                if (tokenEmissionDate < lastAuthUpdate) {
+                    // if (tokenEmissionDate < lastAuthUpdate) {
+                    generateErrorUtil('Token no válido', 401);
+                }
+            } //si hemos llegado aquí, el token es correcto
             //es momento de comprobar el rol
             if (role && tokenInfo.role !== role) {
                 return generateErrorUtil(

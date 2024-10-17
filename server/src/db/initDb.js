@@ -15,7 +15,7 @@ const SQL_USERS_TABLE = `
         username VARCHAR(50) UNIQUE,
         email VARCHAR(100) UNIQUE NOT NULL,
         password VARCHAR(100) NOT NULL,
-        avatar VARCHAR(100),
+        avatar VARCHAR(100) DEFAULT 'default-avatar.png',
 
         firstName VARCHAR(50) NOT NULL,
         lastName VARCHAR(50) NOT NULL,
@@ -29,8 +29,8 @@ const SQL_USERS_TABLE = `
         active BOOLEAN DEFAULT FALSE,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        lastAuthUpdate DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME,
+        lastAuthUpdate DATETIME
     )`;
 
 const SQL_HACKATHONS_TABLE = `
@@ -51,11 +51,11 @@ const SQL_HACKATHONS_TABLE = `
         online ENUM ('presencial', 'remoto') NOT NULL,
         location VARCHAR(200),
         prizes DECIMAL(9, 2),
-        logo VARCHAR(100),
+        logo VARCHAR(100) DEFAULT 'default-hackathon-logo.svg',
         documentation VARCHAR(100),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_ENROLLSIN_TABLE = `
@@ -71,10 +71,10 @@ const SQL_ENROLLSIN_TABLE = `
         inscriptionDate DATETIME NOT NULL,
         attended BOOLEAN,
         rating TINYINT UNSIGNED,
-        score INT UNSIGNED,
+        score INT UNSIGNED DEFAULT 0,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_THEMES_TABLE = `
@@ -84,7 +84,7 @@ const SQL_THEMES_TABLE = `
         theme varchar(200) NOT NULL,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_HACKATHONTHEMES_TABLE = `
@@ -98,7 +98,7 @@ const SQL_HACKATHONTHEMES_TABLE = `
         FOREIGN KEY (themeId) REFERENCES themes(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_TECHNOLOGIES_TABLE = `
@@ -108,7 +108,7 @@ const SQL_TECHNOLOGIES_TABLE = `
         technology varchar(200) NOT NULL,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_HACKATHONTECHNOLOGIES_TABLE = `
@@ -122,7 +122,7 @@ const SQL_HACKATHONTECHNOLOGIES_TABLE = `
         FOREIGN KEY (technologyId) REFERENCES technologies(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_USERTECHNOLOGIES_TABLE = `
@@ -136,7 +136,7 @@ const SQL_USERTECHNOLOGIES_TABLE = `
         FOREIGN KEY (technologyId) REFERENCES technologies(id),
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        updatedAt DATETIME
     )`;
 
 const SQL_ADMIN_INSERT = `

@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {
+    activateOrganizerController,
     addUserController,
     validateUserController,
     loginUserController,
@@ -11,6 +12,7 @@ import {
     generateRecoverCodeController,
     recoverPasswordController,
     addOrganizerController,
+    deleteUserController,
 } from '../controllers/users/index.js';
 
 import {
@@ -26,21 +28,27 @@ const router = express.Router();
 router.post('/users/register', addUserController);
 
 // Middleware para que el administrador registre un organizador
-router.post('/users/addOrganizer', authAdminController, addUserController);
+router.put(
+    '/users/addOrganizer/:userId',
+    authAdminController,
+    activateOrganizerController,
+);
 
 // Middleware de solicitud de alta al administrador para registrarse como organizadores
 router.post('/users/organizers/request', addOrganizerController);
 
 // Middleware que valida un nuevo usuario
-router.get('/users/register/validate/:activationCode', validateUserController);
-// al principio get
+router.patch(
+    '/users/register/validate/:activationCode',
+    validateUserController,
+);
 
 // Middleware que logea un usuario ya creado.
 router.post('/users/login', loginUserController);
 
 // Middleware que devuelve el perfil del usuario
-router.get('/user', authUserController, getOwnUserController);
-router.get('/user/getAllUsers', authAdminController, getAllUsersController);
+router.get('/users', authUserController, getOwnUserController);
+router.get('/users/getAllUsers', authAdminController, getAllUsersController);
 
 // Midelware que actualiza el perfil del usuario
 router.put('/users/update', authUserController, updateUserController);
@@ -54,5 +62,10 @@ router.put(
     '/users/password/recover/:recoverPassCode',
     recoverPasswordController,
 );
-
+// Middlware para eliminar un usuario
+router.delete(
+    '/users/delete/:userId',
+    authUserController,
+    deleteUserController,
+);
 export default router;

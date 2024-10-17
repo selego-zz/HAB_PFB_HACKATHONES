@@ -47,7 +47,6 @@ const addDummyData = async () => {
     ///////////////////////////////////////////////
     //insertamos los datos de la tabla hackathons
     ///////////////////////////////////////////////
-    let i = 0;
     for (const data of hackathons) {
         await pool.query(
             `    
@@ -76,10 +75,9 @@ const addDummyData = async () => {
                 data.online,
                 data.location,
                 data.prizes,
-                'logo' + i > 9 ? i : '0' + i,
+                data.logo,
             ],
         );
-        i++;
     }
 
     ///////////////////////////////////////////////

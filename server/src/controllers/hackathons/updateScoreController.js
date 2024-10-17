@@ -15,9 +15,9 @@ const updateScoreController = async (req, res, next) => {
         // Validamos los datos del body.
         await validateSchema(userScoreSchema, req.body);
 
-        const { score } = req.body;
+        const { score, developerId } = req.body;
         const organizerId = req.user.id;
-        const { hackathonId, developerId } = req.params;
+        const { hackathonId } = req.params;
 
         // Verificamos que el organizador del hackathon sea el mismo usuario que hace la solicitud.
         const organizerDb = await getHackathonOrganizerModel(hackathonId);

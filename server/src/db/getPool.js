@@ -19,7 +19,6 @@ const getPool = async () => {
                 host: MYSQL_HOST,
                 user: MYSQL_USER,
                 password: MYSQL_PASS,
-                timezone: 'Z',
             });
 
             //creamos la base de datos
@@ -31,7 +30,6 @@ const getPool = async () => {
                 user: MYSQL_USER,
                 password: MYSQL_PASS,
                 database: MYSQL_DB,
-                timezone: 'Z',
             });
         }
 
