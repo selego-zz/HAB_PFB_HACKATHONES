@@ -13,7 +13,6 @@ const HackathonList = ({ hackathons, showRating }) => {
             const element = document.getElementById(`section-${hackathon.id}`);
             if (element) {
                 element.onclick = () => {
-                    console.log('navigate to ' + hackathon.id);
                     navigate(`/hackathons/${hackathon.id}`);
                 };
             }

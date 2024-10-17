@@ -18,7 +18,6 @@ const CreateHackathonForm = ({
     const [hackathonEnd, setHackathonEnd] = useState('');
 
     useEffect(() => {
-        console.log(formData.inscriptionDate);
         // Validación de datos
         try {
             if (currentDate.length < 1) setCurrentDate(new Date());
@@ -30,8 +29,6 @@ const CreateHackathonForm = ({
                 setHackathonDate(new Date(formData.hackathonDate));
             if (!hackathonEnd.length < 1)
                 setHackathonEnd(new Date(formData.hackathonEnd));
-
-            console.log(formData.inscriptionDate);
 
             if (!forceDate) {
                 //puede ser que estemos modificando un hackathon en marcha o antiguo, con lo que las fechas podrían ser anteriores

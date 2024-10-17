@@ -18,8 +18,6 @@ const CreateHackathonForm = ({
         const hackathonDate = new Date(formData.hackathonDate);
         const hackathonEnd = new Date(formData.hackathonEnd);
 
-        console.log(formData.inscriptionDate);
-
         if (!forceDate) {
             //puede ser que estemos modificando un hackathon en marcha o antiguo, con lo que las fechas podrían ser anteriores
             // Verificar fechas
