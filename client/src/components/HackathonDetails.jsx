@@ -8,6 +8,7 @@ const formatDate = (dateStr) => {
         .replace('.', '');
 };
 
+// Renderizado de detalles de hackathon
 const HackathonDetails = ({
     hackathon,
     participants,
@@ -31,11 +32,13 @@ const HackathonDetails = ({
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
                         {/* Logo y nombre de hackathon */}
                         <div className="flex items-center justify-start space-x-4">
-                            <img
-                                className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
-                                src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
-                                alt="Logo del hackathon."
-                            />
+                            {hackathon?.logo && (
+                                <img
+                                    className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
+                                    src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                                    alt="Logo del hackathon."
+                                />
+                            )}
                             <h1 className="text-header-big mt-0">
                                 {hackathon?.name}
                             </h1>
@@ -115,7 +118,10 @@ const HackathonDetails = ({
                                                 </div>
                                                 <input
                                                     type="number"
-                                                    placeholder="Puntuación"
+                                                    placeholder={
+                                                        dev.score ||
+                                                        'Puntuación'
+                                                    }
                                                     value={
                                                         scores[dev.userId] || ''
                                                     }

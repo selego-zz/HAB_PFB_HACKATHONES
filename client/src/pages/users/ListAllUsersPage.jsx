@@ -1,21 +1,32 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
-import { useDocumentTitle } from '../../hooks/index.js';
+import { useNavigate } from 'react-router-dom';
 
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
+import { useDocumentTitle } from '../../hooks/index.js';
 const { VITE_API_URL } = import.meta.env;
 
 //////
 
 const ListAllUsersPage = () => {
     useDocumentTitle('Gestión de usuarios'); // Título de pestaña
-    const { authToken } = useContext(AuthContext);
+    const { authToken, isAdmin } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState('all'); // Estado para el filtro de usuarios
+    const navigate = useNavigate();
 
     useEffect(() => {
+        // Si el usuario que trata de acceder a la página no es administrador, lo redirigimos automáticamente a la homepage
+        if (!isAdmin()) {
+            toast.error('No tienes permisos para realizar esa acción', {
+                id: 'listalluserspage',
+            });
+            navigate('/');
+            return;
+        }
+
         const fetchUsers = async () => {
             try {
                 const res = await fetch(
@@ -39,7 +50,7 @@ const ListAllUsersPage = () => {
                 // Hace que no se llame infinitamente
                 if (!compareUsers(body.data.users)) setUsers(body.data.users);
             } catch (err) {
-                toast.error(err.message);
+                toast.error(err.message, { id: 'listalluserspage' });
             }
         };
 
@@ -67,7 +78,7 @@ const ListAllUsersPage = () => {
         };
 
         fetchUsers();
-    }, [authToken, users]);
+    }, [authToken, users, isAdmin, navigate]);
 
     const handleRemoveUser = async (user) => {
         try {

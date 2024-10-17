@@ -9,7 +9,6 @@ import { updatePassModel } from '../../models/users/index.js';
 // Función controladora que le permite a un usuario cambiar su contraseña.
 const updatePassController = async (req, res, next) => {
     try {
-        console.log(req.body);
         await validateSchema(updatePassSchema, req.body);
 
         // Obtenemos los datos necesarios.

@@ -2,7 +2,10 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDocumentTitle, useHackathons } from '../../hooks/index.js';
+
+import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+
 import HackathonDetails from '../../components/HackathonDetails.jsx';
 
 //////
@@ -69,24 +72,38 @@ const HackathonDetailsPage = () => {
     ]);
 
     const handleDelete = async () => {
-        if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
-            try {
-                const participants =
-                    await getAllInscriptionsFromAHackathon(hackathonId);
+        try {
+            // Comprobamos que no tenga participantes inscritos.
+            const participants =
+                await getAllInscriptionsFromAHackathon(hackathonId);
 
-                if (participants.length > 0) {
-                    toast.error(
-                        'No se puede eliminar un hackathon si hay gente inscrita',
-                    );
-                    return;
-                }
+            if (participants.length > 0) {
+                toast.error(
+                    'No se puede eliminar un hackathon si hay gente inscrita',
+                );
+                return;
+            }
 
+            // Confirmación con sweetalert2.
+            const resultDelete = await Swal.fire({
+                title: 'Eliminación de hackathon',
+                text: '¿Estás seguro de que quieres eliminar este hackathon?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF3333',
+                cancelButtonColor: '#22577A',
+                confirmButtonText: 'Sí, quiero eliminar este hackathon',
+                cancelButtonText: 'Cancelar',
+            });
+
+            // Si el organizador confirma, procedemos con la eliminación.
+            if (resultDelete.isConfirmed) {
                 await deleteHackathon(hackathonId);
                 toast.success('Hackathon eliminado');
                 navigate('/');
-            } catch (err) {
-                toast.error(err.message, { id: 'hackathondetailspage' });
             }
+        } catch (err) {
+            toast.error(err.message, { id: 'hackathondetailspage' });
         }
     };
 

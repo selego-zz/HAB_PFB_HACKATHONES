@@ -29,7 +29,6 @@ const UpdateHackathonPage = () => {
             if (authLoading) return;
             let tempHackathon = await getHackathon(hackathonId);
             if (!hackathon) setHackathon(tempHackathon);
-            console.log(tempHackathon);
 
             const tempFormData = {
                 name: tempHackathon.name,
