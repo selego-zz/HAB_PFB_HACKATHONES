@@ -719,6 +719,30 @@ const users = [
         biography: 'Desarrolladora con experiencia en hackathons.',
         linkedIn: 'https://linkedin.com/in/devUser45',
     },
+    {
+        id: 61,
+        username: 'dev',
+        email: 'dev@dev.dev',
+        password: 'dev',
+        avatar: 'avatar35.png',
+        firstName: 'Al',
+        lastName: 'Jordan',
+        role: 'desarrollador',
+        biography: 'Desarrolladora con experiencia en hackathons.',
+        linkedIn: 'https://linkedin.com/in/devDev',
+    },
+    {
+        id: 62,
+        username: 'org',
+        email: 'org@org.org',
+        password: 'org',
+        avatar: 'avatar15.png',
+        firstName: 'Gordon',
+        lastName: 'Samuels',
+        role: 'organizador',
+        biography: 'Organizador con experiencia en hackathons.',
+        linkedIn: 'https://linkedin.com/in/devDev',
+    },
 ];
 
 export default users;
