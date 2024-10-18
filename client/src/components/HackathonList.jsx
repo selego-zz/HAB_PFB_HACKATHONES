@@ -24,17 +24,17 @@ const HackathonList = ({ hackathons, showRating }) => {
             {hackathons.map((hackathon) => (
                 <li
                     key={hackathon.id}
-                    className="flex justify-between  mb-4 p-4 border rounded cursor-pointer md:w-3/5"
+                    className="flex justify-between  mb-4 p-4 rounded-md cursor-pointer md:w-3/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md h-36 border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8"
                 >
                     <section id={`section-${hackathon.id}`}>
-                        <h2 className="text-xl font-semibold">
+                        <h2 className="text-xl font-semibold font-jost m-3 ">
                             {hackathon.name}
                         </h2>
-                        <p>
+                        <p className="font-jost m-3">
                             <strong>Fecha:</strong> {hackathon.hackathonDate} -{' '}
                             {hackathon.hackathonEnd}
                         </p>
-                        <p>
+                        <p className="font-jost m-3">
                             <strong>Ubicación:</strong> {hackathon.location}
                         </p>
                     </section>
