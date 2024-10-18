@@ -15,7 +15,6 @@ const HackathonInscriptionPage = () => {
     const navigate = useNavigate();
 
     const [isConfirmed, setIsConfirmed] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
     const [isRegistrationOpen, setIsRegistrationOpen] = useState(true);
 
     // Verifica si la inscripción está abierta
@@ -66,28 +65,21 @@ const HackathonInscriptionPage = () => {
             toast.success(body.message);
 
             setIsConfirmed(true);
-            setIsOpen(false);
             setTimeout(() => {
                 navigate(`/hackathons/${hackathonId}`);
             }, 3000);
-
-            return true;
         } catch (err) {
             toast.error(err.message);
         }
     };
 
     const handleCancel = () => {
-        if (!isOpen) {
-            navigate(`/hackathons/${hackathonId}`);
-        } else {
-            setIsOpen(false);
-        }
+        navigate(`/hackathons/${hackathonId}`);
     };
 
     return (
-        <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
-            <div className=" bg-blanco bg-opacity-90">
+        <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center">
+            <div className="bg-blanco bg-opacity-90">
                 <div className="flex items-center flex-col justify-center flex-grow h-96">
                     <div className="relative bg-gradient-to-r from-verdeclaro to-casiblanco p-6 rounded-2xl shadow-xl w-96 h-56 text-center flex justify-center items-center flex-col sm:w-2/5 sm:min-w-96">
                         <button
@@ -107,35 +99,21 @@ const HackathonInscriptionPage = () => {
                         ) : (
                             <>
                                 {isRegistrationOpen ? (
-                                    <>
-                                        {isOpen ? (
-                                            <>
-                                                <p className="mb-5 font-jost font-medium text-azuloscuro ">
-                                                    ¿Quieres inscribirte en el
-                                                    hackathon?
-                                                </p>
-                                                <button
-                                                    onClick={handleConfirm}
-                                                    className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
-                                                >
-                                                    Confirmar
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <button
-                                                onClick={() => setIsOpen(true)}
-                                                className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48 mt-4"
-                                            >
-                                                Inscribirse
-                                            </button>
-                                        )}
-                                    </>
+                                    <p className="mb-5 font-jost font-medium text-azuloscuro">
+                                        ¿Quieres inscribirte en el hackathon?
+                                    </p>
                                 ) : (
-                                    <p className="font-jost font-medium text-rojo ">
+                                    <p className="font-jost font-medium text-rojo">
                                         La fecha de inscripción ha pasado. No
                                         puedes inscribirte en el hackathon.
                                     </p>
                                 )}
+                                <button
+                                    onClick={handleConfirm}
+                                    className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
+                                >
+                                    Confirmar
+                                </button>
                             </>
                         )}
                     </div>
