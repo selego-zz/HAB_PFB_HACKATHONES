@@ -1,40 +1,64 @@
 const generateGetInscriptionsSQL = (WHERE, role) => {
-    let campos = ``;
+    let campos = `
+        h.id, 
+        h.name, 
+        h.logo, 
+        h.online, 
+        h.hackathonDate, 
+        h.hackathonEnd, 
+        h.location, 
+        h.updatedAt, 
+        h.description, 
+        h.requirements
+    `;
 
-    campos += `
-    h.id, 
-    h.name, 
-    h.logo, 
-    h.online, 
-    h.hackathonDate, 
-    h.hackathonEnd, 
-    h.location, 
-    h.updatedAt
-    h.description,
-    h.requirements 
-`;
+    if (role === 'desarrollador') {
+        campos += `,
+        e.rating,
+        e.score,
+        e.inscriptionDate,
+        e.attended,
+        u.username, 
+        u.avatar,
+        u.id AS userId `;
+    }
 
-    if (role === 'desarrollador')
-        campos += `, 
-    e.rating,
-    e.score,
-    e.inscriptionDate,
-    e.attended,
-    u.username, 
-    u.avatar,
-    u.id `;
-
-    const sql = `SELECT  ${campos + (role === 'desarrollador' ? 'AS userId ' : '')}, 
-    AVG(e.rating) AS average_rating,
-    AVG(e.score) AS average_score
+    const sql = `
+        SELECT 
+            ${campos}, 
+            AVG(e.rating) AS average_rating,
+            AVG(e.score) AS average_score
         FROM 
-    enrollsin e
-    JOIN 
-    hackathons h ON e.hackathonId = h.id
-    JOIN 
-    users u ON e.userId = u.id
+            enrollsin e
+        JOIN 
+            hackathons h ON e.hackathonId = h.id
+        JOIN 
+            users u ON e.userId = u.id
         ${WHERE}
-        GROUP BY ${campos}`;
+        GROUP BY 
+            h.id, 
+            h.name, 
+            h.logo, 
+            h.online, 
+            h.hackathonDate, 
+            h.hackathonEnd, 
+            h.location, 
+            h.updatedAt, 
+            h.description, 
+            h.requirements
+            ${
+                role === 'desarrollador'
+                    ? `,
+            e.rating,
+            e.score,
+            e.inscriptionDate,
+            e.attended,
+            u.username, 
+            u.avatar,
+            u.id`
+                    : ''
+            }
+    `;
 
     return sql;
 };

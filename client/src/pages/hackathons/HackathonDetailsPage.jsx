@@ -42,11 +42,13 @@ const HackathonDetailsPage = () => {
                 // Solicitamos usuarios inscritos
                 const userHackathons =
                     await getAllInscriptionsFromAHackathon(hackathonId);
-                const enrolledParticipants = userHackathons.filter(
+
+                // Si la respuesta es null o undefined, devuelve un array vacío
+                const enrolledParticipants = (userHackathons || []).filter(
                     (h) => String(h.hackathonId) === String(hackathonId),
                 );
 
-                setParticipants(enrolledParticipants || []);
+                setParticipants(enrolledParticipants);
 
                 // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
                 const isUserRegistered = enrolledParticipants.some(
@@ -54,13 +56,18 @@ const HackathonDetailsPage = () => {
                 );
                 setIsRegistered(isUserRegistered);
             } catch (err) {
-                toast.error(err.message, {
-                    id: 'hackathondetailspage',
-                });
+                toast.error(
+                    err.message ||
+                        'Error al obtener los detalles del hackathon',
+                    {
+                        id: 'hackathondetailspage',
+                    },
+                );
             } finally {
                 setLoading(false);
             }
         };
+
         fetchHackathonDetails();
     }, [
         hackathonId,
@@ -144,6 +151,8 @@ const HackathonDetailsPage = () => {
     if (loading) {
         return <div>Cargando...</div>;
     }
+
+    console.log(hackathon);
 
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
