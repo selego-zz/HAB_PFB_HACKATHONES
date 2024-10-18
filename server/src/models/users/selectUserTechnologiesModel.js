@@ -1,21 +1,22 @@
 import getPool from '../../db/getPool.js';
-import { selectUserTechnologiesModel } from './index.js';
 
 //////
 
 // Función que realiza una consulta a la base de datos para seleccionar un usuario con un id dado.
-const selectUserByIdModel = async (userId) => {
+const selectUserTechnologiesModel = async (userId) => {
     const pool = await getPool();
 
     // Comprobamos si hay algún usuario con el id proporcionado.
-    const [users] = await pool.query(`SELECT * FROM users WHERE id = ?`, [
-        userId,
-    ]);
-    //buscamos las tecnologías del usuario y las metemos en technologies
-    users[0].technologies = selectUserTechnologiesModel(users[0].id);
+    const [technologies] = await pool.query(
+        `SELECT t.technology
+         FROM userTechnologies ut
+         JOIN technologies t ON ut.technologyId = t.id
+         WHERE ut.userId = `,
+        [userId],
+    );
 
     // Ya que el email no puede repetirse, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
-    return users[0];
+    return technologies;
 };
 
-export default selectUserByIdModel;
+export default selectUserTechnologiesModel;

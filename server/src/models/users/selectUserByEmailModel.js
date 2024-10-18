@@ -1,4 +1,5 @@
 import getPool from '../../db/getPool.js';
+import { selectUserTechnologiesModel } from './index.js';
 
 //////
 
@@ -11,7 +12,8 @@ const selectUserByEmailModel = async (email) => {
         email,
     ]);
 
-    // Por motivos de seguridad trataremos de no darle ninguna pista al usuario que está tratando de logearse así que no indicaremos si lo que está mal es el email o es la contraseña.
+    //buscamos las tecnologías del usuario y las metemos en technologies
+    users[0].technologies = selectUserTechnologiesModel(users[0].id);
 
     // Ya que el email tiene que ser único, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
     return users[0];
