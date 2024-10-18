@@ -76,140 +76,152 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto py-8 px-4">
-            <h2 className="text-center text-2xl font-bold text-gray-700 mb-6">
-                Registro de Usuario
-            </h2>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-4 sm:grid sm:grid-cols-2"
-            >
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Nombre
-                    </label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Apellido
-                    </label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Nombre de usuario
-                    </label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Correo Electrónico
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Contraseña
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Repetir Contraseña
-                    </label>
-                    <input
-                        type="password"
-                        id="repeatpassword"
-                        name="repeatpassword"
-                        onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                        required
-                    />
-                </div>
-
-                {/* Campo de selección de rol */}
-                <div className="min-w-[200px] col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mx-2 mb-2">
-                        Me quiero registrar como...
-                    </label>
-                    <div className="flex gap-4">
-                        <label className="inline-flex items-center">
+        <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+            <div className=" bg-blanco bg-opacity-90">
+                <div className="max-w-4xl mx-auto py-8 px-4">
+                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
+                        REGÍSTRATE
+                    </h2>
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-8 sm:grid sm:grid-cols-2"
+                    >
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Nombre:
+                            </label>
                             <input
-                                type="radio"
-                                name="role"
-                                value="desarrollador"
-                                checked={formData.role === 'desarrollador'}
+                                type="text"
+                                id="firstName"
+                                name="firstName"
+                                value={formData.firstName}
                                 onChange={handleChange}
-                                className="form-radio"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
                             />
-                            <span className="ml-2">Desarrollador</span>
-                        </label>
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                name="role"
-                                value="organizador"
-                                checked={formData.role === 'organizador'}
-                                onChange={handleChange}
-                                className="form-radio"
-                            />
-                            <span className="ml-2">Organizador</span>
-                        </label>
-                    </div>
-                </div>
+                        </div>
 
-                <div className="col-span-2">
-                    <button className="mt-4 font-bold bg-verdeagua py-2 px-4 rounded-lg hover:bg-verdemarino w-1/3 mx-auto block">
-                        Registrarse
-                    </button>
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Apellido:
+                            </label>
+                            <input
+                                type="text"
+                                id="lastName"
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
+                            />
+                        </div>
+
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Nombre de usuario:
+                            </label>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                value={formData.username}
+                                onChange={handleChange}
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
+                            />
+                        </div>
+
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Email:
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
+                            />
+                        </div>
+
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Contraseña:
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
+                            />
+                        </div>
+
+                        <div className="min-w-[200px]">
+                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
+                                Repetir Contraseña:
+                            </label>
+                            <input
+                                type="password"
+                                id="repeatpassword"
+                                name="repeatpassword"
+                                onChange={handleChange}
+                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                required
+                            />
+                        </div>
+
+                        {/* Campo de selección de rol */}
+                        <div className="min-w-[200px] col-span-2 flex flex-col items-center m-7">
+                            <label className="block text-azuloscuro font-jost font-semibold text-lg">
+                                Me quiero registrar como...
+                            </label>
+                            <div className="flex gap-4">
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        name="role"
+                                        value="desarrollador"
+                                        checked={
+                                            formData.role === 'desarrollador'
+                                        }
+                                        onChange={handleChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-semibold">
+                                        Desarrollador
+                                    </span>
+                                </label>
+                                <label className="inline-flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        name="role"
+                                        value="organizador"
+                                        checked={
+                                            formData.role === 'organizador'
+                                        }
+                                        onChange={handleChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-semibold">
+                                        Organizador
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="col-span-2">
+                            <button className="mx-auto block bg-azuloscuro font-jost font-semibold text-blanco w-48 h-10 rounded-3xl hover:bg-verdemarino hover:text-azuloscuro text-lg mb-5">
+                                Registrarse
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     );
 };

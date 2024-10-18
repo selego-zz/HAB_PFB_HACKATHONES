@@ -15,11 +15,9 @@ const DeleteInscriptionPage = () => {
     const navigate = useNavigate();
 
     const [isConfirmed, setIsConfirmed] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [isCancellable, setIsCancellable] = useState(true); // Nuevo estado para controlar si es posible cancelar
-    const [hoursRemaining, setHoursRemaining] = useState(null); // Horas restantes para cancelar
+    const [isCancellable, setIsCancellable] = useState(true);
+    const [hoursRemaining, setHoursRemaining] = useState(null);
 
-    // Obtiene los datos del hackatón y verifica si se puede cancelar la inscripción
     useEffect(() => {
         const checkCancellable = async () => {
             try {
@@ -36,7 +34,7 @@ const DeleteInscriptionPage = () => {
 
                 const hackathonStart = new Date(hackathon.hackathonDate);
                 const now = new Date();
-                const hoursLeft = (hackathonStart - now) / 36e5; // Diferencia en horas
+                const hoursLeft = (hackathonStart - now) / 36e5;
                 setHoursRemaining(hoursLeft);
 
                 if (hoursLeft < import.meta.env.VITE_MAX_CANCELLATION_HOURS) {
@@ -67,27 +65,21 @@ const DeleteInscriptionPage = () => {
             toast.success(body.message);
 
             setIsConfirmed(true);
-            setIsOpen(false);
             setTimeout(() => {
                 navigate(`/hackathons/${hackathonId}`);
             }, 3000);
-            return false;
         } catch (err) {
             toast.error(err.message);
         }
     };
 
     const handleCancel = () => {
-        if (!isOpen) {
-            navigate(`/hackathons/${hackathonId}`);
-        } else {
-            setIsOpen(false);
-        }
+        navigate(`/hackathons/${hackathonId}`);
     };
 
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
-            <div className=" bg-blanco bg-opacity-90">
+            <div className="bg-blanco bg-opacity-90">
                 <div className="flex items-center flex-col justify-center flex-grow h-96">
                     <div className="relative bg-gradient-to-r from-verdeclaro to-casiblanco p-6 rounded-2xl shadow-xl w-96 h-56 text-center flex justify-center items-center flex-col sm:w-2/5 sm:min-w-96">
                         <button
@@ -106,43 +98,29 @@ const DeleteInscriptionPage = () => {
                             </p>
                         ) : (
                             <>
-                                {isOpen ? (
-                                    <>
-                                        {isCancellable ? (
-                                            <>
-                                                <p className="mb-4 font-jost font-medium text-azuloscuro ">
-                                                    ¿Quieres cancelar la
-                                                    inscripción al evento?
-                                                </p>
-                                                <button
-                                                    onClick={handleConfirm}
-                                                    className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
-                                                >
-                                                    Confirmar
-                                                </button>
-                                            </>
-                                        ) : (
-                                            <p className="mb-4 font-jost font-medium text-rojo ">
-                                                No se puede cancelar la
-                                                inscripción, faltan menos de{' '}
-                                                {
-                                                    import.meta.env
-                                                        .VITE_MAX_CANCELLATION_HOURS
-                                                }{' '}
-                                                horas para el evento. Quedan{' '}
-                                                {hoursRemaining.toFixed(2)}{' '}
-                                                horas.
-                                            </p>
-                                        )}
-                                    </>
+                                {isCancellable ? (
+                                    <p className="mb-4 font-jost font-medium text-azuloscuro">
+                                        ¿Quieres cancelar la inscripción al
+                                        evento?
+                                    </p>
                                 ) : (
-                                    <button
-                                        onClick={() => setIsOpen(true)}
-                                        className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-lg w-48 mt-4"
-                                    >
-                                        Eliminar inscripción
-                                    </button>
+                                    <p className="mb-4 font-jost font-medium text-rojo ">
+                                        No se puede cancelar la inscripción,
+                                        faltan menos de{' '}
+                                        {
+                                            import.meta.env
+                                                .VITE_MAX_CANCELLATION_HOURS
+                                        }{' '}
+                                        horas para el evento. Quedan{' '}
+                                        {hoursRemaining.toFixed(2)} horas.
+                                    </p>
                                 )}
+                                <button
+                                    onClick={handleConfirm}
+                                    className="bg-azuloscuro text-blanco px-4 py-2 rounded-lg hover:bg-verdeagua font-jost font-medium text-xl w-48"
+                                >
+                                    Confirmar
+                                </button>
                             </>
                         )}
                     </div>
