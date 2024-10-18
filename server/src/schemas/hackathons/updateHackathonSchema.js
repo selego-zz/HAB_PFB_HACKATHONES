@@ -36,6 +36,8 @@ const updateHackathonSchema = Joi.object().keys({
         .messages(joiErrorMessages),
     location: Joi.string().max(200).optional().messages(joiErrorMessages),
     prizes: Joi.number().optional().messages(joiErrorMessages),
+    description: Joi.string().max(900).optional().messages(joiErrorMessages),
+    requirements: Joi.string().max(900).optional().messages(joiErrorMessages),
     logo: Joi.string().max(100).optional().messages(joiErrorMessages),
     documentation: Joi.string().max(100).optional().messages(joiErrorMessages),
 });

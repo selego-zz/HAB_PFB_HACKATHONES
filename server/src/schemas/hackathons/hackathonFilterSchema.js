@@ -19,6 +19,8 @@ const hackathonFilterSchema = Joi.object().keys({
     }),
     location: Joi.string().max(200).optional().messages(joiErrorMessages),
     prizes: Joi.number().optional().messages(joiErrorMessages),
+    description: Joi.string().max(900).optional().messages(joiErrorMessages),
+    requirements: Joi.string().max(900).optional().messages(joiErrorMessages),
     themes: Joi.array().optional(),
     technologies: Joi.array().optional(),
     orderBy: Joi.array()

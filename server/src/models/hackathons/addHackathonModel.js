@@ -17,6 +17,8 @@ const addHackathonModel = async (
     online,
     location,
     documentation,
+    description,
+    requirements,
 ) => {
     const pool = await getPool();
 
@@ -61,10 +63,9 @@ const addHackathonModel = async (
             location,
             documentation`;
     if (logo) sql += ', logo';
+    if (description) sql += ', description';
+    if (requirements) sql += ', requirements';
     sql += `) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?`;
-    if (logo) sql += ', ?';
-    sql += ')';
-
     const args = [
         name,
         organizerid,
@@ -78,7 +79,20 @@ const addHackathonModel = async (
         location,
         documentation,
     ];
-    if (logo) args.push(logo);
+
+    if (logo) {
+        sql += ', ?';
+        args.push(logo);
+    }
+    if (description) {
+        sql += ', ?';
+        if (logo) args.push(description);
+    }
+    if (requirements) {
+        sql += ', ?';
+        if (logo) args.push(requirements);
+    }
+    sql += ')';
 
     // Insertamos el hackathon.
     const [res] = await pool.query(sql, args);

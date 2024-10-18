@@ -51,7 +51,8 @@ const getFilteredHackathonsModel = async (filters) => {
     }
 
     const camposADevolver =
-        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd, h.location, h.updatedAt';
+        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd, h.location, h.updatedAt, h.description, h.requirements';
+
     let sqlSelect = `SELECT ${camposADevolver}, AVG(e.rating) AS average_rating`;
     let sqlFrom = ' FROM hackathons h';
     let sqlJoins = ` LEFT JOIN
