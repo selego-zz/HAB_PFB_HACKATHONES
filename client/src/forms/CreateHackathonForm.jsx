@@ -272,7 +272,6 @@ const CreateHackathonForm = ({
                     />
                 </div>
 
-                {/* Nuevo campo para la descripción */}
                 <div className="min-w-[200px] col-span-2">
                     <label className="block text-sm font-medium mx-2">
                         Descripción
@@ -287,7 +286,6 @@ const CreateHackathonForm = ({
                     />
                 </div>
 
-                {/* Nuevo campo para los requisitos */}
                 <div className="min-w-[200px] col-span-2">
                     <label className="block text-sm font-medium mx-2">
                         Requisitos

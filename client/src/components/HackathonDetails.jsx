@@ -29,8 +29,8 @@ const HackathonDetails = ({
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
+                    {/* Logo, nombre y descripción de hackathon */}
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
-                        {/* Logo y nombre de hackathon */}
                         <div className="flex items-center justify-start space-x-4">
                             {hackathon?.logo && (
                                 <img
@@ -39,10 +39,15 @@ const HackathonDetails = ({
                                     alt="Logo del hackathon."
                                 />
                             )}
+
                             <h1 className="text-header-big mt-0">
                                 {hackathon?.name}
                             </h1>
                         </div>
+                        <p className="text-xl mt-2">
+                            {hackathon?.description ||
+                                'No hay descripción disponible.'}
+                        </p>
 
                         {isOrganizer() &&
                             authUser?.id === hackathon?.organizerId && (
@@ -65,6 +70,7 @@ const HackathonDetails = ({
                                     </button>
                                 </div>
                             )}
+
                         {isDeveloper() && (
                             <div className="flex mt-4 justify-center">
                                 {isRegistered ? (
@@ -92,6 +98,17 @@ const HackathonDetails = ({
                                 )}
                             </div>
                         )}
+                    </div>
+
+                    {/* Requisitos del hackathon */}
+                    <div className="bg-casiblanco p-4 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold mb-2">
+                            Requisitos
+                        </h2>
+                        <p className="text-sm">
+                            {hackathon?.requirements ||
+                                'No hay requisitos especificados.'}
+                        </p>
                     </div>
 
                     {/* Si el usuario es el organizador del hackathon, muestra lista de participantes */}
@@ -155,47 +172,72 @@ const HackathonDetails = ({
                 </div>
 
                 <aside className="bg-casiblanco p-4 w-full rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
-                    <p className="flex items-center">
-                        <img
-                            src="/public/assets/icons/location.svg"
-                            alt="Icono de ubicación de hackathon."
-                            width="30"
-                            className="mr-2"
-                        />
-                        {hackathon?.location.startsWith('http') ? (
-                            <a
-                                href={hackathon?.location}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center px-2 py-1 border inset-24 border-verdeagua rounded-3xl  hover:bg-azuloscuro hover:text-blanco transition"
-                            >
-                                Online →
-                            </a>
-                        ) : (
-                            hackathon?.location
-                        )}
-                    </p>
+                    <h2 className="text-xl font-semibold mb-4">
+                        Detalles del Hackathon
+                    </h2>
 
-                    <p>
-                        <strong>{hackathon?.prizes}€</strong> en premios.
-                    </p>
+                    <div className="mb-4">
+                        <p className="flex items-center mb-2">
+                            <img
+                                src="/public/assets/icons/location.svg"
+                                alt="Icono de ubicación de hackathon."
+                                width="30"
+                                className="mr-2"
+                            />
+                            {hackathon?.location.startsWith('http') ? (
+                                <a
+                                    href={hackathon?.location}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center px-2 py-1 border inset-24 border-verdeagua rounded-3xl hover:bg-azuloscuro hover:text-blanco transition"
+                                >
+                                    Online →
+                                </a>
+                            ) : (
+                                hackathon?.location
+                            )}
+                        </p>
 
-                    <p className="flex items-center">
+                        <p className="flex items-center mb-2 font-medium">
+                            <img
+                                src="/public/assets/icons/prizes.svg"
+                                alt="Icono de ubicación de hackathon."
+                                width="30"
+                                className="mr-2"
+                            />
+                            <strong>{hackathon?.prizes}€</strong>&nbsp;en
+                            premios.
+                        </p>
+                    </div>
+
+                    <p className="flex items-center mb-2">
                         <img
-                            src="/public/assets/icons/calendar.png"
-                            alt="Icono de ubicación de hackathon."
+                            src="/public/assets/icons/calendar.svg"
+                            alt="Icono de fecha de hackathon."
                             width="30"
                             className="mr-2"
                         />
                         {`${formatDate(hackathon?.hackathonDate)} — ${formatDate(hackathon?.hackathonEnd)}`}
                     </p>
-                    <p className="text-sm">
-                        Inscripciones abiertas desde el{' '}
-                        <strong>
-                            {formatDate(hackathon?.inscriptionDate)}
-                        </strong>{' '}
-                        al{' '}
-                        <strong>{formatDate(hackathon?.inscriptionEnd)}</strong>
+
+                    <p className="flex items-center mb-2">
+                        <img
+                            src="/public/assets/icons/inscription.svg"
+                            alt="Icono de ubicación de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        <p>
+                            Inscripciones abiertas desde el&nbsp;
+                            <strong>
+                                {formatDate(hackathon?.inscriptionDate)}
+                            </strong>
+                            &nbsp;al&nbsp;
+                            <strong>
+                                {formatDate(hackathon?.inscriptionEnd)}
+                            </strong>
+                            .
+                        </p>
                     </p>
                 </aside>
             </div>
@@ -207,6 +249,8 @@ HackathonDetails.propTypes = {
     hackathon: PropTypes.shape({
         name: PropTypes.string,
         logo: PropTypes.string,
+        description: PropTypes.string,
+        requirements: PropTypes.string,
         inscriptionDate: PropTypes.string,
         inscriptionEnd: PropTypes.string,
         hackathonDate: PropTypes.string,
