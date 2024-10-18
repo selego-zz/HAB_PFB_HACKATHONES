@@ -140,34 +140,62 @@ const HackathonDetails = ({
                                     )}
                                 </ul>
 
-                                <div className="flex justify-end mt-4">
-                                    <button
-                                        onClick={handleSubmitScores}
-                                        className="button-angled-green"
-                                    >
-                                        Guardar puntuaciones
-                                    </button>
-                                </div>
+                                {participants.length > 0 && (
+                                    <div className="flex justify-end mt-4">
+                                        <button
+                                            onClick={handleSubmitScores}
+                                            className="button-angled-green"
+                                        >
+                                            Guardar puntuaciones
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         )}
                 </div>
 
-                <aside className="bg-casiblanco p-4 w-fit rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
-                    <p>
-                        <strong>Ubicación:</strong> {hackathon?.location}
+                <aside className="bg-casiblanco p-4 w-full rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
+                    <p className="flex items-center">
+                        <img
+                            src="/public/assets/icons/location.svg"
+                            alt="Icono de ubicación de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        {hackathon?.location.startsWith('http') ? (
+                            <a
+                                href={hackathon?.location}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center px-2 py-1 border inset-24 border-verdeagua rounded-3xl  hover:bg-azuloscuro hover:text-blanco transition"
+                            >
+                                Online →
+                            </a>
+                        ) : (
+                            hackathon?.location
+                        )}
                     </p>
+
                     <p>
-                        <strong>Premios:</strong> {hackathon?.prizes}
+                        <strong>{hackathon?.prizes}€</strong> en premios.
                     </p>
-                    <p>
-                        <strong>Fechas del hackathon:</strong>{' '}
-                        {formatDate(hackathon?.hackathonDate)} -{' '}
-                        {formatDate(hackathon?.hackathonEnd)}
+
+                    <p className="flex items-center">
+                        <img
+                            src="/public/assets/icons/calendar.png"
+                            alt="Icono de ubicación de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        {`${formatDate(hackathon?.hackathonDate)} — ${formatDate(hackathon?.hackathonEnd)}`}
                     </p>
-                    <p>
-                        <strong>Inscripción:</strong>{' '}
-                        {formatDate(hackathon?.inscriptionDate)} -{' '}
-                        {formatDate(hackathon?.inscriptionEnd)}
+                    <p className="text-sm">
+                        Inscripciones abiertas desde el{' '}
+                        <strong>
+                            {formatDate(hackathon?.inscriptionDate)}
+                        </strong>{' '}
+                        al{' '}
+                        <strong>{formatDate(hackathon?.inscriptionEnd)}</strong>
                     </p>
                 </aside>
             </div>
