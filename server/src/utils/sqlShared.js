@@ -1,4 +1,4 @@
-const getInscriptions = (WHERE, role) => {
+const generateGetInscriptionsSQL = (WHERE, role) => {
     let campos = ``;
 
     campos += `
@@ -9,7 +9,10 @@ const getInscriptions = (WHERE, role) => {
     h.hackathonDate, 
     h.hackathonEnd, 
     h.location, 
-    h.updatedAt `;
+    h.updatedAt
+    h.description,
+    h.requirements 
+`;
 
     if (role === 'desarrollador')
         campos += `, 
@@ -36,4 +39,4 @@ const getInscriptions = (WHERE, role) => {
     return sql;
 };
 
-export { getInscriptions };
+export { generateGetInscriptionsSQL };

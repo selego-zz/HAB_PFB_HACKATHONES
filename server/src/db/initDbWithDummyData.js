@@ -22,7 +22,7 @@ const SQL_USERS_TABLE = `
         lastName VARCHAR(50) NOT NULL,
         role ENUM ('administrador', 'organizador', 'desarrollador') NOT NULL,
         
-        biography VARCHAR(300),
+        biography VARCHAR(900),
         linkedIn VARCHAR(100),
 
         recoverPassCode CHAR(30),
@@ -52,6 +52,8 @@ const SQL_HACKATHONS_TABLE = `
         online ENUM ('presencial', 'remoto') NOT NULL,
         location VARCHAR(200),
         prizes DECIMAL(9, 2),
+        description VARCHAR(900),
+        requirements VARCHAR(900),
         logo VARCHAR(100) DEFAULT 'default-hackathon-logo.svg',
         documentation VARCHAR(100),
 
