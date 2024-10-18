@@ -5,6 +5,7 @@ import selectPendingUsersModel from './selectPendingUsersModel.js';
 import selectUserByEmailModel from './selectUserByEmailModel.js';
 import selectUserByIdModel from './selectUserByIdModel.js';
 import selectUserByUsernameModel from './selectUserByUsernameModel.js';
+import selectUserTechnologiesModel from './selectUserTechnologiesModel.js';
 import updateActiveUserModel from './updateActiveUserModel.js';
 import updatePassModel from './updatePassModel.js';
 import updateResetPassModel from './updateResetPassModel.js';
@@ -19,6 +20,7 @@ export {
     selectUserByEmailModel,
     selectUserByIdModel,
     selectUserByUsernameModel,
+    selectUserTechnologiesModel,
     updateActiveUserModel,
     updatePassModel,
     updateResetPassModel,
