@@ -42,6 +42,8 @@ const UpdateHackathonPage = () => {
                 prizes: tempHackathon.prizes,
                 logo: tempHackathon.logo,
                 documentation: tempHackathon.documentation,
+                requirements: tempHackathon.requirements,
+                description: tempHackathon.description,
             };
 
             if (formData === null) setFormData(tempFormData);

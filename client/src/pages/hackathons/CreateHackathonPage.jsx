@@ -30,6 +30,8 @@ const CreateHackathonPage = () => {
         prizes: '',
         logo: '',
         documentation: '',
+        requirements: '',
+        description: '',
     });
 
     // Verificación de acceso al cargar el componente
