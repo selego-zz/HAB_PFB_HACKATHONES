@@ -6,7 +6,7 @@ import getPool from '../../db/getPool.js';
 const selectUserTechnologiesModel = async (userId) => {
     const pool = await getPool();
 
-    // Consulta utilizando un parámetro preparado para evitar errores de sintaxis y mejorar la seguridad
+    // Comprobamos si hay algún usuario con el id proporcionado.
     const [technologies] = await pool.query(
         `SELECT t.technology
          FROM userTechnologies ut
