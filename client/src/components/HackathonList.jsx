@@ -19,7 +19,6 @@ const HackathonList = ({ hackathons, showRating }) => {
             }
         });
     }, [hackathons, navigate]);
-    console.log(hackathons);
 
     return (
         <ul className="mt-4">

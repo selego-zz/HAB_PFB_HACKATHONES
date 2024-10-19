@@ -33,13 +33,6 @@ const Rating = ({
     scoreText,
     editable,
 }) => {
-    console.log(hackathonId);
-    console.log(initialRating);
-    console.log(ranking);
-    console.log(position);
-    console.log(scoreText);
-    console.log(editable);
-
     const [rating, setRating] = useState(initialRating);
     const _stars = [];
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');

@@ -35,7 +35,8 @@ const UpdateUserPage = () => {
     const [linkedIn, setLinkedIn] = useState('');
 
     // Tecnologías de usuario
-    const { technologies, setTechnologies, techLoading } = useTechnologies();
+    const { technologies, setTechnologies, techLoading } = useTechnologies(); // Todas las tecnologías (para el map)
+    const [selectedTechnologies, setSelectedTechnologies] = useState([]); // Solo las seleccionadas
 
     const navigate = useNavigate();
 
@@ -54,10 +55,10 @@ const UpdateUserPage = () => {
     // Manejo de tecnologías
     const handleTechnologyChange = (e) => {
         const { value } = e.target;
-        setTechnologies((prevState) => {
+        setSelectedTechnologies((prevState) => {
             const updatedTechnologies = prevState.includes(value)
-                ? prevState.filter((tech) => tech !== value)
-                : [...prevState, value];
+                ? prevState.filter((tech) => tech !== value) // Si ya está, la elimina
+                : [...prevState, value]; // Si no está, la agrega
             return updatedTechnologies;
         });
     };
@@ -80,6 +81,7 @@ const UpdateUserPage = () => {
                 );
             }
 
+            // Cogemos todos los datos introducidos/modificados para actualizar el usuario
             const user = {};
             if (username.length) user.username = username;
             if (avatar !== '') user.avatar = avatar;
@@ -87,8 +89,7 @@ const UpdateUserPage = () => {
             if (lastName.length) user.lastName = lastName;
             if (biography.length) user.biography = biography;
             if (linkedIn.length) user.linkedIn = linkedIn;
-
-            if (technologies.length) user.technologies = technologies;
+            if (technologies.length) user.technologies = selectedTechnologies;
 
             if (avatar !== '') await updateUserWithAvatar(user);
             else await updateUser(user);
@@ -106,6 +107,8 @@ const UpdateUserPage = () => {
             );
         }
     };
+
+    console.log(selectedTechnologies);
 
     return (
         <main>
@@ -213,7 +216,7 @@ const UpdateUserPage = () => {
                                             <input
                                                 type="checkbox"
                                                 value={tech.technology}
-                                                checked={technologies.includes(
+                                                checked={selectedTechnologies.includes(
                                                     tech.technology,
                                                 )}
                                                 onChange={
