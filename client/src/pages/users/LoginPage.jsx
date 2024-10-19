@@ -85,33 +85,56 @@ const LoginPage = () => {
 
     return (
         <main>
-            <h2>Iniciar sesión</h2>
+            <div className=" h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+                <div className="h-full bg-blanco bg-opacity-90 flex flex-col items-center justify-center">
+                    <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
+                        INICIAR SESIÓN
+                    </h2>
 
-            <form onSubmit={handleLoginUser}>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
+                    <form
+                        onSubmit={handleLoginUser}
+                        className="flex flex-col justify-center items-center"
+                    >
+                        <label htmlFor="email" className="label">
+                            Email:
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="input mb-12"
+                            required
+                        />
 
-                <label htmlFor="pass">Contraseña:</label>
-                <input
-                    type="password"
-                    id="pass"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                        <label htmlFor="pass" className="label">
+                            Contraseña:
+                        </label>
+                        <input
+                            type="password"
+                            id="pass"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="input"
+                            required
+                        />
 
-                {/* Habilitamos o deshabilitamos el botón en función de si estamos haciendo un fetch o no. */}
-                <button disabled={loading}>Loguearme</button>
-            </form>
-            <NavLink to="/users/recover">
-                ¿Has olvidado tu contraseña? pulsa aqui para cambiarla
-            </NavLink>
+                        {/* Habilitamos o deshabilitamos el botón en función de si estamos haciendo un fetch o no. */}
+                        <button
+                            disabled={loading}
+                            className="button-blue mt-20"
+                        >
+                            Iniciar Sesión
+                        </button>
+                    </form>
+                    <NavLink
+                        to="/users/recover"
+                        className="block text-azuloscuro font-jost font-semibold text-center text-md mt-5 "
+                    >
+                        ¿Has olvidado tu contraseña? pulsa aqui para cambiarla
+                    </NavLink>
+                </div>
+            </div>
         </main>
     );
 };

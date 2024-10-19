@@ -83,55 +83,47 @@ const RegisterPage = () => {
                         className="flex flex-col gap-8 sm:grid sm:grid-cols-2"
                     >
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Nombre:
-                            </label>
+                            <label className="label">Nombre:</label>
                             <input
                                 type="text"
                                 id="firstName"
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="input"
                                 required
                                 autoFocus
                             />
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Apellido:
-                            </label>
+                            <label className="label">Apellido:</label>
                             <input
                                 type="text"
                                 id="lastName"
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="input"
                                 required
                             />
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Nombre de usuario:
-                            </label>
+                            <label className="label">Nombre de usuario:</label>
                             <input
                                 type="text"
                                 id="username"
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="input"
                                 required
                             />
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Email:
-                            </label>
+                            <label className="label">Email:</label>
                             <input
                                 type="email"
                                 id="email"
@@ -144,9 +136,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Contraseña:
-                            </label>
+                            <label className="label">Contraseña:</label>
                             <input
                                 type="password"
                                 id="password"
@@ -159,9 +149,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="block text-azuloscuro font-jost font-semibold text-center text-lg">
-                                Repetir Contraseña:
-                            </label>
+                            <label className="label">Repetir Contraseña:</label>
                             <input
                                 type="password"
                                 id="repeatpassword"
@@ -174,7 +162,7 @@ const RegisterPage = () => {
 
                         {/* Campo de selección de rol */}
                         <div className="min-w-[200px] col-span-2 flex flex-col items-center m-7">
-                            <label className="block text-azuloscuro font-jost font-semibold text-lg">
+                            <label className="label mb-5">
                                 Me quiero registrar como...
                             </label>
                             <div className="flex gap-4">
@@ -212,9 +200,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="col-span-2">
-                            <button className="mx-auto block bg-azuloscuro font-jost font-semibold text-blanco w-48 h-10 rounded-3xl hover:bg-verdemarino hover:text-azuloscuro text-lg mb-5">
-                                Registrarse
-                            </button>
+                            <button className="button-blue">Registrarse</button>
                         </div>
                     </form>
                 </div>
