@@ -80,7 +80,7 @@ const RegisterPage = () => {
                     </h2>
                     <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col gap-8 sm:grid sm:grid-cols-2"
+                        className="flex flex-col gap-8 md:grid md:grid-cols-2"
                     >
                         <div className="min-w-[200px]">
                             <label className="label">Nombre:</label>
