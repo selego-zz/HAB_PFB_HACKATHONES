@@ -55,10 +55,10 @@ const UpdateUserPage = () => {
     const handleTechnologyChange = (e) => {
         const { value } = e.target;
         setTechnologies((prevState) => {
-            const updatedTechnologies = prevState.technologies.includes(value)
-                ? prevState.technologies.filter((tech) => tech !== value)
-                : [...prevState.technologies, value];
-            return { ...prevState, technologies: updatedTechnologies };
+            const updatedTechnologies = prevState.includes(value)
+                ? prevState.filter((tech) => tech !== value)
+                : [...prevState, value];
+            return updatedTechnologies;
         });
     };
 
@@ -90,8 +90,8 @@ const UpdateUserPage = () => {
 
             if (technologies.length) user.technologies = technologies;
 
-            if (avatar !== '') updateUserWithAvatar(user);
-            else updateUser(user);
+            if (avatar !== '') await updateUserWithAvatar(user);
+            else await updateUser(user);
 
             if (password.length) await updatePassword(oldPassword, password);
 
