@@ -6,16 +6,15 @@ import getPool from '../../db/getPool.js';
 const selectUserTechnologiesModel = async (userId) => {
     const pool = await getPool();
 
-    // Comprobamos si hay algún usuario con el id proporcionado.
+    // Consulta utilizando un parámetro preparado para evitar errores de sintaxis y mejorar la seguridad
     const [technologies] = await pool.query(
         `SELECT t.technology
          FROM userTechnologies ut
          JOIN technologies t ON ut.technologyId = t.id
-         WHERE ut.userId = `,
+         WHERE ut.userId = ?`,
         [userId],
     );
 
-    // Ya que el email no puede repetirse, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
     return technologies;
 };
 

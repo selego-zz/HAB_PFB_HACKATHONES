@@ -1,7 +1,7 @@
 // Importamos hooks
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDocumentTitle } from '../../hooks/index.js';
+import { useDocumentTitle, useTechnologies } from '../../hooks/index.js';
 
 // Importamos contexts
 import { AuthContext } from '../../contexts/AuthContext.jsx';
@@ -15,8 +15,13 @@ const UpdateUserPage = () => {
     useDocumentTitle('Actualización de perfil');
 
     //tomamos la función del contexto de usuario que se encarga del update
-    const { updateUser, updateUserWithAvatar, updatePassword, authUser } =
-        useContext(AuthContext);
+    const {
+        updateUser,
+        updateUserWithAvatar,
+        updatePassword,
+        authUser,
+        isDeveloper,
+    } = useContext(AuthContext);
 
     //id, rol y email no pueden cambiarse
     const [username, setUsername] = useState('');
@@ -29,6 +34,9 @@ const UpdateUserPage = () => {
     const [biography, setBiography] = useState('');
     const [linkedIn, setLinkedIn] = useState('');
 
+    // Tecnologías de usuario
+    const { technologies, setTechnologies, techLoading } = useTechnologies();
+
     const navigate = useNavigate();
 
     // UseEffect para establecer los valores iniciales de estado
@@ -39,9 +47,22 @@ const UpdateUserPage = () => {
             setLastName(authUser.lastName || '');
             setBiography(authUser.biography || '');
             setLinkedIn(authUser.linkedIn || '');
+            setTechnologies(authUser.technologies || []);
         }
-    }, [authUser]);
+    }, [authUser, setTechnologies]);
 
+    // Manejo de tecnologías
+    const handleTechnologyChange = (e) => {
+        const { value } = e.target;
+        setTechnologies((prevState) => {
+            const updatedTechnologies = prevState.includes(value)
+                ? prevState.filter((tech) => tech !== value)
+                : [...prevState, value];
+            return updatedTechnologies;
+        });
+    };
+
+    // Manejo de envío
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -67,8 +88,10 @@ const UpdateUserPage = () => {
             if (biography.length) user.biography = biography;
             if (linkedIn.length) user.linkedIn = linkedIn;
 
-            if (avatar !== '') updateUserWithAvatar(user);
-            else updateUser(user);
+            if (technologies.length) user.technologies = technologies;
+
+            if (avatar !== '') await updateUserWithAvatar(user);
+            else await updateUser(user);
 
             if (password.length) await updatePassword(oldPassword, password);
 
@@ -83,6 +106,8 @@ const UpdateUserPage = () => {
             );
         }
     };
+
+    console.log(technologies);
 
     return (
         <main>
@@ -171,6 +196,43 @@ const UpdateUserPage = () => {
                         className="input-box"
                     />
                 </div>
+
+                {/* Selector de tecnologías */}
+                {isDeveloper() && (
+                    <div className="min-w-[200px] col-span-2">
+                        <label className="block text-azuloscuro font-jost font-semibold text-lg">
+                            Tecnologías:
+                        </label>
+
+                        {!techLoading && (
+                            <div className="flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost font-medium focus:ring-2">
+                                {Array.isArray(technologies) &&
+                                    technologies.map((tech) => (
+                                        <label
+                                            key={tech.technology}
+                                            className="inline-flex items-center"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                value={tech.technology}
+                                                checked={technologies.includes(
+                                                    tech.technology,
+                                                )}
+                                                onChange={
+                                                    handleTechnologyChange
+                                                }
+                                                className="form-checkbox h-4 w-4"
+                                            />
+                                            <span className="ml-1 text-azuloscuro font-jost font-semibold">
+                                                {tech.technology}
+                                            </span>
+                                        </label>
+                                    ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 <div>
                     <label className="text-common" htmlFor="password">
                         Contraseña

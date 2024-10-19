@@ -67,11 +67,7 @@ const RegisterPage = () => {
                 navigate('/');
             }, 500);
         } catch (err) {
-            toast.error(
-                err.message ||
-                    'Hubo un error en el registro, inténtalo de nuevo más tarde.',
-                { id: 'registro' },
-            );
+            toast.error(err.message, { id: 'registro' });
         }
     };
 
@@ -96,8 +92,9 @@ const RegisterPage = () => {
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
+                                autoFocus
                             />
                         </div>
 
@@ -111,7 +108,7 @@ const RegisterPage = () => {
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
                             />
                         </div>
@@ -126,7 +123,7 @@ const RegisterPage = () => {
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
                             />
                         </div>
@@ -141,7 +138,7 @@ const RegisterPage = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
                             />
                         </div>
@@ -156,7 +153,7 @@ const RegisterPage = () => {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
                             />
                         </div>
@@ -170,7 +167,7 @@ const RegisterPage = () => {
                                 id="repeatpassword"
                                 name="repeatpassword"
                                 onChange={handleChange}
-                                className="w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                className="w-80 h-11 rounded-3xl bg-casiblanco block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
                                 required
                             />
                         </div>
@@ -183,14 +180,14 @@ const RegisterPage = () => {
                             <div className="flex gap-4">
                                 <label className="inline-flex items-center">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="role"
                                         value="desarrollador"
                                         checked={
                                             formData.role === 'desarrollador'
                                         }
                                         onChange={handleChange}
-                                        className="form-checkbox h-4 w-4"
+                                        className="form-radio h-4 w-4"
                                     />
                                     <span className="ml-1 text-azuloscuro font-jost font-semibold">
                                         Desarrollador
@@ -198,14 +195,14 @@ const RegisterPage = () => {
                                 </label>
                                 <label className="inline-flex items-center">
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="role"
                                         value="organizador"
                                         checked={
                                             formData.role === 'organizador'
                                         }
                                         onChange={handleChange}
-                                        className="form-checkbox h-4 w-4"
+                                        className="form-radio h-4 w-4"
                                     />
                                     <span className="ml-1 text-azuloscuro font-jost font-semibold">
                                         Organizador
