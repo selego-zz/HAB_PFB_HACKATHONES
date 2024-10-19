@@ -121,7 +121,7 @@ const getFilteredHackathonsModel = async (filters) => {
     );
 
     for (const hackathon of res) {
-        hackathon.ranking = getRankingModel(hackathon.id);
+        hackathon.ranking = await getRankingModel(hackathon.id);
     }
 
     return res;

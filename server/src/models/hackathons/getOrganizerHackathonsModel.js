@@ -1,5 +1,6 @@
 import getPool from '../../db/getPool.js';
 import { generateGetInscriptionsSQL } from '../../utils/index.js';
+import { getRankingModel } from './index.js';
 
 //////
 
@@ -11,6 +12,9 @@ const getOrganizerHackathonsModel = async (organizerId) => {
         generateGetInscriptionsSQL(`WHERE h.organizerId = ?`, 'organizador'),
         [organizerId],
     );
+    for (const hackathon of enrollments) {
+        hackathon.ranking = await getRankingModel(hackathon.id);
+    }
 
     return enrollments;
 };

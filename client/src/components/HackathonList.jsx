@@ -11,6 +11,7 @@ const HackathonList = ({ hackathons, showRating }) => {
     useEffect(() => {
         hackathons.forEach((hackathon) => {
             const element = document.getElementById(`section-${hackathon.id}`);
+
             if (element) {
                 element.onclick = () => {
                     navigate(`/hackathons/${hackathon.id}`);
@@ -18,6 +19,7 @@ const HackathonList = ({ hackathons, showRating }) => {
             }
         });
     }, [hackathons, navigate]);
+    console.log(hackathons);
 
     return (
         <ul className="mt-4">
@@ -44,6 +46,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                             hackathonId={hackathon.id}
                             editable={true}
                             scoreText={'Puntuación obtenida'}
+                            position={hackathon.position}
                             initialRating={
                                 hackathon.rating ? hackathon.rating : 0
                             }
@@ -55,6 +58,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                             hackathonId={hackathon.id}
                             editable={false}
                             scoreText={'Puntuación media'}
+                            position={hackathon.position}
                             initialRating={
                                 hackathon.average_rating
                                     ? parseInt(hackathon.average_rating)

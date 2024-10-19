@@ -10,7 +10,7 @@ const getHackathonByIdModel = async (hackathonId) => {
         hackathonId,
     ]);
 
-    if (res.length) res[0].ranking = getRankingModel(res[0].id);
+    if (res.length) res[0].ranking = await getRankingModel(res[0].id);
 
     return res[0];
 };

@@ -1,6 +1,6 @@
 import getPool from '../../db/getPool.js';
 import { generateGetInscriptionsSQL } from '../../utils/index.js';
-import { getRankingModel } from './index.js';
+import { getRankingModel, getOwnPosition } from './index.js';
 
 //////
 
@@ -13,7 +13,10 @@ const getUserHackathonsModel = async (userId) => {
         [userId],
     );
     for (const hackathon of enrollments) {
-        hackathon.ranking = getRankingModel(hackathon.id);
+        hackathon.ranking = await getRankingModel(hackathon.id);
+        hackathon.position = 'No valorado';
+        if (hackathon.score > 0)
+            hackathon.position = await getOwnPosition(hackathon.id, userId);
     }
 
     return enrollments;

@@ -107,8 +107,6 @@ const UpdateUserPage = () => {
         }
     };
 
-    console.log(technologies);
-
     return (
         <main>
             <h2 className="text-header-big">
