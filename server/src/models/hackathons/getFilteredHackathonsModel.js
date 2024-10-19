@@ -1,6 +1,6 @@
 import getPool from '../../db/getPool.js';
 
-import { getAllHackathonsModel } from './index.js';
+import { getAllHackathonsModel, getRankingModel } from './index.js';
 
 /////////////////////////////////////////////////////////////////
 // Modelo que devuelve información de los hackathones
@@ -119,6 +119,11 @@ const getFilteredHackathonsModel = async (filters) => {
         sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
         args,
     );
+
+    for (const hackathon of res) {
+        hackathon.ranking = getRankingModel(hackathon.id);
+    }
+
     return res;
 };
 

@@ -1,4 +1,5 @@
 import getPool from '../../db/getPool.js';
+import { getRankingModel } from './index.js';
 
 //////
 
@@ -25,6 +26,11 @@ const getAllHackathonsModel = async () => {
     `;
 
     const [res] = await pool.query(sql);
+
+    for (const hackathon of res) {
+        hackathon.ranking = getRankingModel(hackathon.id);
+    }
+
     return res;
 };
 
