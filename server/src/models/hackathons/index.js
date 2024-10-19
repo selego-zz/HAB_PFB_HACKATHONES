@@ -11,6 +11,7 @@ import getHackathonOrganizerModel from './getHackathonOrganizerModel.js';
 import getHackathonTechnologiesModel from './getHackathonTechnologiesModel.js';
 import getHackathonThemesModel from './getHackathonThemesModel.js';
 import getOrganizerHackathonsModel from './getOrganizerHackathonsModel.js';
+import getOwnPosition from './getOwnPosition.js';
 import getRankingModel from './getRankingModel.js';
 import getUserHackathonsModel from './getUserHackathonsModel.js';
 import addHackathonModel from './addHackathonModel.js';
@@ -32,6 +33,7 @@ export {
     getHackathonTechnologiesModel,
     getHackathonThemesModel,
     getOrganizerHackathonsModel,
+    getOwnPosition,
     getRankingModel,
     getUserHackathonsModel,
     addHackathonModel,

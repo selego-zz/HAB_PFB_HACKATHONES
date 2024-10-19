@@ -6,7 +6,7 @@ const getRankingModel = async (hackathonId) => {
     const pool = await getPool();
 
     let [res] = await pool.query(
-        `SELECT username, score FROM enrollsIn JOIN users ON userId = user.id WHERE hackathonId = ? ORDER BY score DESC`,
+        `SELECT username, score FROM enrollsIn JOIN users ON userId = users.id WHERE hackathonId = ? ORDER BY score DESC`,
         [hackathonId],
     );
 
@@ -21,6 +21,6 @@ const getRankingModel = async (hackathonId) => {
         } else break;
     }
 
-    return res;
+    return ranking;
 };
 export default getRankingModel;

@@ -28,7 +28,7 @@ const getAllHackathonsModel = async () => {
     const [res] = await pool.query(sql);
 
     for (const hackathon of res) {
-        hackathon.ranking = getRankingModel(hackathon.id);
+        hackathon.ranking = await getRankingModel(hackathon.id);
     }
 
     return res;

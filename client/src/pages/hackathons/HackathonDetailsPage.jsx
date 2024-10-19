@@ -152,8 +152,6 @@ const HackathonDetailsPage = () => {
         return <div>Cargando...</div>;
     }
 
-    console.log(hackathon);
-
     return (
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
             <HackathonDetails

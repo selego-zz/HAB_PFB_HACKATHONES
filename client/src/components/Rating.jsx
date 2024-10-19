@@ -29,9 +29,17 @@ const Rating = ({
     hackathonId,
     initialRating,
     ranking,
+    position,
     scoreText,
     editable,
 }) => {
+    console.log(hackathonId);
+    console.log(initialRating);
+    console.log(ranking);
+    console.log(position);
+    console.log(scoreText);
+    console.log(editable);
+
     const [rating, setRating] = useState(initialRating);
     const _stars = [];
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');
@@ -46,7 +54,7 @@ const Rating = ({
             </div>
             <h2 className="font-bold">{scoreText} </h2>
             <div className="ranking text-2xl text-azuloscuro font-bold">
-                {ranking}
+                {ranking} Puntos - Posición {position}
             </div>
         </article>
     );
@@ -56,6 +64,7 @@ Rating.propTypes = {
     hackathonId: PropTypes.number.isRequired,
     initialRating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
+    position: PropTypes.number.isRequired,
     scoreText: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
 };
