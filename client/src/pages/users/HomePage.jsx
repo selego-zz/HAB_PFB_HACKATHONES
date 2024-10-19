@@ -16,36 +16,32 @@ const HomePage = () => {
     return (
         <main>
             <div className="relative">
-                <div className="lg:bg-[url('/assets/images/back-banner.jpg')] lg:bg-cover lg:bg-center lg:absolute lg:left-1/3 inset-0 z-0"></div>
+                <div className="absolute bg-[url('/assets/images/back-banner.jpg')] lg:bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center lg:left-1/3 inset-0 z-0 min-h-screen"></div>
 
-                <div className="relative z-10 flex flex-col items-center justify-center lg:items-start sm:pt-10">
-                    <div>
-                        <h2 className="text-header-big">
-                            El hogar de los hackathones.
-                        </h2>
-                    </div>
+                <div className="absolute inset-0 z-10 bg-blanco opacity-80 lg:opacity-0"></div>
 
-                    <div className="ml-10 mr-10 lg:ml-20 mt-2 lg:w-96">
-                        <p className="text-common">
-                            Donde las organizaciones y los desarrolladores se
-                            unen para construir, inspirar e innovar.
-                        </p>
-                    </div>
+                <div className="relative z-20 min-h-screen flex flex-col items-center lg:items-start sm:pt-10 lg:ml-8">
+                    <h2 className="text-header-big mt-24 lg:mt-14">
+                        El hogar de los hackathones.
+                    </h2>
 
-                    <div className="flex flex-col items-center justify-center lg:items-start h-60">
-                        <button
-                            onClick={handleOrganizacionesClick}
-                            className="button-big-rounded-green"
-                        >
-                            Organizaciones<span className="ml-10">→</span>
-                        </button>
-                        <button
-                            onClick={handleParticipantesClick}
-                            className="button-big-rounded-green"
-                        >
-                            Participantes<span className="ml-16">→</span>
-                        </button>
-                    </div>
+                    <p className="text-common m-10 lg:ml-20 lg:w-96">
+                        Donde las organizaciones y los desarrolladores se unen
+                        para construir, inspirar e innovar.
+                    </p>
+
+                    <button
+                        onClick={handleOrganizacionesClick}
+                        className="button-big-rounded-green"
+                    >
+                        Para organizadores<span className="ml-3">→</span>
+                    </button>
+                    <button
+                        onClick={handleParticipantesClick}
+                        className="button-big-rounded-green"
+                    >
+                        Para participantes<span className="ml-4">→</span>
+                    </button>
                 </div>
             </div>
         </main>
