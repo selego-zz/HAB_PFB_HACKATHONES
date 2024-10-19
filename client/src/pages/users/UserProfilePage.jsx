@@ -20,7 +20,7 @@ const UserProfilePage = () => {
     const [historico, setHistorico] = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
 
     const [historicHackathons, setHistoricHackathons] = useState([]);
-    const [actualHackathons, setActualHackathons] = useState([]);
+    const [currentHackathons, setCurrentHackathons] = useState([]);
 
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const UserProfilePage = () => {
                             new Date(hackathon.hackathonEnd) <= Date.now(),
                     ),
                 );
-                setActualHackathons(
+                setCurrentHackathons(
                     newHackathons.filter(
                         (hackathon) =>
                             new Date(hackathon.hackathonEnd) > Date.now(),
@@ -165,7 +165,7 @@ const UserProfilePage = () => {
 
             {/* Hackathons Activos */}
             <div>
-                {!historico && <HackathonList hackathons={actualHackathons} />}
+                {!historico && <HackathonList hackathons={currentHackathons} />}
             </div>
             <button onClick={handleRemoveUser} className="button-angled-red">
                 Eliminar usuario
