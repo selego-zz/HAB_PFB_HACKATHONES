@@ -14,9 +14,13 @@ const addDummyData = async () => {
     const pool = await getPool();
     ///////////////////////////////////////////////
     //insertamos los datos de la tabla usuarios
+    //aprovechamos el mismo bucle para meterles tecnologías
     ///////////////////////////////////////////////
+    const technologies = process.env.DB_TECHNOLOGIES.split(',').map(
+        (technology) => technology.replace(/^"|"$/g, ''),
+    );
     for (const data of users) {
-        await pool.query(
+        const [res] = await pool.query(
             `    
             INSERT INTO users (
                 username, 
@@ -42,6 +46,23 @@ const addDummyData = async () => {
                 data.avatar,
             ],
         );
+
+        if (data.role === 'desarrollador') {
+            const tecs = [];
+            const nTec = Math.floor(Math.random() * 5);
+            for (let i = 0; i < nTec; i++) {
+                const actualTec = Math.ceil(
+                    Math.random() * technologies.length,
+                );
+                if (!tecs.includes(actualTec)) {
+                    tecs.push(actualTec);
+                    await pool.query(
+                        'INSERT INTO userTechnologies (userId, technologyId) VALUES (?, ?)',
+                        [res.insertId, actualTec],
+                    );
+                }
+            }
+        }
     }
 
     ///////////////////////////////////////////////
