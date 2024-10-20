@@ -99,7 +99,7 @@ const UserProfilePage = () => {
             toast.error(err.message, { id: 'userprofile' });
         }
     };
-
+    if (!authUser) return <h1>Loading...</h1>;
     return (
         <div>
             {/* Información del usuario */}

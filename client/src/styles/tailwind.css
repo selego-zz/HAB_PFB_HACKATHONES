@@ -26,6 +26,9 @@
     .text-header-big {
         @apply font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0;
     }
+    .text-header-medium {
+        @apply font-semibold text-xl font-jost lg:ml-20 mt-10 lg:mt-0;
+    }
     .text-common {
         @apply font-jost font-medium text-center lg:text-left;
     }
