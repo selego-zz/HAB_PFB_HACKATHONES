@@ -46,7 +46,7 @@ const Rating = ({
                 )}
             </div>
             <h2 className="font-bold">{scoreText} </h2>
-            <div className="ranking text-2xl text-azuloscuro font-bold">
+            <div className="ranking text-lg text-azuloscuro font-bold">
                 {ranking} Puntos - Posición {position}
             </div>
         </article>
