@@ -25,6 +25,8 @@ const HackathonDetails = ({
     const navigate = useNavigate();
     const { VITE_API_UPLOADS } = import.meta.env;
 
+    console.log(isRegistered);
+
     return (
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
@@ -179,7 +181,7 @@ const HackathonDetails = ({
                     <div className="mb-4">
                         <p className="flex items-center mb-2">
                             <img
-                                src="/public/assets/icons/location.svg"
+                                src="/assets/icons/location.svg"
                                 alt="Icono de ubicación de hackathon."
                                 width="30"
                                 className="mr-2"
@@ -200,7 +202,7 @@ const HackathonDetails = ({
 
                         <p className="flex items-center mb-2 font-medium">
                             <img
-                                src="/public/assets/icons/prizes.svg"
+                                src="/assets/icons/prizes.svg"
                                 alt="Icono de ubicación de hackathon."
                                 width="30"
                                 className="mr-2"
@@ -212,7 +214,7 @@ const HackathonDetails = ({
 
                     <p className="flex items-center mb-2">
                         <img
-                            src="/public/assets/icons/calendar.svg"
+                            src="/assets/icons/calendar.svg"
                             alt="Icono de fecha de hackathon."
                             width="30"
                             className="mr-2"
@@ -220,9 +222,9 @@ const HackathonDetails = ({
                         {`${formatDate(hackathon?.hackathonDate)} — ${formatDate(hackathon?.hackathonEnd)}`}
                     </p>
 
-                    <p className="flex items-center mb-2">
+                    <div className="flex items-center mb-2">
                         <img
-                            src="/public/assets/icons/inscription.svg"
+                            src="/assets/icons/inscription.svg"
                             alt="Icono de ubicación de hackathon."
                             width="30"
                             className="mr-2"
@@ -238,7 +240,7 @@ const HackathonDetails = ({
                             </strong>
                             .
                         </p>
-                    </p>
+                    </div>
                 </aside>
             </div>
         </div>

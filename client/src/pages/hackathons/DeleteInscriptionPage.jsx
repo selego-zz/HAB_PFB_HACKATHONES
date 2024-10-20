@@ -81,7 +81,7 @@ const DeleteInscriptionPage = () => {
         <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
             <div className="bg-blanco bg-opacity-90">
                 <div className="flex items-center flex-col justify-center flex-grow h-96">
-                    <div className="relative bg-gradient-to-r from-verdeclaro to-casiblanco p-6 rounded-2xl shadow-xl w-96 h-56 text-center flex justify-center items-center flex-col sm:w-2/5 sm:min-w-96">
+                    <div className="relative bg-gradient-to-r from-verdeclaro to-casiblanco p-6 rounded-2xl shadow-xl w-80 h-56 text-center flex justify-center items-center flex-col sm:w-2/5 sm:min-w-96">
                         <button
                             onClick={handleCancel}
                             className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-verdemarino text-negro"
@@ -100,7 +100,7 @@ const DeleteInscriptionPage = () => {
                             <>
                                 {isCancellable ? (
                                     <p className="mb-4 font-jost font-medium text-azuloscuro">
-                                        ¿Quieres cancelar la inscripción al
+                                        ¿Quieres cancelar tu inscripción al
                                         evento?
                                     </p>
                                 ) : (
