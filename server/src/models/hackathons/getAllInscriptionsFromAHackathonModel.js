@@ -1,6 +1,8 @@
 import getPool from '../../db/getPool.js';
 
 import { generateGetInscriptionsSQL } from '../../utils/index.js';
+import { getRankingModel, getUsersEnrolledOnAHackathonModel } from './index.js';
+
 //////
 
 /////////////////////////////////////////////////////////////////
@@ -13,6 +15,11 @@ const getAllInscriptionsFromAHackathonModel = async (hackathonId) => {
         generateGetInscriptionsSQL('WHERE hackathonId = ?', 'organizador'),
         [hackathonId],
     );
+
+    for (const hackathon of enrollments) {
+        hackathon.developers = getUsersEnrolledOnAHackathonModel;
+        hackathon.ranking = await getRankingModel(hackathon.id);
+    }
 
     return enrollments;
 };

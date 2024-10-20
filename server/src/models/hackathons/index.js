@@ -14,6 +14,7 @@ import getOrganizerHackathonsModel from './getOrganizerHackathonsModel.js';
 import getOwnPosition from './getOwnPosition.js';
 import getRankingModel from './getRankingModel.js';
 import getUserHackathonsModel from './getUserHackathonsModel.js';
+import getUsersEnrolledOnAHackathonModel from './getUsersEnrolledOnAHackathonModel.js';
 import addHackathonModel from './addHackathonModel.js';
 import updateHackathonModel from './updateHackathonModel.js';
 import updateRatingModel from './updateRatingModel.js';
@@ -36,6 +37,7 @@ export {
     getOwnPosition,
     getRankingModel,
     getUserHackathonsModel,
+    getUsersEnrolledOnAHackathonModel,
     addHackathonModel,
     updateHackathonModel,
     updateRatingModel,

@@ -1,5 +1,6 @@
 import {
     addHackathonInscriptionModel,
+    addHackathonModel,
     deleteHackathonModel,
     deleteHackathonInscriptionModel,
     getAllHackathonsModel,
@@ -15,7 +16,7 @@ import {
     getOwnPosition,
     getRankingModel,
     getUserHackathonsModel,
-    addHackathonModel,
+    getUsersEnrolledOnAHackathonModel,
     updateHackathonModel,
     updateRatingModel,
     updateScoreModel,
@@ -42,6 +43,7 @@ import {
 export {
     // hackathons
     addHackathonInscriptionModel,
+    addHackathonModel,
     deleteHackathonModel,
     deleteHackathonInscriptionModel,
     getAllHackathonsModel,
@@ -57,7 +59,7 @@ export {
     getOrganizerHackathonsModel,
     getRankingModel,
     getUserHackathonsModel,
-    addHackathonModel,
+    getUsersEnrolledOnAHackathonModel,
     updateHackathonModel,
     updateRatingModel,
     updateScoreModel,
