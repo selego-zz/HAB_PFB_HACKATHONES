@@ -29,10 +29,10 @@ const generateGetInscriptionsSQL = (WHERE, role) => {
             AVG(e.rating) AS average_rating,
             AVG(e.score) AS average_score
         FROM 
-            enrollsin e
-        JOIN 
-            hackathons h ON e.hackathonId = h.id
-        JOIN 
+            hackathons h
+        LEFT JOIN 
+            enrollsin e ON e.hackathonId = h.id
+        LEFT JOIN 
             users u ON e.userId = u.id
         ${WHERE}
         GROUP BY 
