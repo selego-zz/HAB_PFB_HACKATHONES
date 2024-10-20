@@ -12,6 +12,9 @@ import './styles/tailwind.css';
 import './styles/scrollbar.css';
 import './styles/logoscarousel.css';
 
+// Botón de scroll arriba
+import { ScrollToTopButton } from './components/aux_components/buttons';
+
 //////
 
 createRoot(document.getElementById('root')).render(
@@ -19,6 +22,7 @@ createRoot(document.getElementById('root')).render(
         <BrowserRouter>
             <AuthProvider>
                 <ScrollToTop />
+                <ScrollToTopButton className="button-top" />
                 <App />
             </AuthProvider>
         </BrowserRouter>
