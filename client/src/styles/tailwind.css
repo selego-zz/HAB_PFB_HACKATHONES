@@ -5,6 +5,13 @@
 @tailwind utilities;
 
 @layer components {
+    .button-back,
+    .button-forward {
+        @apply flex items-center justify-center bg-verdeagua text-blanco p-2 rounded-full hover:bg-verdemarino transition duration-200 text-xl;
+    }
+    .button-top {
+        @apply fixed z-50 bottom-4 right-4 bg-azuloscuro text-blanco p-2 rounded-full hover:bg-verdemarino transition duration-200 text-xl opacity-50 hover:opacity-100;
+    }
     .button-rounded-green {
         @apply flex items-center justify-center  bg-casiblanco text-azuloscuro rounded-3xl  hover:bg-verdeclaro font-jost font-semibold sm:h-9 sm:w-44 h-7 w-28 mx-1 text-sm sm:text-lg;
     }

@@ -2,6 +2,8 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 import { NavLink } from 'react-router-dom';
 
+import { BackButton, ForwardButton } from './aux_components/buttons/index.js';
+
 const { VITE_API_UPLOADS } = import.meta.env;
 
 //////
@@ -62,6 +64,8 @@ const Header = () => {
 
                 {/* Navegación de botones */}
                 <nav className="flex items-center gap-2">
+                    <BackButton className="button-back" />
+                    <ForwardButton className="button-forward" />
                     {isDeveloper() && (
                         <NavLink
                             to="/hackathons"
