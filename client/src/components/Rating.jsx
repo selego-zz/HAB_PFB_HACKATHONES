@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useHackathons from '../hooks/useHackathons';
 import { useState } from 'react';
 
-const MakeStar = (star, rating, setRating, hackathonId, editable) => {
+const MakeStar = (star, rating, setRating, hackathonId, isDeveloper) => {
     const { updateRating } = useHackathons();
     return (
         <span
@@ -12,7 +12,7 @@ const MakeStar = (star, rating, setRating, hackathonId, editable) => {
             className="hover:text-6xl cursor-pointer"
             onClick={() => {
                 if (
-                    editable &&
+                    isDeveloper &&
                     confirm('¿Está seguro de que desea cambiar la puntuación?')
                 ) {
                     updateRating(hackathonId, rating);
@@ -30,8 +30,7 @@ const Rating = ({
     initialRating,
     ranking,
     position,
-    scoreText,
-    editable,
+    isDeveloper,
 }) => {
     const [rating, setRating] = useState(initialRating);
     const _stars = [];
@@ -42,13 +41,23 @@ const Rating = ({
             <h2 className="font-bold">Rating</h2>
             <div className="stars text-4xl text-amarillo group">
                 {_stars.map((star, index) =>
-                    MakeStar(star, index + 1, setRating, hackathonId, editable),
+                    MakeStar(
+                        star,
+                        index + 1,
+                        setRating,
+                        hackathonId,
+                        isDeveloper,
+                    ),
                 )}
             </div>
-            <h2 className="font-bold">{scoreText} </h2>
-            <div className="ranking text-lg text-azuloscuro font-bold">
-                {ranking} Puntos - Posición {position}
-            </div>
+            {isDeveloper && (
+                <section>
+                    <p>Has obtenido: {ranking} Puntos</p>
+                    <p className=" text-azuloscuro font-bold">
+                        Conseguiste el puesto: {position}
+                    </p>
+                </section>
+            )}
         </article>
     );
 };
@@ -58,8 +67,7 @@ Rating.propTypes = {
     initialRating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
     position: PropTypes.number.isRequired,
-    scoreText: PropTypes.string.isRequired,
-    editable: PropTypes.bool.isRequired,
+    isDeveloper: PropTypes.bool.isRequired,
 };
 
 export default Rating;
