@@ -83,6 +83,7 @@ const HackathonDetailsPage = () => {
             // Comprobamos que no tenga participantes inscritos.
             const participants =
                 await getAllInscriptionsFromAHackathon(hackathonId);
+            console.log(participants);
 
             if (participants.length > 0) {
                 toast.error(

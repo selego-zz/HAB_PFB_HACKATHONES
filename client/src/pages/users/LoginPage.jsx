@@ -105,6 +105,7 @@ const LoginPage = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             className="input mb-12"
                             required
+                            autoFocus
                         />
 
                         <label htmlFor="pass" className="label">
@@ -122,16 +123,17 @@ const LoginPage = () => {
                         {/* Habilitamos o deshabilitamos el botón en función de si estamos haciendo un fetch o no. */}
                         <button
                             disabled={loading}
-                            className="button-blue mt-20"
+                            className="button-blue mt-16"
                         >
                             Iniciar Sesión
                         </button>
                     </form>
                     <NavLink
                         to="/users/recover"
-                        className="block text-azuloscuro font-jost font-semibold text-center text-md mt-5 "
+                        className="block text-azuloscuro hover:text-negro font-jost font-semibold text-center text-md mt-5 "
                     >
-                        ¿Has olvidado tu contraseña? pulsa aqui para cambiarla
+                        ¿Has olvidado tu contraseña? <br /> Pulsa aquí para
+                        cambiarla.
                     </NavLink>
                 </div>
             </div>

@@ -83,7 +83,7 @@ const UpdateHackathonPage = () => {
             formData.id = hackathon.id;
             const res = await updateHackathon(formData);
             toast.success(res);
-            navigate('/');
+            navigate(`/hackathons/${hackathonId}`);
         } catch (err) {
             toast.error(err.message);
         }

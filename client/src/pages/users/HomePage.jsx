@@ -21,7 +21,7 @@ const HomePage = () => {
                 <div className="absolute inset-0 z-10 bg-blanco opacity-80 lg:opacity-0"></div>
 
                 <div className="relative z-20 min-h-screen flex flex-col items-center lg:items-start sm:pt-10 lg:ml-8">
-                    <h2 className="text-header-big mt-24 lg:mt-14">
+                    <h2 className="text-header-big mt-24 lg:mt-14 text-center mx-10">
                         El hogar de los hackathones.
                     </h2>
 
