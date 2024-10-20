@@ -72,8 +72,8 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
-            <div className=" bg-blanco bg-opacity-90">
+        <div className="h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+            <div className="h-full bg-blanco bg-opacity-90">
                 <div className="max-w-4xl mx-auto py-8 px-4">
                     <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
                         REGÍSTRATE
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="label">Apellido:</label>
+                            <label className="label">Apellidos:</label>
                             <input
                                 type="text"
                                 id="lastName"

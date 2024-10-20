@@ -13,6 +13,7 @@ export default {
             verdemarino: '#57CC99',
             verdeclaro: '#A6F2B7',
             casiblanco: '#C7F9CC',
+            verde2: '#d8f3dc',
             blanco: '#ffffff',
             negro: '#000000',
             rojoclaro: '#FFAFAF',
