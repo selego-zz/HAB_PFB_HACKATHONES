@@ -50,6 +50,14 @@ const Rating = ({
                     ),
                 )}
             </div>
+            {!isDeveloper && (
+                <section>
+                    <p>
+                        La opinión media sobre este Hackathon ha sido de{' '}
+                        {rating} / 5
+                    </p>
+                </section>
+            )}
             {isDeveloper && (
                 <section>
                     <p>Has obtenido: {ranking} Puntos</p>
