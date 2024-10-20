@@ -112,177 +112,207 @@ const UpdateUserPage = () => {
 
     return (
         <main>
-            <h2 className="text-header-big">
-                Actualización de datos de usuario
-            </h2>
-            <form
-                onSubmit={handleSubmit}
-                className="flex flex-col gap-4 sm:grid sm:grid-cols-2"
-            >
-                <div>
-                    <label className="text-common" htmlFor="username">
-                        Nombre de usuario
-                    </label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="linkedIn">
-                        enlace a LinkedIn
-                    </label>
-                    <input
-                        type="text"
-                        id="linkedIn"
-                        name="linkedIn"
-                        value={linkedIn}
-                        onChange={(e) => setLinkedIn(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="firstName">
-                        Nombre
-                    </label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="lastName">
-                        Apellidos
-                    </label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="avatar">
-                        Avatar
-                    </label>
-                    <input
-                        type="file"
-                        id="avatar"
-                        name="avatar"
-                        accept="image/jpeg, image/png"
-                        onChange={(e) => setAvatar(e.target.files[0])}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="biography">
-                        Biografía
-                    </label>
-                    <input
-                        type="text"
-                        id="biography"
-                        name="biography"
-                        value={biography}
-                        onChange={(e) => setBiography(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-
-                {/* Selector de tecnologías */}
-                {isDeveloper() && (
-                    <div className="min-w-[200px] col-span-2">
-                        <label className="block text-azuloscuro font-jost font-semibold text-lg">
-                            Tecnologías:
-                        </label>
-
-                        {!techLoading && (
-                            <div className="flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost font-medium focus:ring-2">
-                                {Array.isArray(technologies) &&
-                                    technologies.map((tech) => (
-                                        <label
-                                            key={tech.technology}
-                                            className="inline-flex items-center"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                value={tech.technology}
-                                                checked={selectedTechnologies.includes(
-                                                    tech.technology,
-                                                )}
-                                                onChange={
-                                                    handleTechnologyChange
-                                                }
-                                                className="form-checkbox h-4 w-4"
-                                            />
-                                            <span className="ml-1 text-azuloscuro font-jost font-semibold">
-                                                {tech.technology}
-                                            </span>
-                                        </label>
-                                    ))}
+            <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+                <div className="h-full bg-blanco bg-opacity-90">
+                    <div className="max-w-4xl mx-auto py-8 px-4">
+                        <h2 className="text-header-big text-azuloscuro text-center mb-10">
+                            Actualiza tu perfil.
+                        </h2>
+                        <form
+                            onSubmit={handleSubmit}
+                            className="flex flex-col gap-8 md:grid md:grid-cols-2"
+                        >
+                            <div>
+                                <label className="label" htmlFor="firstName">
+                                    Nombre:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    name="firstName"
+                                    value={firstName}
+                                    onChange={(e) =>
+                                        setFirstName(e.target.value)
+                                    }
+                                    className="input"
+                                />
                             </div>
-                        )}
+                            <div>
+                                <label className="label" htmlFor="lastName">
+                                    Apellidos:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    name="lastName"
+                                    value={lastName}
+                                    onChange={(e) =>
+                                        setLastName(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+                            <div>
+                                <label className="label" htmlFor="username">
+                                    Nombre de usuario:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    value={username}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+                            <div>
+                                <label className="label" htmlFor="linkedIn">
+                                    Linkedin:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="linkedIn"
+                                    name="linkedIn"
+                                    value={linkedIn}
+                                    onChange={(e) =>
+                                        setLinkedIn(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+                            <div>
+                                <label className="label" htmlFor="oldPassword">
+                                    Contraseña antigua:
+                                </label>
+                                <input
+                                    type="password"
+                                    id="oldPassword"
+                                    name="oldPassword"
+                                    value={oldPassword}
+                                    onChange={(e) =>
+                                        setOldPassword(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+                            <div>
+                                <label className="label" htmlFor="password">
+                                    Nueva contraseña:
+                                </label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    className="label"
+                                    htmlFor="repeatedPassword"
+                                >
+                                    Repite la nueva contraseña:
+                                </label>
+                                <input
+                                    type="password"
+                                    id="repeatedPassword"
+                                    name="repeatedPassword"
+                                    value={repeatedPassword}
+                                    onChange={(e) =>
+                                        setRepeatedPassword(e.target.value)
+                                    }
+                                    className="input"
+                                />
+                            </div>
+
+                            <div className="flex flex-col items-center ">
+                                <label className="label" htmlFor="avatar">
+                                    Foto de perfil:
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="avatar"
+                                    name="avatar"
+                                    accept="image/jpeg, image/png"
+                                    onChange={(e) =>
+                                        setAvatar(e.target.files[0])
+                                    }
+                                    className=""
+                                />
+                            </div>
+
+                            <div className=" flex flex-col col-span-2 mt-10">
+                                <label
+                                    className="font-jost font-semibold text-azuloscuro text-lg ml-8"
+                                    htmlFor="biography"
+                                >
+                                    Biografía:
+                                </label>
+                                <textarea
+                                    id="biography"
+                                    name="biography"
+                                    rows="5"
+                                    cols="50"
+                                    value={biography}
+                                    onChange={(e) =>
+                                        setBiography(e.target.value)
+                                    }
+                                    className="bg-casiblanco rounded-xl block text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2 p-5"
+                                />
+                            </div>
+
+                            {/* Selector de tecnologías */}
+                            {isDeveloper() && (
+                                <div className="min-w-[200px] col-span-2 mt-10">
+                                    <label className="label">
+                                        Tecnologías:
+                                    </label>
+
+                                    {!techLoading && (
+                                        <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
+                                            {Array.isArray(technologies) &&
+                                                technologies.map((tech) => (
+                                                    <label
+                                                        key={tech.technology}
+                                                        className="inline-flex items-center"
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            value={
+                                                                tech.technology
+                                                            }
+                                                            checked={selectedTechnologies.includes(
+                                                                tech.technology,
+                                                            )}
+                                                            onChange={
+                                                                handleTechnologyChange
+                                                            }
+                                                            className="form-checkbox h-4 w-4"
+                                                        />
+                                                        <span className="ml-1 text-azuloscuro font-jost font-medium">
+                                                            {tech.technology}
+                                                        </span>
+                                                    </label>
+                                                ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            <div className="col-span-2 mt-14">
+                                <button className="button-blue">Guardar</button>
+                            </div>
+                        </form>
                     </div>
-                )}
-
-                <div>
-                    <label className="text-common" htmlFor="password">
-                        Contraseña
-                    </label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="input-box"
-                    />
                 </div>
-                <div>
-                    <label className="text-common" htmlFor="repeatedPassword">
-                        Repite la contraseña
-                    </label>
-                    <input
-                        type="password"
-                        id="repeatedPassword"
-                        name="repeatedPassword"
-                        value={repeatedPassword}
-                        onChange={(e) => setRepeatedPassword(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-                <div>
-                    <label className="text-common" htmlFor="oldPassword">
-                        Como medida de seguridad: si cambias la contraseña
-                        tienes que indicarnos la contraseña actual.
-                        <br />
-                        Solo es necesario si quieres cambiar la contraseña
-                    </label>
-                    <input
-                        type="password"
-                        id="oldPassword"
-                        name="oldPassword"
-                        value={oldPassword}
-                        onChange={(e) => setOldPassword(e.target.value)}
-                        className="input-box"
-                    />
-                </div>
-
-                <div className="col-span-2">
-                    <button className="button-rounded-green">
-                        Actualizar Datos
-                    </button>
-                </div>
-            </form>
+            </div>
         </main>
     );
 };

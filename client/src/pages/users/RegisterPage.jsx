@@ -97,7 +97,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="label">Apellido:</label>
+                            <label className="label">Apellidos:</label>
                             <input
                                 type="text"
                                 id="lastName"

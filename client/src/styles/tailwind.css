@@ -24,7 +24,7 @@
         @apply mt-1 block w-11/12 mx-auto rounded-md shadow-sm bg-verdeclaro p-2;
     }
     .text-header-big {
-        @apply font-semibold text-3xl font-jost lg:ml-20 mt-10 lg:mt-0;
+        @apply font-semibold text-3xl font-jost;
     }
     .text-header-medium {
         @apply font-semibold text-xl font-jost lg:ml-20 mt-10 lg:mt-0;
