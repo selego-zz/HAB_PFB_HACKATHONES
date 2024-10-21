@@ -31,8 +31,7 @@ const Header = () => {
         return null; // Retorna null si no hay contexto
     }
 
-    const { authUser, isAdmin, isDeveloper, isOrganizer, authLogoutState } =
-        authContext;
+    const { authUser, isAdmin, isOrganizer, authLogoutState } = authContext;
 
     const toggleMenu = () => {
         setMenuOpen((prev) => !prev);
@@ -46,34 +45,37 @@ const Header = () => {
 
     return (
         <header className="bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro w-full relative">
-            <div className="flex justify-between items-center max-w-full mx-auto px-4 py-2 sm:px-10">
+            <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-2 sm:px-10">
                 {/* Logo */}
-                <NavLink to="/">
-                    <picture>
-                        <source
-                            media="(max-width: 639px)"
-                            srcSet="/logo/app-logo-small.png"
-                        />
-                        <img
-                            src="/logo/app-logo.png"
-                            alt="Logo de la página."
-                            className="h-16 w-16 sm:h-16 sm:w-36"
-                        />
-                    </picture>
-                </NavLink>
+                <div className="grow">
+                    <NavLink to="/">
+                        <picture>
+                            <source
+                                media="(max-width: 770px)"
+                                srcSet="/logo/app-logo-small.png"
+                            />
+                            <img
+                                src="/logo/app-logo.png"
+                                alt="Logo de la página."
+                                className="h-16 w-fit"
+                            />
+                        </picture>
+                    </NavLink>
+                </div>
 
                 {/* Navegación de botones */}
-                <nav className="flex items-center gap-2">
+                <div className="flex gap-3 mx-3">
                     <BackButton className="button-back" />
                     <ForwardButton className="button-forward" />
-                    {isDeveloper() && (
-                        <NavLink
-                            to="/hackathons"
-                            className="button-rounded-green"
-                        >
-                            <button>Eventos</button>
-                        </NavLink>
-                    )}
+                </div>
+                <nav className="hidden sm:flex items-center gap-1 mx-3">
+                    <NavLink
+                        to="/hackathons"
+                        className="button-rounded-green w-20"
+                    >
+                        <button>Eventos</button>
+                    </NavLink>
+
                     {isOrganizer() && (
                         <NavLink
                             to="/hackathons/create"
@@ -93,18 +95,18 @@ const Header = () => {
                 </nav>
 
                 {/* Icono de avatar (menú hamburguesa) o botones de inicio de sesión */}
-                <div className="flex items-center">
+                <div className="flex items-center gap-2">
                     {!authUser ? (
                         <>
                             <NavLink
                                 to="/users/login"
-                                className="button-rounded-green"
+                                className="button-rounded-green w-fit p-2"
                             >
                                 <button>Iniciar sesión</button>
                             </NavLink>
                             <NavLink
                                 to="/users/register"
-                                className="button-rounded-green"
+                                className="button-rounded-green w-fit p-2"
                             >
                                 <button>Registrarse</button>
                             </NavLink>
@@ -117,7 +119,7 @@ const Header = () => {
                                     VITE_API_UPLOADS + '/default-avatar.png'
                                 }
                                 alt="Avatar del usuario"
-                                className="h-12 w-12 rounded-full"
+                                className="h-16 w-16 rounded-full ml-3"
                             />
                         </button>
                     )}
@@ -129,13 +131,45 @@ const Header = () => {
                 <div className="fixed inset-0 bg-negro bg-opacity-50 z-40"></div>
             )}
 
-            {/* Menú hamburguesa con "Perfil" y "Cerrar sesión" */}
+            {/* Menú hamburguesa con botones adicionales para pantallas pequeñas */}
             {isMenuOpen && (
                 <nav
                     ref={menuRef}
                     className="absolute top-16 right-7 bg-azuloscuro text-blanco w-fit rounded-lg shadow-lg z-50 p-6"
                 >
                     <ul className="flex flex-col items-center">
+                        {/* Botones adicionales en pantallas pequeñas */}
+                        <li className="py-2 sm:hidden">
+                            <NavLink
+                                to="/hackathons"
+                                className="button-rounded-green"
+                                onClick={toggleMenu}
+                            >
+                                Eventos
+                            </NavLink>
+                        </li>
+                        {isOrganizer() && (
+                            <li className="py-2 sm:hidden">
+                                <NavLink
+                                    to="/hackathons/create"
+                                    className="button-rounded-green"
+                                    onClick={toggleMenu}
+                                >
+                                    Añadir Hackathon
+                                </NavLink>
+                            </li>
+                        )}
+                        {isAdmin() && (
+                            <li className="py-2 sm:hidden">
+                                <NavLink
+                                    to="users/getAllUsers"
+                                    className="button-rounded-green"
+                                    onClick={toggleMenu}
+                                >
+                                    Listado de usuarios
+                                </NavLink>
+                            </li>
+                        )}
                         <li className="py-2">
                             <NavLink
                                 to="/users"

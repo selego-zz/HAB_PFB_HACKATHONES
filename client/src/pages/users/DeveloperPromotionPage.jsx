@@ -29,7 +29,7 @@ const DeveloperPromotionPage = () => {
                             desarrolladores con proyectos innovadores. Participa
                             en hackathones que te ayudarán a crecer
                             profesionalmente, mejorar tus habilidades técnicas y
-                            crear conexiones valiosas en la industria.
+                            entablar valiosas conexiones en la industria.
                         </p>
                     </div>
 
@@ -95,8 +95,8 @@ const DeveloperPromotionPage = () => {
                             habilidades en un entorno competitivo y
                             colaborativo. Hack-a-ton es tu puerta de entrada a
                             proyectos emocionantes y a un futuro profesional
-                            lleno de oportunidades. ¡Mira qué empresas están
-                            buscando talento!
+                            lleno de oportunidades. ¡Mira qué empresas buscan a
+                            gente como tú!
                         </p>
                     </div>
 
