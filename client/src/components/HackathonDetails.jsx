@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
-const formatDate = (dateStr) => {
+/* const formatDate = (dateStr) => {
     const options = { day: 'numeric', month: 'short', year: '2-digit' };
     return new Date(dateStr)
         .toLocaleDateString('es-ES', options)
         .replace('.', '');
-};
+}; */
 
 // Renderizado de detalles de hackathon
 const HackathonDetails = ({
@@ -24,6 +25,20 @@ const HackathonDetails = ({
 }) => {
     const navigate = useNavigate();
     const { VITE_API_UPLOADS } = import.meta.env;
+
+    // Formato de fechas
+    const formattedInscrStartDate = dayjs(hackathon?.inscriptionDate).format(
+        'DD/MM/YYYY HH:mm',
+    );
+    const formattedInscrEndDate = dayjs(hackathon?.inscriptionEnd).format(
+        'DD/MM/YYYY HH:mm',
+    );
+    const formattedHackStartDate = dayjs(hackathon?.hackathonDate).format(
+        'DD/MM/YYYY HH:mm',
+    );
+    const formattedHackEndDate = dayjs(hackathon?.hackathonEnd).format(
+        'DD/MM/YYYY HH:mm',
+    );
 
     return (
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
@@ -194,47 +209,64 @@ const HackathonDetails = ({
                                     Online →
                                 </a>
                             ) : (
-                                hackathon?.location
+                                <p className="font-semibold">
+                                    {hackathon?.location}
+                                </p>
                             )}
                         </p>
 
-                        <p className="flex items-center mb-2 font-medium">
+                        <p className="flex items-center mb-2">
                             <img
                                 src="/assets/icons/prizes.svg"
-                                alt="Icono de ubicación de hackathon."
+                                alt="Icono de premios de hackathon."
                                 width="30"
                                 className="mr-2"
                             />
-                            <strong>{hackathon?.prizes}€</strong>&nbsp;en
-                            premios.
+                            <strong className="font-medium bg-amarillo w-fit rounded-lg px-2 text-xl">
+                                {hackathon?.prizes}€
+                            </strong>
+                            &nbsp;en premios.
                         </p>
                     </div>
 
-                    <p className="flex items-center mb-2">
+                    <div className="flex items-center mb-2">
                         <img
                             src="/assets/icons/calendar.svg"
                             alt="Icono de fecha de hackathon."
                             width="30"
                             className="mr-2"
                         />
-                        {`${formatDate(hackathon?.hackathonDate)} — ${formatDate(hackathon?.hackathonEnd)}`}
-                    </p>
+                        <p>
+                            Del&nbsp;
+                            <strong className="whitespace-nowrap font-semibold bg-azuloscuro text-blanco rounded-md px-1">
+                                {formattedHackStartDate}
+                            </strong>
+                            <br />
+                            al&nbsp;
+                            <strong className="whitespace-normal font-semibold bg-azuloscuro text-blanco rounded-md px-1">
+                                {formattedHackEndDate}
+                            </strong>
+                            .
+                        </p>
+                    </div>
 
                     <div className="flex items-center mb-2">
                         <img
                             src="/assets/icons/inscription.svg"
-                            alt="Icono de ubicación de hackathon."
+                            alt="Icono de inscripción de hackathon."
                             width="30"
                             className="mr-2"
                         />
                         <p>
-                            Inscripciones abiertas desde el&nbsp;
-                            <strong>
-                                {formatDate(hackathon?.inscriptionDate)}
+                            Inscripciones abiertas <br />
+                            del&nbsp;
+                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1">
+                                {formattedInscrStartDate}
                             </strong>
-                            &nbsp;al&nbsp;
-                            <strong>
-                                {formatDate(hackathon?.inscriptionEnd)}
+                            <br />
+                            al&nbsp;
+                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1">
+                                {formattedInscrEndDate}
                             </strong>
                             .
                         </p>

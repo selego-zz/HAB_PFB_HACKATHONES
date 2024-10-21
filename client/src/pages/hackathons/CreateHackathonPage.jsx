@@ -38,7 +38,7 @@ const CreateHackathonPage = () => {
     useEffect(() => {
         if (authLoading) return;
         if (!authUser || !isOrganizer()) {
-            toast.error('Solo los organizadores pueden crear hackathons');
+            toast.error('Solo los organizadores pueden añadir hackathons');
             navigate('/');
         }
     }, [authUser, authLoading, isOrganizer, navigate]);
@@ -75,7 +75,7 @@ const CreateHackathonPage = () => {
                     formData={formData}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
-                    buttonMessage={'Crear hackathon'}
+                    buttonMessage={'Añadir hackathon'}
                 />
             </div>
         </div>
