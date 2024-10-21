@@ -8,8 +8,11 @@ const getAllInscriptionsFromAHackathonController = async (req, res, next) => {
     try {
         const { hackathonId } = req.params;
 
-        const hackathons =
-            await getAllInscriptionsFromAHackathonModel(hackathonId);
+        const hackathons = await getAllInscriptionsFromAHackathonModel(
+            hackathonId,
+            req.user.id,
+            req.user.role,
+        );
 
         let message =
             hackathons.length > 0

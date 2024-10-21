@@ -45,7 +45,7 @@ const HackathonDetailsPage = () => {
 
                 // Si la respuesta es null o undefined, devuelve un array vacío
                 const enrolledParticipants = (userHackathons || []).filter(
-                    (h) => String(h.hackathonId) === String(hackathonId),
+                    (h) => String(h.id) === String(hackathonId),
                 );
 
                 setParticipants(enrolledParticipants);
@@ -157,7 +157,7 @@ const HackathonDetailsPage = () => {
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
             <HackathonDetails
                 hackathon={hackathon}
-                participants={participants}
+                participants={participants[0]}
                 isRegistered={isRegistered}
                 isDeveloper={isDeveloper}
                 isOrganizer={isOrganizer}

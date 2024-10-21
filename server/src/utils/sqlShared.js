@@ -22,6 +22,7 @@ const generateGetInscriptionsSQL = (WHERE, role) => {
         u.avatar,
         u.id AS userId `;
     }
+    console.log(role);
 
     const sql = `
         SELECT 
@@ -59,6 +60,7 @@ const generateGetInscriptionsSQL = (WHERE, role) => {
                     : ''
             }
     `;
+    console.log(sql);
 
     return sql;
 };

@@ -25,8 +25,6 @@ const HackathonDetails = ({
     const navigate = useNavigate();
     const { VITE_API_UPLOADS } = import.meta.env;
 
-    console.log(isRegistered);
-
     return (
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
@@ -121,10 +119,10 @@ const HackathonDetails = ({
                                     Desarrolladores inscritos
                                 </h2>
                                 <ul>
-                                    {participants.length > 0 ? (
-                                        participants.map((dev) => (
+                                    {participants?.developers?.length > 0 ? (
+                                        participants.developers.map((dev) => (
                                             <li
-                                                key={dev.id}
+                                                key={dev.userId}
                                                 className="flex items-center justify-between mb-2"
                                             >
                                                 <div className="flex items-center space-x-4">
@@ -159,7 +157,7 @@ const HackathonDetails = ({
                                     )}
                                 </ul>
 
-                                {participants.length > 0 && (
+                                {participants?.developers?.length > 0 && (
                                     <div className="flex justify-end mt-4">
                                         <button
                                             onClick={handleSubmitScores}
@@ -262,14 +260,16 @@ HackathonDetails.propTypes = {
         documentation: PropTypes.string,
         organizerId: PropTypes.number,
     }),
-    participants: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            avatar: PropTypes.string,
-            username: PropTypes.string,
-            userId: PropTypes.number.isRequired,
-        }),
-    ).isRequired,
+    participants: PropTypes.shape({
+        developers: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                avatar: PropTypes.string,
+                username: PropTypes.string,
+                userId: PropTypes.number,
+            }),
+        ),
+    }),
     isRegistered: PropTypes.bool.isRequired,
     isDeveloper: PropTypes.func.isRequired,
     isOrganizer: PropTypes.func.isRequired,

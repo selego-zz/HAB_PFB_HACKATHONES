@@ -20,12 +20,16 @@ const getUsersHackathonController = async (req, res, next) => {
         // Si el usuario es administrador, listamos todas las inscripciones.
         if (role === 'administrador') {
             hackathons = await getAllInscriptionsModel();
+            console.log('ADMIN');
+
             // Si es desarrollador, listamos solo las inscripciones del usuario autenticado.
         } else if (role === 'desarrollador') {
             hackathons = await getUserHackathonsModel(userId);
+            console.log('DEV');
         } else {
             // Si no es desarrollador ni administrador pero está logeado es organizador.
             hackathons = await getOrganizerHackathonsModel(userId);
+            console.log('ORG');
         }
 
         // Si no se encuentran inscripciones, lanzamos un error.
