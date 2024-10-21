@@ -4,7 +4,7 @@ import { useHackathons } from '../../hooks/index.js';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import HackathonList from '../../components/HackathonList.jsx';
+import { HackathonList } from '../../components';
 import { useDocumentTitle } from '../../hooks/index.js';
 
 import toast from 'react-hot-toast';
