@@ -3,7 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 
 import { useDocumentTitle } from '../../hooks/index.js';
-import LogosCarousel from '../../components/aux_components/LogosCarousel.jsx';
+import { LogosCarousel } from '../../components';
 
 //////
 
