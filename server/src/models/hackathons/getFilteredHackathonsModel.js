@@ -32,6 +32,7 @@ const getFilteredHackathonsModel = async (filters) => {
     if (!filters) return await getAllHackathonsModel();
 
     const pool = await getPool();
+    console.log(filters);
 
     //primero extraemos los arrays de filters, para poder trabajar con el json plano
     let orderBy;
@@ -48,6 +49,48 @@ const getFilteredHackathonsModel = async (filters) => {
     if (filters.technologies) {
         technologies = filters.technologies;
         delete filters.technologies;
+    }
+
+    let maxParticipantsFrom;
+    let maxParticipantsTo;
+    let prizesFrom;
+    let prizesTo;
+    let inscriptionFrom;
+    let inscriptionTo;
+    let hackathonDateFrom;
+    let hackathonDateTo;
+
+    if (filters.maxParticipantsFrom) {
+        maxParticipantsFrom = filters.maxParticipantsFrom;
+        delete filters.maxParticipantsFrom;
+    }
+    if (filters.maxParticipantsTo) {
+        maxParticipantsTo = filters.maxParticipantsTo;
+        delete filters.maxParticipantsTo;
+    }
+    if (filters.prizesFrom) {
+        prizesFrom = filters.prizesFrom;
+        delete filters.prizesFrom;
+    }
+    if (filters.prizesTo) {
+        prizesTo = filters.prizesTo;
+        delete filters.prizesTo;
+    }
+    if (filters.inscriptionFrom) {
+        inscriptionFrom = filters.inscriptionFrom;
+        delete filters.inscriptionFrom;
+    }
+    if (filters.inscriptionTo) {
+        inscriptionTo = filters.inscriptionTo;
+        delete filters.inscriptionTo;
+    }
+    if (filters.hackathonDateFrom) {
+        hackathonDateFrom = filters.hackathonDateFrom;
+        delete filters.hackathonDateFrom;
+    }
+    if (filters.hackathonDateTo) {
+        hackathonDateTo = filters.hackathonDateTo;
+        delete filters.hackathonDateTo;
     }
 
     const camposADevolver =
@@ -101,6 +144,40 @@ const getFilteredHackathonsModel = async (filters) => {
         sqlWhere += ` and ?? like ?`;
         args.push(filter);
         args.push('%' + filters[filter] + '%');
+    }
+
+    // ahora vamos con los filtros especiales:
+    if (maxParticipantsFrom) {
+        sqlWhere += ` and maxParticipants >= ?`;
+        args.push(maxParticipantsFrom);
+    }
+    if (maxParticipantsTo) {
+        sqlWhere += ` and maxParticipants <= ?`;
+        args.push(maxParticipantsTo);
+    }
+    if (prizesFrom) {
+        sqlWhere += ` and prizes >= ?`;
+        args.push(prizesFrom);
+    }
+    if (prizesTo) {
+        sqlWhere += ` and prizes <= ?`;
+        args.push(prizesTo);
+    }
+    if (inscriptionFrom) {
+        sqlWhere += ` and inscriptionEnd >= ?`;
+        args.push(inscriptionFrom);
+    }
+    if (inscriptionTo) {
+        sqlWhere += ` and h.inscriptionDate <= ?`;
+        args.push(inscriptionTo);
+    }
+    if (hackathonDateFrom) {
+        sqlWhere += ` and hackathonEnd >= ?`;
+        args.push(hackathonDateFrom);
+    }
+    if (hackathonDateTo) {
+        sqlWhere += ` and hackathonDate <= ?`;
+        args.push(hackathonDateTo);
     }
 
     //si hemos metido filters, metemos where

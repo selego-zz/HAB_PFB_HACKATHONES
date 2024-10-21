@@ -25,8 +25,7 @@ const HackathonListPage = () => {
         hackathons,
         hackathonLoading,
         filter,
-        addFilter,
-        removeFilter,
+        setFilters,
         /*         //tecnologias y temas
         technologies,
         addTechnology,
@@ -46,59 +45,44 @@ const HackathonListPage = () => {
             setTitleFilter(filter.name);
         }
     }, [filter.name]);
+
     const handleSearchClick = async () => {
-        if (titleFilter.length < 1) removeFilter('name');
-        else addFilter({ name: titleFilter });
+        const filters = {};
+        if (titleFilter.length > 1) filters.name = titleFilter;
 
-        if (online.length < 1) removeFilter('online');
-        else addFilter({ online: online });
+        if (online.length > 1) filters.online = online;
 
-        if (location.length < 1) removeFilter('location');
-        else addFilter({ location: location });
+        if (location.length > 1) filters.location = location;
 
-        if (maxParticipantsFrom.length < 1) removeFilter('maxParticipantsFrom');
-        else
-            addFilter({
-                maxParticipantsFrom: maxParticipantsFrom,
-            });
-        if (maxParticipantsTo.length < 1) removeFilter('maxParticipantsTo');
-        else
-            addFilter({
-                maxParticipantsTo: maxParticipantsTo,
-            });
+        if (maxParticipantsFrom.length > 1)
+            filters.maxParticipantsFrom = maxParticipantsFrom;
 
-        if (prizesFrom.length < 1) removeFilter('prizesFrom');
-        else addFilter({ prizesFrom: prizesFrom });
-        if (prizesTo.length < 1) removeFilter('prizesTo');
-        else addFilter({ prizesTo: prizesTo });
+        if (maxParticipantsTo.length > 1)
+            filters.maxParticipantsTo = maxParticipantsTo;
 
-        if (inscriptionDate.length < 1) removeFilter('inscriptionDate');
-        else {
+        if (prizesFrom.length > 1) filters.prizesFrom = prizesFrom;
+
+        if (prizesTo.length > 1) filters.prizesTo = prizesTo;
+
+        if (inscriptionDate.length > 1) {
             const inscriptionFrom = inscriptionDate[0];
             let inscriptionTo =
                 inscriptionDate.length > 1
                     ? inscriptionDate[1]
                     : inscriptionDate[0];
-            addFilter({
-                inscriptionFrom: inscriptionFrom,
-            });
-            addFilter({
-                inscriptionTo: inscriptionTo,
-            });
+            filters.inscriptionFrom = inscriptionFrom;
+            filters.inscriptionTo = inscriptionTo;
         }
 
-        if (hackathonDate.length < 1) removeFilter('hackathonDate');
-        else {
+        if (hackathonDate.length > 1) {
             const hackathonDateFrom = hackathonDate[0];
             let hackathonDateTo =
                 hackathonDate.length > 1 ? hackathonDate[1] : hackathonDate[0];
-            addFilter({
-                hackathonDateFrom: hackathonDateFrom,
-            });
-            addFilter({
-                hackathonDateTo: hackathonDateTo,
-            });
+            filters.hackathonDateFrom = hackathonDateFrom;
+            filters.hackathonDateTo = hackathonDateTo;
         }
+        setFilters(filters);
+        console.log(filters);
     };
 
     if (hackathonLoading) {
