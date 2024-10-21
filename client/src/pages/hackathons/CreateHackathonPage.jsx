@@ -58,7 +58,7 @@ const CreateHackathonPage = () => {
         try {
             const res = await addHackathon(formData);
             toast.success(res);
-            navigate('/');
+            navigate('/users');
         } catch (err) {
             toast.error(err.message);
         }
