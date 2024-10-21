@@ -17,7 +17,7 @@ const getAllInscriptionsFromAHackathonModel = async (hackathonId) => {
     );
 
     for (const hackathon of enrollments) {
-        hackathon.developers = getUsersEnrolledOnAHackathonModel;
+        hackathon.developers = await getUsersEnrolledOnAHackathonModel();
         hackathon.ranking = await getRankingModel(hackathon.id);
     }
 
