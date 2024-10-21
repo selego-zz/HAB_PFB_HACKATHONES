@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useDocumentTitle, useHackathons } from '../../hooks';
 
-import HackathonList from '../../components/HackathonList';
-import DateRangePicker from '../../components/DateRangePicker';
+import { HackathonList, DateRangePicker } from '../../components';
 
 const HackathonListPage = () => {
     // Título de pestaña

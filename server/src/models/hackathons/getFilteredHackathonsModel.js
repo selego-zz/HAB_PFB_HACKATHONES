@@ -172,11 +172,11 @@ const getFilteredHackathonsModel = async (filters) => {
         args.push(inscriptionTo);
     }
     if (hackathonDateFrom) {
-        sqlWhere += ` and hackathonEnd >= ?`;
+        sqlWhere += ` and hackathonDate >= ?`;
         args.push(hackathonDateFrom);
     }
     if (hackathonDateTo) {
-        sqlWhere += ` and hackathonDate <= ?`;
+        sqlWhere += ` and hackathonEnd <= ?`;
         args.push(hackathonDateTo);
     }
 
@@ -191,6 +191,10 @@ const getFilteredHackathonsModel = async (filters) => {
         //quitamos la coma inicial
         sqlOrderBy = ' order by ' + sqlOrderBy.slice(2);
     }
+
+    console.log(
+        sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
+    );
 
     const [res] = await pool.query(
         sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
