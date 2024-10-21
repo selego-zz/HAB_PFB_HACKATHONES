@@ -8,17 +8,30 @@ import { getRankingModel, getUsersEnrolledOnAHackathonModel } from './index.js';
 /////////////////////////////////////////////////////////////////
 // Modelo que devuelve todos los inscritos a un hackathon
 /////////////////////////////////////////////////////////////////
-const getAllInscriptionsFromAHackathonModel = async (hackathonId) => {
+const getAllInscriptionsFromAHackathonModel = async (
+    hackathonId,
+    userId,
+    role,
+) => {
     const pool = await getPool();
 
+    let where = 'WHERE hackathonId = ?';
+    let args = [hackathonId];
+
+    if (role === 'desarrollador') {
+        where += ' AND userId = ?';
+        args.push(userId);
+    }
+
     const [enrollments] = await pool.query(
-        generateGetInscriptionsSQL('WHERE hackathonId = ?', 'organizador'),
-        [hackathonId],
+        generateGetInscriptionsSQL(where, role),
+        args,
     );
 
     for (const hackathon of enrollments) {
-        hackathon.developers = await getUsersEnrolledOnAHackathonModel();
-        hackathon.ranking = await getRankingModel(hackathon.id);
+        hackathon.developers =
+            await getUsersEnrolledOnAHackathonModel(hackathonId);
+        hackathon.ranking = await getRankingModel(hackathonId);
     }
 
     return enrollments;

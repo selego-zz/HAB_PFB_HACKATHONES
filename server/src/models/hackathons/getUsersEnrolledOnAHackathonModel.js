@@ -6,7 +6,7 @@ import getPool from '../../db/getPool.js';
 //   generateGetInscriptionsSQL si se llamara para desarrollador
 ////////////////////////////////////////////////////////////////////
 
-const getUsersEnrolledOnAHackathonModel = async (userId, hackathonId) => {
+const getUsersEnrolledOnAHackathonModel = async (hackathonId) => {
     const pool = await getPool();
 
     // Consulta para verificar si el usuario está inscrito en el hackathon
@@ -21,8 +21,8 @@ const getUsersEnrolledOnAHackathonModel = async (userId, hackathonId) => {
             u.id AS userId
         FROM enrollsIn e
         JOIN users u ON e.userId = u.id
-        WHERE userId = ? AND hackathonId = ?`,
-        [userId, hackathonId],
+        WHERE hackathonId = ?`,
+        [hackathonId],
     );
 
     return enrolledUsers;
