@@ -1,20 +1,16 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
-
 import { useDocumentTitle } from '../../hooks/index.js';
-import { LogosCarousel } from '../../components';
+import { LogosCarousel } from '../../components/index.js';
 
 //////
 
-const OrganizerPromotionPage = () => {
-    useDocumentTitle('Organiza tu hackathon con nosotros'); // Título de pestaña
+const DeveloperPromotionPage = () => {
+    useDocumentTitle('Muestra tu talento'); // Título de pestaña
 
     const navigate = useNavigate();
-    const { isOrganizer, authLoading } = useContext(AuthContext);
 
-    const handleOrganizacionesClick = () => {
-        navigate('/hackathons/create');
+    const handleExplorarHackathonesClick = () => {
+        navigate('/hackathons');
     };
 
     return (
@@ -25,14 +21,15 @@ const OrganizerPromotionPage = () => {
                     {/* Título y descripción */}
                     <div className="rounded-2xl shadow-xl p-8 mb-8 max-w-2xl w-auto">
                         <h2 className="text-2xl md:text-4xl font-bold mb-4">
-                            Estás en buenas manos con
+                            Pon a prueba tus habilidades con
                             <br /> Hack-a-ton.
                         </h2>
                         <p className="text-lg md:text-xl ">
-                            Impulsamos hackathones desde 2009. Nuestras
-                            soluciones simplifican la gestión del evento,
-                            mejoran la experiencia de los participantes y
-                            promueven mejores resultados comerciales.
+                            Desde 2009, hemos conectado a miles de
+                            desarrolladores con proyectos innovadores. Participa
+                            en hackathones que te ayudarán a crecer
+                            profesionalmente, mejorar tus habilidades técnicas y
+                            crear conexiones valiosas en la industria.
                         </p>
                     </div>
 
@@ -50,8 +47,8 @@ const OrganizerPromotionPage = () => {
                                     +4 millones
                                 </p>
                                 <p className=" text-sm">
-                                    de los mejores desarrolladores para tus
-                                    proyectos
+                                    en nuestra comunidad, ¿a qué esperas para
+                                    unirte?
                                 </p>
                             </div>
                         </div>
@@ -59,7 +56,7 @@ const OrganizerPromotionPage = () => {
                         <div className="flex items-center justify-center bg-verdeclaro rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
                                 src="/assets/images/hackathons.svg"
-                                alt="hackathones impulsados"
+                                alt="hackathones realizados"
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
@@ -67,8 +64,8 @@ const OrganizerPromotionPage = () => {
                                     +10.000
                                 </p>
                                 <p className=" text-sm">
-                                    hackathones gestionados, sin líos ni
-                                    complicaciones
+                                    hackathones realizados, ¡y otros tantos
+                                    premios repartidos!
                                 </p>
                             </div>
                         </div>
@@ -84,8 +81,7 @@ const OrganizerPromotionPage = () => {
                                     +14 años
                                 </p>
                                 <p className=" text-sm">
-                                    de experiencia sirviendo a las empresas
-                                    líderes
+                                    conectando talento con oportunidades
                                 </p>
                             </div>
                         </div>
@@ -94,31 +90,33 @@ const OrganizerPromotionPage = () => {
                     {/* Texto final */}
                     <div className="bg-blanco bg-opacity-75 rounded-2xl shadow-xl p-8 mb-8 max-w-xl w-auto">
                         <p className="text-lg ">
-                            Únete a las empresas líderes que confían en
-                            HACK-A-TON para llevar tus hackathones al siguiente
-                            nivel.
+                            Únete a nuestra comunidad de desarrolladores,
+                            aprende de los mejores y pon a prueba tus
+                            habilidades en un entorno competitivo y
+                            colaborativo. Hack-a-ton es tu puerta de entrada a
+                            proyectos emocionantes y a un futuro profesional
+                            lleno de oportunidades. ¡Mira qué empresas están
+                            buscando talento!
                         </p>
                     </div>
 
                     {/* Componente LogosCarousel */}
                     <LogosCarousel />
 
-                    {/* Mostrar botón solo si es organizador */}
-                    {!authLoading && isOrganizer() && (
-                        <div className="mt-8">
-                            <button
-                                onClick={handleOrganizacionesClick}
-                                className="button-rounded-green h-fit w-fit px-10 py-2 mb-10 text-3xl"
-                            >
-                                Organiza tu hackathon
-                                <span className="p-2">→</span>
-                            </button>
-                        </div>
-                    )}
+                    {/* Botón a eventos */}
+
+                    <div className="mt-8">
+                        <button
+                            onClick={handleExplorarHackathonesClick}
+                            className="button-rounded-green h-fit w-fit px-10 py-2 mb-10 text-3xl"
+                        >
+                            Explorar Hackathones <span className="p-2">→</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
     );
 };
 
-export default OrganizerPromotionPage;
+export default DeveloperPromotionPage;

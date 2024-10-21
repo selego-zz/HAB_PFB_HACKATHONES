@@ -8,6 +8,7 @@ import {
 } from './hackathons';
 
 import {
+    DeveloperPromotionPage,
     HomePage,
     ListAllUsersPage,
     LoginPage,
@@ -33,6 +34,7 @@ export {
     HackathonListPage,
     UpdateHackathonPage,
     // Users
+    DeveloperPromotionPage,
     HomePage,
     ListAllUsersPage,
     LoginPage,

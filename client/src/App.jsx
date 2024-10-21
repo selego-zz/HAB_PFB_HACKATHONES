@@ -11,6 +11,7 @@ import {
     HackathonListPage,
     UpdateHackathonPage,
     // Users
+    DeveloperPromotionPage,
     HomePage,
     ListAllUsersPage,
     LoginPage,
@@ -58,8 +59,12 @@ const App = () => {
                     />
                     <Route path="users/update" element={<UpdateUserPage />} />
                     <Route
-                        path="promotion"
+                        path="org-promotion"
                         element={<OrganizerPromotionPage />}
+                    />
+                    <Route
+                        path="dev-promotion"
+                        element={<DeveloperPromotionPage />}
                     />
                     <Route
                         path="users/getAllUsers"

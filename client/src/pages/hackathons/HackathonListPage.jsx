@@ -148,7 +148,7 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
+                            <label className="block text-sm font-medium  mx-2">
                                 Fecha de inscripción
                             </label>
                             <input
@@ -164,7 +164,7 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
+                            <label className="block text-sm font-medium  mx-2">
                                 Fecha de fin de inscripción
                             </label>
                             <input
@@ -180,7 +180,7 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
+                            <label className="block text-sm font-medium  mx-2">
                                 Fecha de inicio de hackathon
                             </label>
                             <input
@@ -196,7 +196,7 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
+                            <label className="block text-sm font-medium  mx-2">
                                 Fecha de din de hackathon
                             </label>
                             <input
@@ -223,7 +223,7 @@ const HackathonListPage = () => {
                         id="title"
                         value={titleFilter}
                         onChange={(e) => setTitleFilter(e.target.value)}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="mt-1 block w-11/12 mx-auto rounded-md shadow-sm bg-verdeclaro p-2"
                     />
                     <button onClick={handleSearchClick}>Buscar</button>
                 </section>

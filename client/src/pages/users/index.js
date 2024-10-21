@@ -1,3 +1,4 @@
+import DeveloperPromotionPage from './DeveloperPromotionPage.jsx';
 import HomePage from './HomePage.jsx';
 import ListAllUsersPage from './ListAllUsersPage.jsx';
 import LoginPage from './LoginPage.jsx';
@@ -10,6 +11,7 @@ import UserProfilePage from './UserProfilePage.jsx';
 import ValidationPage from './ValidationPage.jsx';
 
 export {
+    DeveloperPromotionPage,
     HomePage,
     ListAllUsersPage,
     LoginPage,

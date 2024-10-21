@@ -7,10 +7,10 @@ const HomePage = () => {
     const navigate = useNavigate(); // Hook para la navegación
 
     const handleOrganizacionesClick = () => {
-        navigate('/promotion');
+        navigate('/org-promotion');
     };
     const handleParticipantesClick = () => {
-        navigate('/hackathons');
+        navigate('/dev-promotion');
     };
 
     return (
