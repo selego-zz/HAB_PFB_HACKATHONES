@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { useDocumentTitle, useHackathons } from '../../hooks';
+
 import HackathonList from '../../components/HackathonList';
+import DateRangePicker from '../../components/DateRangePicker';
 
 const HackathonListPage = () => {
     // Título de pestaña
@@ -10,12 +12,14 @@ const HackathonListPage = () => {
     const [titleFilter, setTitleFilter] = useState('');
     const [online, setOnline] = useState('');
     const [location, setLocation] = useState('');
-    const [inscriptionDate, setInscriptionDate] = useState('');
-    const [inscriptionEnd, setInscriptionEnd] = useState('');
-    const [maxParticipants, setMaxParticipants] = useState('');
-    const [hackathonDate, setHackathonDate] = useState('');
-    const [hackathonEnd, setHackathonEnd] = useState('');
-    const [prizes, setPrizes] = useState('');
+
+    const [prizesFrom, setPrizesFrom] = useState('');
+    const [prizesTo, setPrizesTo] = useState('');
+    const [maxParticipantsFrom, setMaxParticipantsFrom] = useState('');
+    const [maxParticipantsTo, setMaxParticipantsTo] = useState('');
+
+    const [inscriptionDate, setInscriptionDate] = useState([]);
+    const [hackathonDate, setHackathonDate] = useState([]);
 
     const {
         hackathons,
@@ -52,38 +56,49 @@ const HackathonListPage = () => {
         if (location.length < 1) removeFilter('location');
         else addFilter({ location: location });
 
-        if (maxParticipants.length < 1) removeFilter('maxParticipants');
+        if (maxParticipantsFrom.length < 1) removeFilter('maxParticipantsFrom');
         else
             addFilter({
-                maxParticipants: maxParticipants,
+                maxParticipantsFrom: maxParticipantsFrom,
+            });
+        if (maxParticipantsTo.length < 1) removeFilter('maxParticipantsTo');
+        else
+            addFilter({
+                maxParticipantsTo: maxParticipantsTo,
             });
 
-        if (prizes.length < 1) removeFilter('prizes');
-        else addFilter({ prizes: prizes });
+        if (prizesFrom.length < 1) removeFilter('prizesFrom');
+        else addFilter({ prizesFrom: prizesFrom });
+        if (prizesTo.length < 1) removeFilter('prizesTo');
+        else addFilter({ prizesTo: prizesTo });
 
         if (inscriptionDate.length < 1) removeFilter('inscriptionDate');
-        else
+        else {
+            const inscriptionFrom = inscriptionDate[0];
+            let inscriptionTo =
+                inscriptionDate.length > 1
+                    ? inscriptionDate[1]
+                    : inscriptionDate[0];
             addFilter({
-                inscriptionDate: inscriptionDate,
+                inscriptionFrom: inscriptionFrom,
             });
-
-        if (inscriptionEnd.length < 1) removeFilter('inscriptionEnd');
-        else
             addFilter({
-                inscriptionEnd: inscriptionEnd,
+                inscriptionTo: inscriptionTo,
             });
+        }
 
         if (hackathonDate.length < 1) removeFilter('hackathonDate');
-        else
+        else {
+            const hackathonDateFrom = hackathonDate[0];
+            let hackathonDateTo =
+                hackathonDate.length > 1 ? hackathonDate[1] : hackathonDate[0];
             addFilter({
-                hackathonDate: hackathonDate,
+                hackathonDateFrom: hackathonDateFrom,
             });
-
-        if (hackathonEnd.length < 1) removeFilter('hackathonEnd');
-        else
             addFilter({
-                hackathonEnd: hackathonEnd,
+                hackathonDateTo: hackathonDateTo,
             });
+        }
     };
 
     if (hackathonLoading) {
@@ -123,90 +138,85 @@ const HackathonListPage = () => {
                         />
                     </li>
                     <li>
-                        <h2>Número de participantes máximo</h2>
-                        <input
-                            type="number"
-                            id="maxParticipants"
-                            value={maxParticipants}
-                            onChange={(e) => {
-                                setMaxParticipants(e.target.value);
-                            }}
-                            className="input-box"
-                        />
+                        <h2>Número de participantes</h2>
+                        <section className="participantes flex">
+                            <section className="desde">
+                                <label htmlFor="maxParticipantsFrom">
+                                    Desde
+                                </label>
+                                <input
+                                    className="semi-input-box"
+                                    type="number"
+                                    id="maxParticipantsFrom"
+                                    value={maxParticipantsFrom}
+                                    onChange={(e) => {
+                                        setMaxParticipantsFrom(e.target.value);
+                                    }}
+                                />
+                            </section>
+                            <section className="hasta">
+                                <label htmlFor="maxParticipantsTo">Hasta</label>
+                                <input
+                                    className="semi-input-box"
+                                    type="number"
+                                    id="maxParticipantsTo"
+                                    value={maxParticipantsTo}
+                                    onChange={(e) => {
+                                        setMaxParticipantsTo(e.target.value);
+                                    }}
+                                />
+                            </section>
+                        </section>
                     </li>
                     <li>
                         <h2>Importe en premios</h2>
-                        <input
-                            type="number"
-                            id="prizes"
-                            value={prizes}
-                            onChange={(e) => {
-                                setPrizes(e.target.value);
-                            }}
-                            className="input-box"
-                        />
+
+                        <section className="participantes flex">
+                            <section className="desde">
+                                <label htmlFor="prizesFrom">Desde</label>
+                                <input
+                                    className="semi-input-box"
+                                    type="number"
+                                    id="prizesFrom"
+                                    value={prizesFrom}
+                                    onChange={(e) => {
+                                        setPrizesFrom(e.target.value);
+                                    }}
+                                />
+                            </section>
+                            <section className="hasta">
+                                <label htmlFor="prizesTo">Hasta</label>
+                                <input
+                                    className="semi-input-box"
+                                    type="number"
+                                    id="prizesTo"
+                                    value={prizesTo}
+                                    onChange={(e) => {
+                                        setPrizesTo(e.target.value);
+                                    }}
+                                />
+                            </section>
+                        </section>
                     </li>
                     <li>
                         <div className="min-w-[200px]">
                             <label className="block text-sm font-medium  mx-2">
-                                Fecha de inscripción
+                                Fechas de inscripción
                             </label>
-                            <input
-                                type="datetime-local"
-                                name="inscriptionDate"
-                                value={inscriptionDate}
-                                onChange={(e) => {
-                                    setInscriptionDate(e.target.value);
-                                }}
-                                className="input-box"
+                            <DateRangePicker
+                                hackathonDate={inscriptionDate}
+                                setHackathonDate={setInscriptionDate}
                             />
                         </div>
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium  mx-2">
-                                Fecha de fin de inscripción
+                            <label className="block text-sm font-medium mx-2">
+                                Fechas de hackathon
                             </label>
-                            <input
-                                type="datetime-local"
-                                name="inscriptionEnd"
-                                value={inscriptionEnd}
-                                onChange={(e) => {
-                                    setInscriptionEnd(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium  mx-2">
-                                Fecha de inicio de hackathon
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="hackathonDate"
-                                value={hackathonDate}
-                                onChange={(e) => {
-                                    setHackathonDate(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium  mx-2">
-                                Fecha de din de hackathon
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="hackathonEnd"
-                                value={hackathonEnd}
-                                onChange={(e) => {
-                                    setHackathonEnd(e.target.value);
-                                }}
-                                className="input-box"
+                            <DateRangePicker
+                                hackathonDate={hackathonDate}
+                                setHackathonDate={setHackathonDate}
                             />
                         </div>
                     </li>
