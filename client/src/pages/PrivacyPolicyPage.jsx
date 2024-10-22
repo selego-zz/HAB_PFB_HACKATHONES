@@ -1,4 +1,8 @@
+import { useDocumentTitle } from '../hooks';
+
 const PrivacyPolicyPage = () => {
+    useDocumentTitle('Política de Privacidad');
+
     return (
         <div className="bg-casiblanco min-h-screen py-10 px-4 sm:px-10 lg:px-20 max-w-full">
             <div className="max-w-5xl mx-auto">

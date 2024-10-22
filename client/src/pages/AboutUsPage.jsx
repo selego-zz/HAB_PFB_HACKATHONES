@@ -1,3 +1,5 @@
+import { useDocumentTitle } from '../hooks';
+
 const developers = [
     {
         name: 'Amanda González',
@@ -8,8 +10,8 @@ const developers = [
     {
         name: 'Bruno Martí',
         image: '/assets/images/br.png',
-        github: 'https://github.com/',
-        linkedin: 'https://www.linkedin.com/in/',
+        github: 'https://github.com/selego-zz',
+        linkedin: 'https://linkedin.com/in/brunomartiluis/',
     },
     {
         name: 'Emilio Sánchez',
@@ -27,6 +29,8 @@ const developers = [
 
 // Página "Sobre nosotros"
 const AboutUsPage = () => {
+    useDocumentTitle('Sobre Nosotros');
+
     return (
         <div className="bg-casiblanco h-auto flex flex-col items-center justify-center py-10">
             <h1 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
