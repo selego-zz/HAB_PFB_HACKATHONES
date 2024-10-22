@@ -148,7 +148,7 @@ const UserProfilePage = () => {
 
                     {/* Historial de hackathons */}
 
-                    <div className="mt-20 flex">
+                    <div className="mt-20 flex  sm:ml-7">
                         <button
                             className="bg-verdeclaro font-jost font-semibold text-azuloscuro text-lg sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro"
                             onClick={() => {
@@ -168,7 +168,7 @@ const UserProfilePage = () => {
                         </button>
                     </div>
 
-                    <div>
+                    <div className="sm:ml-7">
                         {historico && (
                             <HackathonList
                                 hackathons={historicHackathons}
@@ -178,7 +178,7 @@ const UserProfilePage = () => {
                     </div>
 
                     {/* Hackathons Activos */}
-                    <div className="bg-verde2 border-verde2 border">
+                    <div className="bg-verde2 border-verde2 border sm:ml-7">
                         {!historico && (
                             <HackathonList hackathons={currentHackathons} />
                         )}
@@ -187,7 +187,7 @@ const UserProfilePage = () => {
                     <div className="flex justify-center md:justify-start">
                         <button
                             onClick={handleRemoveUser}
-                            className="button-angled-red mt-20"
+                            className="button-angled-red mt-20 sm:ml-10"
                         >
                             Eliminar usuario
                         </button>
