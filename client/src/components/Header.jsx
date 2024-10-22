@@ -81,7 +81,7 @@ const Header = () => {
                             to="/hackathons/create"
                             className="button-rounded-green"
                         >
-                            <button>Crea un Hackathon</button>
+                            <button>Añadir Hackathon</button>
                         </NavLink>
                     )}
                     {isAdmin() && (
