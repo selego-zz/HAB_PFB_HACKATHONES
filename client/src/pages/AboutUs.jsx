@@ -31,11 +31,11 @@ const AboutUs = () => {
             <h1 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
                 Conoce al equipo
             </h1>
-            <div className="flex flex-wrap justify-center gap-10">
+            <div className="flex flex-wrap justify-center gap-8 w-full">
                 {developers.map((dev, index) => (
                     <div
                         key={index}
-                        className="bg-white rounded-lg shadow-lg p-6 max-w-sm transform transition duration-500 hover:scale-105 hover:shadow-2xl"
+                        className="bg-white rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl w-full max-w-60"
                     >
                         <img
                             className="rounded-full w-32 h-32 mx-auto mb-4"
