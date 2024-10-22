@@ -19,6 +19,8 @@ const addHackathonModel = async (
     documentation,
     description,
     requirements,
+    technologies,
+    themes,
 ) => {
     const pool = await getPool();
 
@@ -96,6 +98,17 @@ const addHackathonModel = async (
 
     // Insertamos el hackathon.
     const [res] = await pool.query(sql, args);
+
+    for (const technology of technologies)
+        await pool.query(
+            'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, SELECT id FROM technologies WHERE technology = ?)',
+            [res.insertId, technology],
+        );
+    for (const theme of themes)
+        await pool.query(
+            'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, SELECT id FROM themes WHERE theme = ?)',
+            [res.insertId, theme],
+        );
     return res.insertId;
 };
 

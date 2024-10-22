@@ -40,6 +40,8 @@ const hackathonSchema = Joi.object().keys({
     requirements: Joi.string().max(900).optional().messages(joiErrorMessages),
     logo: Joi.string().max(100).optional().messages(joiErrorMessages),
     documentation: Joi.string().max(100).optional().messages(joiErrorMessages),
+    technologies: Joi.array().optional(),
+    themes: Joi.array().optional(),
 });
 
 export default hackathonSchema;

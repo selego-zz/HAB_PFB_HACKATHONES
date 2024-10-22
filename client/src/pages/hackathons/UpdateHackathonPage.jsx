@@ -44,6 +44,8 @@ const UpdateHackathonPage = () => {
                 documentation: tempHackathon.documentation,
                 requirements: tempHackathon.requirements,
                 description: tempHackathon.description,
+                technologies: tempHackathon.technologies,
+                themes: tempHackathon.themes,
             };
 
             if (formData === null) setFormData(tempFormData);
@@ -88,6 +90,29 @@ const UpdateHackathonPage = () => {
             toast.error(err.message);
         }
     };
+    // Manejo de tecnologías
+    const handleTechnologyChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.technologies.indexOf(value);
+        if (index === -1) fD.technologies.push(value);
+        else fD.technologies.splice(index, 1);
+
+        setFormData(fD);
+    };
+
+    // Manejo de temas
+    const handleThemeChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.themes.indexOf(value);
+        if (index === -1) fD.themes.push(value);
+        else fD.themes.splice(index, 1);
+
+        setFormData(fD);
+    };
 
     if (!authUser) {
         return null;
@@ -103,6 +128,8 @@ const UpdateHackathonPage = () => {
                 <CreateHackathonForm
                     formData={formData}
                     handleChange={handleChange}
+                    handleTechnologyChange={handleTechnologyChange}
+                    handleThemeChange={handleThemeChange}
                     handleSubmit={handleSubmit}
                     buttonMessage={'Actualizar hackathon'}
                     forceDate={true}

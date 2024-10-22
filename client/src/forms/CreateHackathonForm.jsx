@@ -1,10 +1,13 @@
 import { toast } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useTechnologies, useThemes } from '../hooks';
 
 const CreateHackathonForm = ({
     formData,
     handleChange,
+    handleTechnologyChange,
+    handleThemeChange,
     handleSubmit,
     buttonMessage,
     forceDate,
@@ -14,6 +17,9 @@ const CreateHackathonForm = ({
     const [inscriptionEnd, setInscriptionEnd] = useState('');
     const [hackathonDate, setHackathonDate] = useState('');
     const [hackathonEnd, setHackathonEnd] = useState('');
+
+    const { technologies } = useTechnologies(); // Todas las tecnologías (para el map)
+    const { themes } = useThemes(); // Todas las tecnologías (para el map)
 
     useEffect(() => {
         // Validación de datos
@@ -81,6 +87,7 @@ const CreateHackathonForm = ({
                     },
                 );
             }
+            console.log(formData.technologies);
         } catch (err) {
             toast.error(err.message, {
                 id: 'createhackathonform',
@@ -101,6 +108,8 @@ const CreateHackathonForm = ({
         formData.prizes,
         formData.requirements,
         formData.description,
+        formData.technologies,
+        formData.themes,
     ]);
     return (
         <div className="max-w-4xl mx-auto py-8 px-4">
@@ -300,6 +309,62 @@ const CreateHackathonForm = ({
                     />
                 </div>
 
+                {/* Selector de tecnologías */}
+                <div className="min-w-[200px] col-span-2 mt-10">
+                    <label className="label">Tecnologías:</label>
+
+                    <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
+                        {Array.isArray(technologies) &&
+                            technologies.map((tech) => (
+                                <label
+                                    key={tech.technology}
+                                    className="inline-flex items-center"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        value={tech.technology}
+                                        checked={formData.technologies.includes(
+                                            tech.technology,
+                                        )}
+                                        onChange={handleTechnologyChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-medium">
+                                        {tech.technology}
+                                    </span>
+                                </label>
+                            ))}
+                    </div>
+                </div>
+
+                {/* Selector de tecnologías */}
+                <div className="min-w-[200px] col-span-2 mt-10">
+                    <label className="label">Tecnologías:</label>
+
+                    <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
+                        {Array.isArray(themes) &&
+                            themes.map((them) => (
+                                <label
+                                    key={them.theme}
+                                    className="inline-flex items-center"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        value={them.theme}
+                                        checked={formData.themes.includes(
+                                            them.theme,
+                                        )}
+                                        onChange={handleThemeChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-medium">
+                                        {them.theme}
+                                    </span>
+                                </label>
+                            ))}
+                    </div>
+                </div>
+
                 {/* Botón de envío */}
                 <div className="col-span-2">
                     <button className="mt-4 font-bold bg-verdeagua py-2 px-4 rounded-lg hover:bg-verdemarino w-1/3 mx-auto block">
@@ -339,8 +404,12 @@ CreateHackathonForm.propTypes = {
         documentation: PropTypes.any,
         requirements: PropTypes.string,
         description: PropTypes.string,
+        technologies: PropTypes.array,
+        themes: PropTypes.array,
     }).isRequired,
     handleChange: PropTypes.func.isRequired,
+    handleTechnologyChange: PropTypes.func.isRequired,
+    handleThemeChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     buttonMessage: PropTypes.string.isRequired,
     forceDate: PropTypes.bool,

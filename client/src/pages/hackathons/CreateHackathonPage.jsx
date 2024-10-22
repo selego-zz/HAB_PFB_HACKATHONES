@@ -32,6 +32,8 @@ const CreateHackathonPage = () => {
         documentation: '',
         requirements: '',
         description: '',
+        technologies: [],
+        themes: [],
     });
 
     // Verificación de acceso al cargar el componente
@@ -49,6 +51,30 @@ const CreateHackathonPage = () => {
         if (name === 'logo' || name === 'documentation')
             value = e.target.files[0];
         setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    // Manejo de tecnologías
+    const handleTechnologyChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.technologies.indexOf(value);
+        if (index === -1) fD.technologies.push(value);
+        else fD.technologies.splice(index, 1);
+
+        setFormData(fD);
+    };
+
+    // Manejo de temas
+    const handleThemeChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.themes.indexOf(value);
+        if (index === -1) fD.themes.push(value);
+        else fD.themes.splice(index, 1);
+
+        setFormData(fD);
     };
 
     // Manejador de envío del formulario
@@ -74,6 +100,8 @@ const CreateHackathonPage = () => {
                 <CreateHackathonForm
                     formData={formData}
                     handleChange={handleChange}
+                    handleTechnologyChange={handleTechnologyChange}
+                    handleThemeChange={handleThemeChange}
                     handleSubmit={handleSubmit}
                     buttonMessage={'Añadir hackathon'}
                 />
