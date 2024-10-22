@@ -122,9 +122,6 @@ const HackathonListPage = () => {
             filters.hackathonDateTo = hackathonDateTo;
         }
         setFilters(filters);
-        console.log(maxParticipants);
-        console.log(prizes);
-        console.log(filters);
     };
 
     if (hackathonLoading) {

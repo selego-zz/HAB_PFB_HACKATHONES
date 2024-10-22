@@ -392,14 +392,10 @@ const useHackathons = () => {
         //y añadiremos o sobreescribiremos la nueva clave
         const updatedFilters = { ...filter };
         updatedFilters[key] = value;
-        console.log(updatedFilters);
 
         setFilters(updatedFilters);
     };
     const removeFilter = (oldFilter) => {
-        console.log('remove');
-        console.log(oldFilter);
-
         if (!(oldFilter in filter)) return;
         const updatedFilters = { ...filter };
         delete updatedFilters[oldFilter];
