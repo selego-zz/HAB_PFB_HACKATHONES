@@ -32,7 +32,6 @@ const getFilteredHackathonsModel = async (filters) => {
     if (!filters) return await getAllHackathonsModel();
 
     const pool = await getPool();
-    console.log(filters);
 
     //primero extraemos los arrays de filters, para poder trabajar con el json plano
     let orderBy;
@@ -60,22 +59,18 @@ const getFilteredHackathonsModel = async (filters) => {
     let hackathonDateFrom;
     let hackathonDateTo;
 
-    if (filters.maxParticipantsFrom) {
-        maxParticipantsFrom = filters.maxParticipantsFrom;
-        delete filters.maxParticipantsFrom;
-    }
-    if (filters.maxParticipantsTo) {
-        maxParticipantsTo = filters.maxParticipantsTo;
-        delete filters.maxParticipantsTo;
-    }
-    if (filters.prizesFrom) {
-        prizesFrom = filters.prizesFrom;
-        delete filters.prizesFrom;
-    }
-    if (filters.prizesTo) {
-        prizesTo = filters.prizesTo;
-        delete filters.prizesTo;
-    }
+    maxParticipantsFrom = filters.maxParticipantsFrom;
+    delete filters.maxParticipantsFrom;
+
+    maxParticipantsTo = filters.maxParticipantsTo;
+    delete filters.maxParticipantsTo;
+
+    prizesFrom = filters.prizesFrom;
+    delete filters.prizesFrom;
+
+    prizesTo = filters.prizesTo;
+    delete filters.prizesTo;
+
     if (filters.inscriptionFrom) {
         inscriptionFrom = filters.inscriptionFrom;
         delete filters.inscriptionFrom;
@@ -192,10 +187,6 @@ const getFilteredHackathonsModel = async (filters) => {
         sqlOrderBy = ' order by ' + sqlOrderBy.slice(2);
     }
 
-    console.log(
-        sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
-    );
-
     const [res] = await pool.query(
         sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
         args,
@@ -204,6 +195,7 @@ const getFilteredHackathonsModel = async (filters) => {
     for (const hackathon of res) {
         hackathon.ranking = await getRankingModel(hackathon.id);
     }
+    console.log(res);
 
     return res;
 };

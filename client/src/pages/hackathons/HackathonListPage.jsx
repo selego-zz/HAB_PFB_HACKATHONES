@@ -4,27 +4,21 @@ import { useDocumentTitle, useHackathons } from '../../hooks';
 
 import { HackathonList, DateRangePicker } from '../../components';
 
+//slider
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
 const HackathonListPage = () => {
     // Título de pestaña
     useDocumentTitle('Eventos');
-
-    const [titleFilter, setTitleFilter] = useState('');
-    const [online, setOnline] = useState('');
-    const [location, setLocation] = useState('');
-
-    const [prizesFrom, setPrizesFrom] = useState('');
-    const [prizesTo, setPrizesTo] = useState('');
-    const [maxParticipantsFrom, setMaxParticipantsFrom] = useState('');
-    const [maxParticipantsTo, setMaxParticipantsTo] = useState('');
-
-    const [inscriptionDate, setInscriptionDate] = useState([]);
-    const [hackathonDate, setHackathonDate] = useState([]);
 
     const {
         hackathons,
         hackathonLoading,
         filter,
         setFilters,
+        getMaxParticipants,
+        getMaxPrize,
         /*         //tecnologias y temas
         technologies,
         addTechnology,
@@ -39,11 +33,56 @@ const HackathonListPage = () => {
  */
     } = useHackathons();
 
+    const [titleFilter, setTitleFilter] = useState('');
+    const [online, setOnline] = useState('');
+    const [location, setLocation] = useState('');
+
+    const [prizes, setPrizes] = useState([0, 0]);
+    const [limPrizes, setLimPrizes] = useState(0);
+    const [maxParticipants, setMaxParticipants] = useState([0, 0]);
+    const [limMaxParticipants, setLimMaxParticipants] = useState(0);
+
+    const [inscriptionDate, setInscriptionDate] = useState([]);
+    const [hackathonDate, setHackathonDate] = useState([]);
+
     useEffect(() => {
         if (filter.name) {
             setTitleFilter(filter.name);
         }
     }, [filter.name]);
+
+    useEffect(() => {
+        const participants = async () => {
+            const tempParticipants = parseInt(await getMaxParticipants());
+            if (tempParticipants === 0) return;
+
+            if (limMaxParticipants === tempParticipants) return;
+
+            setLimMaxParticipants(tempParticipants);
+            setMaxParticipants([0, tempParticipants]);
+        };
+        participants();
+    }, [limMaxParticipants, getMaxParticipants]);
+
+    useEffect(() => {
+        const Prizes = async () => {
+            const tempPrizes = parseInt(await getMaxPrize());
+            if (tempPrizes === 0) return;
+
+            if (limPrizes === tempPrizes) return;
+            setLimPrizes(tempPrizes);
+            setPrizes([0, tempPrizes]);
+        };
+        Prizes();
+    }, [limPrizes, getMaxPrize]);
+
+    const handleMaxParticipantsChange = (e, value) => {
+        setMaxParticipants(value);
+    };
+
+    const handleMaxPrizesChange = (e, value) => {
+        setPrizes(value);
+    };
 
     const handleSearchClick = async () => {
         const filters = {};
@@ -53,15 +92,17 @@ const HackathonListPage = () => {
 
         if (location.length > 1) filters.location = location;
 
-        if (maxParticipantsFrom.length > 1)
-            filters.maxParticipantsFrom = maxParticipantsFrom;
+        //if (maxParticipants[0].length > 1)
+        filters.maxParticipantsFrom = maxParticipants[0];
 
-        if (maxParticipantsTo.length > 1)
-            filters.maxParticipantsTo = maxParticipantsTo;
+        //if (maxParticipants[1].length > 1)
+        filters.maxParticipantsTo = maxParticipants[1];
 
-        if (prizesFrom.length > 1) filters.prizesFrom = prizesFrom;
+        //if (prizes[0].length > 1)
+        filters.prizesFrom = prizes[0];
 
-        if (prizesTo.length > 1) filters.prizesTo = prizesTo;
+        ///if (prizes[1].length > 1)
+        filters.prizesTo = prizes[1];
 
         if (inscriptionDate.length > 1) {
             const inscriptionFrom = inscriptionDate[0];
@@ -81,7 +122,6 @@ const HackathonListPage = () => {
             filters.hackathonDateTo = hackathonDateTo;
         }
         setFilters(filters);
-        console.log(filters);
     };
 
     if (hackathonLoading) {
@@ -92,7 +132,7 @@ const HackathonListPage = () => {
         <main className="flex">
             {/* Sección para poner los filtros */}
             <section>
-                <ul>
+                <ul className="p-4">
                     <li>
                         <h2>online</h2>
                         <select
@@ -122,6 +162,20 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <h2>Número de participantes</h2>
+                        <Box sx={{ width: 300 }}>
+                            <Slider
+                                getAriaLabel={() =>
+                                    'Número máximo de participantes'
+                                }
+                                value={maxParticipants}
+                                onChange={handleMaxParticipantsChange}
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={limMaxParticipants}
+                            />
+                        </Box>
+
+                        {/*
                         <section className="participantes flex">
                             <section className="desde">
                                 <label htmlFor="maxParticipantsFrom">
@@ -150,10 +204,21 @@ const HackathonListPage = () => {
                                 />
                             </section>
                         </section>
+                        */}
                     </li>
                     <li>
                         <h2>Importe en premios</h2>
-
+                        <Box sx={{ width: 300 }}>
+                            <Slider
+                                getAriaLabel={() => 'Importe máximo de premios'}
+                                value={prizes}
+                                onChange={handleMaxPrizesChange}
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={limPrizes}
+                            />
+                        </Box>
+                        {/*
                         <section className="participantes flex">
                             <section className="desde">
                                 <label htmlFor="prizesFrom">Desde</label>
@@ -180,12 +245,11 @@ const HackathonListPage = () => {
                                 />
                             </section>
                         </section>
+                        */}
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium  mx-2">
-                                Fechas de inscripción
-                            </label>
+                            <label>Fechas de inscripción</label>
                             <DateRangePicker
                                 hackathonDate={inscriptionDate}
                                 setHackathonDate={setInscriptionDate}
@@ -194,9 +258,7 @@ const HackathonListPage = () => {
                     </li>
                     <li>
                         <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium mx-2">
-                                Fechas de hackathon
-                            </label>
+                            <label>Fechas de hackathon</label>
                             <DateRangePicker
                                 hackathonDate={hackathonDate}
                                 setHackathonDate={setHackathonDate}
