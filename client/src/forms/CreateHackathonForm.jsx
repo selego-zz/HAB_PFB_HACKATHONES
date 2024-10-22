@@ -281,7 +281,7 @@ const CreateHackathonForm = ({
                         value={formData.description}
                         onChange={handleChange}
                         maxLength={500}
-                        className="mt-1 block w-full rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="textarea"
                         rows={4}
                     />
                 </div>
@@ -295,7 +295,7 @@ const CreateHackathonForm = ({
                         value={formData.requirements}
                         onChange={handleChange}
                         maxLength={500}
-                        className="mt-1 block w-full rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="textarea"
                         rows={4}
                     />
                 </div>

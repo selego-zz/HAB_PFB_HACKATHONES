@@ -264,7 +264,7 @@ const UpdateUserPage = () => {
                                     onChange={(e) =>
                                         setBiography(e.target.value)
                                     }
-                                    className="bg-casiblanco rounded-xl block text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2 p-5"
+                                    className="textarea"
                                 />
                             </div>
 
