@@ -34,9 +34,7 @@ const DateRangePicker = ({ hackathonDate, setHackathonDate }) => {
         }
     }, [hackathonDate, setHackathonDate]);
 
-    return (
-        <input ref={datePickerRef} className="input-box" name="hackathonDate" />
-    );
+    return <input ref={datePickerRef} className="input" name="hackathonDate" />;
 };
 
 DateRangePicker.propTypes = {

@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 
 const Podium = ({ podium }) => {
     return (
-        <article className="Rating w-56 p-1 bg-verdeclaro text-left rounded-2xl">
-            <h2 className="font-bold">Primer clasificado:</h2>
+        <article className="min-w-48 min-h-40 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center ">
+            <h2 className="font-semibold text-azuloscuro">
+                Primer clasificado:
+            </h2>
             <p>{podium[0].username}</p>
-            <h2 className="font-bold ">Segundo clasificado:</h2>
+            <h2 className="font-semibold text-azuloscuro ">
+                Segundo clasificado:
+            </h2>
             <p>{podium[1].username}</p>
-            <div className="font-bold ">Tecer clasificaddo:</div>
+            <div className="font-semibold text-azuloscuro ">
+                Tecer clasificado:
+            </div>
             <p>{podium[2].username}</p>
         </article>
     );

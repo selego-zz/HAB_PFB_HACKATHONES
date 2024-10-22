@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 // Formato de fechas
 import dayjs from 'dayjs';
 
+const { VITE_API_UPLOADS } = import.meta.env;
+
 //////
 
 const HackathonList = ({ hackathons, showRating }) => {
@@ -38,22 +40,30 @@ const HackathonList = ({ hackathons, showRating }) => {
                 return (
                     <li
                         key={hackathon.id}
-                        className="flex justify-between  mb-4 p-4 rounded-md cursor-pointer md:w-3/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md h-44 border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8"
+                        className="flex flex-col md:flex-row  rounded-md cursor-pointer md:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md sm:h-44 border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8"
                     >
-                        <section id={`section-${hackathon.id}`}>
-                            <h2 className="text-xl font-semibold font-jost m-3 ">
+                        <img
+                            className="w-24 h-24  border-4 rounded-sm border-verdemarino border-opacity-25"
+                            src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                            alt="Logo del hackathon."
+                        />
+                        <section
+                            id={`section-${hackathon.id}`}
+                            className="border"
+                        >
+                            <h2 className="text-sm sm:text-xl font-semibold font-jost m-3">
                                 {hackathon.name}
                             </h2>
-                            <p className="font-jost m-3">
+                            <p className="font-jost m-3 text-sm sm:text-md">
                                 <strong>Fecha:</strong> {formattedStartDate} -{' '}
                                 {formattedEndDate}
                             </p>
-                            <p className="font-jost m-3">
+                            <p className="font-jost m-3 text-sm sm:text-md">
                                 <strong>Ubicación:</strong> {hackathon.location}
                             </p>
                         </section>
 
-                        <section className="flex">
+                        <section className="flex gap-8 items-center border">
                             {showRating && (
                                 <Podium podium={hackathon.ranking} />
                             )}
