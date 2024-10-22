@@ -82,9 +82,11 @@ const addDummyData = async () => {
                 online,
                 location,
                 prizes,
-                logo
+                logo,
+                description,
+                requirements
                 )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 data.organizerId,
                 data.name,
@@ -97,6 +99,13 @@ const addDummyData = async () => {
                 data.location,
                 data.prizes,
                 data.logo,
+                `Id ea irure cupidatat esse esse anim aute cillum fugiat Lorem cillum qui. Nostrud dolor sint sint mollit fugiat nulla. Enim nulla irure laboris excepteur aliquip laboris fugiat eu magna. Non reprehenderit sint culpa qui. Aliqua exercitation pariatur adipisicing non. Reprehenderit excepteur enim consectetur est fugiat id sit aliqua. Excepteur ad nostrud et esse ut veniam.
+
+Duis deserunt eiusmod consequat elit voluptate culpa qui. Mollit id anim sunt Lorem nisi tempor ut nisi proident aute Lorem. Nostrud nisi consequat excepteur nisi irure nulla eu nulla deserunt veniam officia labore nostrud sint. Id deserunt duis ut duis enim aliquip est. Adipisicing velit duis magna dolore esse consectetur aliqua officia in. Sunt ut proident aliqua tempor ea laboris ut.`,
+                `Pariatur est ut ut pariatur id adipisicing mollit reprehenderit laborum. Ad est est irure veniam cillum in. Deserunt sint incididunt ad nisi consectetur irure exercitation deserunt. Aliqua esse pariatur consequat aliquip eiusmod nulla laboris ipsum proident.
+
+Proident ex officia consectetur velit nulla enim velit consectetur cupidatat ullamco. Cillum nulla culpa incididunt magna est dolore amet duis ut aliquip ullamco adipisicing esse. Amet in proident ut eu duis non Lorem ex laboris cillum aliqua. Est magna eiusmod nostrud nostrud veniam incididunt irure minim nisi exercitation cillum quis qui tempor. Irure sit magna consectetur anim deserunt anim duis eu veniam velit Lorem adipisicing labore. Ut Lorem sint est sit aliquip aliquip velit ex sit excepteur nulla qui aliqua proident. Do commodo ullamco anim nostrud.
+`,
             ],
         );
     }
