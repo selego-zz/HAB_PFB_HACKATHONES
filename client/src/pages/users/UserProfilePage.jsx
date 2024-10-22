@@ -108,7 +108,7 @@ const UserProfilePage = () => {
         <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
             <div className="min-h-screen bg-blanco bg-opacity-90">
                 <div className="max-w-screen mx-auto py-8 px-4 ml-5 mr-5">
-                    <div className=" font-jost font-semibold text-blanco flex bg-azuloscuro rounded-xl sm:ml-7 ">
+                    <div className="flex items-center bg-azuloscuro rounded-xl sm:ml-7 p-5 ">
                         {authUser.avatar && (
                             <img
                                 src={`${VITE_API_UPLOADS}/${authUser.avatar}`}
@@ -116,59 +116,83 @@ const UserProfilePage = () => {
                                 className="w-24 h-24 rounded-full m-4 border-blanco border-4 "
                             />
                         )}
-                        <div className="flex flex-col justify-center">
-                            <h1 className="text-3xl w-full">
+                        <div className="flex flex-col ml-4">
+                            <h1 className="font-jost font-semibold text-blanco text-xl sm:text-3xl w-full">
                                 {authUser.firstName} {authUser.lastName} (
                                 {authUser.username})
                             </h1>
-                            <p> Email: {authUser.email} </p>
-                            <p> Linkedin: {authUser.linkedIn} </p>
+                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-5">
+                                Email: {authUser.email}
+                            </p>
+                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua w-36 rounded-2xl hover:bg-verdemarino">
+                                {authUser.linkedIn && (
+                                    <a
+                                        href={`https://www.linkedin.com/in/${authUser.linkedIn}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img
+                                            src={`/assets/icons/footer/linkedin.png`}
+                                            alt="LinkedIn"
+                                            className="w-10 h-57 inline-block"
+                                        />
+                                        LinkedIn
+                                    </a>
+                                )}
+                            </p>
                         </div>
                     </div>
-
                     <div className="flex flex-col-reverse sm:flex-row-reverse sm:justify-end mt-7 sm:ml-7">
                         <div className="flex flex-col w-full sm:ml-10 mt-10 sm:mt-0">
                             <h2 className="font-jost font-semibold text-azuloscuro">
                                 Biografía:
                             </h2>
-                            <p className="bg-casiblanco  max-w-3xl h-40 rounded-2xl text-negro font-jost font-medium">
+                            <p className="bg-casiblanco  max-w-3xl h-40 rounded-2xl text-negro font-jost font-medium p-5">
                                 {authUser.biography}
                             </p>
                         </div>
 
-                        <button
-                            onClick={() => {
-                                navigate('/users/update');
-                            }}
-                            className="bg-verdemarino text-azuloscuro font-jost font-semibold h-10 min-w-36  rounded-2xl hover:bg-verdeclaro "
-                        >
-                            Actualizar perfil
-                        </button>
+                        <div className="flex flex-col gap-5">
+                            <button
+                                onClick={() => {
+                                    navigate('/users/update');
+                                }}
+                                className="bg-verdemarino text-azuloscuro font-jost font-semibold h-10 min-w-36  rounded-2xl hover:bg-verdeclaro "
+                            >
+                                Actualizar perfil
+                            </button>
+
+                            <button
+                                onClick={handleRemoveUser}
+                                className="button-angled-red font-jost font-semibold h-10 min-w-36  rounded-2xl"
+                            >
+                                Eliminar usuario
+                            </button>
+                        </div>
                     </div>
 
                     {/* Historial de hackathons */}
-
-                    <div className="mt-20 flex  sm:ml-7">
+                    <div className="mt-20 flex sm:ml-7">
                         <button
-                            className="bg-verdeclaro font-jost font-semibold text-azuloscuro text-lg sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro"
-                            onClick={() => {
-                                setHistorico(true);
-                            }}
-                        >
-                            Historial de hackathons
-                        </button>
-
-                        <button
-                            className="bg-verdeclaro font-jost font-semibold text-azuloscuro text-lg sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro "
+                            className={`bg-verdeclaro font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro mr-1 ${!historico ? 'bg-verdemarino text-white' : ''}`}
                             onClick={() => {
                                 setHistorico(false);
                             }}
                         >
                             Hackathons activos
                         </button>
+
+                        <button
+                            className={`bg-verdeclaro font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro ${historico ? 'bg-verdemarino text-white' : ''}`}
+                            onClick={() => {
+                                setHistorico(true);
+                            }}
+                        >
+                            Historial de hackathons
+                        </button>
                     </div>
 
-                    <div className="sm:ml-7">
+                    <div className="bg-verde2 border-verde2 border rounded-r-xl rounded-b-xl sm:ml-7 ">
                         {historico && (
                             <HackathonList
                                 hackathons={historicHackathons}
@@ -176,21 +200,11 @@ const UserProfilePage = () => {
                             />
                         )}
                     </div>
-
                     {/* Hackathons Activos */}
-                    <div className="bg-verde2 border-verde2 border sm:ml-7">
+                    <div className="bg-verde2 border-verde2 border rounded-r-xl rounded-b-xl  sm:ml-7">
                         {!historico && (
                             <HackathonList hackathons={currentHackathons} />
                         )}
-                    </div>
-
-                    <div className="flex justify-center md:justify-start">
-                        <button
-                            onClick={handleRemoveUser}
-                            className="button-angled-red mt-20 sm:ml-10"
-                        >
-                            Eliminar usuario
-                        </button>
                     </div>
                 </div>
             </div>
