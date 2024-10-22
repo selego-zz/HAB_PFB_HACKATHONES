@@ -47,24 +47,23 @@ const Header = () => {
         <header className="bg-azuloscuro text-blanco sm:bg-blanco sm:text-azuloscuro w-full relative">
             <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-2 sm:px-10">
                 {/* Logo */}
-                <div className="grow">
-                    <NavLink to="/">
-                        <picture>
-                            <source
-                                media="(max-width: 770px)"
-                                srcSet="/logo/app-logo-small.png"
-                            />
-                            <img
-                                src="/logo/app-logo.png"
-                                alt="Logo de la página."
-                                className="h-16 w-fit"
-                            />
-                        </picture>
-                    </NavLink>
-                </div>
+
+                <NavLink to="/">
+                    <picture>
+                        <source
+                            media="(max-width: 770px)"
+                            srcSet="/logo/app-logo-small.png"
+                        />
+                        <img
+                            src="/logo/app-logo.png"
+                            alt="Logo de la página."
+                            className="h-16 w-fit"
+                        />
+                    </picture>
+                </NavLink>
 
                 {/* Navegación de botones */}
-                <div className="flex gap-3 mx-3">
+                <div className="flex gap-3 mx-3 ml-auto">
                     <BackButton className="button-back" />
                     <ForwardButton className="button-forward" />
                 </div>

@@ -4,11 +4,11 @@ import {
     ForwardButton,
     ScrollToTopButton,
     // Otros
+    DateRangePicker,
     LogosCarousel,
     ScrollToTop,
 } from './aux_components';
 
-import DateRangePicker from './DateRangePicker.jsx';
 import Footer from './Footer.jsx';
 import HackathonDetails from './HackathonDetails.jsx';
 import HackathonList from './HackathonList.jsx';
@@ -25,11 +25,11 @@ export {
     ForwardButton,
     ScrollToTopButton,
     // Otros
+    DateRangePicker,
     LogosCarousel,
     ScrollToTop,
 
     // Componentes principales
-    DateRangePicker,
     Footer,
     HackathonDetails,
     HackathonList,
