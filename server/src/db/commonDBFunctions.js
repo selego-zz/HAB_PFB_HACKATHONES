@@ -51,8 +51,8 @@ const SQL_HACKATHONS_TABLE = `
         online ENUM ('presencial', 'remoto') NOT NULL,
         location VARCHAR(200),
         prizes DECIMAL(9, 2),
-        description VARCHAR(900),
-        requirements VARCHAR(900),
+        description VARCHAR(1200),
+        requirements VARCHAR(1200),
         logo VARCHAR(100) DEFAULT 'default-hackathon-logo.svg',
         documentation VARCHAR(100),
 
