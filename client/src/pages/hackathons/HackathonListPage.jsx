@@ -77,10 +77,12 @@ const HackathonListPage = () => {
     }, [limPrizes, getMaxPrize]);
 
     const handleMaxParticipantsChange = (e, value) => {
+        if (value[1] < 1) value[1] = 1;
         setMaxParticipants(value);
     };
 
     const handleMaxPrizesChange = (e, value) => {
+        if (value[1] < 1) value[1] = 1;
         setPrizes(value);
     };
 
@@ -121,6 +123,8 @@ const HackathonListPage = () => {
             filters.hackathonDateFrom = hackathonDateFrom;
             filters.hackathonDateTo = hackathonDateTo;
         }
+        console.log(filters);
+
         setFilters(filters);
     };
 
