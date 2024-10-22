@@ -124,7 +124,7 @@ const UserProfilePage = () => {
                             <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-5">
                                 Email: {authUser.email}
                             </p>
-                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua w-36 rounded-2xl hover:bg-verdemarino">
+                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua w-20 sm:w-36 rounded-2xl hover:bg-verdemarino">
                                 {authUser.linkedIn && (
                                     <a
                                         href={`https://www.linkedin.com/in/${authUser.linkedIn}`}
@@ -134,7 +134,7 @@ const UserProfilePage = () => {
                                         <img
                                             src={`/assets/icons/footer/linkedin.png`}
                                             alt="LinkedIn"
-                                            className="w-10 h-57 inline-block"
+                                            className="w-6 sm:w-10  inline-block "
                                         />
                                         LinkedIn
                                     </a>
