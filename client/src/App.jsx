@@ -23,7 +23,8 @@ import {
     UserProfilePage,
     ValidationPage,
     // Otros
-    AboutUs,
+    AboutUsPage,
+    PrivacyPolicyPage,
     NotFoundPage,
 } from './pages';
 
@@ -98,7 +99,8 @@ const App = () => {
                     />
 
                     {/* Otros */}
-                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/about-us" element={<AboutUsPage />} />
+                    <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </section>

@@ -21,8 +21,9 @@ import {
     ValidationPage,
 } from './users';
 
+import AboutUsPage from './AboutUsPage.jsx';
+import PrivacyPolicyPage from './PrivacyPolicyPage.jsx';
 import NotFoundPage from './NotFoundPage.jsx';
-import AboutUs from './AboutUs.jsx';
 
 //////
 
@@ -47,6 +48,7 @@ export {
     UserProfilePage,
     ValidationPage,
     // Otros
-    AboutUs,
+    AboutUsPage,
+    PrivacyPolicyPage,
     NotFoundPage,
 };

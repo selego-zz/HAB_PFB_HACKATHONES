@@ -25,7 +25,8 @@ const developers = [
     },
 ];
 
-const AboutUs = () => {
+// Página "Sobre nosotros"
+const AboutUsPage = () => {
     return (
         <div className="bg-casiblanco h-auto flex flex-col items-center justify-center py-10">
             <h1 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
@@ -85,4 +86,4 @@ const AboutUs = () => {
     );
 };
 
-export default AboutUs;
+export default AboutUsPage;

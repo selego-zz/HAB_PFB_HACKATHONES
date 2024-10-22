@@ -54,7 +54,7 @@ const Footer = () => {
                     </a>
                 </div>
             </div>
-            <div className="flex flex-col items-center md:items-start p-6">
+            <div className="flex flex-col text-center items-center p-6">
                 <ul className="space-y-2">
                     <li>
                         <a
