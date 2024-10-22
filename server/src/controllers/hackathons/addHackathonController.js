@@ -29,6 +29,10 @@ const addHackathonController = async (req, res, next) => {
             prizes,
             online,
             location,
+            description,
+            requirements,
+            technologies,
+            themes,
         } = req.body;
 
         // Variables para almacenar el nombre del logo y de la documentación.
@@ -67,6 +71,10 @@ const addHackathonController = async (req, res, next) => {
             online,
             location,
             documentationFilename, // Pasamos el nombre del fichero de documentación si se subió, de lo contrario será null.
+            description,
+            requirements,
+            technologies,
+            themes,
         );
 
         // Respondemos al cliente con un estado 201 (creado) y un mensaje de éxito.

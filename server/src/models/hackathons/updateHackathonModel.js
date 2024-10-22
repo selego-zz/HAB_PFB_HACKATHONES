@@ -20,6 +20,10 @@ const updateHackathonModel = async (hackathon) => {
     const hackathonId = hackathon.id;
     delete hackathon.id;
 
+    //temas y tecnologías
+    const technologies = hackathon.technologies;
+    const themes = hackathon.themes;
+
     // Comprobamos que las fechas están en el formato correcto para la inserción.
     if (
         hackathon.inscriptionDate &&
@@ -75,6 +79,27 @@ const updateHackathonModel = async (hackathon) => {
 
     // Ejecutamos la consulta
     const [res] = await pool.query(sql, args);
+
+    //Actualizamos tecnologías
+    await pool.query(
+        'DELETE FROM hackathonTechnologies WHERE hackathonId = ?',
+        [hackathonId],
+    );
+    for (const technology of technologies)
+        await pool.query(
+            'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, SELECT id FROM technologies WHERE technology = ?)',
+            [hackathonId, technology],
+        );
+
+    //actualizamos temas
+    await pool.query('DELETE FROM hackathonThemes WHERE hackathonId = ?', [
+        hackathonId,
+    ]);
+    for (const theme of themes)
+        await pool.query(
+            'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, SELECT id FROM themes WHERE theme = ?)',
+            [hackathonId, theme],
+        );
 
     // Volvemos a asignar el id al objeto por si se requiere
     hackathon.id = hackathonId;
