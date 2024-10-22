@@ -9,7 +9,10 @@ const getHackathonController = async (req, res, next) => {
         const { hackathonId } = req.params;
         const hackathon = await getHackathonByIdModel(hackathonId);
         if (!hackathon) {
-            generateErrorUtil('Hackathon no encontrado', 404);
+            generateErrorUtil(
+                'Hackathon ' + hackathonId + ' no encontrado',
+                404,
+            );
         }
 
         res.send({

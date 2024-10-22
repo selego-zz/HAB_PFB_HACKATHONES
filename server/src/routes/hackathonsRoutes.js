@@ -16,6 +16,8 @@ import {
     getAllHackathonsController,
     getAllInscriptionsFromAHackathonController,
     getHackathonController,
+    getMaxParticipantsController,
+    getMaxPrizeController,
     getTechnologiesController,
     getThemesController,
     getUsersHackathonController,
@@ -90,6 +92,9 @@ router.put(
     authOrganizerController,
     updateScoreController,
 );
+
+router.get('/maxParticipants', getMaxParticipantsController);
+router.get('/maxPrize', getMaxPrizeController);
 
 router.get('/technologies', getTechnologiesController);
 
