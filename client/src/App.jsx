@@ -22,7 +22,8 @@ import {
     UpdateUserPage,
     UserProfilePage,
     ValidationPage,
-    // 404
+    // Otros
+    AboutUs,
     NotFoundPage,
 } from './pages';
 
@@ -95,6 +96,9 @@ const App = () => {
                         path="/hackathons/:hackathonId/update"
                         element={<UpdateHackathonPage />}
                     />
+
+                    {/* Otros */}
+                    <Route path="/aboutUs" element={<AboutUs />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </section>

@@ -22,6 +22,7 @@ import {
 } from './users';
 
 import NotFoundPage from './NotFoundPage.jsx';
+import AboutUs from './AboutUs.jsx';
 
 //////
 
@@ -45,6 +46,7 @@ export {
     UpdateUserPage,
     UserProfilePage,
     ValidationPage,
-    // 404
+    // Otros
+    AboutUs,
     NotFoundPage,
 };
