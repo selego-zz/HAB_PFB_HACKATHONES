@@ -86,9 +86,24 @@ const HackathonDetailsPage = () => {
             console.log(participants);
 
             if (participants.length > 0) {
-                toast.error(
-                    'No se puede eliminar un hackathon si hay gente inscrita',
-                );
+                // Confirmación con sweetalert2.
+                const resultDelete = await Swal.fire({
+                    title: 'Eliminación de hackathon',
+                    text: `Este Hackathon tiene ${participants.length} Participante${participants.length > 1 ? 's' : ''} inscrito${participants.length > 1 ? 's' : ''}. ¿Estás seguro de que quieres eliminar este hackathon?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#FF3333',
+                    cancelButtonColor: '#22577A',
+                    confirmButtonText: 'Sí, quiero eliminar este hackathon',
+                    cancelButtonText: 'Cancelar',
+                });
+
+                // Si el organizador confirma, procedemos con la eliminación.
+                if (resultDelete.isConfirmed) {
+                    await deleteHackathon(hackathonId);
+                    toast.success('Hackathon eliminado');
+                    navigate('/');
+                }
                 return;
             }
 
