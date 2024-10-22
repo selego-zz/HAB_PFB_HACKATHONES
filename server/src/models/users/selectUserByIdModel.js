@@ -13,7 +13,6 @@ const selectUserByIdModel = async (userId) => {
     ]);
     //buscamos las tecnologías del usuario y las metemos en technologies
     users[0].technologies = await selectUserTechnologiesModel(users[0].id);
-    console.log(users[0]);
 
     // Ya que el email no puede repetirse, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
     return users[0];

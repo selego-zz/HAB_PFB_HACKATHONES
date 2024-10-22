@@ -1,6 +1,11 @@
 import getPool from '../../db/getPool.js';
 
-import { getAllHackathonsModel, getRankingModel } from './index.js';
+import {
+    getAllHackathonsModel,
+    getHackathonTechnologiesModel,
+    getHackathonThemesModel,
+    getRankingModel,
+} from './index.js';
 
 /////////////////////////////////////////////////////////////////
 // Modelo que devuelve información de los hackathones
@@ -194,9 +199,11 @@ const getFilteredHackathonsModel = async (filters) => {
 
     for (const hackathon of res) {
         hackathon.ranking = await getRankingModel(hackathon.id);
+        hackathon.technologies = await getHackathonTechnologiesModel(
+            hackathon.id,
+        );
+        hackathon.themes = await getHackathonThemesModel(hackathon.id);
     }
-    console.log(res);
-
     return res;
 };
 

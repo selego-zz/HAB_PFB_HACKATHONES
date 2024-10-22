@@ -123,7 +123,6 @@ const HackathonListPage = () => {
             filters.hackathonDateFrom = hackathonDateFrom;
             filters.hackathonDateTo = hackathonDateTo;
         }
-        console.log(filters);
 
         setFilters(filters);
     };

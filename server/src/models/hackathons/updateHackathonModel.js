@@ -22,7 +22,9 @@ const updateHackathonModel = async (hackathon) => {
 
     //temas y tecnologías
     const technologies = hackathon.technologies;
+    delete hackathon.technologies;
     const themes = hackathon.themes;
+    delete hackathon.themes;
 
     // Comprobamos que las fechas están en el formato correcto para la inserción.
     if (
@@ -87,7 +89,7 @@ const updateHackathonModel = async (hackathon) => {
     );
     for (const technology of technologies)
         await pool.query(
-            'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, SELECT id FROM technologies WHERE technology = ?)',
+            'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
             [hackathonId, technology],
         );
 
@@ -97,7 +99,7 @@ const updateHackathonModel = async (hackathon) => {
     ]);
     for (const theme of themes)
         await pool.query(
-            'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, SELECT id FROM themes WHERE theme = ?)',
+            'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, (SELECT id FROM themes WHERE theme = ?))',
             [hackathonId, theme],
         );
 

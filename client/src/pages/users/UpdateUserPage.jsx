@@ -43,8 +43,6 @@ const UpdateUserPage = () => {
     // UseEffect para establecer los valores iniciales de estado
     useEffect(() => {
         if (authUser) {
-            console.log(authUser.technologies);
-
             setUsername(authUser.username || '');
             setFirstName(authUser.firstName || '');
             setLastName(authUser.lastName || '');
@@ -112,8 +110,6 @@ const UpdateUserPage = () => {
             );
         }
     };
-
-    console.log(selectedTechnologies);
 
     return (
         <main>
