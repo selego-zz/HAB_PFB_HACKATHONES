@@ -128,7 +128,7 @@ const CreateHackathonForm = ({
 
                 <div className="min-w-[200px]">
                     <label className="block text-sm font-medium mx-2">
-                        Premios
+                        Premio (€)
                     </label>
                     <input
                         type="number"
