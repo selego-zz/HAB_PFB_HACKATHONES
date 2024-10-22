@@ -111,9 +111,10 @@ const PrivacyPolicyPage = () => {
                         <p className="text-negro">
                             Si tiene alguna pregunta sobre esta Política de
                             Privacidad, puede contactarnos por correo
-                            electrónico en:{' '}
-                            <span className="text-verdeclaro font-semibold">
-                                privacy@ourcompany.com
+                            electrónico en:
+                            <br />
+                            <span className="text-azuloscuro font-semibold">
+                                privacidad@hack-a-ton.com
                             </span>
                         </p>
                     </section>
