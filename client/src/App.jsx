@@ -98,7 +98,7 @@ const App = () => {
                     />
 
                     {/* Otros */}
-                    <Route path="/aboutUs" element={<AboutUs />} />
+                    <Route path="/about-us" element={<AboutUs />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </section>

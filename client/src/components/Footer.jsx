@@ -59,7 +59,7 @@ const Footer = () => {
                     <li>
                         <a
                             href="/about-us"
-                            className="font-jost font-semibold text-blanco"
+                            className="font-jost font-semibold text-blanco hover:text-verdeclaro"
                         >
                             Sobre nosotros
                         </a>
@@ -67,7 +67,7 @@ const Footer = () => {
                     <li>
                         <a
                             href="/privacy"
-                            className="font-jost font-semibold text-blanco"
+                            className="font-jost font-semibold text-blanco hover:text-verdeclaro"
                         >
                             Política de privacidad
                         </a>
