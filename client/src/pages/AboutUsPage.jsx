@@ -8,8 +8,8 @@ const developers = [
     {
         name: 'Bruno Martí',
         image: '/assets/images/br.png',
-        github: 'https://github.com/',
-        linkedin: 'https://www.linkedin.com/in/',
+        github: 'https://github.com/selego-zz',
+        linkedin: 'https://linkedin.com/in/brunomartiluis/',
     },
     {
         name: 'Emilio Sánchez',
