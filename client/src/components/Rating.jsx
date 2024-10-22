@@ -74,7 +74,7 @@ Rating.propTypes = {
     hackathonId: PropTypes.number.isRequired,
     initialRating: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
-    position: PropTypes.number.isRequired,
+    position: PropTypes.number,
     isDeveloper: PropTypes.bool.isRequired,
 };
 
