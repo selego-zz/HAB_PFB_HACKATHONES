@@ -83,13 +83,12 @@ const HackathonDetailsPage = () => {
             // Comprobamos que no tenga participantes inscritos.
             const participants =
                 await getAllInscriptionsFromAHackathon(hackathonId);
-            console.log(participants);
 
-            if (participants.length > 0) {
+            if (participants[0]?.developers?.length > 0) {
                 // Confirmación con sweetalert2.
                 const resultDelete = await Swal.fire({
                     title: 'Eliminación de hackathon',
-                    text: `Este Hackathon tiene ${participants.length} Participante${participants.length > 1 ? 's' : ''} inscrito${participants.length > 1 ? 's' : ''}. ¿Estás seguro de que quieres eliminar este hackathon?`,
+                    text: `Este Hackathon tiene ${participants[0].developers.length} participante${participants[0].developers.length > 1 ? 's' : ''} inscrito${participants[0].developers.length > 1 ? 's' : ''}. ¿Estás seguro de que quieres eliminar este hackathon?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#FF3333',

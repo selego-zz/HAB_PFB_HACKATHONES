@@ -87,7 +87,6 @@ const CreateHackathonForm = ({
                     },
                 );
             }
-            console.log(formData.technologies);
         } catch (err) {
             toast.error(err.message, {
                 id: 'createhackathonform',
@@ -323,7 +322,7 @@ const CreateHackathonForm = ({
                                     <input
                                         type="checkbox"
                                         value={tech.technology}
-                                        checked={formData.technologies.includes(
+                                        checked={formData?.technologies?.includes(
                                             tech.technology,
                                         )}
                                         onChange={handleTechnologyChange}
@@ -351,7 +350,7 @@ const CreateHackathonForm = ({
                                     <input
                                         type="checkbox"
                                         value={them.theme}
-                                        checked={formData.themes.includes(
+                                        checked={formData?.themes?.includes(
                                             them.theme,
                                         )}
                                         onChange={handleThemeChange}

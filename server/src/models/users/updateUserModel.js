@@ -13,8 +13,6 @@ import getPool from '../../db/getPool.js';
 const updateUserModel = async (user) => {
     const pool = await getPool();
 
-    console.log(user);
-
     // el campo id es obligatorio
     if (!user.id) return;
 

@@ -209,9 +209,9 @@ const HackathonDetails = ({
                                     Online →
                                 </a>
                             ) : (
-                                <p className="font-semibold">
+                                <span className="font-semibold">
                                     {hackathon?.location}
-                                </p>
+                                </span>
                             )}
                         </p>
 
