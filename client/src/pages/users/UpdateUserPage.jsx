@@ -231,11 +231,10 @@ const UpdateUserPage = () => {
                                 />
                             </div>
 
-                            <div className="flex flex-col items-center ">
-                                <label className="label" htmlFor="avatar">
+                            <div className="relative">
+                                <label htmlFor="avatar" className="label">
                                     Foto de perfil:
                                 </label>
-
                                 <input
                                     type="file"
                                     id="avatar"
@@ -244,8 +243,21 @@ const UpdateUserPage = () => {
                                     onChange={(e) =>
                                         setAvatar(e.target.files[0])
                                     }
-                                    className=""
+                                    className="hidden"
                                 />
+                                <label
+                                    htmlFor="avatar"
+                                    className="cursor-pointer flex justify-center mt-1"
+                                >
+                                    <div className="bg-verdemarino w-56 h-9 rounded-3xl font-jost font-semibold text-azuloscuro flex items-center justify-center hover:bg-verdeclaro">
+                                        <img
+                                            src="/assets/icons/folders_icon.png"
+                                            alt="Icono de carga"
+                                            className="w-6 h-6 mr-2"
+                                        />
+                                        <span>Seleccionar Imagen</span>
+                                    </div>
+                                </label>
                             </div>
 
                             <div className=" flex flex-col col-span-2 mt-10">
