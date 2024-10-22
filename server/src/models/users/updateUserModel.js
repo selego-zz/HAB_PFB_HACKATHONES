@@ -13,6 +13,8 @@ import getPool from '../../db/getPool.js';
 const updateUserModel = async (user) => {
     const pool = await getPool();
 
+    console.log(user);
+
     // el campo id es obligatorio
     if (!user.id) return;
 
@@ -27,6 +29,12 @@ const updateUserModel = async (user) => {
     const password = user.password; //al final pondremos la contraseña sin encriptar nuevamente en el JSON, por si se requiere para algo
 
     delete user.password;
+
+    let technologies = [];
+    if (user.technologies) {
+        technologies = user.technologies;
+        delete user.technologies;
+    }
 
     //cada vez que hacemos un update hay que actualziar updatedAt
     let sql = 'UPDATE users SET updatedAt = NOW()';
@@ -43,6 +51,15 @@ const updateUserModel = async (user) => {
     args.push(userId);
 
     const [res] = await pool.query(sql, args);
+
+    await pool.query('DELETE FROM userTechnologies WHERE userId = ?', [userId]);
+
+    for (const technology of technologies) {
+        await pool.query(
+            'INSERT INTO userTechnologies (USERiD, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
+            [userId, technology],
+        );
+    }
 
     user.id = userId;
     user.password = password;
