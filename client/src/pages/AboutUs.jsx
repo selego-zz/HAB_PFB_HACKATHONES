@@ -27,7 +27,7 @@ const developers = [
 
 const AboutUs = () => {
     return (
-        <div className="bg-casiblanco min-h-screen flex flex-col items-center justify-center py-10">
+        <div className="bg-casiblanco h-auto flex flex-col items-center justify-center py-10">
             <h1 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
                 Conoce al equipo
             </h1>
