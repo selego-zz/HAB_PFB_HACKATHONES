@@ -230,7 +230,7 @@ const HackathonListPage = () => {
                         </section>
 
                         <div className=" xl:col-span-2">
-                            <section className="flex justify-center xl:justify-start gap-5 mb-10">
+                            <section className="flex justify-center items-center xl:justify-start gap-5 mb-10">
                                 <input
                                     type="text"
                                     id="title"
