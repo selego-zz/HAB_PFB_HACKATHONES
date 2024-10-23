@@ -44,13 +44,13 @@ const HackathonList = ({ hackathons, showRating }) => {
                     >
                         <div className="flex md:gap-10 justify-center items-center">
                             <img
-                                className="w-36 h-36  border-4 rounded-sm border-verdeagua m-5"
+                                className="sm:w-36 sm:h-36 w-24 h-24 border-4 rounded-sm border-verdeagua m-5"
                                 src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
                                 alt="Logo del hackathon."
                             />
                             <section
                                 id={`section-${hackathon.id}`}
-                                className=" min-w-52"
+                                className=" min-w-40"
                             >
                                 <h2 className="text-sm sm:text-xl font-semibold font-jost m-3">
                                     {hackathon.name}

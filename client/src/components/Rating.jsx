@@ -56,7 +56,7 @@ const Rating = ({
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');
 
     return (
-        <article className="w-56 min-h-52 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center p-2 shadow-md">
+        <article className="w-56 min-h-64 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center sm:p-2 shadow-md">
             <h2 className="font-bold">Rating</h2>
             <div className="stars text-4xl text-amarillo group">
                 {_stars.map((star, index) =>

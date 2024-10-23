@@ -135,12 +135,12 @@ const HackathonListPage = () => {
         <main>
             <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center">
                 <div className=" bg-blanco bg-opacity-90">
-                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro m-10">
+                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mt-16">
                         EVENTOS DE HACKATHONS
                     </h2>
                     <div className="m-10 xl:m-16 flex flex-col xl:grid xl:grid-cols-3 gap-20 items-center xl:items-start">
                         {/* Sección para poner los filtros */}
-                        <section className=" max-w-sm flex mt-28">
+                        <section className=" max-w-sm flex xl:mt-28">
                             <ul>
                                 <li className="mb-8 mt-8">
                                     <h2 className="label">Modalidad</h2>
@@ -230,7 +230,7 @@ const HackathonListPage = () => {
                         </section>
 
                         <div className=" xl:col-span-2">
-                            <section className="flex justify-center xl:justify-start gap-5 mb-10">
+                            <section className="flex justify-center items-center xl:justify-start gap-5 mb-10">
                                 <input
                                     type="text"
                                     id="title"

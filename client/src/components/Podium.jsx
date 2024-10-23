@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Podium = ({ podium }) => {
     return (
-        <article className="w-56 min-h-52 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center shadow-md ">
+        <article className="w-56 min-h-64 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center shadow-md p-2">
             <h2 className="font-semibold text-azuloscuro">1º clasificado:</h2>
             <p className="mb-2">{podium[0].username}</p>
             <h2 className="font-semibold text-azuloscuro ">2º clasificado:</h2>

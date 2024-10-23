@@ -95,8 +95,8 @@ const CreateHackathonPage = () => {
     }
 
     return (
-        <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
-            <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
+        <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center">
+            <div className="min-h-screen bg-blanco bg-opacity-90">
                 <CreateHackathonForm
                     formData={formData}
                     handleChange={handleChange}
