@@ -11,9 +11,12 @@ const selectUserByEmailModel = async (email) => {
     const [users] = await pool.query(`SELECT * FROM users WHERE email = ?`, [
         email,
     ]);
+    console.log(users);
 
-    //buscamos las tecnologías del usuario y las metemos en technologies
-    users[0].technologies = selectUserTechnologiesModel(users[0].id);
+    if (users.length) {
+        //buscamos las tecnologías del usuario y las metemos en technologies
+        users[0].technologies = selectUserTechnologiesModel(users[0].id);
+    }
 
     // Ya que el email tiene que ser único, el array de usuarios solo podrá contener un único usuario, que será un objeto en la posición 0. En caso de que no se haya encontrado a ningún usuario retornará undefined.
     return users[0];

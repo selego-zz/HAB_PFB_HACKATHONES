@@ -1,9 +1,10 @@
 // Importamos los hooks.
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // Importamos la función toast.
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthContext';
 
 // Importamos la URL del servidor.
 const { VITE_API_URL } = import.meta.env;
@@ -13,6 +14,7 @@ const RecoverPass_GetCodePage = () => {
     const [password, setPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
     const [passChanged, setPassChanged] = useState(false);
+    const { authLogoutState } = useContext(AuthContext);
     // Importamos la función navigate.
     const navigate = useNavigate();
 
@@ -46,7 +48,9 @@ const RecoverPass_GetCodePage = () => {
             if (body.status === 'error') {
                 throw new Error(body.message);
             }
+
             setPassChanged(true);
+            authLogoutState();
 
             // Redirigimos a la página principal.
             toast.success('Contraseña actualizada', {
@@ -62,47 +66,69 @@ const RecoverPass_GetCodePage = () => {
 
     return (
         <main>
-            <h2>Cambio de contraseña</h2>
-            <p>
-                Bienvenido, para cambiar tu contraseña, por favor introduce la
-                nueva contraseña en la casilla indicada. Por tu seguridad, debes
-                volver a introducirla en la casilla identificada como Repite tu
-                contraseña, para asegurar que no te has equivocado con ninguna
-                letra
-            </p>
-            <form onSubmit={handleChangePass}>
-                <ul>
-                    <li>
-                        <label htmlFor="pass">Contraseña:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </li>
-                    <li>
-                        <label htmlFor="repeatedPassword">
-                            Repite tu contraseña:
-                        </label>
-                        <input
-                            type="password"
-                            id="repeatedPassword"
-                            value={repeatedPassword}
-                            onChange={(e) =>
-                                setRepeatedPassword(e.target.value)
-                            }
-                            required
-                        />
-                    </li>
-                    <li>
-                        <button disabled={passChanged}>
-                            Cambiar contraseña
-                        </button>
-                    </li>
-                </ul>
-            </form>
+            <div className="font-jost h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+                <div className="h-full bg-blanco bg-opacity-90 flex flex-col items-center justify-center">
+                    <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
+                        Cambio de contraseña
+                    </h2>
+                    <p className="p-16">
+                        Bienvenido, para cambiar tu contraseña, por favor
+                        introduce la nueva contraseña en la casilla indicada.
+                        Por tu seguridad, debes volver a introducirla en la
+                        casilla identificada como Repite tu contraseña, para
+                        asegurar que no te has equivocado con ninguna letra
+                    </p>
+                    <form
+                        onSubmit={handleChangePass}
+                        className="flex flex-col justify-center items-center"
+                    >
+                        <ul>
+                            <li>
+                                <label htmlFor="pass" className="label">
+                                    Contraseña:
+                                </label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    className="input mb-12"
+                                    required
+                                    autoFocus
+                                />
+                            </li>
+                            <li>
+                                <label
+                                    htmlFor="repeatedPassword"
+                                    className="label"
+                                >
+                                    Repite tu contraseña:
+                                </label>
+                                <input
+                                    type="password"
+                                    id="repeatedPassword"
+                                    value={repeatedPassword}
+                                    onChange={(e) =>
+                                        setRepeatedPassword(e.target.value)
+                                    }
+                                    className="input mb-12"
+                                    required
+                                />
+                            </li>
+                            <li>
+                                <button
+                                    disabled={passChanged}
+                                    className="button-blue mt-16"
+                                >
+                                    Cambiar contraseña
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
         </main>
     );
 };

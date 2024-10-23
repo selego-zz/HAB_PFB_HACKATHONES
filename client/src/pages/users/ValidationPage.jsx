@@ -1,15 +1,19 @@
 // Importamos los hooks.
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // Importamos la función toast.
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthContext';
 
 // Importamos la URL del servidor.
 const { VITE_API_URL } = import.meta.env;
 
 // Inicializamos el componente.
 const ValidationPage = () => {
+    //importamos cerrar sesión
+    const { authLogoutState } = useContext(AuthContext);
+
     // Importamos la función navigate.
     const navigate = useNavigate();
 
@@ -35,6 +39,10 @@ const ValidationPage = () => {
                 if (body.status === 'error') {
                     throw new Error(body.message);
                 }
+
+                //si validamos un nuevo usuario, cerramos la sesión de cualquiera que estuviera
+                //por que validar, y que haya una sesión abierta con otro usuario puede ser confuso
+                authLogoutState();
 
                 // Si todo ha ido bien mostramos un mensaje al usuario.
                 toast.success(body.message, {

@@ -11,8 +11,11 @@ const selectUserByUsernameModel = async (username) => {
         `SELECT id, username FROM users WHERE username = ?`,
         [username],
     );
-    //buscamos las tecnologías del usuario y las metemos en technologies
-    users[0].technologies = selectUserTechnologiesModel(users[0].id);
+
+    if (users.length) {
+        //buscamos las tecnologías del usuario y las metemos en technologies
+        users[0].technologies = selectUserTechnologiesModel(users[0].id);
+    }
 
     return users[0];
 };
