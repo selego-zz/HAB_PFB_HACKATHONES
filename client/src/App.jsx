@@ -5,9 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import {
     // Hackathons
     CreateHackathonPage,
-    DeleteInscriptionPage,
     HackathonDetailsPage,
-    HackathonInscriptionPage,
     HackathonListPage,
     UpdateHackathonPage,
     // Users
@@ -79,14 +77,6 @@ const App = () => {
                     <Route
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}
-                    />
-                    <Route
-                        path="/hackathons/:hackathonId/cancel"
-                        element={<DeleteInscriptionPage />}
-                    />
-                    <Route
-                        path="/hackathons/:hackathonId/registration"
-                        element={<HackathonInscriptionPage />}
                     />
                     <Route path="/hackathons" element={<HackathonListPage />} />
                     <Route

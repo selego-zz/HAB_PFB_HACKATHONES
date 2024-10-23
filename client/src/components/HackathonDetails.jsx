@@ -1,19 +1,20 @@
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext.jsx';
+
+import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
+
 import dayjs from 'dayjs';
+import Swal from 'sweetalert2';
 
-/* const formatDate = (dateStr) => {
-    const options = { day: 'numeric', month: 'short', year: '2-digit' };
-    return new Date(dateStr)
-        .toLocaleDateString('es-ES', options)
-        .replace('.', '');
-}; */
+//////
 
-// Renderizado de detalles de hackathon
 const HackathonDetails = ({
     hackathon,
     participants,
     isRegistered,
+    setIsRegistered,
     isDeveloper,
     isOrganizer,
     handleDelete,
@@ -24,7 +25,8 @@ const HackathonDetails = ({
     hackathonId,
 }) => {
     const navigate = useNavigate();
-    const { VITE_API_UPLOADS } = import.meta.env;
+    const { authToken } = useContext(AuthContext);
+    const { VITE_API_URL, VITE_API_UPLOADS } = import.meta.env;
 
     // Formato de fechas
     const formattedInscrStartDate = dayjs(hackathon?.inscriptionDate).format(
@@ -40,7 +42,76 @@ const HackathonDetails = ({
         'DD/MM/YYYY HH:mm',
     );
 
-    console.log(hackathon);
+    // Función para inscribirse en el hackathon
+    const handleInscription = async () => {
+        try {
+            const inscriptionConfirm = await Swal.fire({
+                title: '¿Quieres inscribirte?',
+                text: 'Estás a punto de inscribirte en este hackathon.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, quiero inscribirme',
+                cancelButtonText: 'Cancelar',
+            });
+
+            if (!inscriptionConfirm.isConfirmed) return;
+
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/registration`,
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: authToken,
+                    },
+                },
+            );
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+            toast.success(body.message);
+
+            setIsRegistered(true);
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
+
+    // Función para cancelar la inscripción
+    const handleCancelInscription = async () => {
+        try {
+            const confirmDelete = await Swal.fire({
+                title: '¿Quieres cancelar tu inscripción?',
+                text: 'Podrás volver a inscribirte siempre y cuando estés dentro del plazo de inscripción.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, cancelar',
+                cancelButtonText: 'Volver',
+            });
+
+            if (!confirmDelete.isConfirmed) return;
+
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/cancel`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: authToken,
+                    },
+                },
+            );
+
+            const result = await res.json();
+            if (result.status === 'error') {
+                throw new Error(result.message);
+            }
+
+            setIsRegistered(false);
+            toast.success('Inscripción cancelada.');
+            navigate(`/hackathons/${hackathonId}`);
+        } catch (err) {
+            toast.error(`Error: ${err.message}`);
+        }
+    };
 
     return (
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg font-jost">
@@ -92,22 +163,14 @@ const HackathonDetails = ({
                             <div className="flex mt-4 justify-center">
                                 {isRegistered ? (
                                     <button
-                                        onClick={() =>
-                                            navigate(
-                                                `/hackathons/${hackathonId}/cancel`,
-                                            )
-                                        }
+                                        onClick={handleCancelInscription}
                                         className="button-angled-red"
                                     >
                                         Cancelar mi inscripción
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={() =>
-                                            navigate(
-                                                `/hackathons/${hackathonId}/registration`,
-                                            )
-                                        }
+                                        onClick={handleInscription}
                                         className="button-angled-green"
                                     >
                                         ¡Quiero inscribirme!
@@ -128,7 +191,7 @@ const HackathonDetails = ({
                         </p>
                     </div>
 
-                    {/* Si el usuario es el organizador del hackathon, muestra lista de participantes */}
+                    {/* Lista de participantes si es organizador */}
                     {isOrganizer() &&
                         authUser?.id === hackathon?.organizerId && (
                             <div className="bg-casiblanco p-4 rounded-lg shadow-md">
@@ -188,7 +251,7 @@ const HackathonDetails = ({
                         )}
                 </div>
 
-                {/* Detalles de hackathon */}
+                {/* Detalles del hackathon */}
                 <aside className="flex flex-col gap-7 bg-casiblanco p-4 w-full rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-6 lg:mx-4">
                     <h2 className="text-xl font-semibold">
                         Detalles del Hackathon
@@ -362,6 +425,7 @@ HackathonDetails.propTypes = {
         ),
     }),
     isRegistered: PropTypes.bool.isRequired,
+    setIsRegistered: PropTypes.func.isRequired,
     isDeveloper: PropTypes.func.isRequired,
     isOrganizer: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,

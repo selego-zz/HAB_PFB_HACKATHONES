@@ -52,7 +52,7 @@ const HackathonDetailsPage = () => {
 
                 // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
                 const isUserRegistered = enrolledParticipants.some(
-                    (h) => h.userId === authUser?.id,
+                    (h) => h.developers.userId === authUser?.id,
                 );
                 setIsRegistered(isUserRegistered);
             } catch (err) {
@@ -173,6 +173,7 @@ const HackathonDetailsPage = () => {
                 hackathon={hackathon}
                 participants={participants[0]}
                 isRegistered={isRegistered}
+                setIsRegistered={setIsRegistered}
                 isDeveloper={isDeveloper}
                 isOrganizer={isOrganizer}
                 handleDelete={handleDelete}
