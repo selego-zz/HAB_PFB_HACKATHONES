@@ -51,9 +51,10 @@ const HackathonDetailsPage = () => {
                 setParticipants(enrolledParticipants);
 
                 // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
-                const isUserRegistered = enrolledParticipants.some(
-                    (h) => h.developers.userId === authUser?.id,
-                );
+                const isUserRegistered =
+                    enrolledParticipants[0].developers.some(
+                        (h) => h.userId === authUser?.id,
+                    );
                 setIsRegistered(isUserRegistered);
             } catch (err) {
                 toast.error(
