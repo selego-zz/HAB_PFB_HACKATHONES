@@ -232,7 +232,7 @@ const UpdateUserPage = () => {
                                 />
                             </div>
 
-                            <div className="relative">
+                            <div>
                                 <label htmlFor="avatar" className="label">
                                     Foto de perfil:
                                 </label>
@@ -256,7 +256,7 @@ const UpdateUserPage = () => {
                                             alt="Icono de carga"
                                             className="w-6 h-6 mr-2"
                                         />
-                                        <span>Seleccionar Imagen</span>
+                                        <span>Seleccionar imagen</span>
                                     </div>
                                 </label>
                             </div>
@@ -319,7 +319,7 @@ const UpdateUserPage = () => {
                                 </div>
                             )}
 
-                            <div className="col-span-2 mt-14">
+                            <div className="col-span-2 mt-12">
                                 <button className="button-blue">Guardar</button>
                             </div>
                         </form>
