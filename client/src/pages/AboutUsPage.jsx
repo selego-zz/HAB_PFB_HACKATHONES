@@ -40,7 +40,7 @@ const AboutUsPage = () => {
                 {developers.map((dev, index) => (
                     <div
                         key={index}
-                        className="bg-white rounded-lg shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl w-full max-w-60"
+                        className="bg-blanco bg-opacity-60 rounded-lg shadow-lg p-6 transform transition duration-500 hover:bg-opacity-100 hover:scale-105 hover:shadow-2xl w-full max-w-60"
                     >
                         <img
                             className="rounded-full w-32 h-32 mx-auto mb-4"
