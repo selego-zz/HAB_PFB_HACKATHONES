@@ -4,8 +4,8 @@ const developers = [
     {
         name: 'Amanda González',
         image: '/assets/images/am.png',
-        github: 'https://github.com/',
-        linkedin: 'https://www.linkedin.com/in/',
+        github: 'https://github.com/Amanda-Gonzalez-Cotrina',
+        linkedin: 'https://linkedin.com/in/amanda-gonzález-cotrina',
     },
     {
         name: 'Bruno Martí',
