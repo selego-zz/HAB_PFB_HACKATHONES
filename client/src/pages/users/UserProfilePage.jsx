@@ -124,17 +124,18 @@ const UserProfilePage = () => {
                             <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-5">
                                 Email: {authUser.email}
                             </p>
-                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua w-20 sm:w-36 rounded-2xl hover:bg-verdemarino">
+                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua sm:h-8 w-20 sm:w-36 rounded-2xl hover:bg-verdemarino">
                                 {authUser.linkedIn && (
                                     <a
                                         href={`https://www.linkedin.com/in/${authUser.linkedIn}`}
                                         target="_blank"
+                                        className="flex items-center ml-1 sm:ml-2 sm:mt-0.5"
                                         rel="noopener noreferrer"
                                     >
                                         <img
                                             src={`/assets/icons/footer/linkedin.png`}
                                             alt="LinkedIn"
-                                            className="w-6 sm:w-10  inline-block "
+                                            className="w-5 h-3 sm:w-10 sm:h-6"
                                         />
                                         LinkedIn
                                     </a>
@@ -174,7 +175,7 @@ const UserProfilePage = () => {
                     {/* Historial de hackathons */}
                     <div className="mt-20 flex sm:ml-7">
                         <button
-                            className={`bg-verdeclaro font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro mr-1 ${!historico ? 'bg-verdemarino text-white' : ''}`}
+                            className={`bg-verdemarino font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdeclaro focus:bg-verdeclaro border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro mr-1 ${!historico ? 'bg-verdeclaro text-white' : ''}`}
                             onClick={() => {
                                 setHistorico(false);
                             }}
@@ -183,7 +184,7 @@ const UserProfilePage = () => {
                         </button>
 
                         <button
-                            className={`bg-verdeclaro font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdemarino focus:bg-verdemarino border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro ${historico ? 'bg-verdemarino text-white' : ''}`}
+                            className={`bg-verdemarino font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdeclaro focus:bg-verdeclaro border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro ${historico ? 'bg-verdeclaro' : ''}`}
                             onClick={() => {
                                 setHistorico(true);
                             }}

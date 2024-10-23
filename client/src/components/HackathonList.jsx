@@ -40,7 +40,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                 return (
                     <li
                         key={hackathon.id}
-                        className="flex flex-col xl:flex-row gap-5 rounded-md cursor-pointer xl:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md  border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8 mb-5"
+                        className="flex flex-col xl:flex-row gap-5 rounded-md cursor-pointer xl:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md  border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8 mb-5 ml-5"
                     >
                         <div className="flex md:gap-10 justify-center items-center">
                             <img
