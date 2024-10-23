@@ -39,39 +39,60 @@ const RecoverPass_SendCodePage = () => {
                 throw new Error(body.message);
             }
 
+            // Indicamos que ha finalizado el fetch.
+            setMailSent(true);
+
             // Redirigimos a la página principal.
-            toast.success('Correo enviado', { id: 'sendRecoverPassword' });
+            toast.success(
+                'Correo enviado, comprueba tu buzón, en breve obtendrás respuesta',
+                { id: 'sendRecoverPassword' },
+            );
             navigate('/');
         } catch (err) {
             toast.error(err.message, {
                 id: 'sendRecoverPassword',
             });
-        } finally {
-            // Indicamos que ha finalizado el fetch.
-            setMailSent(true);
         }
     };
 
     return (
         <main>
-            <h2>Recuperación de contraseña</h2>
-            <p>
-                Si has olvidado tu contraseña, no te preocupes, simplemente el
-                correo electrónico con el que te registraste, y, si se encuentra
-                reigstrado en nuestro sistema, te enviaremos un correo de
-                recuperación
-            </p>
-            <form onSubmit={handleSendRecoveryMail}>
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <button disabled={mailSent}>Enviar correo</button>
-            </form>
+            <div className="font-jost h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+                <div className="h-full bg-blanco bg-opacity-90 flex flex-col items-center justify-center">
+                    <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
+                        Recuperación de contraseña
+                    </h2>
+                    <p className="p-16">
+                        Si has olvidado tu contraseña, no te preocupes,
+                        simplemente el correo electrónico con el que te
+                        registraste, y, si se encuentra reigstrado en nuestro
+                        sistema, te enviaremos un correo de recuperación
+                    </p>
+                    <form
+                        onSubmit={handleSendRecoveryMail}
+                        className="flex flex-col justify-center items-center"
+                    >
+                        <label htmlFor="email" className="label">
+                            Email:
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="input mb-12"
+                            required
+                            autoFocus
+                        />
+                        <button
+                            disabled={mailSent}
+                            className="button-blue mt-16"
+                        >
+                            Enviar correo
+                        </button>
+                    </form>
+                </div>
+            </div>
         </main>
     );
 };

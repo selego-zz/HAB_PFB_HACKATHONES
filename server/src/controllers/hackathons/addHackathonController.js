@@ -13,6 +13,11 @@ import { hackathonSchema } from '../../schemas/index.js';
 
 const addHackathonController = async (req, res, next) => {
     try {
+        if (!Array.isArray(req.body.technologies))
+            req.body.technologies = req.body.technologies.split(',');
+        if (!Array.isArray(req.body.themes))
+            req.body.themes = req.body.themes.split(',');
+
         // Validamos los datos del cuerpo de la solicitud según el esquema del hackathon.
         await validateSchema(hackathonSchema, req.body);
 
