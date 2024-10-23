@@ -72,8 +72,8 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
-            <div className="h-full bg-blanco bg-opacity-90">
+        <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+            <div className="min-h-screen bg-blanco bg-opacity-90">
                 <div className="max-w-4xl mx-auto py-8 px-4">
                     <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
                         REGÍSTRATE
