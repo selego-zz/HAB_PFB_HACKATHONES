@@ -62,7 +62,7 @@ const RecoverPass_SendCodePage = () => {
                     <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
                         Recuperación de contraseña
                     </h2>
-                    <p className="p-16">
+                    <p className="p-16 max-w-400">
                         Si has olvidado tu contraseña, no te preocupes,
                         simplemente el correo electrónico con el que te
                         registraste, y, si se encuentra reigstrado en nuestro
