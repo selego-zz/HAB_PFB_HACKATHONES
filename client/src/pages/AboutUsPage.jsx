@@ -16,8 +16,8 @@ const developers = [
     {
         name: 'Emilio Sánchez',
         image: '/assets/images/em.png',
-        github: 'https://github.com/',
-        linkedin: 'https://www.linkedin.com/in/',
+        github: 'https://github.com/EmilioSanchez87',
+        linkedin: 'https://www.linkedin.com/in/emiliosasanchez/',
     },
     {
         name: 'Rodrigo Masid',

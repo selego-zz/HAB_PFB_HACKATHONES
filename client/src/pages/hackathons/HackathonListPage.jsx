@@ -143,7 +143,7 @@ const HackathonListPage = () => {
                         <section className=" max-w-sm flex mt-28">
                             <ul>
                                 <li className="mb-8 mt-8">
-                                    <h2 className="label">online</h2>
+                                    <h2 className="label">Modalidad</h2>
                                     <select
                                         name="online"
                                         id="online"
