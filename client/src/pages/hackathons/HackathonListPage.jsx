@@ -138,9 +138,9 @@ const HackathonListPage = () => {
                     <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro m-10">
                         EVENTOS DE HACKATHONS
                     </h2>
-                    <div className="m-10 sm:m-16 flex flex-col md:grid md:grid-cols-3 gap-20">
+                    <div className="m-10 xl:m-16 flex flex-col xl:grid xl:grid-cols-3 gap-20 items-center xl:items-start">
                         {/* Sección para poner los filtros */}
-                        <section className=" max-w-sm flex justify-center mt-28">
+                        <section className=" max-w-sm flex mt-28">
                             <ul>
                                 <li className="mb-8 mt-8">
                                     <h2 className="label">online</h2>
@@ -229,8 +229,8 @@ const HackathonListPage = () => {
                             </ul>
                         </section>
 
-                        <div className=" md:col-span-2">
-                            <section className="flex gap-5 mb-10">
+                        <div className=" xl:col-span-2">
+                            <section className="flex justify-center xl:justify-start gap-5 mb-10">
                                 <input
                                     type="text"
                                     id="title"

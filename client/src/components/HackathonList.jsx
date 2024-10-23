@@ -40,30 +40,33 @@ const HackathonList = ({ hackathons, showRating }) => {
                 return (
                     <li
                         key={hackathon.id}
-                        className="flex flex-col md:flex-row  rounded-md cursor-pointer md:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md sm:h-44 border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8"
+                        className="flex flex-col xl:flex-row gap-5 rounded-md cursor-pointer xl:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md  border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8 mb-5"
                     >
-                        <img
-                            className="w-24 h-24  border-4 rounded-sm border-verdemarino border-opacity-25"
-                            src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
-                            alt="Logo del hackathon."
-                        />
-                        <section
-                            id={`section-${hackathon.id}`}
-                            className="border"
-                        >
-                            <h2 className="text-sm sm:text-xl font-semibold font-jost m-3">
-                                {hackathon.name}
-                            </h2>
-                            <p className="font-jost m-3 text-sm sm:text-md">
-                                <strong>Fecha:</strong> {formattedStartDate} -{' '}
-                                {formattedEndDate}
-                            </p>
-                            <p className="font-jost m-3 text-sm sm:text-md">
-                                <strong>Ubicación:</strong> {hackathon.location}
-                            </p>
-                        </section>
+                        <div className="flex md:gap-10 justify-center items-center">
+                            <img
+                                className="w-36 h-36  border-4 rounded-sm border-verdeagua m-5"
+                                src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                                alt="Logo del hackathon."
+                            />
+                            <section
+                                id={`section-${hackathon.id}`}
+                                className=" min-w-52"
+                            >
+                                <h2 className="text-sm sm:text-xl font-semibold font-jost m-3">
+                                    {hackathon.name}
+                                </h2>
+                                <p className="font-jost m-3 text-sm sm:text-md">
+                                    <strong>Fecha:</strong> {formattedStartDate}{' '}
+                                    - {formattedEndDate}
+                                </p>
+                                <p className="font-jost m-3 text-sm sm:text-md">
+                                    <strong>Ubicación:</strong>{' '}
+                                    {hackathon.location}
+                                </p>
+                            </section>
+                        </div>
 
-                        <section className="flex gap-8 items-center border">
+                        <section className="flex gap-4 items-center justify-center p-5">
                             {showRating && (
                                 <Podium podium={hackathon.ranking} />
                             )}
