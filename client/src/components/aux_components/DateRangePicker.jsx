@@ -1,36 +1,47 @@
-//useRef lo uso para asocuar flatpickr a los input date
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-//Flatpickr
+// Flatpickr
 import Flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import 'flatpickr/dist/themes/material_green.css'; // Puedes cambiar el tema si quieres
+import 'flatpickr/dist/themes/material_green.css';
 
 const DateRangePicker = ({ hackathonDate, setHackathonDate }) => {
     const datePickerRef = useRef(null);
 
     useEffect(() => {
         if (datePickerRef.current) {
-            Flatpickr(datePickerRef.current, {
+            const fp = Flatpickr(datePickerRef.current, {
                 mode: 'range',
                 dateFormat: 'Y-m-d H:i',
                 enableTime: true,
                 defaultDate: hackathonDate,
 
-                //para que no se cierre seleccionando rangos
+                // No cerrar el calendario al seleccionar fechas
                 closeOnSelect: false,
+
+                // Para controlar el cierre del calendario
                 onClose: function (selectedDates, dateStr, instance) {
-                    // Check if two dates (start and end) have been selected
                     if (selectedDates.length < 2) {
-                        instance.open(); // Reopen the calendar if only one date is selected
+                        // Si solo se selecciona una fecha, reabrir el calendario
+                        setTimeout(() => {
+                            instance.open();
+                        }, 0);
                     }
                 },
 
                 onChange: function (selectedDates) {
-                    setHackathonDate(selectedDates);
+                    // Si se seleccionaron dos fechas, actualizar el estado
+                    if (selectedDates.length === 2) {
+                        setHackathonDate(selectedDates);
+                    }
                 },
             });
+
+            return () => {
+                // Cleanup del flatpickr al desmontar el componente
+                fp.destroy();
+            };
         }
     }, [hackathonDate, setHackathonDate]);
 
@@ -41,4 +52,5 @@ DateRangePicker.propTypes = {
     hackathonDate: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
     setHackathonDate: PropTypes.func.isRequired,
 };
+
 export default DateRangePicker;
