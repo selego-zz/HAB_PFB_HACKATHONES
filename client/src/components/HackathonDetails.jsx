@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useState } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 
@@ -27,6 +27,10 @@ const HackathonDetails = ({
     const { authToken } = useContext(AuthContext);
     const { VITE_API_URL, VITE_API_UPLOADS } = import.meta.env;
 
+    const [isConfirmed, setIsConfirmed] = useState(false);
+    const [isRegistrationOpen, setIsRegistrationOpen] = useState(true);
+    const [hoursRemaining, setHoursRemaining] = useState(null);
+
     // Formato de fechas
     const formattedInscrStartDate = dayjs(hackathon?.inscriptionDate).format(
         'DD/MM/YYYY HH:mm',
@@ -49,7 +53,7 @@ const HackathonDetails = ({
                 text: 'Estás a punto de inscribirte en este hackathon.',
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonText: 'Sí, inscribirme',
+                confirmButtonText: 'Sí, quiero inscribirme',
                 cancelButtonText: 'Cancelar',
             });
 
