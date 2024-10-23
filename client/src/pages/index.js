@@ -1,8 +1,6 @@
 import {
     CreateHackathonPage,
-    DeleteInscriptionPage,
     HackathonDetailsPage,
-    HackathonInscriptionPage,
     HackathonListPage,
     UpdateHackathonPage,
 } from './hackathons';
@@ -30,9 +28,7 @@ import NotFoundPage from './NotFoundPage.jsx';
 export {
     // Hackathons
     CreateHackathonPage,
-    DeleteInscriptionPage,
     HackathonDetailsPage,
-    HackathonInscriptionPage,
     HackathonListPage,
     UpdateHackathonPage,
     // Users

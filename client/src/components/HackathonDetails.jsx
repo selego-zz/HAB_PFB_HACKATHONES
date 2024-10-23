@@ -1,4 +1,4 @@
-import { useNavigate, useState } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 
@@ -14,6 +14,7 @@ const HackathonDetails = ({
     hackathon,
     participants,
     isRegistered,
+    setIsRegistered,
     isDeveloper,
     isOrganizer,
     handleDelete,
@@ -26,10 +27,6 @@ const HackathonDetails = ({
     const navigate = useNavigate();
     const { authToken } = useContext(AuthContext);
     const { VITE_API_URL, VITE_API_UPLOADS } = import.meta.env;
-
-    const [isConfirmed, setIsConfirmed] = useState(false);
-    const [isRegistrationOpen, setIsRegistrationOpen] = useState(true);
-    const [hoursRemaining, setHoursRemaining] = useState(null);
 
     // Formato de fechas
     const formattedInscrStartDate = dayjs(hackathon?.inscriptionDate).format(
@@ -48,7 +45,7 @@ const HackathonDetails = ({
     // Función para inscribirse en el hackathon
     const handleInscription = async () => {
         try {
-            const { value: confirmed } = await Swal.fire({
+            const inscriptionConfirm = await Swal.fire({
                 title: '¿Quieres inscribirte?',
                 text: 'Estás a punto de inscribirte en este hackathon.',
                 icon: 'question',
@@ -57,32 +54,23 @@ const HackathonDetails = ({
                 cancelButtonText: 'Cancelar',
             });
 
-            if (confirmed) {
-                const res = await fetch(
-                    `${VITE_API_URL}/hackathons/${hackathonId}`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            Authorization: authToken,
-                        },
+            if (!inscriptionConfirm.isConfirmed) return;
+
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/registration`,
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: authToken,
                     },
-                );
+                },
+            );
+            const body = await res.json();
 
-                const hackathon = await res.json();
+            if (body.status === 'error') throw new Error(body.message);
+            toast.success(body.message);
 
-                const now = new Date();
-                const registrationEnd = new Date(hackathon.inscriptionEnd);
-
-                if (now > registrationEnd) {
-                    setIsRegistrationOpen(false);
-                    throw new Error(
-                        'La fecha de inscripción para este hackathon ya ha pasado',
-                    );
-                }
-
-                toast.success('Inscripción realizada con éxito.');
-                navigate(`/hackathons/${hackathonId}`);
-            }
+            setIsRegistered(true);
         } catch (err) {
             toast.error(err.message);
         }
@@ -91,7 +79,7 @@ const HackathonDetails = ({
     // Función para cancelar la inscripción
     const handleCancelInscription = async () => {
         try {
-            const { value: confirmed } = await Swal.fire({
+            const confirmDelete = await Swal.fire({
                 title: '¿Quieres cancelar tu inscripción?',
                 text: 'Podrás volver a inscribirte siempre y cuando estés dentro del plazo de inscripción.',
                 icon: 'warning',
@@ -100,25 +88,26 @@ const HackathonDetails = ({
                 cancelButtonText: 'Volver',
             });
 
-            if (confirmed) {
-                const res = await fetch(
-                    `${VITE_API_URL}/hackathons/${hackathonId}/cancel`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            Authorization: authToken,
-                        },
+            if (!confirmDelete.isConfirmed) return;
+
+            const res = await fetch(
+                `${VITE_API_URL}/hackathons/${hackathonId}/cancel`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        Authorization: authToken,
                     },
-                );
+                },
+            );
 
-                const result = await res.json();
-                if (result.status === 'error') {
-                    throw new Error(result.message);
-                }
-
-                toast.success('Inscripción cancelada.');
-                navigate(`/hackathons/${hackathonId}`);
+            const result = await res.json();
+            if (result.status === 'error') {
+                throw new Error(result.message);
             }
+
+            setIsRegistered(false);
+            toast.success('Inscripción cancelada.');
+            navigate(`/hackathons/${hackathonId}`);
         } catch (err) {
             toast.error(`Error: ${err.message}`);
         }
@@ -436,6 +425,7 @@ HackathonDetails.propTypes = {
         ),
     }),
     isRegistered: PropTypes.bool.isRequired,
+    setIsRegistered: PropTypes.func.isRequired,
     isDeveloper: PropTypes.func.isRequired,
     isOrganizer: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
