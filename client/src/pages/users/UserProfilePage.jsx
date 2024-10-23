@@ -175,7 +175,7 @@ const UserProfilePage = () => {
                     {/* Historial de hackathons */}
                     <div className="mt-20 flex sm:ml-7">
                         <button
-                            className={` font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdeclaro rounded-t-md mr-3 ${!historico ? 'bg-casiblanco underline decoration-azuloscuro underline-offset-4' : 'bg-verdemarino'}`}
+                            className={`font-jost font-semibold text-azuloscuro text-md sm:text-xl h-14 w-56 rounded-sm hover:bg-verdeclaro rounded-t-md mr-3 ${!historico ? 'bg-casiblanco underline decoration-azuloscuro underline-offset-4' : 'bg-verdemarino'}`}
                             onClick={() => {
                                 setHistorico(false);
                             }}
@@ -184,7 +184,7 @@ const UserProfilePage = () => {
                         </button>
 
                         <button
-                            className={`font-jost font-semibold text-azuloscuro text-sm sm:text-xl h-10 w-fit px-3 rounded-sm hover:bg-verdeclaro rounded-t-md ${historico ? 'bg-casiblanco underline decoration-azuloscuro underline-offset-4' : 'bg-verdemarino'}`}
+                            className={`font-jost font-semibold text-azuloscuro text-sm sm:text-xl h-14 w-fit px-3 rounded-sm hover:bg-verdeclaro rounded-t-md ${historico ? 'bg-casiblanco underline decoration-azuloscuro underline-offset-4' : 'bg-verdemarino'}`}
                             onClick={() => {
                                 setHistorico(true);
                             }}
