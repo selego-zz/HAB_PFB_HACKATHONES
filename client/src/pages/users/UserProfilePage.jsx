@@ -184,7 +184,7 @@ const UserProfilePage = () => {
                         </button>
 
                         <button
-                            className={`bg-verdemarino font-jost font-semibold text-azuloscuro text-md sm:text-xl h-10 w-56 rounded-sm hover:bg-verdeclaro focus:bg-verdeclaro border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro ${historico ? 'bg-verdeclaro' : ''}`}
+                            className={`bg-verdemarino font-jost font-semibold text-azuloscuro text-sm sm:text-xl h-10 w-56 rounded-sm hover:bg-verdeclaro focus:bg-verdeclaro border-l-2 border-l-azuloscuro border-r-2 border-r-azuloscuro ${historico ? 'bg-verdeclaro' : ''}`}
                             onClick={() => {
                                 setHistorico(true);
                             }}
