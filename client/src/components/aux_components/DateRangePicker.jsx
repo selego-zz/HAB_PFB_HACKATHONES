@@ -17,29 +17,31 @@ const DateRangePicker = ({ hackathonDate, setHackathonDate }) => {
                 enableTime: true,
                 defaultDate: hackathonDate,
 
-                // No cerrar el calendario al seleccionar fechas
                 closeOnSelect: false,
 
                 // Para controlar el cierre del calendario
                 onClose: function (selectedDates, dateStr, instance) {
                     if (selectedDates.length < 2) {
-                        // Si solo se selecciona una fecha, reabrir el calendario
+                        // Guardar la posición actual del scroll
+                        const scrollPos = window.scrollY;
+
                         setTimeout(() => {
                             instance.open();
+                            // Restaurar la posición del scroll después de abrir el calendario
+                            window.scrollTo(0, scrollPos);
                         }, 0);
                     }
                 },
 
                 onChange: function (selectedDates) {
-                    // Si se seleccionaron dos fechas, actualizar el estado
                     if (selectedDates.length === 2) {
                         setHackathonDate(selectedDates);
                     }
                 },
             });
 
+            // Para desmontarlo y mantener limpio el DOM
             return () => {
-                // Cleanup del flatpickr al desmontar el componente
                 fp.destroy();
             };
         }

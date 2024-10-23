@@ -37,7 +37,7 @@ const OrganizerPromotionPage = () => {
                     </div>
 
                     {/* Sección con estadísticas */}
-                    <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 w-full max-w-fit flex flex-wrap justify-center gap-6">
+                    <div className="rounded-2xl shadow-xl p-8 mb-8 w-full max-w-fit flex flex-wrap justify-center gap-6">
                         {/* Estadística 1 */}
                         <div className="flex items-center justify-center bg-casiblanco rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
