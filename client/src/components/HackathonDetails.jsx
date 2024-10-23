@@ -40,8 +40,10 @@ const HackathonDetails = ({
         'DD/MM/YYYY HH:mm',
     );
 
+    console.log(hackathon);
+
     return (
-        <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
+        <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg font-jost">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
                     {/* Logo, nombre y descripción de hackathon */}
@@ -59,7 +61,7 @@ const HackathonDetails = ({
                                 {hackathon?.name}
                             </h1>
                         </div>
-                        <p className="text-xl mt-2">
+                        <p className="text-lg mt-2">
                             {hackathon?.description ||
                                 'No hay descripción disponible.'}
                         </p>
@@ -120,7 +122,7 @@ const HackathonDetails = ({
                         <h2 className="text-xl font-semibold mb-2">
                             Requisitos
                         </h2>
-                        <p className="text-sm">
+                        <p>
                             {hackathon?.requirements ||
                                 'No hay requisitos especificados.'}
                         </p>
@@ -186,50 +188,49 @@ const HackathonDetails = ({
                         )}
                 </div>
 
-                <aside className="bg-casiblanco p-4 w-full rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-4 lg:gap-0 lg:mx-4">
-                    <h2 className="text-xl font-semibold mb-4">
+                {/* Detalles de hackathon */}
+                <aside className="flex flex-col gap-7 bg-casiblanco p-4 w-full rounded-lg shadow-md lg:mt-0 lg:self-start lg:mr-4 mt-6 lg:mx-4">
+                    <h2 className="text-xl font-semibold">
                         Detalles del Hackathon
                     </h2>
 
-                    <div className="mb-4">
-                        <p className="flex items-center mb-2">
-                            <img
-                                src="/assets/icons/location.svg"
-                                alt="Icono de ubicación de hackathon."
-                                width="30"
-                                className="mr-2"
-                            />
-                            {hackathon?.location.startsWith('http') ? (
-                                <a
-                                    href={hackathon?.location}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center px-2 py-1 border inset-24 border-verdeagua rounded-3xl hover:bg-azuloscuro hover:text-blanco transition"
-                                >
-                                    Online →
-                                </a>
-                            ) : (
-                                <span className="font-semibold">
-                                    {hackathon?.location}
-                                </span>
-                            )}
-                        </p>
+                    <p className="flex items-center">
+                        <img
+                            src="/assets/icons/location.svg"
+                            alt="Icono de ubicación de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        {hackathon?.location.startsWith('http') ? (
+                            <a
+                                href={hackathon?.location}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center px-2 py-1 border inset-24 border-verdeagua rounded-3xl hover:bg-azuloscuro hover:text-blanco transition"
+                            >
+                                Online →
+                            </a>
+                        ) : (
+                            <span className="font-semibold">
+                                {hackathon?.location}
+                            </span>
+                        )}
+                    </p>
 
-                        <p className="flex items-center mb-2">
-                            <img
-                                src="/assets/icons/prizes.svg"
-                                alt="Icono de premios de hackathon."
-                                width="30"
-                                className="mr-2"
-                            />
-                            <strong className="font-medium bg-amarillo w-fit rounded-lg px-2 text-xl">
-                                {hackathon?.prizes}€
-                            </strong>
-                            &nbsp;en premios.
-                        </p>
-                    </div>
+                    <p className="flex items-center">
+                        <img
+                            src="/assets/icons/prizes.svg"
+                            alt="Icono de premios de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        <strong className="font-medium bg-amarillo w-fit rounded-lg px-2">
+                            {hackathon?.prizes}€
+                        </strong>
+                        &nbsp;en premios.
+                    </p>
 
-                    <div className="flex items-center mb-2">
+                    <div className="flex items-center">
                         <img
                             src="/assets/icons/calendar.svg"
                             alt="Icono de fecha de hackathon."
@@ -237,20 +238,20 @@ const HackathonDetails = ({
                             className="mr-2"
                         />
                         <p>
-                            Del&nbsp;
-                            <strong className="whitespace-nowrap font-semibold bg-azuloscuro text-blanco rounded-md px-1">
+                            Del
+                            <strong className="whitespace-nowrap font-semibold bg-azuloscuro text-blanco rounded-md px-1 inline-block m-1">
                                 {formattedHackStartDate}
                             </strong>
                             <br />
-                            al&nbsp;
-                            <strong className="whitespace-normal font-semibold bg-azuloscuro text-blanco rounded-md px-1">
+                            al
+                            <strong className="whitespace-normal font-semibold bg-azuloscuro text-blanco rounded-md px-1 inline-block m-1">
                                 {formattedHackEndDate}
                             </strong>
                             .
                         </p>
                     </div>
 
-                    <div className="flex items-center mb-2">
+                    <div className="flex items-center">
                         <img
                             src="/assets/icons/inscription.svg"
                             alt="Icono de inscripción de hackathon."
@@ -259,24 +260,72 @@ const HackathonDetails = ({
                         />
                         <p>
                             Inscripciones abiertas <br />
-                            del&nbsp;
-                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1">
+                            del
+                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1 inline-block m-1">
                                 {formattedInscrStartDate}
                             </strong>
                             <br />
-                            al&nbsp;
-                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1">
+                            al
+                            <strong className="whitespace-nowrap font-semibold bg-verdeagua text-blanco rounded-md px-1 inline-block m-1">
                                 {formattedInscrEndDate}
                             </strong>
                             .
                         </p>
                     </div>
+
+                    <p className="flex items-center">
+                        <img
+                            src="/assets/icons/flag-techs.png"
+                            alt="Icono de tecnologías de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        <span className="font-semibold">
+                            {hackathon?.technologies?.length > 0 ? (
+                                hackathon.technologies.map((tech, index) => (
+                                    <span
+                                        key={index}
+                                        className="inline-block bg-verdemarino rounded-full px-4 py-1 m-1"
+                                    >
+                                        {tech.technology}
+                                    </span>
+                                ))
+                            ) : (
+                                <span>No hay tecnologías disponibles.</span>
+                            )}
+                        </span>
+                    </p>
+
+                    <p className="flex items-center">
+                        <img
+                            src="/assets/icons/tag-themes.png"
+                            alt="Icono de temáticas de hackathon."
+                            width="30"
+                            className="mr-2"
+                        />
+                        <span className="font-semibold">
+                            {hackathon?.themes?.length > 0 ? (
+                                hackathon.themes.map((theme, index) => (
+                                    <span
+                                        key={index}
+                                        className="
+                                        inline-block bg-blanco bg-opacity-95 rounded-full px-4 py-1 m-1"
+                                    >
+                                        {theme.theme}
+                                    </span>
+                                ))
+                            ) : (
+                                <span>No hay temáticas disponibles.</span>
+                            )}
+                        </span>
+                    </p>
                 </aside>
             </div>
         </div>
     );
 };
 
+// Validar props
 HackathonDetails.propTypes = {
     hackathon: PropTypes.shape({
         name: PropTypes.string,
@@ -291,6 +340,16 @@ HackathonDetails.propTypes = {
         prizes: PropTypes.string,
         documentation: PropTypes.string,
         organizerId: PropTypes.number,
+        themes: PropTypes.arrayOf(
+            PropTypes.shape({
+                theme: PropTypes.string.isRequired,
+            }),
+        ),
+        technologies: PropTypes.arrayOf(
+            PropTypes.shape({
+                technology: PropTypes.string.isRequired,
+            }),
+        ),
     }),
     participants: PropTypes.shape({
         developers: PropTypes.arrayOf(

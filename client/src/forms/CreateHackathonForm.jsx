@@ -336,9 +336,9 @@ const CreateHackathonForm = ({
                     </div>
                 </div>
 
-                {/* Selector de tecnologías */}
+                {/* Selector de temáticas */}
                 <div className="min-w-[200px] col-span-2 mt-10">
-                    <label className="label">Tecnologías:</label>
+                    <label className="label">Temáticas:</label>
 
                     <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
                         {Array.isArray(themes) &&
