@@ -40,15 +40,18 @@ const HackathonList = ({ hackathons, showRating }) => {
                 return (
                     <li
                         key={hackathon.id}
-                        className="flex flex-col xl:flex-row gap-5 xl:gap-16 rounded-md cursor-pointer xl:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md  border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8 mb-5"
+                        className="flex flex-col xl:flex-row gap-5 rounded-md cursor-pointer xl:w-4/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md  border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8 mb-5"
                     >
-                        <div className="flex md:gap-10 items-center">
+                        <div className="flex md:gap-10 justify-center items-center">
                             <img
                                 className="w-36 h-36  border-4 rounded-sm border-verdeagua m-5"
                                 src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
                                 alt="Logo del hackathon."
                             />
-                            <section id={`section-${hackathon.id}`}>
+                            <section
+                                id={`section-${hackathon.id}`}
+                                className=" min-w-52"
+                            >
                                 <h2 className="text-sm sm:text-xl font-semibold font-jost m-3">
                                     {hackathon.name}
                                 </h2>
@@ -63,7 +66,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                             </section>
                         </div>
 
-                        <section className="flex gap-8 items-center">
+                        <section className="flex gap-4 items-center justify-center p-5">
                             {showRating && (
                                 <Podium podium={hackathon.ranking} />
                             )}
