@@ -57,20 +57,18 @@ const RecoverPass_SendCodePage = () => {
 
     return (
         <main>
-            <div className="font-jost h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+            <div className=" h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
                 <div className="h-full bg-blanco bg-opacity-90 flex flex-col items-center justify-center">
                     <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
                         Recuperación de contraseña
                     </h2>
-                    <p className="p-16 max-w-400">
-                        Si has olvidado tu contraseña, no te preocupes,
-                        simplemente el correo electrónico con el que te
-                        registraste, y, si se encuentra reigstrado en nuestro
-                        sistema, te enviaremos un correo de recuperación
+                    <p className="font-jost font-medium text-azuloscuro text-center max-w-96 m-10">
+                        Si has olvidado tu contraseña, introduce tu email para
+                        recuperarla.
                     </p>
                     <form
                         onSubmit={handleSendRecoveryMail}
-                        className="flex flex-col justify-center items-center"
+                        className="flex flex-col items-center justify-center"
                     >
                         <label htmlFor="email" className="label">
                             Email:
@@ -84,6 +82,10 @@ const RecoverPass_SendCodePage = () => {
                             required
                             autoFocus
                         />
+                        <p className="font-jost text-azuloscuro text-xs">
+                            *Recibirás un email con el enlace de recuperación.
+                        </p>
+
                         <button
                             disabled={mailSent}
                             className="button-blue mt-16"
