@@ -24,7 +24,7 @@ const getUsersEnrolledOnAHackathonModel = async (hackathonId) => {
         WHERE hackathonId = ?`,
         [hackathonId],
     );
-
+    if (!enrolledUsers) return [];
     return enrolledUsers;
 };
 
