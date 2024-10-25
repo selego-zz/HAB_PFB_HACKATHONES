@@ -26,23 +26,27 @@ Los **desarrolladores** podrán inscribirse como participantes en cuantos desaf�
 
 - **POST** - ["/api/users/register"] - Crea un nuevo usuario. No requiere autenticación.
 
-- **POST** - ["/api/users/addOrganizer"] - Para que el administrador registre un organizador.
+- **PUT** - ["/api/users/addOrganizer/:userId"] - Para que el administrador registre un organizador.
 
 - **POST** - ["/api/users/organizers/request] - Solicitud al administrador para registrarse como organizador. No requiere autenticación.
 
-- **PATCH** - ["/api/users/register/validate/:activationCode"] - Validar usuario con un código. No requiere autenticación. (Mientras se desarrolle la API será GET).
+- **PATCH** - ["/api/users/register/validate/:activationCode"] - Validar usuario con un código. No requiere autenticación.
 
 - **POST** - ["/api/users/login"] - Logea un usuario ya creado. No requiere autenticación.
 
 - **GET** - ["/api/users/"] - Devuelve el perfil del usuario. Sí requiere autenticación.
 
+- **GET** - ["/api/users/getAllUsers"] - Devuelve el perfil de todos los usuarios. Solo administrador.
+
 - **PUT** - ["/api/users/update"] - Actualizar perfil del usuario. Sí requiere autenticación.
 
-- **PUT** - ["api/users/password"] - Actualiza la contraseña. Sí requiere autenticación.
+- **PUT** - ["/api/users/password"] - Actualiza la contraseña. Sí requiere autenticación.
 
 - **PUT** - ["/api/users/password/recover"] - Envía email con código de recuperación. No requiere autenticación.
 
 - **PUT** - ["/api/users/password/recover/:recoverPassCode"] - Cambia la contraseña recuperada. No requiere autenticación.
+
+- **DELETE** - ["/api/users/delete/:userId"] - Elimina los datos del usuario. Requiere autenticación.
 
 ## Endpoints de hackathones
 
@@ -52,7 +56,9 @@ Los **desarrolladores** podrán inscribirse como participantes en cuantos desaf�
 
 - **PUT** - ["/api/hackathons/:hackathonId/update"] - Actualizar evento de hackathon. Requiere auntenticación de organizador.
 
-- **GET** - ["/api/hackathons/:hackathonId"] - Devuelve información sobre un evento de hackathon. Requiere autenticación de desarrollador u organizador.
+- **GET** - ["/api/hackathons/:hackathonId"] - Devuelve información sobre un evento de hackathon. No requiere autenticación.
+
+- **GET** - ["/api/hackathons/:hackathonId/enrollments"] - devuelve los inscritos de hackathon. Requiere autenticación.
 
 - **POST** - ["/api/hackathons/:hackathonId/registration"] - Inscripción a un evento de hackathon. Requiere autenticación de desarrollador.
 
@@ -64,7 +70,11 @@ Los **desarrolladores** podrán inscribirse como participantes en cuantos desaf�
 
 - **PUT** - ["/api/hackathons/:hackathonId/rating"] - Rating 1-5 después de la fecha de realización. Requiere autenticación del desarrollador.
 
-- **PUT** - ["/api/hackathons/:hackathonId/:developerId/ranking"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+- **PUT** - ["/api/hackathons/:hackathonId/ranking"] - Clasificación de los participates después de cada competición. Requiere autenticación del organizador.
+
+- **GET** - ["/api/maxParticipants"] - Devuelve el número máximo de plazas del hackathon que más plazas permite tener.
+
+- **GET** - ["/api/maxPrize"] - Devuelve el premio máximo que se oferta entre todos los hackathones.
 
 - **GET** - ["/api/technologies"] - Devuelve un listado de tecnologías de los hackathons. Ninguna autenticación.
 
