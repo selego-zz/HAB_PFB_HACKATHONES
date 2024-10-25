@@ -71,12 +71,8 @@ const RecoverPass_GetCodePage = () => {
                     <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
                         Cambio de contraseña
                     </h2>
-                    <p className="p-16">
-                        Bienvenido, para cambiar tu contraseña, por favor
-                        introduce la nueva contraseña en la casilla indicada.
-                        Por tu seguridad, debes volver a introducirla en la
-                        casilla identificada como Repite tu contraseña, para
-                        asegurar que no te has equivocado con ninguna letra
+                    <p className="font-jost font-medium text-azuloscuro text-center max-w-96 m-10">
+                        Introduce tu nueva contraseña.
                     </p>
                     <form
                         onSubmit={handleChangePass}
