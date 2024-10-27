@@ -40,8 +40,10 @@ const HackathonDetailsPage = () => {
                 setHackathon(data);
 
                 // Solicitamos usuarios inscritos
-                const userHackathons =
-                    await getAllInscriptionsFromAHackathon(hackathonId);
+                let userHackathons;
+                if (isOrganizer())
+                    userHackathons =
+                        await getAllInscriptionsFromAHackathon(hackathonId);
 
                 // Si la respuesta es null o undefined, devuelve un array vacío
                 const enrolledParticipants = (userHackathons || []).filter(
@@ -77,6 +79,7 @@ const HackathonDetailsPage = () => {
         oldParam,
         authUser?.id,
         navigate,
+        isOrganizer,
     ]);
 
     const handleDelete = async () => {
