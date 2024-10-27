@@ -424,7 +424,7 @@ HackathonDetails.propTypes = {
             }),
         ),
     }),
-    isRegistered: PropTypes.bool.isRequired,
+    isRegistered: PropTypes.bool,
     setIsRegistered: PropTypes.func.isRequired,
     isDeveloper: PropTypes.func.isRequired,
     isOrganizer: PropTypes.func.isRequired,
