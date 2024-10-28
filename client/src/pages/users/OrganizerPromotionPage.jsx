@@ -3,7 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 
 import { useDocumentTitle } from '../../hooks/index.js';
-import LogosCarousel from '../../components/aux_components/LogosCarousel.jsx';
+import { LogosCarousel } from '../../components';
 
 //////
 
@@ -28,7 +28,7 @@ const OrganizerPromotionPage = () => {
                             Estás en buenas manos con
                             <br /> Hack-a-ton.
                         </h2>
-                        <p className="text-lg md:text-xl text-gray-600">
+                        <p className="text-lg md:text-xl ">
                             Impulsamos hackathones desde 2009. Nuestras
                             soluciones simplifican la gestión del evento,
                             mejoran la experiencia de los participantes y
@@ -37,7 +37,7 @@ const OrganizerPromotionPage = () => {
                     </div>
 
                     {/* Sección con estadísticas */}
-                    <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 w-full max-w-fit flex flex-wrap justify-center gap-6">
+                    <div className="rounded-2xl shadow-xl p-8 mb-8 w-full max-w-fit flex flex-wrap justify-center gap-6">
                         {/* Estadística 1 */}
                         <div className="flex items-center justify-center bg-casiblanco rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
@@ -46,11 +46,12 @@ const OrganizerPromotionPage = () => {
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
-                                <p className="text-xl font-semibold text-gray-700">
+                                <p className="text-xl font-semibold ">
                                     +4 millones
                                 </p>
-                                <p className="text-gray-500 text-sm">
-                                    comunidad de desarrolladores
+                                <p className=" text-sm">
+                                    de los mejores desarrolladores para tus
+                                    proyectos
                                 </p>
                             </div>
                         </div>
@@ -62,27 +63,29 @@ const OrganizerPromotionPage = () => {
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
-                                <p className="text-xl font-semibold text-gray-700">
+                                <p className="text-xl font-semibold ">
                                     +10.000
                                 </p>
-                                <p className="text-gray-500 text-sm">
-                                    hackathones impulsados
+                                <p className=" text-sm">
+                                    hackathones gestionados, sin líos ni
+                                    complicaciones
                                 </p>
                             </div>
                         </div>
                         {/* Estadística 3 */}
-                        <div className="flex items-center justify-center bg-verdeagua rounded-lg shadow-md p-6 max-w-xs w-auto">
+                        <div className="flex items-center justify-center bg-verdemarino rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
                                 src="/assets/images/experience.svg"
                                 alt="Años de experiencia"
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
-                                <p className="text-xl font-semibold text-gray-700">
+                                <p className="text-xl font-semibold ">
                                     +14 años
                                 </p>
-                                <p className="text-gray-500 text-sm">
-                                    de experiencia en hackathones
+                                <p className=" text-sm">
+                                    de experiencia sirviendo a las empresas
+                                    líderes
                                 </p>
                             </div>
                         </div>
@@ -90,7 +93,7 @@ const OrganizerPromotionPage = () => {
 
                     {/* Texto final */}
                     <div className="bg-blanco bg-opacity-75 rounded-2xl shadow-xl p-8 mb-8 max-w-xl w-auto">
-                        <p className="text-lg text-gray-600">
+                        <p className="text-lg ">
                             Únete a las empresas líderes que confían en
                             HACK-A-TON para llevar tus hackathones al siguiente
                             nivel.
@@ -107,7 +110,7 @@ const OrganizerPromotionPage = () => {
                                 onClick={handleOrganizacionesClick}
                                 className="button-rounded-green h-fit w-fit px-10 py-2 mb-10 text-3xl"
                             >
-                                Organiza tu hackathon{' '}
+                                Organiza tu hackathon
                                 <span className="p-2">→</span>
                             </button>
                         </div>

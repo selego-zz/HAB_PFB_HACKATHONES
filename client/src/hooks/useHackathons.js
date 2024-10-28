@@ -306,6 +306,29 @@ const useHackathons = () => {
         }
     };
 
+    const getMaxPrize = async () => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/maxPrize`);
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+            return body.data;
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+    const getMaxParticipants = async () => {
+        try {
+            const res = await fetch(`${VITE_API_URL}/maxParticipants`);
+            const body = await res.json();
+
+            if (body.status === 'error') throw new Error(body.message);
+            return body.data;
+        } catch (err) {
+            throw new Error(err);
+        }
+    };
+
     ////////////////////////////////////////////////////////////
     // De aquí en adelante será lo relativo a todo lo que se
     // pasa como filtro al get hackathon
@@ -453,6 +476,8 @@ const useHackathons = () => {
         deleteHackathon,
         getAllInscriptionsFromAHackathon,
         getHackathon,
+        getMaxParticipants,
+        getMaxPrize,
         getUsersHackathon,
         updateHackathon,
         updateRating,
@@ -460,6 +485,7 @@ const useHackathons = () => {
         //Consultar los filtros, añadir nuevo filtro, eliminar filtro
         filter,
         addFilter,
+        setFilters,
         removeFilter,
         //tecnologias y temas
         technologies,

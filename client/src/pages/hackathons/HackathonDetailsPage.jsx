@@ -2,7 +2,10 @@ import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext.jsx';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDocumentTitle, useHackathons } from '../../hooks/index.js';
+
+import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+
 import HackathonDetails from '../../components/HackathonDetails.jsx';
 
 //////
@@ -37,27 +40,37 @@ const HackathonDetailsPage = () => {
                 setHackathon(data);
 
                 // Solicitamos usuarios inscritos
-                const userHackathons =
-                    await getAllInscriptionsFromAHackathon(hackathonId);
-                const enrolledParticipants = userHackathons.filter(
-                    (h) => String(h.hackathonId) === String(hackathonId),
+                let userHackathons;
+                if (isOrganizer())
+                    userHackathons =
+                        await getAllInscriptionsFromAHackathon(hackathonId);
+
+                // Si la respuesta es null o undefined, devuelve un array vacío
+                const enrolledParticipants = (userHackathons || []).filter(
+                    (h) => String(h.id) === String(hackathonId),
                 );
 
-                setParticipants(enrolledParticipants || []);
+                setParticipants(enrolledParticipants);
 
                 // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
-                const isUserRegistered = enrolledParticipants.some(
-                    (h) => h.userId === authUser?.id,
-                );
+                const isUserRegistered =
+                    enrolledParticipants[0]?.developers?.some(
+                        (h) => h.userId === authUser?.id,
+                    );
                 setIsRegistered(isUserRegistered);
             } catch (err) {
-                toast.error(err.message, {
-                    id: 'hackathondetailspage',
-                });
+                toast.error(
+                    err.message ||
+                        'Error al obtener los detalles del hackathon',
+                    {
+                        id: 'hackathondetailspage',
+                    },
+                );
             } finally {
                 setLoading(false);
             }
         };
+
         fetchHackathonDetails();
     }, [
         hackathonId,
@@ -66,27 +79,57 @@ const HackathonDetailsPage = () => {
         oldParam,
         authUser?.id,
         navigate,
+        isOrganizer,
     ]);
 
     const handleDelete = async () => {
-        if (confirm('¿Estás seguro de que quieres eliminar este hackathon?')) {
-            try {
-                const participants =
-                    await getAllInscriptionsFromAHackathon(hackathonId);
+        try {
+            // Comprobamos que no tenga participantes inscritos.
+            const participants =
+                await getAllInscriptionsFromAHackathon(hackathonId);
 
-                if (participants.length > 0) {
-                    toast.error(
-                        'No se puede eliminar un hackathon si hay gente inscrita',
-                    );
-                    return;
+            if (participants[0]?.developers?.length > 0) {
+                // Confirmación con sweetalert2.
+                const resultDelete = await Swal.fire({
+                    title: 'Eliminación de hackathon',
+                    text: `Este Hackathon tiene ${participants[0].developers.length} participante${participants[0].developers.length > 1 ? 's' : ''} inscrito${participants[0].developers.length > 1 ? 's' : ''}. ¿Estás seguro de que quieres eliminar este hackathon?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#FF3333',
+                    cancelButtonColor: '#22577A',
+                    confirmButtonText: 'Sí, quiero eliminar este hackathon',
+                    cancelButtonText: 'Cancelar',
+                });
+
+                // Si el organizador confirma, procedemos con la eliminación.
+                if (resultDelete.isConfirmed) {
+                    await deleteHackathon(hackathonId);
+                    toast.success('Hackathon eliminado');
+                    navigate('/');
                 }
+                return;
+            }
 
+            // Confirmación con sweetalert2.
+            const resultDelete = await Swal.fire({
+                title: 'Eliminación de hackathon',
+                text: '¿Estás seguro de que quieres eliminar este hackathon?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF3333',
+                cancelButtonColor: '#22577A',
+                confirmButtonText: 'Sí, quiero eliminar este hackathon',
+                cancelButtonText: 'Cancelar',
+            });
+
+            // Si el organizador confirma, procedemos con la eliminación.
+            if (resultDelete.isConfirmed) {
                 await deleteHackathon(hackathonId);
                 toast.success('Hackathon eliminado');
                 navigate('/');
-            } catch (err) {
-                toast.error(err.message, { id: 'hackathondetailspage' });
             }
+        } catch (err) {
+            toast.error(err.message, { id: 'hackathondetailspage' });
         }
     };
 
@@ -132,8 +175,9 @@ const HackathonDetailsPage = () => {
         <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
             <HackathonDetails
                 hackathon={hackathon}
-                participants={participants}
+                participants={participants[0]}
                 isRegistered={isRegistered}
+                setIsRegistered={setIsRegistered}
                 isDeveloper={isDeveloper}
                 isOrganizer={isOrganizer}
                 handleDelete={handleDelete}

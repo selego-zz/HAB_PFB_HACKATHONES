@@ -1,12 +1,13 @@
 import { toast } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-
-//////
+import { useTechnologies, useThemes } from '../hooks';
 
 const CreateHackathonForm = ({
     formData,
     handleChange,
+    handleTechnologyChange,
+    handleThemeChange,
     handleSubmit,
     buttonMessage,
     forceDate,
@@ -17,8 +18,10 @@ const CreateHackathonForm = ({
     const [hackathonDate, setHackathonDate] = useState('');
     const [hackathonEnd, setHackathonEnd] = useState('');
 
+    const { technologies } = useTechnologies(); // Todas las tecnologías (para el map)
+    const { themes } = useThemes(); // Todas las tecnologías (para el map)
+
     useEffect(() => {
-        console.log(formData.inscriptionDate);
         // Validación de datos
         try {
             if (currentDate.length < 1) setCurrentDate(new Date());
@@ -30,8 +33,6 @@ const CreateHackathonForm = ({
                 setHackathonDate(new Date(formData.hackathonDate));
             if (!hackathonEnd.length < 1)
                 setHackathonEnd(new Date(formData.hackathonEnd));
-
-            console.log(formData.inscriptionDate);
 
             if (!forceDate) {
                 //puede ser que estemos modificando un hackathon en marcha o antiguo, con lo que las fechas podrían ser anteriores
@@ -104,127 +105,119 @@ const CreateHackathonForm = ({
         formData.inscriptionEnd,
         formData.maxParticipants,
         formData.prizes,
+        formData.requirements,
+        formData.description,
+        formData.technologies,
+        formData.themes,
     ]);
     return (
         <div className="max-w-4xl mx-auto py-8 px-4">
-            <h2 className="text-center text-2xl font-bold text-gray-700 mb-6">
-                {buttonMessage}
+            <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro m-10 mb-16">
+                CREAR EVENTO DE HACKATHON
             </h2>
             {/* FORMULARIO */}
             <form
                 onSubmit={handleSubmit}
-                className="flex flex-col gap-4 sm:grid sm:grid-cols-2"
+                className="flex flex-col gap-8 md:grid md:grid-cols-2"
             >
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Nombre del Hackathon
-                    </label>
+                    <label className="label">Nombre del Hackathon:</label>
                     <input
                         type="text"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Premios
-                    </label>
+                    <label className="label">Premio (€):</label>
                     <input
                         type="number"
                         name="prizes"
                         value={formData.prizes}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Fecha de inscripción
-                    </label>
+                    <label className="label">Fecha de inscripción:</label>
                     <input
                         type="datetime-local"
                         name="inscriptionDate"
                         value={formatDate(formData.inscriptionDate)}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Fecha de fin de inscripción
+                    <label className="label">
+                        Fecha de fin de inscripción:
                     </label>
                     <input
                         type="datetime-local"
                         name="inscriptionEnd"
                         value={formatDate(formData.inscriptionEnd)}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Fecha del hackathon
-                    </label>
+                    <label className="label">Fecha del hackathon:</label>
                     <input
                         type="datetime-local"
                         name="hackathonDate"
                         value={formatDate(formData.hackathonDate)}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Finalización del hackathon
-                    </label>
+                    <label className="label">Finalización del hackathon:</label>
                     <input
                         type="datetime-local"
                         name="hackathonEnd"
                         value={formatDate(formData.hackathonEnd)}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Número máximo de participantes
+                    <label className="label">
+                        Número máximo de participantes:
                     </label>
                     <input
                         type="number"
                         name="maxParticipants"
                         value={formData.maxParticipants}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                         required
                     />
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Ubicación
-                    </label>
+                    <label className="label">Ubicación:</label>
                     <input
                         type="text"
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="input"
                     />
-                    <div className="flex mt-2">
-                        <label className="inline-flex items-center mx-2">
+                    <div className="flex gap-8 justify-center mt-3">
+                        <label className="label">
                             <input
                                 type="radio"
                                 name="online"
@@ -235,7 +228,7 @@ const CreateHackathonForm = ({
                             />
                             <span className="ml-2">Presencial</span>
                         </label>
-                        <label className="inline-flex items-center mx-2">
+                        <label className="label">
                             <input
                                 type="radio"
                                 name="online"
@@ -249,37 +242,143 @@ const CreateHackathonForm = ({
                     </div>
                 </div>
 
-                <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Logo del hackathon
-                    </label>
+                <div>
+                    <label className="label">Logo del hackathon:</label>
                     <input
                         type="file"
                         name="logo"
+                        id="logo"
+                        className="hidden"
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
                         accept="image/*"
                     />
+                    <label
+                        htmlFor="logo"
+                        className="cursor-pointer flex justify-center mt-1"
+                    >
+                        <div className="bg-verdemarino w-56 h-9 rounded-3xl font-jost font-semibold text-azuloscuro flex items-center justify-center hover:bg-verdeclaro">
+                            <img
+                                src="/assets/icons/folders_icon.png"
+                                alt="Icono de carga"
+                                className="w-6 h-6 mr-2"
+                            />
+                            <span>Seleccionar imagen</span>
+                        </div>
+                    </label>
                 </div>
 
                 <div className="min-w-[200px]">
-                    <label className="block text-sm font-medium text-gray-700 mx-2">
-                        Documentación
-                    </label>
+                    <label className="label">Documentación:</label>
                     <input
                         type="file"
                         name="documentation"
+                        id="documentacion"
                         onChange={handleChange}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
+                        className="hidden"
                         accept=".pdf,.doc,.docx"
+                    />
+                    <label
+                        htmlFor="documentacion"
+                        className="cursor-pointer flex justify-center mt-1"
+                    >
+                        <div className="bg-verdemarino w-56 h-9 rounded-3xl font-jost font-semibold text-azuloscuro flex items-center justify-center hover:bg-verdeclaro">
+                            <img
+                                src="/assets/icons/folders_icon.png"
+                                alt="Icono de carga"
+                                className="w-6 h-6 mr-2"
+                            />
+                            <span>Seleccionar archivo</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div className="min-w-[200px] col-span-2">
+                    <label className="font-jost font-semibold text-azuloscuro text-lg ml-8">
+                        Descripción:
+                    </label>
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        maxLength={500}
+                        className="textarea"
+                        rows={4}
                     />
                 </div>
 
+                <div className="min-w-[200px] col-span-2">
+                    <label className="font-jost font-semibold text-azuloscuro text-lg ml-8">
+                        Requisitos:
+                    </label>
+                    <textarea
+                        name="requirements"
+                        value={formData.requirements}
+                        onChange={handleChange}
+                        maxLength={500}
+                        className="textarea"
+                        rows={4}
+                    />
+                </div>
+
+                {/* Selector de tecnologías */}
+                <div className="min-w-[200px] col-span-2 mt-10">
+                    <label className="label">Tecnologías:</label>
+
+                    <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
+                        {Array.isArray(technologies) &&
+                            technologies.map((tech) => (
+                                <label
+                                    key={tech.technology}
+                                    className="inline-flex items-center"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        value={tech.technology}
+                                        checked={formData?.technologies?.includes(
+                                            tech.technology,
+                                        )}
+                                        onChange={handleTechnologyChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-medium">
+                                        {tech.technology}
+                                    </span>
+                                </label>
+                            ))}
+                    </div>
+                </div>
+
+                {/* Selector de temáticas */}
+                <div className="min-w-[200px] col-span-2 mt-10">
+                    <label className="label">Temáticas:</label>
+
+                    <div className=" flex flex-wrap gap-4 p-4 rounded-3xl bg-casiblanco mx-auto text-azuloscuro font-jost focus:ring-2">
+                        {Array.isArray(themes) &&
+                            themes.map((them) => (
+                                <label
+                                    key={them.theme}
+                                    className="inline-flex items-center"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        value={them.theme}
+                                        checked={formData?.themes?.includes(
+                                            them.theme,
+                                        )}
+                                        onChange={handleThemeChange}
+                                        className="form-checkbox h-4 w-4"
+                                    />
+                                    <span className="ml-1 text-azuloscuro font-jost font-medium">
+                                        {them.theme}
+                                    </span>
+                                </label>
+                            ))}
+                    </div>
+                </div>
+
                 {/* Botón de envío */}
-                <div className="col-span-2">
-                    <button className="mt-4 font-bold bg-verdeagua py-2 px-4 rounded-lg hover:bg-verdemarino w-1/3 mx-auto block">
-                        {buttonMessage}
-                    </button>
+                <div className="col-span-2 mt-12">
+                    <button className="button-blue">{buttonMessage}</button>
                 </div>
             </form>
         </div>
@@ -312,8 +411,14 @@ CreateHackathonForm.propTypes = {
         online: PropTypes.string.isRequired,
         logo: PropTypes.any,
         documentation: PropTypes.any,
+        requirements: PropTypes.string,
+        description: PropTypes.string,
+        technologies: PropTypes.array,
+        themes: PropTypes.array,
     }).isRequired,
     handleChange: PropTypes.func.isRequired,
+    handleTechnologyChange: PropTypes.func.isRequired,
+    handleThemeChange: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     buttonMessage: PropTypes.string.isRequired,
     forceDate: PropTypes.bool,

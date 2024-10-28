@@ -13,6 +13,11 @@ import { hackathonSchema } from '../../schemas/index.js';
 
 const addHackathonController = async (req, res, next) => {
     try {
+        if (!Array.isArray(req.body.technologies))
+            req.body.technologies = req.body.technologies.split(',');
+        if (!Array.isArray(req.body.themes))
+            req.body.themes = req.body.themes.split(',');
+
         // Validamos los datos del cuerpo de la solicitud según el esquema del hackathon.
         await validateSchema(hackathonSchema, req.body);
 
@@ -29,6 +34,10 @@ const addHackathonController = async (req, res, next) => {
             prizes,
             online,
             location,
+            description,
+            requirements,
+            technologies,
+            themes,
         } = req.body;
 
         // Variables para almacenar el nombre del logo y de la documentación.
@@ -67,6 +76,10 @@ const addHackathonController = async (req, res, next) => {
             online,
             location,
             documentationFilename, // Pasamos el nombre del fichero de documentación si se subió, de lo contrario será null.
+            description,
+            requirements,
+            technologies,
+            themes,
         );
 
         // Respondemos al cliente con un estado 201 (creado) y un mensaje de éxito.

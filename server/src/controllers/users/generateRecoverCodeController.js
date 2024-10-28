@@ -23,7 +23,8 @@ const generateRecoverCodeController = async (req, res, next) => {
 
         // Comprobamos que el usuario existe
         const user = await selectUserByEmailModel(email);
-        if (!user) generateErrorUtil('Usuario no encontrado', 404);
+        if (!user || user.length < 1)
+            generateErrorUtil('Usuario no encontrado', 404);
 
         // si ya tiene un código de recuperación, lo enviamos, sino generamos uno nuevo
         if (!user.recoverPassCode) {

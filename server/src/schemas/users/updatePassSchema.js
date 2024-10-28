@@ -7,7 +7,7 @@ import joiErrorMessages from '../joiErrorMessages.js';
 /////////////////////////////////////////////////////////////
 const updatePassSchema = Joi.object().keys({
     oldPass: Joi.string().max(100).required().messages(joiErrorMessages),
-    newPass: Joi.string().max(100).required().messages(joiErrorMessages),
+    newPass: Joi.string().min(6).max(100).required().messages(joiErrorMessages),
 });
 
 export default updatePassSchema;

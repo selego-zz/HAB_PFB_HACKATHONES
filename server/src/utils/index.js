@@ -4,7 +4,7 @@ import removePhotoUtil from './removePhotoUtil.js';
 import saveFileUtil from './saveFileUtil.js';
 import savePhotoUtil from './savePhotoUtil.js';
 import sendMailUtil from './sendMailUtil.js';
-import { getInscriptions } from './sqlShared.js';
+import { generateGetInscriptionsSQL } from './sqlShared.js';
 import validateSchema from './validateSchema.js';
 import verifyTokenUtil from './verifyTokenUtil.js';
 
@@ -26,7 +26,7 @@ export {
     verifyTokenUtil,
 
     //sqls
-    getInscriptions,
+    generateGetInscriptionsSQL,
 
     //mails
     generateAddOrganizerMailUtil,

@@ -29,7 +29,6 @@ const UpdateHackathonPage = () => {
             if (authLoading) return;
             let tempHackathon = await getHackathon(hackathonId);
             if (!hackathon) setHackathon(tempHackathon);
-            console.log(tempHackathon);
 
             const tempFormData = {
                 name: tempHackathon.name,
@@ -37,12 +36,16 @@ const UpdateHackathonPage = () => {
                 inscriptionEnd: tempHackathon.inscriptionEnd,
                 hackathonDate: tempHackathon.hackathonDate,
                 hackathonEnd: tempHackathon.hackathonEnd,
-                maxParticipants: tempHackathon.maxParticipants,
+                maxParticipants: tempHackathon.maxParticipants + '',
                 online: tempHackathon.online,
-                location: tempHackathon.location,
+                location: tempHackathon.location || '',
                 prizes: tempHackathon.prizes,
-                logo: tempHackathon.logo,
-                documentation: tempHackathon.documentation,
+                logo: tempHackathon.logo || '',
+                documentation: tempHackathon.documentation || '',
+                requirements: tempHackathon.requirements || '',
+                description: tempHackathon.description || '',
+                technologies: tempHackathon.technologies || [],
+                themes: tempHackathon.themes || [],
             };
 
             if (formData === null) setFormData(tempFormData);
@@ -82,10 +85,33 @@ const UpdateHackathonPage = () => {
             formData.id = hackathon.id;
             const res = await updateHackathon(formData);
             toast.success(res);
-            navigate('/');
+            navigate(`/hackathons/${hackathonId}`);
         } catch (err) {
             toast.error(err.message);
         }
+    };
+    // Manejo de tecnologías
+    const handleTechnologyChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.technologies.indexOf(value);
+        if (index === -1) fD.technologies.push(value);
+        else fD.technologies.splice(index, 1);
+
+        setFormData(fD);
+    };
+
+    // Manejo de temas
+    const handleThemeChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.themes.indexOf(value);
+        if (index === -1) fD.themes.push(value);
+        else fD.themes.splice(index, 1);
+
+        setFormData(fD);
     };
 
     if (!authUser) {
@@ -102,6 +128,8 @@ const UpdateHackathonPage = () => {
                 <CreateHackathonForm
                     formData={formData}
                     handleChange={handleChange}
+                    handleTechnologyChange={handleTechnologyChange}
+                    handleThemeChange={handleThemeChange}
                     handleSubmit={handleSubmit}
                     buttonMessage={'Actualizar hackathon'}
                     forceDate={true}

@@ -1,6 +1,11 @@
 import getPool from '../../db/getPool.js';
 
-import { getAllHackathonsModel } from './index.js';
+import {
+    getAllHackathonsModel,
+    getHackathonTechnologiesModel,
+    getHackathonThemesModel,
+    getRankingModel,
+} from './index.js';
 
 /////////////////////////////////////////////////////////////////
 // Modelo que devuelve información de los hackathones
@@ -50,8 +55,47 @@ const getFilteredHackathonsModel = async (filters) => {
         delete filters.technologies;
     }
 
+    let maxParticipantsFrom;
+    let maxParticipantsTo;
+    let prizesFrom;
+    let prizesTo;
+    let inscriptionFrom;
+    let inscriptionTo;
+    let hackathonDateFrom;
+    let hackathonDateTo;
+
+    maxParticipantsFrom = filters.maxParticipantsFrom;
+    delete filters.maxParticipantsFrom;
+
+    maxParticipantsTo = filters.maxParticipantsTo;
+    delete filters.maxParticipantsTo;
+
+    prizesFrom = filters.prizesFrom;
+    delete filters.prizesFrom;
+
+    prizesTo = filters.prizesTo;
+    delete filters.prizesTo;
+
+    if (filters.inscriptionFrom) {
+        inscriptionFrom = filters.inscriptionFrom;
+        delete filters.inscriptionFrom;
+    }
+    if (filters.inscriptionTo) {
+        inscriptionTo = filters.inscriptionTo;
+        delete filters.inscriptionTo;
+    }
+    if (filters.hackathonDateFrom) {
+        hackathonDateFrom = filters.hackathonDateFrom;
+        delete filters.hackathonDateFrom;
+    }
+    if (filters.hackathonDateTo) {
+        hackathonDateTo = filters.hackathonDateTo;
+        delete filters.hackathonDateTo;
+    }
+
     const camposADevolver =
-        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd, h.location, h.updatedAt';
+        'h.id, h.name, h.logo, h.online, h.hackathonDate, h.hackathonEnd, h.location, h.updatedAt, h.description, h.requirements';
+
     let sqlSelect = `SELECT ${camposADevolver}, AVG(e.rating) AS average_rating`;
     let sqlFrom = ' FROM hackathons h';
     let sqlJoins = ` LEFT JOIN
@@ -102,6 +146,40 @@ const getFilteredHackathonsModel = async (filters) => {
         args.push('%' + filters[filter] + '%');
     }
 
+    // ahora vamos con los filtros especiales:
+    if (maxParticipantsFrom) {
+        sqlWhere += ` and maxParticipants >= ?`;
+        args.push(maxParticipantsFrom);
+    }
+    if (maxParticipantsTo) {
+        sqlWhere += ` and maxParticipants <= ?`;
+        args.push(maxParticipantsTo);
+    }
+    if (prizesFrom) {
+        sqlWhere += ` and prizes >= ?`;
+        args.push(prizesFrom);
+    }
+    if (prizesTo) {
+        sqlWhere += ` and prizes <= ?`;
+        args.push(prizesTo);
+    }
+    if (inscriptionFrom) {
+        sqlWhere += ` and inscriptionEnd >= ?`;
+        args.push(inscriptionFrom);
+    }
+    if (inscriptionTo) {
+        sqlWhere += ` and h.inscriptionDate <= ?`;
+        args.push(inscriptionTo);
+    }
+    if (hackathonDateFrom) {
+        sqlWhere += ` and hackathonDate >= ?`;
+        args.push(hackathonDateFrom);
+    }
+    if (hackathonDateTo) {
+        sqlWhere += ` and hackathonEnd <= ?`;
+        args.push(hackathonDateTo);
+    }
+
     //si hemos metido filters, metemos where
     if (sqlWhere.length > 0) sqlWhere = ' WHERE' + sqlWhere.slice(4);
 
@@ -118,6 +196,14 @@ const getFilteredHackathonsModel = async (filters) => {
         sqlSelect + sqlFrom + sqlJoins + sqlWhere + groupBy + sqlOrderBy,
         args,
     );
+
+    for (const hackathon of res) {
+        hackathon.ranking = await getRankingModel(hackathon.id);
+        hackathon.technologies = await getHackathonTechnologiesModel(
+            hackathon.id,
+        );
+        hackathon.themes = await getHackathonThemesModel(hackathon.id);
+    }
     return res;
 };
 

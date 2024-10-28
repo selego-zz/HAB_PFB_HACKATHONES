@@ -15,6 +15,9 @@ import { updateUserSchema } from '../../schemas/index.js';
 // Función controladora que le permite a un usuario cambiar sus datos personales.
 const updateUserController = async (req, res, next) => {
     try {
+        if (!Array.isArray(req.body.technologies))
+            req.body.technologies = req.body.technologies.split(',');
+
         // Validamos el esquema de los datos que se están actualizando
         await validateSchema(updateUserSchema, req.body);
 

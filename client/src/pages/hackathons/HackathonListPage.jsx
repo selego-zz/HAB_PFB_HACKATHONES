@@ -1,28 +1,24 @@
 import { useEffect, useState } from 'react';
 
 import { useDocumentTitle, useHackathons } from '../../hooks';
-import HackathonList from '../../components/HackathonList';
+
+import { HackathonList, DateRangePicker } from '../../components';
+
+//slider
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 const HackathonListPage = () => {
     // Título de pestaña
     useDocumentTitle('Eventos');
 
-    const [titleFilter, setTitleFilter] = useState('');
-    const [online, setOnline] = useState('');
-    const [location, setLocation] = useState('');
-    const [inscriptionDate, setInscriptionDate] = useState('');
-    const [inscriptionEnd, setInscriptionEnd] = useState('');
-    const [maxParticipants, setMaxParticipants] = useState('');
-    const [hackathonDate, setHackathonDate] = useState('');
-    const [hackathonEnd, setHackathonEnd] = useState('');
-    const [prizes, setPrizes] = useState('');
-
     const {
         hackathons,
         hackathonLoading,
         filter,
-        addFilter,
-        removeFilter,
+        setFilters,
+        getMaxParticipants,
+        getMaxPrize,
         /*         //tecnologias y temas
         technologies,
         addTechnology,
@@ -37,53 +33,98 @@ const HackathonListPage = () => {
  */
     } = useHackathons();
 
+    const [titleFilter, setTitleFilter] = useState('');
+    const [online, setOnline] = useState('');
+    const [location, setLocation] = useState('');
+
+    const [prizes, setPrizes] = useState([0, 0]);
+    const [limPrizes, setLimPrizes] = useState(0);
+    const [maxParticipants, setMaxParticipants] = useState([0, 0]);
+    const [limMaxParticipants, setLimMaxParticipants] = useState(0);
+
+    const [inscriptionDate, setInscriptionDate] = useState([]);
+    const [hackathonDate, setHackathonDate] = useState([]);
+
     useEffect(() => {
         if (filter.name) {
             setTitleFilter(filter.name);
         }
     }, [filter.name]);
+
+    useEffect(() => {
+        const participants = async () => {
+            const tempParticipants = parseInt(await getMaxParticipants());
+            if (tempParticipants === 0) return;
+
+            if (limMaxParticipants === tempParticipants) return;
+
+            setLimMaxParticipants(tempParticipants);
+            setMaxParticipants([0, tempParticipants]);
+        };
+        participants();
+    }, [limMaxParticipants, getMaxParticipants]);
+
+    useEffect(() => {
+        const Prizes = async () => {
+            const tempPrizes = parseInt(await getMaxPrize());
+            if (tempPrizes === 0) return;
+
+            if (limPrizes === tempPrizes) return;
+            setLimPrizes(tempPrizes);
+            setPrizes([0, tempPrizes]);
+        };
+        Prizes();
+    }, [limPrizes, getMaxPrize]);
+
+    const handleMaxParticipantsChange = (e, value) => {
+        if (value[1] < 1) value[1] = 1;
+        setMaxParticipants(value);
+    };
+
+    const handleMaxPrizesChange = (e, value) => {
+        if (value[1] < 1) value[1] = 1;
+        setPrizes(value);
+    };
+
     const handleSearchClick = async () => {
-        if (titleFilter.length < 1) removeFilter('name');
-        else addFilter({ name: titleFilter });
+        const filters = {};
+        if (titleFilter.length > 1) filters.name = titleFilter;
 
-        if (online.length < 1) removeFilter('online');
-        else addFilter({ online: online });
+        if (online.length > 1) filters.online = online;
 
-        if (location.length < 1) removeFilter('location');
-        else addFilter({ location: location });
+        if (location.length > 1) filters.location = location;
 
-        if (maxParticipants.length < 1) removeFilter('maxParticipants');
-        else
-            addFilter({
-                maxParticipants: maxParticipants,
-            });
+        //if (maxParticipants[0].length > 1)
+        filters.maxParticipantsFrom = maxParticipants[0];
 
-        if (prizes.length < 1) removeFilter('prizes');
-        else addFilter({ prizes: prizes });
+        //if (maxParticipants[1].length > 1)
+        filters.maxParticipantsTo = maxParticipants[1];
 
-        if (inscriptionDate.length < 1) removeFilter('inscriptionDate');
-        else
-            addFilter({
-                inscriptionDate: inscriptionDate,
-            });
+        //if (prizes[0].length > 1)
+        filters.prizesFrom = prizes[0];
 
-        if (inscriptionEnd.length < 1) removeFilter('inscriptionEnd');
-        else
-            addFilter({
-                inscriptionEnd: inscriptionEnd,
-            });
+        ///if (prizes[1].length > 1)
+        filters.prizesTo = prizes[1];
 
-        if (hackathonDate.length < 1) removeFilter('hackathonDate');
-        else
-            addFilter({
-                hackathonDate: hackathonDate,
-            });
+        if (inscriptionDate.length > 1) {
+            const inscriptionFrom = inscriptionDate[0];
+            let inscriptionTo =
+                inscriptionDate.length > 1
+                    ? inscriptionDate[1]
+                    : inscriptionDate[0];
+            filters.inscriptionFrom = inscriptionFrom;
+            filters.inscriptionTo = inscriptionTo;
+        }
 
-        if (hackathonEnd.length < 1) removeFilter('hackathonEnd');
-        else
-            addFilter({
-                hackathonEnd: hackathonEnd,
-            });
+        if (hackathonDate.length > 1) {
+            const hackathonDateFrom = hackathonDate[0];
+            let hackathonDateTo =
+                hackathonDate.length > 1 ? hackathonDate[1] : hackathonDate[0];
+            filters.hackathonDateFrom = hackathonDateFrom;
+            filters.hackathonDateTo = hackathonDateTo;
+        }
+
+        setFilters(filters);
     };
 
     if (hackathonLoading) {
@@ -91,143 +132,125 @@ const HackathonListPage = () => {
     }
 
     return (
-        <main className="flex">
-            {/* Sección para poner los filtros */}
-            <section>
-                <ul>
-                    <li>
-                        <h2>online</h2>
-                        <select
-                            name="online"
-                            id="online"
-                            defaultValue={online}
-                            onChange={(e) => {
-                                setOnline(e.target.value);
-                            }}
-                        >
-                            <option value="remoto">Online</option>
-                            <option value="presencial">Presencial</option>
-                            <option value=""></option>
-                        </select>
-                    </li>
-                    <li>
-                        <h2>Localización</h2>
-                        <input
-                            type="text"
-                            id="location"
-                            value={location}
-                            onChange={(e) => {
-                                setLocation(e.target.value);
-                            }}
-                            className="input-box"
-                        />
-                    </li>
-                    <li>
-                        <h2>Número de participantes máximo</h2>
-                        <input
-                            type="number"
-                            id="maxParticipants"
-                            value={maxParticipants}
-                            onChange={(e) => {
-                                setMaxParticipants(e.target.value);
-                            }}
-                            className="input-box"
-                        />
-                    </li>
-                    <li>
-                        <h2>Importe en premios</h2>
-                        <input
-                            type="number"
-                            id="prizes"
-                            value={prizes}
-                            onChange={(e) => {
-                                setPrizes(e.target.value);
-                            }}
-                            className="input-box"
-                        />
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
-                                Fecha de inscripción
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="inscriptionDate"
-                                value={inscriptionDate}
-                                onChange={(e) => {
-                                    setInscriptionDate(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
-                                Fecha de fin de inscripción
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="inscriptionEnd"
-                                value={inscriptionEnd}
-                                onChange={(e) => {
-                                    setInscriptionEnd(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
-                                Fecha de inicio de hackathon
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="hackathonDate"
-                                value={hackathonDate}
-                                onChange={(e) => {
-                                    setHackathonDate(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                    <li>
-                        <div className="min-w-[200px]">
-                            <label className="block text-sm font-medium text-gray-700 mx-2">
-                                Fecha de din de hackathon
-                            </label>
-                            <input
-                                type="datetime-local"
-                                name="hackathonEnd"
-                                value={hackathonEnd}
-                                onChange={(e) => {
-                                    setHackathonEnd(e.target.value);
-                                }}
-                                className="input-box"
-                            />
-                        </div>
-                    </li>
-                </ul>
-            </section>
+        <main>
+            <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center">
+                <div className=" bg-blanco bg-opacity-90">
+                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mt-16">
+                        EVENTOS DE HACKATHONS
+                    </h2>
+                    <div className="m-10 xl:m-16 flex flex-col xl:grid xl:grid-cols-3 gap-20 items-center xl:items-start">
+                        {/* Sección para poner los filtros */}
+                        <section className=" max-w-sm flex xl:mt-28">
+                            <ul>
+                                <li className="mb-8 mt-8">
+                                    <h2 className="label">Modalidad</h2>
+                                    <select
+                                        name="online"
+                                        id="online"
+                                        defaultValue={online}
+                                        className="input"
+                                        onChange={(e) => {
+                                            setOnline(e.target.value);
+                                        }}
+                                    >
+                                        <option value="remoto">Online</option>
+                                        <option value="presencial">
+                                            Presencial
+                                        </option>
+                                        <option value=""></option>
+                                    </select>
+                                </li>
+                                <li className="mb-8">
+                                    <h2 className="label">Localización</h2>
+                                    <input
+                                        type="text"
+                                        id="location"
+                                        value={location}
+                                        className="input"
+                                        onChange={(e) => {
+                                            setLocation(e.target.value);
+                                        }}
+                                    />
+                                </li>
+                                <li className="mb-8">
+                                    <h2 className="label">
+                                        Número de participantes
+                                    </h2>
+                                    <Box sx={{ width: 300 }}>
+                                        <Slider
+                                            getAriaLabel={() =>
+                                                'Número máximo de participantes'
+                                            }
+                                            value={maxParticipants}
+                                            onChange={
+                                                handleMaxParticipantsChange
+                                            }
+                                            valueLabelDisplay="auto"
+                                            min={0}
+                                            max={limMaxParticipants}
+                                        />
+                                    </Box>
+                                </li>
+                                <li className="mb-8">
+                                    <h2 className="label">
+                                        Importe en premios
+                                    </h2>
+                                    <Box sx={{ width: 300 }}>
+                                        <Slider
+                                            getAriaLabel={() =>
+                                                'Importe máximo de premios'
+                                            }
+                                            value={prizes}
+                                            onChange={handleMaxPrizesChange}
+                                            valueLabelDisplay="auto"
+                                            min={0}
+                                            max={limPrizes}
+                                        />
+                                    </Box>
+                                </li>
+                                <li className="mb-8">
+                                    <label className="label">
+                                        Fechas de inscripción
+                                    </label>
+                                    <DateRangePicker
+                                        hackathonDate={inscriptionDate}
+                                        setHackathonDate={setInscriptionDate}
+                                    />
+                                </li>
+                                <li>
+                                    <label className="label">
+                                        Fechas de hackathon
+                                    </label>
+                                    <DateRangePicker
+                                        hackathonDate={hackathonDate}
+                                        setHackathonDate={setHackathonDate}
+                                    />
+                                </li>
+                            </ul>
+                        </section>
 
-            <div className="p-8 grow">
-                {/*//lo comento por que no esta en el wireframe
-            <h1 className="text-2xl font-bold">Eventos de Hackatones</h1>
-            */}
-                <section className="flex">
-                    <input
-                        type="text"
-                        id="title"
-                        value={titleFilter}
-                        onChange={(e) => setTitleFilter(e.target.value)}
-                        className="mt-1 block w-11/12 mx-auto border-gray-300 rounded-md shadow-sm bg-verdeclaro p-2"
-                    />
-                    <button onClick={handleSearchClick}>Buscar</button>
-                </section>
-                <HackathonList hackathons={hackathons} />
+                        <div className=" xl:col-span-2">
+                            <section className="flex justify-center items-center xl:justify-start gap-5 mb-10">
+                                <input
+                                    type="text"
+                                    id="title"
+                                    value={titleFilter}
+                                    onChange={(e) =>
+                                        setTitleFilter(e.target.value)
+                                    }
+                                    className="w-3/5 h-11 rounded-3xl shadow-md pl-10 bg-casiblanco text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2"
+                                />
+                                <button
+                                    onClick={handleSearchClick}
+                                    className="bg-verdeagua w-28 h-10 rounded-3xl hover:bg-azuloscuro font-jost font-semibold text-blanco text-lg "
+                                >
+                                    Buscar
+                                </button>
+                            </section>
+                            <HackathonList hackathons={hackathons} />
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     );

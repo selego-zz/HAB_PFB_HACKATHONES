@@ -16,6 +16,8 @@ import {
     getAllHackathonsController,
     getAllInscriptionsFromAHackathonController,
     getHackathonController,
+    getMaxParticipantsController,
+    getMaxPrizeController,
     getTechnologiesController,
     getThemesController,
     getUsersHackathonController,
@@ -91,8 +93,16 @@ router.put(
     updateScoreController,
 );
 
+//Devuelve el número máximo de plazas del hackathon que más plazas permite tener.
+router.get('/maxParticipants', getMaxParticipantsController);
+
+//Devuelve el premio máximo que se oferta entre todos los hackathones.
+router.get('/maxPrize', getMaxPrizeController);
+
+//Devuelve un listado de tecnologías de los hackathons. Ninguna autenticación.
 router.get('/technologies', getTechnologiesController);
 
+//Devuelve un listado de temas de los hackathons. Ninguna autenticación.
 router.get('/themes', getThemesController);
 
 export default router;

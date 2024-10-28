@@ -11,8 +11,6 @@ import { updateUserModel } from '../../models/users/index.js';
 // Función controladora que permite crear un usuario.
 const activateOrganizerController = async (req, res, next) => {
     try {
-        console.log(req.body);
-
         // Obtenemos los datos necesarios del usuario.
         const { userId } = req.params;
         const { username, email } = req.body;

@@ -30,13 +30,17 @@ const CreateHackathonPage = () => {
         prizes: '',
         logo: '',
         documentation: '',
+        requirements: '',
+        description: '',
+        technologies: [],
+        themes: [],
     });
 
     // Verificación de acceso al cargar el componente
     useEffect(() => {
         if (authLoading) return;
         if (!authUser || !isOrganizer()) {
-            toast.error('Solo los organizadores pueden crear hackathons');
+            toast.error('Solo los organizadores pueden añadir hackathons');
             navigate('/');
         }
     }, [authUser, authLoading, isOrganizer, navigate]);
@@ -49,6 +53,30 @@ const CreateHackathonPage = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // Manejo de tecnologías
+    const handleTechnologyChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.technologies.indexOf(value);
+        if (index === -1) fD.technologies.push(value);
+        else fD.technologies.splice(index, 1);
+
+        setFormData(fD);
+    };
+
+    // Manejo de temas
+    const handleThemeChange = (e) => {
+        const { value } = e.target;
+        const fD = { ...formData };
+
+        const index = fD.themes.indexOf(value);
+        if (index === -1) fD.themes.push(value);
+        else fD.themes.splice(index, 1);
+
+        setFormData(fD);
+    };
+
     // Manejador de envío del formulario
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -56,7 +84,7 @@ const CreateHackathonPage = () => {
         try {
             const res = await addHackathon(formData);
             toast.success(res);
-            navigate('/');
+            navigate('/users');
         } catch (err) {
             toast.error(err.message);
         }
@@ -67,13 +95,15 @@ const CreateHackathonPage = () => {
     }
 
     return (
-        <div className="bg-[url('/assets/images/back-banner.jpg')] inset-0 bg-cover bg-center z-0">
-            <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg">
+        <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center">
+            <div className="min-h-screen bg-blanco bg-opacity-90">
                 <CreateHackathonForm
                     formData={formData}
                     handleChange={handleChange}
+                    handleTechnologyChange={handleTechnologyChange}
+                    handleThemeChange={handleThemeChange}
                     handleSubmit={handleSubmit}
-                    buttonMessage={'Crear hackathon'}
+                    buttonMessage={'Añadir hackathon'}
                 />
             </div>
         </div>

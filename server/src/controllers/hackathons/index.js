@@ -5,6 +5,8 @@ import deleteHackathonInscriptionController from './deleteHackathonInscriptionCo
 import getAllHackathonsController from './getAllHackathonsController.js';
 import getAllInscriptionsFromAHackathonController from './getAllInscriptionsFromAHackathonController.js';
 import getHackathonController from './getHackathonController.js';
+import getMaxParticipantsController from './getMaxParticipantsController.js';
+import getMaxPrizeController from './getMaxPrizeController.js';
 import getTechnologiesController from './getTechnologiesController.js';
 import getThemesController from './getThemesController.js';
 import getUsersHackathonController from './getUsersHackathonController.js';
@@ -20,6 +22,8 @@ export {
     getAllHackathonsController,
     getAllInscriptionsFromAHackathonController,
     getHackathonController,
+    getMaxParticipantsController,
+    getMaxPrizeController,
     getTechnologiesController,
     getThemesController,
     getUsersHackathonController,

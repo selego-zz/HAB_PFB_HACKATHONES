@@ -5,12 +5,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx';
 
-import ScrollToTop from './components/aux_components/ScrollToTop.jsx';
-
 // Estilos CSS
 import './styles/tailwind.css';
 import './styles/scrollbar.css';
 import './styles/logoscarousel.css';
+
+// Componentes de scroll
+import { ScrollToTop, ScrollToTopButton } from './components';
 
 //////
 
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         <BrowserRouter>
             <AuthProvider>
                 <ScrollToTop />
+                <ScrollToTopButton className="button-top" />
                 <App />
             </AuthProvider>
         </BrowserRouter>

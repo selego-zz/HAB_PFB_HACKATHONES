@@ -1,4 +1,5 @@
 import getPool from '../../db/getPool.js';
+import { selectUserTechnologiesModel } from './index.js';
 
 //////
 
@@ -10,8 +11,11 @@ const selectAllUsersModel = async () => {
         `SELECT id, username, email, avatar, firstName, lastName, role, biography, linkedIn, active, updatedAt, lastAuthUpdate FROM users WHERE password <> "usuario eliminado"`,
     );
 
-    // En caso de que no se haya encontrado a ningún usuario retornará undefined.
-    return users;
+    //buscamos las tecnologías de cada usuario y las metemos en technologies
+    return users.map((user) => {
+        user.technologies = selectUserTechnologiesModel(user.id);
+        return user;
+    });
 };
 
 export default selectAllUsersModel;

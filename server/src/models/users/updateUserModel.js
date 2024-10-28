@@ -28,6 +28,12 @@ const updateUserModel = async (user) => {
 
     delete user.password;
 
+    let technologies = [];
+    if (user.technologies) {
+        technologies = user.technologies;
+        delete user.technologies;
+    }
+
     //cada vez que hacemos un update hay que actualziar updatedAt
     let sql = 'UPDATE users SET updatedAt = NOW()';
     let args = [];
@@ -43,6 +49,15 @@ const updateUserModel = async (user) => {
     args.push(userId);
 
     const [res] = await pool.query(sql, args);
+
+    await pool.query('DELETE FROM userTechnologies WHERE userId = ?', [userId]);
+
+    for (const technology of technologies) {
+        await pool.query(
+            'INSERT INTO userTechnologies (USERiD, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
+            [userId, technology],
+        );
+    }
 
     user.id = userId;
     user.password = password;

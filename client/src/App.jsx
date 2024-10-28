@@ -1,29 +1,36 @@
 // Importamos los hooks
 import { Routes, Route } from 'react-router-dom';
 
-// Importamos los componentes
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import HomePage from './pages/users/HomePage.jsx';
-import RegisterPage from './pages/users/RegisterPage.jsx';
-import LoginPage from './pages/users/LoginPage.jsx';
-import ValidationPage from './pages/users/ValidationPage.jsx';
-import RecoverPass_GetCodePage from './pages/users/RecoverPass_GetCodePage.jsx';
-import RecoverPass_SendCodePage from './pages/users/RecoverPass_SendCodePage.jsx';
-import ListAllUsersPage from './pages/users/ListAllUsersPage.jsx';
-import OrganizerPromotionPage from './pages/users/OrganizerPromotionPage.jsx';
-import NotFoundPage from './pages/NotFoundPage.jsx';
+// Importamos las páginas
+import {
+    // Hackathons
+    CreateHackathonPage,
+    HackathonDetailsPage,
+    HackathonListPage,
+    UpdateHackathonPage,
+    // Users
+    DeveloperPromotionPage,
+    HomePage,
+    ListAllUsersPage,
+    LoginPage,
+    OrganizerPromotionPage,
+    RecoverPass_GetCodePage,
+    RecoverPass_SendCodePage,
+    RegisterPage,
+    UpdateUserPage,
+    UserProfilePage,
+    ValidationPage,
+    // Otros
+    AboutUsPage,
+    PrivacyPolicyPage,
+    NotFoundPage,
+} from './pages';
 
-//Importamos otras funciones
+// Importamos componentes
+import { Header, Footer } from './components';
+
+// Importamos otras funciones
 import { Toaster } from 'react-hot-toast';
-import HackathonDetailsPage from './pages/hackathons/HackathonDetailsPage.jsx';
-import HackathonListPage from './pages/hackathons/HackathonListPage.jsx';
-import CreateHackathonPage from './pages/hackathons/CreateHackathonPage.jsx';
-import HackathonInscriptionPage from './pages/hackathons/HackathonInscriptionPage.jsx';
-import DeleteInscriptionPage from './pages/hackathons/DeleteInscriptionPage.jsx';
-import UserProfilePage from './pages/users/UserProfilePage.jsx';
-import UpdateUserPage from './pages/users/UpdateUserPage.jsx';
-import UpdateHackathonPage from './pages/hackathons/UpdateHackathonPage.jsx';
 
 ////////////////////////////////////////////
 
@@ -52,8 +59,12 @@ const App = () => {
                     />
                     <Route path="users/update" element={<UpdateUserPage />} />
                     <Route
-                        path="promotion"
+                        path="org-promotion"
                         element={<OrganizerPromotionPage />}
+                    />
+                    <Route
+                        path="dev-promotion"
+                        element={<DeveloperPromotionPage />}
                     />
                     <Route
                         path="users/getAllUsers"
@@ -67,14 +78,6 @@ const App = () => {
                         path="/hackathons/create"
                         element={<CreateHackathonPage />}
                     />
-                    <Route
-                        path="/hackathons/:hackathonId/cancel"
-                        element={<DeleteInscriptionPage />}
-                    />
-                    <Route
-                        path="/hackathons/:hackathonId/registration"
-                        element={<HackathonInscriptionPage />}
-                    />
                     <Route path="/hackathons" element={<HackathonListPage />} />
                     <Route
                         path="/hackathons/:hackathonId"
@@ -84,6 +87,10 @@ const App = () => {
                         path="/hackathons/:hackathonId/update"
                         element={<UpdateHackathonPage />}
                     />
+
+                    {/* Otros */}
+                    <Route path="/about-us" element={<AboutUsPage />} />
+                    <Route path="/privacy" element={<PrivacyPolicyPage />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </section>
