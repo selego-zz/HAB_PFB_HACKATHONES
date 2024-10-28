@@ -110,6 +110,7 @@ const CreateHackathonForm = ({
         formData.technologies,
         formData.themes,
     ]);
+
     return (
         <div className="max-w-4xl mx-auto py-8 px-4">
             <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro m-10 mb-16">
@@ -334,8 +335,10 @@ const CreateHackathonForm = ({
                                     <input
                                         type="checkbox"
                                         value={tech.technology}
-                                        checked={formData?.technologies?.includes(
-                                            tech.technology,
+                                        checked={formData?.technologies?.some(
+                                            (t) =>
+                                                t.technology ===
+                                                tech.technology,
                                         )}
                                         onChange={handleTechnologyChange}
                                         className="form-checkbox h-4 w-4"
@@ -362,8 +365,8 @@ const CreateHackathonForm = ({
                                     <input
                                         type="checkbox"
                                         value={them.theme}
-                                        checked={formData?.themes?.includes(
-                                            them.theme,
+                                        checked={formData?.themes?.some(
+                                            (t) => t.theme === them.theme,
                                         )}
                                         onChange={handleThemeChange}
                                         className="form-checkbox h-4 w-4"
