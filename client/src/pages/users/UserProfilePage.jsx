@@ -148,9 +148,9 @@ const UserProfilePage = () => {
                             <h2 className="font-jost font-semibold text-azuloscuro">
                                 Biografía:
                             </h2>
-                            <p className="bg-casiblanco  max-w-3xl h-40 rounded-2xl text-negro font-jost font-medium p-5">
+                            <textarea className="textarea">
                                 {authUser.biography}
-                            </p>
+                            </textarea>
                         </div>
 
                         <div className="flex flex-col gap-5">
