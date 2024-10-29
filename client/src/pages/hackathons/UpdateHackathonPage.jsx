@@ -135,7 +135,7 @@ const UpdateHackathonPage = () => {
                     handleTechnologyChange={handleTechnologyChange}
                     handleThemeChange={handleThemeChange}
                     handleSubmit={handleSubmit}
-                    buttonMessage={'Actualizar hackathon'}
+                    buttonMessage={'Modificar hackathon'}
                     forceDate={true}
                 />
             </div>

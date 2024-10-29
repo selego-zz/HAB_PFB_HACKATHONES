@@ -117,17 +117,9 @@ const HackathonDetails = ({
         <div className="relative z-10 bg-blanco bg-opacity-90 p-8 max-w-full mx-auto rounded-lg shadow-lg font-jost">
             <div className="grid grid-cols-1 lg:grid-cols-[65%_35%] lg:gap-8 max-w-3xl mx-auto">
                 <div className="flex flex-col space-y-6 lg:mx-4">
-                    {/* Logo, nombre y descripción de hackathon */}
+                    {/* Nombre y descripción de hackathon */}
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
                         <div className="flex items-center justify-start space-x-4">
-                            {hackathon?.logo && (
-                                <img
-                                    className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
-                                    src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
-                                    alt="Logo del hackathon."
-                                />
-                            )}
-
                             <h1 className="text-header-big mt-0">
                                 {hackathon?.name}
                             </h1>
@@ -148,7 +140,7 @@ const HackathonDetails = ({
                                         }
                                         className="button-angled-green"
                                     >
-                                        Actualizar Hackathon
+                                        Modificar Hackathon
                                     </button>
                                     <button
                                         onClick={handleDelete}
