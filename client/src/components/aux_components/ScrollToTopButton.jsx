@@ -16,7 +16,7 @@ const ScrollToTopButton = ({ className }) => {
             className={className}
             title="Volver arriba"
         >
-            ⬆
+            ↑
         </button>
     );
 };

@@ -9,7 +9,7 @@ const DeveloperPromotionPage = () => {
 
     const navigate = useNavigate();
 
-    const handleExplorarHackathonesClick = () => {
+    const handleExplorarhackathonsClick = () => {
         navigate('/hackathons');
     };
 
@@ -27,7 +27,7 @@ const DeveloperPromotionPage = () => {
                         <p className="text-lg md:text-xl ">
                             Desde 2009, hemos conectado a miles de
                             desarrolladores con proyectos innovadores. Participa
-                            en hackathones que te ayudarán a crecer
+                            en hackathons que te ayudarán a crecer
                             profesionalmente, mejorar tus habilidades técnicas y
                             entablar valiosas conexiones en la industria.
                         </p>
@@ -56,7 +56,7 @@ const DeveloperPromotionPage = () => {
                         <div className="flex items-center justify-center bg-verdeclaro rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
                                 src="/assets/images/hackathons.svg"
-                                alt="hackathones realizados"
+                                alt="hackathons realizados"
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
@@ -64,7 +64,7 @@ const DeveloperPromotionPage = () => {
                                     +10.000
                                 </p>
                                 <p className=" text-sm">
-                                    hackathones realizados, ¡y otros tantos
+                                    hackathons realizados, ¡y otros tantos
                                     premios repartidos!
                                 </p>
                             </div>
@@ -107,10 +107,10 @@ const DeveloperPromotionPage = () => {
 
                     <div className="mt-8">
                         <button
-                            onClick={handleExplorarHackathonesClick}
+                            onClick={handleExplorarhackathonsClick}
                             className="button-rounded-green h-fit w-fit px-10 py-2 mb-10 text-3xl"
                         >
-                            Explorar Hackathones <span className="p-2">→</span>
+                            Explorar hackathons <span className="p-2">→</span>
                         </button>
                     </div>
                 </div>
