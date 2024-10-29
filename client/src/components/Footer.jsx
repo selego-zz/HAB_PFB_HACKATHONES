@@ -74,7 +74,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </div>
-            <p className="font-jost font-semibold text-center m-2">
+            <p className="font-jost font-semibold text-center m-2 text-blanco">
                 &copy; HACK-A-BOSS, <br />
                 JSB40RT Grupo B, <br />
                 2024

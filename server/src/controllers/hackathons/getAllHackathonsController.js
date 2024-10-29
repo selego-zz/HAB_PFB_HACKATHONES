@@ -8,9 +8,9 @@ import {
 } from '../../models/index.js';
 
 /////////////////////////////////////////////////////////////////
-// Controlador que devuelve información de los hackathones
+// Controlador que devuelve información de los hackathons
 //
-// Si body está vacío, devuelve información de todos los hackathones
+// Si body está vacío, devuelve información de todos los hackathons
 //
 // Si body no está vacío, puede contener una combinación de
 //       los siguientes campos, que pueden estar o no:

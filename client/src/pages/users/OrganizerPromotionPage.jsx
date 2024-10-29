@@ -29,7 +29,7 @@ const OrganizerPromotionPage = () => {
                             <br /> Hack-a-ton.
                         </h2>
                         <p className="text-lg md:text-xl ">
-                            Impulsamos hackathones desde 2009. Nuestras
+                            Impulsamos hackathons desde 2009. Nuestras
                             soluciones simplifican la gestión del evento,
                             mejoran la experiencia de los participantes y
                             promueven mejores resultados comerciales.
@@ -59,7 +59,7 @@ const OrganizerPromotionPage = () => {
                         <div className="flex items-center justify-center bg-verdeclaro rounded-lg shadow-md p-6 max-w-xs w-auto">
                             <img
                                 src="/assets/images/hackathons.svg"
-                                alt="hackathones impulsados"
+                                alt="hackathons impulsados"
                                 className="rounded-full w-16 h-16 lg:w-24 lg:h-24 mr-4 shadow-md"
                             />
                             <div>
@@ -67,7 +67,7 @@ const OrganizerPromotionPage = () => {
                                     +10.000
                                 </p>
                                 <p className=" text-sm">
-                                    hackathones gestionados, sin líos ni
+                                    hackathons gestionados, sin líos ni
                                     complicaciones
                                 </p>
                             </div>
@@ -95,7 +95,7 @@ const OrganizerPromotionPage = () => {
                     <div className="bg-blanco bg-opacity-75 rounded-2xl shadow-xl p-8 mb-8 max-w-xl w-auto">
                         <p className="text-lg ">
                             Únete a las empresas líderes que confían en
-                            HACK-A-TON para llevar tus hackathones al siguiente
+                            HACK-A-TON para llevar tus hackathons al siguiente
                             nivel.
                         </p>
                     </div>

@@ -1,12 +1,8 @@
 import {
-    // Botones
-    BackButton,
-    ForwardButton,
-    ScrollToTopButton,
-    // Otros
     DateRangePicker,
     LogosCarousel,
     ScrollToTop,
+    ScrollToTopButton,
 } from './aux_components';
 
 import Footer from './Footer.jsx';
@@ -20,14 +16,10 @@ import Rating from './Rating.jsx';
 
 export {
     // Componentes auxiliares
-    // Botones
-    BackButton,
-    ForwardButton,
-    ScrollToTopButton,
-    // Otros
     DateRangePicker,
     LogosCarousel,
     ScrollToTop,
+    ScrollToTopButton,
 
     // Componentes principales
     Footer,

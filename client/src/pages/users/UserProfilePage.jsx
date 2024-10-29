@@ -161,7 +161,7 @@ const UserProfilePage = () => {
                                 }}
                                 className="bg-verdemarino text-azuloscuro font-jost font-semibold h-10 min-w-36  rounded-2xl hover:bg-verdeclaro "
                             >
-                                Actualizar perfil
+                                Modificar perfil
                             </button>
 
                             <button

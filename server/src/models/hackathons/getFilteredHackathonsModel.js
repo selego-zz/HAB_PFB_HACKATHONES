@@ -8,9 +8,9 @@ import {
 } from './index.js';
 
 /////////////////////////////////////////////////////////////////
-// Modelo que devuelve información de los hackathones
+// Modelo que devuelve información de los hackathons
 //
-// Si body está vacío, devuelve información de todos los hackathones
+// Si body está vacío, devuelve información de todos los hackathons
 //
 // Si body no está vacío, puede contener una combinación de
 //       los siguientes campos, que pueden estar o no:
