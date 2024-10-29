@@ -41,9 +41,9 @@ const HackathonDetailsPage = () => {
 
                 // Solicitamos usuarios inscritos
                 let userHackathons;
-                if (isOrganizer())
-                    userHackathons =
-                        await getAllInscriptionsFromAHackathon(hackathonId);
+                //                if (isOrganizer())
+                userHackathons =
+                    await getAllInscriptionsFromAHackathon(hackathonId);
 
                 // Si la respuesta es null o undefined, devuelve un array vacío
                 const enrolledParticipants = (userHackathons || []).filter(
