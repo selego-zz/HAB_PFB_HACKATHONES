@@ -8,6 +8,7 @@ const getHackathonController = async (req, res, next) => {
     try {
         const { hackathonId } = req.params;
         const hackathon = await getHackathonByIdModel(hackathonId);
+
         if (!hackathon) {
             generateErrorUtil(
                 'Hackathon ' + hackathonId + ' no encontrado',
