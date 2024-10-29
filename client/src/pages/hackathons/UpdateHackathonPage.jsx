@@ -44,10 +44,8 @@ const UpdateHackathonPage = () => {
                 documentation: tempHackathon.documentation || '',
                 requirements: tempHackathon.requirements || '',
                 description: tempHackathon.description || '',
-                technologies:
-                    tempHackathon.technologies.map((tec) => tec.technology) ||
-                    [],
-                themes: tempHackathon.themes.map((theme) => theme.theme) || [],
+                technologies: tempHackathon.technologies || [],
+                themes: tempHackathon.themes || [],
             };
 
             if (formData === null) setFormData(tempFormData);
@@ -97,9 +95,10 @@ const UpdateHackathonPage = () => {
         const { value } = e.target;
         const fD = { ...formData };
 
-        formData?.technologies.indexOf((t) => t.technology === value);
+        // formData?.technologies.indexOf((t) => t.technology === value);
 
-        const index = fD.technologies.indexOf((t) => t.technology === value);
+        const index = fD.technologies.findIndex((t) => t.technology === value);
+
         if (index === -1) fD.technologies.push({ technology: value });
         else fD.technologies.splice(index, 1);
 
@@ -111,7 +110,7 @@ const UpdateHackathonPage = () => {
         const { value } = e.target;
         const fD = { ...formData };
 
-        const index = fD.themes.indexOf((t) => t.themes === value);
+        const index = fD.themes.findIndex((t) => t.theme === value);
         if (index === -1) fD.themes.push({ theme: value });
         else fD.themes.splice(index, 1);
 
