@@ -10,8 +10,6 @@ import {
 const getHackathonByIdModel = async (hackathonId) => {
     const pool = await getPool();
 
-    console.log('getHackathonByIdModel' + hackathonId);
-
     const [res] = await pool.query(`SELECT * FROM hackathons WHERE id = ?`, [
         hackathonId,
     ]);

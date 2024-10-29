@@ -13,8 +13,6 @@ const getHackathonTechnologiesModel = async (hackathonId) => {
         args.push(hackathonId);
     } else SQL = 'SELECT technology FROM technologies';
     const [res] = await pool.query(SQL, args);
-    console.log('getHackathonTechnologiesModel' + hackathonId);
-    console.log(res);
 
     return res;
 };

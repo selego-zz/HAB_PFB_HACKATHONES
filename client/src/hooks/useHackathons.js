@@ -286,8 +286,21 @@ const useHackathons = () => {
 
         // Adjuntamos todos los elementos de userProfile al formData.
         for (const [key, value] of Object.entries(hackathon)) {
-            formData.append(key, value);
+            if (key === 'technologies') {
+                const t = [];
+                for (const technology of value) {
+                    t.push(technology.technology);
+                }
+                formData.append(key, t);
+            } else if (key === 'themes') {
+                const t = [];
+                for (const theme of value) {
+                    t.push(theme.theme);
+                }
+                formData.append(key, t);
+            } else formData.append(key, value);
         }
+
         try {
             const res = await fetch(`${VITE_API_URL}/hackathons/${id}/update`, {
                 method: 'put',
