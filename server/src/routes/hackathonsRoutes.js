@@ -28,7 +28,7 @@ import {
 
 //////
 
-// Middleware que devuelve el listado de eventos de hackathones. Puede aceptar filtros y orden en el body
+// Middleware que devuelve el listado de eventos de hackathons. Puede aceptar filtros y orden en el body
 router.get('/hackathons', getAllHackathonsController);
 
 // Middleware que añade un evento de hackathon.
@@ -96,7 +96,7 @@ router.put(
 //Devuelve el número máximo de plazas del hackathon que más plazas permite tener.
 router.get('/maxParticipants', getMaxParticipantsController);
 
-//Devuelve el premio máximo que se oferta entre todos los hackathones.
+//Devuelve el premio máximo que se oferta entre todos los hackathons.
 router.get('/maxPrize', getMaxPrizeController);
 
 //Devuelve un listado de tecnologías de los hackathons. Ninguna autenticación.

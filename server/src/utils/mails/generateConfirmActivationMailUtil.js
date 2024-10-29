@@ -6,7 +6,7 @@ const generateConfirmActivationMailUtil = (username) => {
             Gracias por registrarte en ${process.env.APP_NAME}.
             El administrador ha revisado tu solicitud de alta como organizador y la ha aceptado, ¡enhorabuena!
 
-            Ya puedes comenzar a publicar tus hackathones en: <a href='${pageLink}'>${pageLink}</a>
+            Ya puedes comenzar a publicar tus hackathons en: <a href='${pageLink}'>${pageLink}</a>
         `;
 
     return mail;
