@@ -41,7 +41,12 @@ const HackathonDetailsPage = () => {
 
                 // Solicitamos usuarios inscritos
                 let userHackathons;
+                if (!authToken) return; //si no está logueado, no puede ver las inscripciones
+
                 //                if (isOrganizer())
+                // si es un organizador: devuelve el listado de usuarios registrados
+                // si es un desarrollador: devuleve el hackathon actual, en caso de estar registrado,
+                //// [] en caso contrario
                 userHackathons =
                     await getAllInscriptionsFromAHackathon(hackathonId);
 
@@ -54,9 +59,8 @@ const HackathonDetailsPage = () => {
 
                 // Comprobación para ver si el usuario que ve la página está inscrito en ese hackathon
                 const isUserRegistered =
-                    enrolledParticipants[0]?.developers?.some(
-                        (h) => h.userId === authUser?.id,
-                    );
+                    isDeveloper && userHackathons.length === 1;
+                //                    enrolledParticipants[0]?.developers?.some((h) => h.userId === authUser?.id,);
                 setIsRegistered(isUserRegistered);
             } catch (err) {
                 toast.error(
