@@ -12,12 +12,15 @@ const { VITE_API_URL } = import.meta.env;
 
 const ListAllUsersPage = () => {
     useDocumentTitle('Gestión de usuarios'); // Título de pestaña
-    const { authToken, isAdmin } = useContext(AuthContext);
+    const { authToken, isAdmin, authLoading } = useContext(AuthContext);
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState('all'); // Estado para el filtro de usuarios
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!authToken) navigate('/');
+        if (authLoading) return;
+
         // Si el usuario que trata de acceder a la página no es administrador, lo redirigimos automáticamente a la homepage
         if (!isAdmin()) {
             toast.error('No tienes permisos para realizar esa acción', {
@@ -78,7 +81,7 @@ const ListAllUsersPage = () => {
         };
 
         fetchUsers();
-    }, [authToken, users, isAdmin, navigate]);
+    }, [authToken, users, isAdmin, navigate, authLoading]);
 
     const handleRemoveUser = async (user) => {
         try {
