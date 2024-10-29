@@ -31,21 +31,13 @@
         @apply bg-casiblanco w-full rounded-xl block text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2 p-5 shadow-md;
     }
     .input {
-        @apply w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2  shadow-md;
+        @apply w-80 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2 shadow-md appearance-none;
     }
 
-    .semiInput {
-        @apply w-36 h-11 rounded-3xl bg-casiblanco  block mx-auto text-center text-azuloscuro font-jost font-medium focus:border-azuloscuro focus:outline-none focus:bg-verdeclaro focus:ring-azuloscuro focus:ring-2;
-    }
     .label {
         @apply block text-azuloscuro font-jost font-semibold text-center text-lg;
     }
-    .input-box {
-        @apply mt-1 block w-11/12 mx-auto rounded-md shadow-sm bg-verdeclaro p-2;
-    }
-    .semi-input-box {
-        @apply mt-1 block w-7/12 mx-auto rounded-md shadow-sm bg-verdeclaro p-2;
-    }
+
     .text-header-big {
         @apply font-semibold text-3xl font-jost;
     }

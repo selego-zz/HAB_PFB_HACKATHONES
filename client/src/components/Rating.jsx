@@ -13,7 +13,7 @@ const MakeStar = (star, rating, setRating, hackathonId, isDeveloper) => {
     return (
         <span
             key={rating}
-            className="hover:text-6xl cursor-pointer"
+            className="cursor-pointer transition-colors duration-300 transform hover:text-blanco"
             onClick={async () => {
                 if (isDeveloper) {
                     const confirmChangeRating = await Swal.fire({
