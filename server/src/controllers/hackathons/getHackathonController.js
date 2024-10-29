@@ -5,6 +5,7 @@ import { getHackathonByIdModel } from '../../models/index.js';
 //////
 
 const getHackathonController = async (req, res, next) => {
+    console.log('getHackathonController');
     try {
         const { hackathonId } = req.params;
         const hackathon = await getHackathonByIdModel(hackathonId);

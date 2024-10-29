@@ -32,11 +32,17 @@ const getAllHackathonsModel = async () => {
     const [res] = await pool.query(sql);
 
     for (const hackathon of res) {
+        console.log('getAllHackathonsModel ' + hackathon.id);
+
         hackathon.ranking = await getRankingModel(hackathon.id);
         hackathon.technologies = await getHackathonTechnologiesModel(
             hackathon.id,
         );
         hackathon.themes = await getHackathonThemesModel(hackathon.id);
+
+        if (hackathon.id === 18) {
+            console.log(await getHackathonTechnologiesModel(hackathon.id));
+        }
     }
 
     return res;
