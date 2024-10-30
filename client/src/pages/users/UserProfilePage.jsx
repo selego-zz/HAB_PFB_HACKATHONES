@@ -18,7 +18,8 @@ const UserProfilePage = () => {
     // Título de pestaña
     useDocumentTitle('Perfil');
 
-    const { authUser, authToken, authLogoutState } = useContext(AuthContext);
+    const { authUser, authToken, authLogoutState, isAdmin } =
+        useContext(AuthContext);
     const [hackathons, setHackathons] = useState([]);
     const { getUsersHackathon, compareHackathons } = useHackathons();
     const [historico, setHistorico] = useState(false); //Esto es para decidir si ver el historial de hackathons o los que están activos.
@@ -104,6 +105,9 @@ const UserProfilePage = () => {
         }
     };
     if (!authUser) return <h1>Loading...</h1>;
+
+    ///////
+
     return (
         <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
             <div className="min-h-screen bg-blanco bg-opacity-90">
@@ -116,7 +120,7 @@ const UserProfilePage = () => {
                                 className="w-24 h-24 rounded-full m-4 border-blanco border-4 "
                             />
                         )}
-                        <div className="flex flex-col ml-4">
+                        <div className="flex flex-col ml-4 mt-3">
                             <h1 className="font-jost font-semibold text-blanco text-xl sm:text-3xl w-full">
                                 {authUser.firstName} {authUser.lastName} (
                                 {authUser.username})
@@ -124,8 +128,8 @@ const UserProfilePage = () => {
                             <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-5">
                                 Email: {authUser.email}
                             </p>
-                            <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua sm:h-8 w-20 sm:w-36 rounded-2xl hover:bg-verdemarino">
-                                {authUser.linkedIn && (
+                            {authUser.linkedIn && (
+                                <p className="font-jost font-medium text-blanco text-xs sm:text-xl mt-3 bg-verdeagua sm:h-8 w-20 sm:w-36 rounded-2xl hover:bg-verdemarino">
                                     <a
                                         href={`https://www.linkedin.com/in/${authUser.linkedIn}`}
                                         target="_blank"
@@ -139,8 +143,23 @@ const UserProfilePage = () => {
                                         />
                                         LinkedIn
                                     </a>
-                                )}
-                            </p>
+                                </p>
+                            )}
+
+                            {authUser.technologies && (
+                                <p className="font-jost mt-5 font-semibold">
+                                    {authUser.technologies.map(
+                                        (tech, index) => (
+                                            <span
+                                                key={index}
+                                                className="inline-block bg-verdemarino rounded-full px-4 py-1 m-1"
+                                            >
+                                                {tech.technology}
+                                            </span>
+                                        ),
+                                    )}
+                                </p>
+                            )}
                         </div>
                     </div>
                     <div className="flex flex-col-reverse sm:flex-row-reverse sm:justify-end mt-7 sm:ml-7">
@@ -150,6 +169,7 @@ const UserProfilePage = () => {
                             </h2>
                             <textarea
                                 className="textarea"
+                                disabled
                                 defaultValue={authUser.biography}
                             ></textarea>
                         </div>
@@ -164,12 +184,14 @@ const UserProfilePage = () => {
                                 Modificar perfil
                             </button>
 
-                            <button
-                                onClick={handleRemoveUser}
-                                className="button-angled-red font-jost font-semibold h-10 min-w-36  rounded-2xl"
-                            >
-                                Eliminar usuario
-                            </button>
+                            {!isAdmin() && (
+                                <button
+                                    onClick={handleRemoveUser}
+                                    className="button-angled-red font-jost font-semibold h-10 min-w-36  rounded-2xl"
+                                >
+                                    Eliminar usuario
+                                </button>
+                            )}
                         </div>
                     </div>
 

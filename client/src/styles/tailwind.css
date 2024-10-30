@@ -52,3 +52,22 @@
         @apply flex justify-between  mb-4 p-4 rounded-md cursor-pointer md:w-3/5 bg-gradient-to-r from-verdeclaro to-blanco shadow-md h-36 border-l-4 border-r-4 border-azuloscuro hover:border-l-8 hover:border-r-8;
     }
 }
+
+@layer utilities {
+    /* Icono de calendario */
+    .date-input-icon-padding {
+        position: relative;
+        &::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 1.5rem;
+        }
+    }
+
+    /* Flechas en inputs de números */
+    .number-input-hide {
+        position: relative;
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+    }
+}
