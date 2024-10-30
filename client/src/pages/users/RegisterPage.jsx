@@ -72,15 +72,15 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
-            <div className="min-h-screen bg-blanco bg-opacity-90">
-                <div className="max-w-4xl mx-auto py-8 px-4">
-                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-10">
+        <div className="h-fit bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center m-3">
+            <div className="h-fit bg-blanco bg-opacity-90">
+                <div className="max-w-4xl mx-auto px-4">
+                    <h2 className="text-center text-3xl font-jost font-semibold text-azuloscuro mb-2">
                         REGÍSTRATE
                     </h2>
                     <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col gap-8 md:grid md:grid-cols-2"
+                        className="flex flex-col gap-3 md:grid md:grid-cols-2"
                     >
                         <div className="min-w-[200px]">
                             <label className="label">Nombre:</label>
@@ -149,7 +149,7 @@ const RegisterPage = () => {
                         </div>
 
                         <div className="min-w-[200px]">
-                            <label className="label">Repetir Contraseña:</label>
+                            <label className="label">Repetir contraseña:</label>
                             <input
                                 type="password"
                                 id="repeatpassword"
@@ -161,8 +161,8 @@ const RegisterPage = () => {
                         </div>
 
                         {/* Campo de selección de rol */}
-                        <div className="min-w-[200px] col-span-2 flex flex-col items-center m-7">
-                            <label className="label mb-5">
+                        <div className="min-w-[200px] col-span-2 flex flex-col items-center m-2">
+                            <label className="label mb-2">
                                 Me quiero registrar como...
                             </label>
                             <div className="flex gap-4">
