@@ -85,9 +85,9 @@ const LoginPage = () => {
 
     return (
         <main>
-            <div className=" h-screen bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center ">
+            <div className="h-fit bg-[url('/assets/images/back-banner.jpg')] bg-cover bg-center m-3">
                 <div className="h-full bg-blanco bg-opacity-90 flex flex-col items-center justify-center">
-                    <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-14">
+                    <h2 className="font-jost font-semibold text-azuloscuro text-3xl text-center m-6">
                         INICIAR SESIÓN
                     </h2>
 
@@ -103,7 +103,7 @@ const LoginPage = () => {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="input mb-12"
+                            className="input mb-7"
                             required
                             autoFocus
                         />
@@ -123,7 +123,7 @@ const LoginPage = () => {
                         {/* Habilitamos o deshabilitamos el botón en función de si estamos haciendo un fetch o no. */}
                         <button
                             disabled={loading}
-                            className="button-blue mt-16"
+                            className="button-blue mt-10"
                         >
                             Iniciar Sesión
                         </button>

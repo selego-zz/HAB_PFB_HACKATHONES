@@ -140,7 +140,7 @@ const CreateHackathonForm = ({
                         name="prizes"
                         value={formData.prizes}
                         onChange={handleChange}
-                        className="input"
+                        className="input number-input-hide"
                     />
                 </div>
 
@@ -151,7 +151,7 @@ const CreateHackathonForm = ({
                         name="inscriptionDate"
                         value={formatDate(formData.inscriptionDate)}
                         onChange={handleChange}
-                        className="input"
+                        className="input date-input-icon-padding"
                         required
                     />
                 </div>
@@ -165,7 +165,7 @@ const CreateHackathonForm = ({
                         name="inscriptionEnd"
                         value={formatDate(formData.inscriptionEnd)}
                         onChange={handleChange}
-                        className="input"
+                        className="input date-input-icon-padding"
                         required
                     />
                 </div>
@@ -177,7 +177,7 @@ const CreateHackathonForm = ({
                         name="hackathonDate"
                         value={formatDate(formData.hackathonDate)}
                         onChange={handleChange}
-                        className="input"
+                        className="input date-input-icon-padding"
                         required
                     />
                 </div>
@@ -189,7 +189,7 @@ const CreateHackathonForm = ({
                         name="hackathonEnd"
                         value={formatDate(formData.hackathonEnd)}
                         onChange={handleChange}
-                        className="input"
+                        className="input date-input-icon-padding"
                         required
                     />
                 </div>
@@ -203,7 +203,7 @@ const CreateHackathonForm = ({
                         name="maxParticipants"
                         value={formData.maxParticipants}
                         onChange={handleChange}
-                        className="input"
+                        className="input number-input-hide"
                         required
                     />
                 </div>

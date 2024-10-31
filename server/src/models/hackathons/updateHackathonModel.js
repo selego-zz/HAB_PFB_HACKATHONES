@@ -88,20 +88,22 @@ const updateHackathonModel = async (hackathon) => {
         [hackathonId],
     );
     for (const technology of technologies)
-        await pool.query(
-            'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
-            [hackathonId, technology],
-        );
+        if (technology.length > 0)
+            await pool.query(
+                'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
+                [hackathonId, technology],
+            );
 
     //actualizamos temas
     await pool.query('DELETE FROM hackathonThemes WHERE hackathonId = ?', [
         hackathonId,
     ]);
     for (const theme of themes)
-        await pool.query(
-            'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, (SELECT id FROM themes WHERE theme = ?))',
-            [hackathonId, theme],
-        );
+        if (theme.length > 0)
+            await pool.query(
+                'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, (SELECT id FROM themes WHERE theme = ?))',
+                [hackathonId, theme],
+            );
 
     // Volvemos a asignar el id al objeto por si se requiere
     hackathon.id = hackathonId;

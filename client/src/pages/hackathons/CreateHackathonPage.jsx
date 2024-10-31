@@ -58,8 +58,11 @@ const CreateHackathonPage = () => {
         const { value } = e.target;
         const fD = { ...formData };
 
-        const index = fD.technologies.indexOf(value);
-        if (index === -1) fD.technologies.push(value);
+        // formData?.technologies.indexOf((t) => t.technology === value);
+
+        const index = fD.technologies.findIndex((t) => t.technology === value);
+
+        if (index === -1) fD.technologies.push({ technology: value });
         else fD.technologies.splice(index, 1);
 
         setFormData(fD);
@@ -70,8 +73,8 @@ const CreateHackathonPage = () => {
         const { value } = e.target;
         const fD = { ...formData };
 
-        const index = fD.themes.indexOf(value);
-        if (index === -1) fD.themes.push(value);
+        const index = fD.themes.findIndex((t) => t.theme === value);
+        if (index === -1) fD.themes.push({ theme: value });
         else fD.themes.splice(index, 1);
 
         setFormData(fD);

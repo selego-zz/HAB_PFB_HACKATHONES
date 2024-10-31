@@ -161,7 +161,7 @@ const HackathonListPage = () => {
                                     </select>
                                 </li>
                                 <li className="mb-8">
-                                    <h2 className="label">Localización</h2>
+                                    <h2 className="label">Dirección</h2>
                                     <input
                                         type="text"
                                         id="location"

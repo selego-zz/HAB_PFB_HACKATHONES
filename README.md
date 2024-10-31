@@ -4,9 +4,9 @@
 
 _HACK-A-TON_ es un proyecto web basado en **Node.js** para el _back-end_ y **React** para el _front-end_. Se trata de una plataforma que muestra un calendario de eventos competitivos de programación a los visitantes, quienes podrán acceder a los detalles concretos de cada uno y realizar una búsqueda filtrada de los mismos según sus preferencias, así como comprobar los _rankings_ de ganadores una vez concluyen.
 
-La web permite registro de usuarios, con rol a escoger entre **desarrolladores** y **organizadores**. El usuario de tipo **administrador** tendrá permisos especiales respetando la privacidad del resto de usuarios, y será el encargado de autorizar a los organizadores para que publiquen sus _hackathones_.
+La web permite registro de usuarios, con rol a escoger entre **desarrolladores** y **organizadores**. El usuario de tipo **administrador** tendrá permisos especiales respetando la privacidad del resto de usuarios, y será el encargado de autorizar a los organizadores para que publiquen sus _hackathons_.
 
-Los **desarrolladores** podrán inscribirse como participantes en cuantos desafíos deseen, cancelar sus inscripciones dentro de los plazos establecidos y dejar valoraciones de 1 a 5 estrellas a los eventos en los que hayan participado. A su vez, los **organizadores**, una vez autorizados, podrán añadir sus _hackathones_ a la página, con los detalles, objetivos, premios, requerimientos, etc. Todos los usuarios registrados tendrán la posibilidad de gestionar y modificar sus perfiles a conveniencia.
+Los **desarrolladores** podrán inscribirse como participantes en cuantos desafíos deseen, cancelar sus inscripciones dentro de los plazos establecidos y dejar valoraciones de 1 a 5 estrellas a los eventos en los que hayan participado. A su vez, los **organizadores**, una vez autorizados, podrán añadir sus _hackathons_ a la página, con los detalles, objetivos, premios, requerimientos, etc. Todos los usuarios registrados tendrán la posibilidad de gestionar y modificar sus perfiles a conveniencia.
 
 ## Instalación y ejecución
 
@@ -169,7 +169,7 @@ Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el d
 
 - **DELETE** - ["/api/users/delete/:userId"] - Elimina los datos del usuario. Requiere autenticación.
 
-## Endpoints de hackathones
+## Endpoints de hackathons
 
 - **GET** - ["/api/hackathons"] - Devuelve un listado de eventos de hackathons filtrados y/o ordenados por localización, estado, duración, preferencias. No requiere autenticación.
 
@@ -195,7 +195,7 @@ Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el d
 
 - **GET** - ["/api/maxParticipants"] - Devuelve el número máximo de plazas del hackathon que más plazas permite tener.
 
-- **GET** - ["/api/maxPrize"] - Devuelve el premio máximo que se oferta entre todos los hackathones.
+- **GET** - ["/api/maxPrize"] - Devuelve el premio máximo que se oferta entre todos los hackathons.
 
 - **GET** - ["/api/technologies"] - Devuelve un listado de tecnologías de los hackathons. Ninguna autenticación.
 

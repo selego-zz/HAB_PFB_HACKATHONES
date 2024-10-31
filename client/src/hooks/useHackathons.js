@@ -139,18 +139,30 @@ const useHackathons = () => {
     };
     const addHackathon = async (hackathon) => {
         try {
-            if (hackathon.logo.length < 1) {
+            if (hackathon.logo?.length < 1) {
                 delete hackathon.logo;
             }
-            if (hackathon.documentation.length < 1) {
+            if (hackathon.documentation?.length < 1) {
                 delete hackathon.documentation;
             }
 
             const formData = new FormData();
 
-            // Adjuntamos todos los elementos de userProfile al formData.
+            // Adjuntamos todos los elementos al formData.
             for (const [key, value] of Object.entries(hackathon)) {
-                formData.append(key, value);
+                if (key === 'technologies') {
+                    const t = [];
+                    for (const technology of value) {
+                        t.push(technology.technology);
+                    }
+                    formData.append(key, t);
+                } else if (key === 'themes') {
+                    const t = [];
+                    for (const theme of value) {
+                        t.push(theme.theme);
+                    }
+                    formData.append(key, t);
+                } else formData.append(key, value);
             }
 
             const res = await fetch(`${VITE_API_URL}/hackathons`, {
@@ -284,10 +296,23 @@ const useHackathons = () => {
 
         const formData = new FormData();
 
-        // Adjuntamos todos los elementos de userProfile al formData.
+        // Adjuntamos todos los elementos al formData.
         for (const [key, value] of Object.entries(hackathon)) {
-            formData.append(key, value);
+            if (key === 'technologies') {
+                const t = [];
+                for (const technology of value) {
+                    t.push(technology.technology);
+                }
+                formData.append(key, t);
+            } else if (key === 'themes') {
+                const t = [];
+                for (const theme of value) {
+                    t.push(theme.theme);
+                }
+                formData.append(key, t);
+            } else formData.append(key, value);
         }
+
         try {
             const res = await fetch(`${VITE_API_URL}/hackathons/${id}/update`, {
                 method: 'put',

@@ -20,6 +20,9 @@ import { updateHackathonSchema } from '../../schemas/index.js';
 // Función controladora para actualizar los datos de un hackathon.
 const updateHackathonController = async (req, res, next) => {
     try {
+        if (req.body.logo?.length === 0) delete req.body.logo;
+        if (req.body.documentation?.length === 0) delete req.body.documentation;
+
         if (!Array.isArray(req.body.technologies))
             req.body.technologies = req.body.technologies.split(',');
         if (!Array.isArray(req.body.themes))

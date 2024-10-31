@@ -22,7 +22,7 @@ const HomePage = () => {
 
                 <div className="relative z-20 min-h-screen flex flex-col items-center lg:items-start sm:pt-10 lg:ml-8">
                     <h2 className="text-header-big mt-24 lg:mt-14 text-center mx-10">
-                        El hogar de los hackathones.
+                        El hogar de los hackathons.
                     </h2>
 
                     <p className="text-common m-10 lg:ml-20 lg:w-96">

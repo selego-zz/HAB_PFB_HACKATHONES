@@ -62,12 +62,12 @@ const addHackathonModel = async (
             maxParticipants,
             prizes,
             online,
-            location,
-            documentation`;
+            location`;
     if (logo) sql += ', logo';
+    if (documentation) sql += ', documentation';
     if (description) sql += ', description';
     if (requirements) sql += ', requirements';
-    sql += `) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?`;
+    sql += `) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?`;
     const args = [
         name,
         organizerid,
@@ -79,31 +79,35 @@ const addHackathonModel = async (
         prizes,
         online,
         location,
-        documentation,
     ];
 
     if (logo) {
         sql += ', ?';
         args.push(logo);
     }
+    if (documentation) {
+        sql += ', ?';
+        args.push(documentation);
+    }
     if (description) {
         sql += ', ?';
-        if (logo) args.push(description);
+        args.push(description);
     }
     if (requirements) {
         sql += ', ?';
-        if (logo) args.push(requirements);
+        args.push(requirements);
     }
     sql += ')';
 
     // Insertamos el hackathon.
     const [res] = await pool.query(sql, args);
 
-    for (const technology of technologies)
+    for (const technology of technologies) {
         await pool.query(
             'INSERT INTO hackathonTechnologies (hackathonId, technologyId) VALUES(?, (SELECT id FROM technologies WHERE technology = ?))',
             [res.insertId, technology],
         );
+    }
     for (const theme of themes)
         await pool.query(
             'INSERT INTO hackathonThemes (hackathonId, themeId) VALUES(?, (SELECT id FROM themes WHERE theme = ?))',

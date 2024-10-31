@@ -13,7 +13,7 @@ const MakeStar = (star, rating, setRating, hackathonId, isDeveloper) => {
     return (
         <span
             key={rating}
-            className="hover:text-6xl cursor-pointer"
+            className="cursor-pointer transition-colors duration-300 transform hover:text-blanco"
             onClick={async () => {
                 if (isDeveloper) {
                     const confirmChangeRating = await Swal.fire({
@@ -56,7 +56,7 @@ const Rating = ({
     for (let i = 0; i < 5; i++) _stars.push(i < rating ? '★' : '☆');
 
     return (
-        <article className="w-56 min-h-64 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center sm:p-2 shadow-md">
+        <article className="w-56 min-h-64 font-jost bg-verdeclaro text-center rounded-2xl flex flex-col justify-center sm:p-2 shadow-md border-2 border-solid border-azuloscuro">
             <h2 className="font-bold">Rating</h2>
             <div className="stars text-4xl text-amarillo group">
                 {_stars.map((star, index) =>
