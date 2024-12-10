@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 
 // Importamos la URL del servidor.
-const { VITE_API_URL } = import.meta.env;
+const { VITE_API_URL, VITE_API_UPLOADS } = import.meta.env;
 
 /* no implemento las siguientes rutas */
 // put '/hackathons/:hackathonId/:developerId/ranking',
@@ -12,7 +12,7 @@ const { VITE_API_URL } = import.meta.env;
 // delete '/hackathons/:hackathonId/cancel',
 
 ////////////////////////////////////////////////////////////////////////
-// Con este Hook controlaremos todo lo relacionado con los hackathons
+// Con este Hook controlaremos lo relacionado con los hackathons
 //
 //   hackathons - contiene el listado de los hackathon filtrado o no
 //       hackathonLoading - indica si el hackathon se está cargando
@@ -70,7 +70,7 @@ const useHackathons = () => {
 
     const [hackathons, setHackathons] = useState([]);
     const [query, setQuery] = useState({});
-    const [filter, setFilters] = useState({});
+    const [filter, setFilter] = useState({});
     const [technologies, setTechnologies] = useState([]);
     const [themes, setThemes] = useState([]);
     const [orderBy, setOrderBy] = useState([]);
@@ -98,8 +98,20 @@ const useHackathons = () => {
 
                 const body = await res.json();
 
-                if (body.status === 'error') throw new Error(body.message);
+                if (body.status === 'error') {
+                    throw new Error(body.message);
+                }
 
+                body.data.forEach((hackathon) => {
+                    // Si el campo "logo" no existe o está vacío, asigna el valor predeterminado
+                    if (!hackathon.logo || hackathon.logo.length < 1) {
+                        hackathon.logo =
+                            '/assets/images/default-hackathon-logo.svg';
+                    } else
+                        hackathon.logo = `${VITE_API_UPLOADS}/${hackathon.logo}`;
+                });
+
+                console.log(body.data);
                 if (!compareHackathons(hackathons, body.data))
                     setHackathons(body.data);
             } catch (err) {
@@ -242,6 +254,11 @@ const useHackathons = () => {
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
+            // Si el campo "logo" no existe o está vacío, asigna el valor predeterminado
+            if (!body.data.logo || body.data.logo.length < 1) {
+                body.data.logo = '/assets/images/default-hackathon-logo.svg';
+            } else body.data.logo = `${VITE_API_UPLOADS}/${body.data.logo}`;
+            console.log(body.data);
 
             return body.data;
         } catch (err) {
@@ -355,7 +372,7 @@ const useHackathons = () => {
     };
 
     ////////////////////////////////////////////////////////////
-    // De aquí en adelante será lo relativo a todo lo que se
+    // De aquí en adelante será lo relativo a lo que se
     // pasa como filtro al get hackathon
     ////////////////////////////////////////////////////////////
 
@@ -418,14 +435,14 @@ const useHackathons = () => {
         const updatedFilters = { ...filter };
         updatedFilters[key] = value;
 
-        setFilters(updatedFilters);
+        setFilter(updatedFilters);
     };
     const removeFilter = (oldFilter) => {
         if (!(oldFilter in filter)) return;
         const updatedFilters = { ...filter };
         delete updatedFilters[oldFilter];
 
-        setFilters(updatedFilters);
+        setFilter(updatedFilters);
     };
 
     const addTechnology = (newTechnology) => {
@@ -510,7 +527,7 @@ const useHackathons = () => {
         //Consultar los filtros, añadir nuevo filtro, eliminar filtro
         filter,
         addFilter,
-        setFilters,
+        setFilters: setFilter,
         removeFilter,
         //tecnologias y temas
         technologies,

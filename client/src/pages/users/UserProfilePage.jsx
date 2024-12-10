@@ -1,16 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { useHackathons } from '../../hooks/index.js';
+import { useHackathons, useDocumentTitle } from '../../hooks/index.js';
 
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { HackathonList } from '../../components';
-import { useDocumentTitle } from '../../hooks/index.js';
 
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
-const { VITE_API_UPLOADS, VITE_API_URL, VITE_APP_NAME } = import.meta.env;
+const { VITE_API_URL, VITE_APP_NAME } = import.meta.env;
 
 ////////////////
 
@@ -115,7 +114,7 @@ const UserProfilePage = () => {
                     <div className="flex items-center bg-azuloscuro rounded-xl sm:ml-7 p-5 ">
                         {authUser.avatar && (
                             <img
-                                src={`${VITE_API_UPLOADS}/${authUser.avatar}`}
+                                src={`${authUser.avatar}`}
                                 alt={`${authUser.firstName} avatar`}
                                 className="w-24 h-24 rounded-full m-4 border-blanco border-4 "
                             />

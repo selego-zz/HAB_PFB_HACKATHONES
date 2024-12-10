@@ -6,7 +6,7 @@ import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Importamos el nombre que le daremos al token.
-const { VITE_AUTH_TOKEN, VITE_API_URL } = import.meta.env;
+const { VITE_AUTH_TOKEN, VITE_API_URL, VITE_API_UPLOADS } = import.meta.env;
 
 //////
 
@@ -48,6 +48,14 @@ export const AuthProvider = ({ children }) => {
                 if (body.status === 'error') {
                     throw new Error(body.message);
                 }
+
+                // Este es el punto donde obtenemos el usuario. Puede que venga con avatar o puede que no.
+                // Si viene sin avatar le asignaremos el avatar por defecto
+                if (!body.data.user.avatar || body.data.user.avatar.length < 1)
+                    body.data.user.avatar = 'assets/images/default-avatar.png';
+                else
+                    body.data.user.avatar =
+                        VITE_API_UPLOADS + '/' + body.data.user.avatar;
 
                 // Establecemos los datos del usuario.
                 setAuthUser(body.data.user);
