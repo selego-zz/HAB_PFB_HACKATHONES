@@ -120,6 +120,14 @@ const HackathonDetails = ({
                     {/* Nombre y descripción de hackathon */}
                     <div className="bg-casiblanco p-4 rounded-lg shadow-md">
                         <div className="flex items-center justify-start space-x-4">
+                            {hackathon?.logo && (
+                                <img
+                                    className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
+                                    src={hackathon?.logo}
+                                    alt="Logo del hackathon."
+                                />
+                            )}
+
                             <h1 className="text-header-big mt-0">
                                 {hackathon?.name}
                             </h1>

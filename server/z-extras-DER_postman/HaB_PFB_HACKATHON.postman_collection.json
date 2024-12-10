@@ -1,1293 +1,1334 @@
 {
-  "info": {
-    "_postman_id": "a332f7b9-4062-4ed6-a712-f17a9b10e248",
-    "name": "HaB_PFB_HACKATHON",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "37787415"
-  },
-  "item": [
-    {
-      "name": "USERS",
-      "item": [
+    "info": {
+        "_postman_id": "a332f7b9-4062-4ed6-a712-f17a9b10e248",
+        "name": "HaB_PFB_HACKATHON",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "37787415"
+    },
+    "item": [
         {
-          "name": "register",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"Pepito\", \r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/register",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "register"]
-            },
-            "description": "Añade un nuevo usuario a la base de datos"
-          },
-          "response": []
-        },
-        {
-          "name": "addOrganizer :userId",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api//users/addOrganizer/:userId",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "", "users", "addOrganizer", ":userId"],
-              "variable": [
+            "name": "USERS",
+            "item": [
                 {
-                  "key": "userId",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "organizers request",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"Jorjito\", \r\n    \"email\": \"facturacion@ich-online.eu\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Jorge\",\r\n    \"lastName\": \"Rastrejo\", \r\n    \"role\": \"organizador\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/organizers/request",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "organizers", "request"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "register validate",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "url": {
-              "raw": "localhost:8000/api/users/register/validate/:activationCode",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": [
-                "api",
-                "users",
-                "register",
-                "validate",
-                ":activationCode"
-              ],
-              "variable": [
-                {
-                  "key": "activationCode",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "login desarrollador",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/login",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "login organizador",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"org15@example.com\",\r\n    \"password\": \"password59\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/login",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "login root",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"hab.pfb.hackathons@gmail.com\",\r\n    \"password\": \"jsb40rt-123456\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/login",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "users",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/users",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "users getAllUsers",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/users/getAllUsers",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "getAllUsers"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "update",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "firstName",
-                  "value": "novale",
-                  "type": "text"
+                    "name": "register",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"username\": \"Pepito\", \r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Pedro\",\r\n    \"lastName\": \"Castrillo\", \r\n    \"role\": \"desarrollador\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/register",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "register"]
+                        },
+                        "description": "Añade un nuevo usuario a la base de datos"
+                    },
+                    "response": []
                 },
                 {
-                  "key": "lastName",
-                  "value": "otra",
-                  "type": "text"
+                    "name": "addOrganizer :userId",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api//users/addOrganizer/:userId",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "",
+                                "users",
+                                "addOrganizer",
+                                ":userId"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "userId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
                 },
                 {
-                  "key": "avatar",
-                  "type": "file",
-                  "src": [],
-                  "disabled": true
-                }
-              ]
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/update",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "update"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "password",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"oldPass\": \"123456 \",\r\n    \"newPass\": \"123456\",\r\n    \"repeatNewPass\": \"123456\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/password",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "password"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "password recover",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/users/password/recover",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "password", "recover"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "password recover passcode",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "\r\n{\r\n    \"newPass\": \"123456\",\r\n    \"repeatNewPass\": \"123456\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:8000/api/users/password/recover/f0f0ed4b2b01dbd5ea5dc4b4f2bfff",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": [
-                "api",
-                "users",
-                "password",
-                "recover",
-                "f0f0ed4b2b01dbd5ea5dc4b4f2bfff"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "delete :userId",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8000/api/users/delete/:userId",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "users", "delete", ":userId"],
-              "variable": [
+                    "name": "organizers request",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"username\": \"Jorjito\", \r\n    \"email\": \"facturacion@ich-online.eu\",\r\n    \"password\": \"123456 \",\r\n    \"firstName\": \"Jorge\",\r\n    \"lastName\": \"Rastrejo\", \r\n    \"role\": \"organizador\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/organizers/request",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "organizers", "request"]
+                        }
+                    },
+                    "response": []
+                },
                 {
-                  "key": "userId",
-                  "value": ""
+                    "name": "register validate",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [],
+                        "url": {
+                            "raw": "localhost:8000/api/users/register/validate/:activationCode",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "users",
+                                "register",
+                                "validate",
+                                ":activationCode"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "activationCode",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login desarrollador",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\",\r\n    \"password\": \"123456 \"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/login",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login organizador",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"org15@example.com\",\r\n    \"password\": \"password59\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/login",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "login root",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"hab.pfb.hackathons@gmail.com\",\r\n    \"password\": \"jsb40rt-123456\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/login",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "login"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/users",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "users getAllUsers",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/users/getAllUsers",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "getAllUsers"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "firstName",
+                                    "value": "novale",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "lastName",
+                                    "value": "otra",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "avatar",
+                                    "type": "file",
+                                    "src": [],
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/update",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "update"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "password",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"oldPass\": \"123456 \",\r\n    \"newPass\": \"123456\",\r\n    \"repeatNewPass\": \"123456\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/password",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "password"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "password recover",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\": \"killteamsalamanca@gmail.com\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/users/password/recover",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "password", "recover"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "password recover passcode",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "\r\n{\r\n    \"newPass\": \"123456\",\r\n    \"repeatNewPass\": \"123456\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/api/users/password/recover/f0f0ed4b2b01dbd5ea5dc4b4f2bfff",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "users",
+                                "password",
+                                "recover",
+                                "f0f0ed4b2b01dbd5ea5dc4b4f2bfff"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "delete :userId",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "localhost:8000/api/users/delete/:userId",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "users", "delete", ":userId"],
+                            "variable": [
+                                {
+                                    "key": "userId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
                 }
-              ]
-            }
-          },
-          "response": []
+            ],
+            "description": "Carpeta para probar los controladores de usuario"
+        },
+        {
+            "name": "HACKATHONS",
+            "item": [
+                {
+                    "name": "hackathons",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "hackathons"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Hola",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "maxParticipants",
+                                    "value": "50",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "online",
+                                    "value": "presencial",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "location",
+                                    "value": "Madrid",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "prizes",
+                                    "value": "10",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "logo",
+                                    "type": "file",
+                                    "src": "/C:/Users/Amanda/Desktop/Imagen de WhatsApp 2024-06-25 a las 20.27.49_f49d62c0.jpg"
+                                },
+                                {
+                                    "key": "documentation",
+                                    "type": "file",
+                                    "src": "/C:/Users/Amanda/Desktop/PFB/Portal Hackatones.pdf"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "hackathons"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons update",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Adiós",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "maxParticipants",
+                                    "value": "40",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "online",
+                                    "value": "presencial",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "location",
+                                    "value": "Madrid",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "prizes",
+                                    "value": "10",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "logo",
+                                    "type": "file",
+                                    "src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "documentation",
+                                    "type": "file",
+                                    "src": "/C:/Users/Amanda/Desktop/PFB/SPRINT I.pdf"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/update",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "update"
+                            ],
+                            "query": [
+                                {
+                                    "key": "",
+                                    "value": null,
+                                    "disabled": true
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons hackathonId",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "hackathons", ":hackathonId"],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "17"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": ":hackathonId enrollments",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "Adiós",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "inscriptionEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonDate",
+                                    "value": "2024-11-15T10:00:00.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "hackathonEnd",
+                                    "value": "2024-11-15T10:00:01.000Z",
+                                    "type": "text"
+                                },
+                                {
+                                    "key": "maxParticipants",
+                                    "value": "40",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "online",
+                                    "value": "presencial",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "location",
+                                    "value": "Madrid",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "prizes",
+                                    "value": "10",
+                                    "type": "text",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "logo",
+                                    "type": "file",
+                                    "src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png",
+                                    "disabled": true
+                                },
+                                {
+                                    "key": "documentation",
+                                    "type": "file",
+                                    "src": "/C:/Users/Amanda/Desktop/PFB/SPRINT I.pdf"
+                                }
+                            ]
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/enrollments",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "enrollments"
+                            ],
+                            "query": [
+                                {
+                                    "key": "",
+                                    "value": null,
+                                    "disabled": true
+                                }
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "registration",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/registration",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "registration"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "13"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons user hackathons",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/user/hackathons",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "hackathons", "user", "hackathons"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons :hackathonId delete",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/delete",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "delete"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "15"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons :hackathonId cancel",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/cancel",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "cancel"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "14"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons :hackathonId rating",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"rating\": \"4\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/rating",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "rating"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "14"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "hackathons :hackathonId :developerId ranking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text",
+                                "disabled": true
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"score\": \"100\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:8000/api/hackathons/:hackathonId/ranking",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": [
+                                "api",
+                                "hackathons",
+                                ":hackathonId",
+                                "ranking"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "hackathonId",
+                                    "value": "14"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "maxParticipants",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/maxParticipants",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "maxParticipants"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "maxPrize",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/maxPrize",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "maxPrize"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "technologies",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/technologies",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "technologies"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "themes",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "{{autOrganizador}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autAdmin}}",
+                                "type": "text",
+                                "disabled": true
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "{{autDesarrollador}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "localhost:8000/api/themes",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["api", "themes"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "recurso estático",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:8000/:nombre",
+                    "host": ["localhost"],
+                    "port": "8000",
+                    "path": [":nombre"],
+                    "variable": [
+                        {
+                            "key": "nombre",
+                            "value": "51233ca5-b162-40b9-a501-be0fef8abeb1.pdf"
+                        }
+                    ]
+                }
+            },
+            "response": []
         }
-      ],
-      "description": "Carpeta para probar los controladores de usuario"
-    },
-    {
-      "name": "HACKATHONS",
-      "item": [
+    ],
+    "event": [
         {
-          "name": "hackathons",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons"]
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [""]
             }
-          },
-          "response": []
         },
         {
-          "name": "hackathons",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "name",
-                  "value": "Hola",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "maxParticipants",
-                  "value": "50",
-                  "type": "text"
-                },
-                {
-                  "key": "online",
-                  "value": "presencial",
-                  "type": "text"
-                },
-                {
-                  "key": "location",
-                  "value": "Madrid",
-                  "type": "text"
-                },
-                {
-                  "key": "prizes",
-                  "value": "10",
-                  "type": "text"
-                },
-                {
-                  "key": "logo",
-                  "type": "file",
-                  "src": "/C:/Users/Amanda/Desktop/Imagen de WhatsApp 2024-06-25 a las 20.27.49_f49d62c0.jpg"
-                },
-                {
-                  "key": "documentation",
-                  "type": "file",
-                  "src": "/C:/Users/Amanda/Desktop/PFB/Portal Hackatones.pdf"
-                }
-              ]
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons"]
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "exec": [""]
             }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons update",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "name",
-                  "value": "Adiós",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "maxParticipants",
-                  "value": "40",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "online",
-                  "value": "presencial",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "location",
-                  "value": "Madrid",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "prizes",
-                  "value": "10",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "logo",
-                  "type": "file",
-                  "src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png",
-                  "disabled": true
-                },
-                {
-                  "key": "documentation",
-                  "type": "file",
-                  "src": "/C:/Users/Amanda/Desktop/PFB/SPRINT I.pdf"
-                }
-              ]
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/update",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "update"],
-              "query": [
-                {
-                  "key": "",
-                  "value": null,
-                  "disabled": true
-                }
-              ],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons hackathonId",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"technologies\": [\"HTML\"],\r\n    \"orderBy\": [\"hackathonDate\"]\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "17"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": ":hackathonId enrollments",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "name",
-                  "value": "Adiós",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "inscriptionEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonDate",
-                  "value": "2024-11-15T10:00:00.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "hackathonEnd",
-                  "value": "2024-11-15T10:00:01.000Z",
-                  "type": "text"
-                },
-                {
-                  "key": "maxParticipants",
-                  "value": "40",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "online",
-                  "value": "presencial",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "location",
-                  "value": "Madrid",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "prizes",
-                  "value": "10",
-                  "type": "text",
-                  "disabled": true
-                },
-                {
-                  "key": "logo",
-                  "type": "file",
-                  "src": "/C:/Users/vaati/Desktop/07-react/Código de clase/diario-viajes(+modularizado)/uploads/75b27474-6b7c-4a6d-b61b-a1af081f2f0b.png",
-                  "disabled": true
-                },
-                {
-                  "key": "documentation",
-                  "type": "file",
-                  "src": "/C:/Users/Amanda/Desktop/PFB/SPRINT I.pdf"
-                }
-              ]
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/enrollments",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "enrollments"],
-              "query": [
-                {
-                  "key": "",
-                  "value": null,
-                  "disabled": true
-                }
-              ],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "registration",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/registration",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "registration"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "13"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons user hackathons",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/user/hackathons",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", "user", "hackathons"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons :hackathonId delete",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/delete",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "delete"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "15"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons :hackathonId cancel",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/cancel",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "cancel"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "14"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons :hackathonId rating",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"rating\": \"4\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/rating",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "rating"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "14"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "hackathons :hackathonId :developerId ranking",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text"
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"score\": \"100\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8000/api/hackathons/:hackathonId/ranking",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "hackathons", ":hackathonId", "ranking"],
-              "variable": [
-                {
-                  "key": "hackathonId",
-                  "value": "14"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "maxParticipants",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/maxParticipants",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "maxParticipants"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "maxPrize",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/maxPrize",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "maxPrize"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "technologies",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/technologies",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "technologies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "themes",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "{{autOrganizador}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autAdmin}}",
-                "type": "text",
-                "disabled": true
-              },
-              {
-                "key": "Authorization",
-                "value": "{{autDesarrollador}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "localhost:8000/api/themes",
-              "host": ["localhost"],
-              "port": "8000",
-              "path": ["api", "themes"]
-            }
-          },
-          "response": []
         }
-      ]
-    },
-    {
-      "name": "recurso estático",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:8000/:nombre",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": [":nombre"],
-          "variable": [
-            {
-              "key": "nombre",
-              "value": "51233ca5-b162-40b9-a501-be0fef8abeb1.pdf"
-            }
-          ]
+    ],
+    "variable": [
+        {
+            "key": "autDesarrollador",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQsInVzZXJuYW1lIjoiUGVwaXRvIiwicm9sZSI6ImRlc2Fycm9sbGFkb3IiLCJlbWFpbCI6ImtpbGx0ZWFtc2FsYW1hbmNhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzg2OTIwNCwiZXhwIjoxNzMyMTg5MjA0fQ.g6pjZ-7KSsmevPicZ2JdwLbAblLBERTN0MqbbIVJ9a4",
+            "type": "string"
+        },
+        {
+            "key": "autAdmin",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjEsInVzZXJuYW1lIjoicm9vdCIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJraWxsdGVhbXNhbGFtYW5jYUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc3Nzg3NjIsImV4cCI6MTczMDM3MDc2Mn0.ryW8U61M9JLR5pp0Bdk-alVlEP9SQPlOdi5QwD_mJrw",
+            "type": "string"
+        },
+        {
+            "key": "autOrganizador",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTksInVzZXJuYW1lIjoib3JnVXNlcjE1Iiwicm9sZSI6Im9yZ2FuaXphZG9yIiwiZW1haWwiOiJvcmcxNUBleGFtcGxlLmNvbSIsImlhdCI6MTcyNzc3NTA3MiwiZXhwIjoxNzMwMzY3MDcyfQ.s0xYCFzdAb74JP1MA4xihp-SxnceOClIZzsF6h-FTeA",
+            "type": "string"
         }
-      },
-      "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "exec": [""]
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "exec": [""]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "key": "autDesarrollador",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQsInVzZXJuYW1lIjoiUGVwaXRvIiwicm9sZSI6ImRlc2Fycm9sbGFkb3IiLCJlbWFpbCI6ImtpbGx0ZWFtc2FsYW1hbmNhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzg2OTIwNCwiZXhwIjoxNzMyMTg5MjA0fQ.g6pjZ-7KSsmevPicZ2JdwLbAblLBERTN0MqbbIVJ9a4",
-      "type": "string"
-    },
-    {
-      "key": "autAdmin",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjEsInVzZXJuYW1lIjoicm9vdCIsInJvbGUiOiJhZG1pbmlzdHJhZG9yIiwiZW1haWwiOiJraWxsdGVhbXNhbGFtYW5jYUBnbWFpbC5jb20iLCJpYXQiOjE3Mjc3Nzg3NjIsImV4cCI6MTczMDM3MDc2Mn0.ryW8U61M9JLR5pp0Bdk-alVlEP9SQPlOdi5QwD_mJrw",
-      "type": "string"
-    },
-    {
-      "key": "autOrganizador",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTksInVzZXJuYW1lIjoib3JnVXNlcjE1Iiwicm9sZSI6Im9yZ2FuaXphZG9yIiwiZW1haWwiOiJvcmcxNUBleGFtcGxlLmNvbSIsImlhdCI6MTcyNzc3NTA3MiwiZXhwIjoxNzMwMzY3MDcyfQ.s0xYCFzdAb74JP1MA4xihp-SxnceOClIZzsF6h-FTeA",
-      "type": "string"
-    }
-  ]
+    ]
 }
