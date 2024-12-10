@@ -123,7 +123,7 @@ const HackathonDetails = ({
                             {hackathon?.logo && (
                                 <img
                                     className="w-24 border-4 rounded-sm border-verdemarino border-opacity-25"
-                                    src={`${VITE_API_UPLOADS}/${hackathon?.logo}`}
+                                    src={hackathon?.logo}
                                     alt="Logo del hackathon."
                                 />
                             )}
