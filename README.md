@@ -18,15 +18,23 @@ Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el d
 
 2. Se ha de duplicar el archivo `.env.example` con el nombre `.env` y rellenar los datos necesarios para la ejecución, prestando especial atención a los que comienzan por ADMIN_USER, pues sus datos serán los del administrador de la plataforma.
 
-3. Para crear la base de datos presentamos 2 opciones:
-   a. Con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`.
-   b. Con un conjunto de datos de prueba además del usuario administrador: ejecutaremos el comando `npm run initdummydb`.
+3. Proceda con la instalación de la base de datos segun los pasos indicados en el apartado **Instalación de la base de datos**
 
 4. Para arrancar el servidor ejecutaremos `npm run dev`, el cual estará disponible en `http://localhost:PUERTO`, siendo `PUERTO` el valor asignado en `.env`. Por ejemplo, para un valor de puerto de 8000, sería `http://localhost:8000`.
 
 5. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
 
-### Instalación de la parte del servidor
+### Instalación de la base de datos
+
+Antes de proceder a la instalación de la base de datos, ha de asegurarse de haber ejecutado los 2 primeros pasos de la fase **Instalación de la parte del servidor**
+
+1. Entrar en el directorio server.
+
+2. Ejecutar el comando adecuado dependiendo de la opción escogida entre las 2 siguientes:
+   a. Base de datos con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`.
+   b. Base de datos con un conjunto de datos de prueba además del usuario administrador, introducidos a fin de poder comprobar las diversas funcionalidades del programa: ejecutaremos el comando `npm run initdummydb`.
+
+### Instalación de la parte del client
 
 1. Una vez en el directorio client, se ejecutará `npm install` para instalar automáticamente todas las dependencias necesarias.
 
