@@ -104,13 +104,14 @@ const useHackathons = () => {
 
                 body.data.forEach((hackathon) => {
                     // Si el campo "logo" no existe o está vacío, asigna el valor predeterminado
-                    if (!hackathon.logo || length(hackathon.logo) < 1) {
+                    if (!hackathon.logo || hackathon.logo.length < 1) {
                         hackathon.logo =
-                            '/assets/images/Wdefault-hackathon-logo.svg';
+                            '/assets/images/default-hackathon-logo.svg';
                     } else
                         hackathon.logo = `${VITE_API_UPLOADS}/${hackathon.logo}`;
                 });
 
+                console.log(body.data);
                 if (!compareHackathons(hackathons, body.data))
                     setHackathons(body.data);
             } catch (err) {
@@ -253,6 +254,11 @@ const useHackathons = () => {
             const body = await res.json();
 
             if (body.status === 'error') throw new Error(body.message);
+            // Si el campo "logo" no existe o está vacío, asigna el valor predeterminado
+            if (!body.data.logo || body.data.logo.length < 1) {
+                body.data.logo = '/assets/images/default-hackathon-logo.svg';
+            } else body.data.logo = `${VITE_API_UPLOADS}/${body.data.logo}`;
+            console.log(body.data);
 
             return body.data;
         } catch (err) {

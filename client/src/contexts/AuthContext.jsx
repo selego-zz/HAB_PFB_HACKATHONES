@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
                 // Este es el punto donde obtenemos el usuario. Puede que venga con avatar o puede que no.
                 // Si viene sin avatar le asignaremos el avatar por defecto
-                if (!body.data.user.avatar || length(body.data.user.avatar) < 1)
+                if (!body.data.user.avatar || body.data.user.avatar.length < 1)
                     body.data.user.avatar = 'assets/images/default-avatar.png';
                 else
                     body.data.user.avatar =

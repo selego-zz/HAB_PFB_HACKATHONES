@@ -43,7 +43,7 @@ const HackathonList = ({ hackathons, showRating }) => {
                         <div className="flex md:gap-10 justify-center items-center mt-10 xl:mt-0">
                             <img
                                 className="sm:w-36 sm:h-36 w-24 h-24 border-4 rounded-sm border-verdeagua m-5"
-                                src={`hackathon?.logo`}
+                                src={hackathon?.logo}
                                 alt="Logo del hackathon."
                             />
                             <section

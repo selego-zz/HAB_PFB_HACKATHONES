@@ -24,6 +24,8 @@ Una vez clonado el repositorio, se ha de abrir una terminal y navegar hasta el d
 
 5. Se puede utilizar el archivo con la colección de peticiones de Postman incluido en el repositorio para comprobar los _end-points_.
 
+6. Se recomienda borrar la carpeta dummy_data_uploads en caso de no requerir datos de prueba
+
 ### Instalación de la base de datos
 
 Antes de proceder a la instalación de la base de datos, ha de asegurarse de haber ejecutado los 2 primeros pasos de la fase **Instalación de la parte del servidor**
@@ -32,7 +34,9 @@ Antes de proceder a la instalación de la base de datos, ha de asegurarse de hab
 
 2. Ejecutar el comando adecuado dependiendo de la opción escogida entre las 2 siguientes:
    a. Base de datos con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`.
-   b. Base de datos con un conjunto de datos de prueba además del usuario administrador, introducidos a fin de poder comprobar las diversas funcionalidades del programa: ejecutaremos el comando `npm run initdummydb`.
+   b. Base de datos con un conjunto de datos de prueba además del usuario administrador, introducidos a fin de poder comprobar las diversas funcionalidades del programa:
+   i-Ejecutaremos el comando `npm run initdummydb`.
+   ii-Se ha de copiar el contenido de la carpeta dummy_data_uploads en la carpeta que se haya definido como UPLOADS_DIR en el archivo .env
 
 ### Instalación de la parte del client
 

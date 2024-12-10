@@ -2,8 +2,6 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../contexts/AuthContext.jsx';
 import { NavLink } from 'react-router-dom';
 
-import { BackButton, ForwardButton } from './aux_components/buttons/index.js';
-
 //////
 
 const Header = () => {
