@@ -8,7 +8,7 @@ const { VITE_API_UPLOADS } = import.meta.env;
 
 const Header = () => {
     const authContext = useContext(AuthContext);
-    const [isMenuOpen, setMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const menuRef = useRef(null);
 
     // useEffect se ejecuta siempre que el menú se abra o cierre
@@ -32,12 +32,12 @@ const Header = () => {
     const { authUser, isAdmin, isOrganizer, authLogoutState } = authContext;
 
     const toggleMenu = () => {
-        setMenuOpen((prev) => !prev);
+        setIsMenuOpen((prev) => !prev);
     };
 
     const handleClickOutside = (event) => {
         if (menuRef.current && !menuRef.current.contains(event.target)) {
-            setMenuOpen(false);
+            setIsMenuOpen(false);
         }
     };
 
@@ -108,10 +108,7 @@ const Header = () => {
                     ) : (
                         <button onClick={toggleMenu} className="text-blanco">
                             <img
-                                src={
-                                    VITE_API_UPLOADS + '/' + authUser.avatar ||
-                                    VITE_API_UPLOADS + '/default-avatar.png'
-                                }
+                                src={authUser.avatar}
                                 alt="Avatar del usuario"
                                 className="h-16 w-16 rounded-full ml-3"
                             />
