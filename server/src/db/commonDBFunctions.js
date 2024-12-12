@@ -83,7 +83,7 @@ const SQL_THEMES_TABLE = `
     CREATE TABLE IF NOT EXISTS themes(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 
-        theme varchar(200) NOT NULL,
+        theme varchar(200) NOT NULL UNIQUE,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME
@@ -107,7 +107,7 @@ const SQL_TECHNOLOGIES_TABLE = `
     CREATE TABLE IF NOT EXISTS technologies(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 
-        technology varchar(200) NOT NULL,
+        technology varchar(200) NOT NULL UNIQUE,
 
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
         updatedAt DATETIME

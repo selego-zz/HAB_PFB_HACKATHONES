@@ -2,7 +2,6 @@
 
 ## Pendientes
 
-- initdummydb da error si no se añaden suficientes temas y tecnologías en .env
 - Los archivos de la carpeta utils deberían terminar todos en la palabra Util. Hay dos (exceptuando el index.js que no cumplen esa condición).
 - En schemas no era necesario hacer el index.js del index.js. En controllers lo tenéis bien, tomadlo como ejemplo.
 - El archivo verifyTokenUtil.js no puede ser un util porque está utilizando req, res y next. Solo podemos ubicar ese tipo de funciones en controllers o middlewares. En este caso se podría crear un util que recibiera como parámetro únicamente token y el tipo de rol, eso tendría más sentido.
@@ -52,3 +51,5 @@
 ~~- El usuario admin se crea con default-avatar.png que no veo en el filesystem~~
 
 ~~- Las imágenes de avatar y hackaton de default las pondría en public del Front y en el DB no guardaría nada. Ejemplo: cuando creo un usuario en el campo avatar no pongo nada y si el Front no recibe el avatar usa lo de default.~~
+
+~~- initdummydb da error si no se añaden suficientes temas y tecnologías en .env~~

@@ -34,7 +34,7 @@ Antes de proceder a la instalación de la base de datos, ha de asegurarse de hab
 
 2. Ejecutar el comando adecuado dependiendo de la opción escogida entre las 2 siguientes:
    a. Base de datos con solo un usuario administrador en ella: ejecutaremos el comando `npm run initdb`.
-   b. Base de datos con un conjunto de datos de prueba además del usuario administrador, introducidos a fin de poder comprobar las diversas funcionalidades del programa:
+   b. Base de datos con un conjunto de datos de prueba además del usuario administrador, introducidos a fin de poder comprobar las diversas funcionalidades del programa: **ATENCIÓN: si no añade suficientes temas o tecnologías en el archivo .env initdummydb añadirá varios para asignárselos a los elementos falsos**
    i-Ejecutaremos el comando `npm run initdummydb`.
    ii-Se ha de copiar el contenido de la carpeta dummy_data_uploads en la carpeta que se haya definido como UPLOADS_DIR en el archivo .env
 
