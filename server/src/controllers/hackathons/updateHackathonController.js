@@ -10,10 +10,10 @@ import {
     removePhotoUtil,
     saveFileUtil,
     savePhotoUtil,
-    validateSchema,
+    validateSchemaUtil,
 } from '../../utils/index.js';
 
-import { updateHackathonSchema } from '../../schemas/index.js';
+import { updateHackathonSchema } from '../../schemas/hackathons/index.js';
 
 //////
 
@@ -29,7 +29,7 @@ const updateHackathonController = async (req, res, next) => {
             req.body.themes = req.body.themes.split(',');
 
         // Validamos los datos enviados en el cuerpo de la solicitud.
-        await validateSchema(updateHackathonSchema, req.body);
+        await validateSchemaUtil(updateHackathonSchema, req.body);
 
         // Obtenemos los datos del cuerpo de la solicitud y el id del hackathon.
         req.body.id = req.params.hackathonId;
@@ -41,7 +41,7 @@ const updateHackathonController = async (req, res, next) => {
         }
 
         // Verificamos si hay un archivo de logo subido para actualizarlo.
-        if (req.files && req.files.logo) {
+        if (req.files?.logo) {
             const newLogo = req.files.logo;
 
             // Guardamos el nuevo logo y obtenemos su nombre.
@@ -55,7 +55,7 @@ const updateHackathonController = async (req, res, next) => {
         }
 
         // Verificamos si hay un archivo de documentación adicional.
-        if (req.files && req.files.documentation) {
+        if (req.files?.documentation) {
             const documentation = req.files.documentation;
 
             // Guardamos.

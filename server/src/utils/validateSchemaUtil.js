@@ -8,7 +8,7 @@
 // lanza una excepción si los datos no se ajustan al esquema
 ///////////////////////////////////////////////////////////
 
-const validateSchema = async (schema, data) => {
+const validateSchemaUtil = async (schema, data) => {
     try {
         await schema.validateAsync(data);
     } catch (err) {
@@ -17,4 +17,4 @@ const validateSchema = async (schema, data) => {
     }
 };
 
-export default validateSchema;
+export default validateSchemaUtil;

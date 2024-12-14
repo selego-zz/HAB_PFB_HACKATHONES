@@ -8,6 +8,8 @@ import {
     hackathonThemes,
     hackathons,
     users,
+    DUMMY_TECHNOLOGIES,
+    DUMMY_THEMES,
 } from './dummyData/index.js';
 
 const addDummyData = async () => {
@@ -16,9 +18,37 @@ const addDummyData = async () => {
     //insertamos los datos de la tabla usuarios
     //aprovechamos el mismo bucle para meterles tecnologías
     ///////////////////////////////////////////////
-    const technologies = process.env.DB_TECHNOLOGIES.split(',').map(
-        (technology) => technology.replace(/^"|"$/g, ''),
+
+    const themes = Array.from(
+        new Set(
+            (DUMMY_THEMES + ',' + process.env.DB_THEMES)
+                .split(',')
+                .map((theme) => theme.replace(/(^"|"$)/g, '')), //esto ultimo quita la comilla inicial y final
+        ),
     );
+    const technologies = Array.from(
+        new Set(
+            (DUMMY_TECHNOLOGIES + ',' + process.env.DB_TECHNOLOGIES)
+                .split(',')
+                .map((technology) => technology.replace(/(^"|"$)/g, '')), //esto ultimo quita la comilla inicial y final
+        ),
+    );
+    let SQL;
+
+    SQL = 'INSERT IGNORE INTO technologies (technology) VALUES';
+    for (const technology of technologies) {
+        SQL += ` ('${technology}'),`;
+    }
+    SQL = SQL.slice(0, -1) + ';';
+    await pool.query(SQL);
+
+    SQL = 'INSERT IGNORE INTO themes (theme) VALUES';
+    for (const theme of themes) {
+        SQL += ` ('${theme}'),`;
+    }
+    SQL = SQL.slice(0, -1) + ';';
+    await pool.query(SQL);
+
     for (const data of users) {
         const [res] = await pool.query(
             `    

@@ -1,8 +1,8 @@
 // Importaciones
-import { userSchema } from '../../schemas/index.js';
+import { userSchema } from '../../schemas/users/index.js';
 import { addUserModel } from '../../models/index.js';
 import {
-    validateSchema,
+    validateSchemaUtil,
     sendMailUtil,
     generateAddOrganizerMailUtil,
 } from '../../utils/index.js';
@@ -11,7 +11,7 @@ import crypto from 'crypto';
 
 const addOrganizerController = async (req, res, next) => {
     try {
-        await validateSchema(userSchema, req.body);
+        await validateSchemaUtil(userSchema, req.body);
         const { username, email, password, firstName, lastName } = req.body;
 
         const emailBody = generateAddOrganizerMailUtil(

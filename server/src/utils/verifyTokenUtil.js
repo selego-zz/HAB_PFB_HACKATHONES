@@ -32,7 +32,7 @@ const verifyTokenUtil = async (req, res, next, role) => {
             const res = await getLastAuthUpdateModel(tokenInfo.id);
 
             if (res) {
-                //si res es null no hace falta hacer todo esto
+                //si res es null no hace falta hacer esto
                 const lastAuthUpdate = new Date(res);
 
                 //tomamos la fecha de creación del token, en segundos,
@@ -41,7 +41,6 @@ const verifyTokenUtil = async (req, res, next, role) => {
                 const tokenEmissionDate = new Date(tokenInfo.iat * 1000);
 
                 if (tokenEmissionDate < lastAuthUpdate) {
-                    // if (tokenEmissionDate < lastAuthUpdate) {
                     generateErrorUtil('Token no válido', 401);
                 }
             } //si hemos llegado aquí, el token es correcto

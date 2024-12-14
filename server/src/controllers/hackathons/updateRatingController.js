@@ -5,15 +5,15 @@ import {
     getEnrollmentModel,
 } from '../../models/index.js';
 
-import { validateSchema, generateErrorUtil } from '../../utils/index.js';
-import { rateHackathonSchema } from '../../schemas/index.js';
+import { validateSchemaUtil, generateErrorUtil } from '../../utils/index.js';
+import { rateHackathonSchema } from '../../schemas/hackathons/index.js';
 
 //////
 
 const updateRatingController = async (req, res, next) => {
     try {
         // Validamos los datos con Joi.
-        await validateSchema(rateHackathonSchema, req.body);
+        await validateSchemaUtil(rateHackathonSchema, req.body);
 
         // Obtenemos el id del hackathon que queremos votar.
         const { hackathonId } = req.params;
