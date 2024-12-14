@@ -4,16 +4,16 @@ import {
     getEnrollmentModel,
 } from '../../models/index.js';
 
-import { validateSchema, generateErrorUtil } from '../../utils/index.js';
+import { validateSchemaUtil, generateErrorUtil } from '../../utils/index.js';
 
-import { userScoreSchema } from '../../schemas/index.js';
+import { userScoreSchema } from '../../schemas/users/index.js';
 
 //////
 
 const updateScoreController = async (req, res, next) => {
     try {
         // Validamos los datos del body.
-        await validateSchema(userScoreSchema, req.body);
+        await validateSchemaUtil(userScoreSchema, req.body);
 
         const { score, developerId } = req.body;
         const organizerId = req.user.id;

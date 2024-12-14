@@ -2,8 +2,8 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-import { loginUserSchema } from '../../schemas/index.js';
+import { generateErrorUtil, validateSchemaUtil } from '../../utils/index.js';
+import { loginUserSchema } from '../../schemas/users/index.js';
 
 import { selectUserByEmailModel } from '../../models/index.js';
 
@@ -17,7 +17,7 @@ const EXPIRATION = process.env.TOKEN_EXPIRATION;
 const loginUserController = async (req, res, next) => {
     try {
         // Validamos los datos con Joi.
-        await validateSchema(loginUserSchema, req.body);
+        await validateSchemaUtil(loginUserSchema, req.body);
 
         const { email, password } = req.body;
 

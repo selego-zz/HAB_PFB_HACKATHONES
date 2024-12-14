@@ -1,6 +1,6 @@
 // Importanciones
-import { recoverPassSchema } from '../../schemas/index.js';
-import { generateErrorUtil, validateSchema } from '../../utils/index.js';
+import { recoverPassSchema } from '../../schemas/users/index.js';
+import { generateErrorUtil, validateSchemaUtil } from '../../utils/index.js';
 import { updateResetPassModel } from '../../models/index.js';
 
 /////////////////////////////////////////////////////////////////
@@ -14,7 +14,7 @@ import { updateResetPassModel } from '../../models/index.js';
 
 const recoverPasswordController = async (req, res, next) => {
     try {
-        await validateSchema(recoverPassSchema, req.body);
+        await validateSchemaUtil(recoverPassSchema, req.body);
 
         const recoverPassCode = req.params.recoverPassCode;
         const { password } = req.body;

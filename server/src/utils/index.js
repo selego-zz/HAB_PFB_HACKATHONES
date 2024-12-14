@@ -4,8 +4,8 @@ import removePhotoUtil from './removePhotoUtil.js';
 import saveFileUtil from './saveFileUtil.js';
 import savePhotoUtil from './savePhotoUtil.js';
 import sendMailUtil from './sendMailUtil.js';
-import { generateGetInscriptionsSQL } from './sqlShared.js';
-import validateSchema from './validateSchema.js';
+import { generateGetInscriptionsSQL } from './sqlSharedUtil.js';
+import validateSchemaUtil from './validateSchemaUtil.js';
 import verifyTokenUtil from './verifyTokenUtil.js';
 
 import {
@@ -22,7 +22,7 @@ export {
     saveFileUtil,
     savePhotoUtil,
     sendMailUtil,
-    validateSchema,
+    validateSchemaUtil,
     verifyTokenUtil,
 
     //sqls

@@ -3,12 +3,12 @@ import crypto from 'crypto';
 
 import {
     sendMailUtil,
-    validateSchema,
+    validateSchemaUtil,
     generateErrorUtil,
     generateAddUserMailUtil,
 } from '../../utils/index.js';
 
-import { userSchema } from '../../schemas/index.js';
+import { userSchema } from '../../schemas/users/index.js';
 
 import {
     selectUserByUsernameModel,
@@ -21,7 +21,7 @@ import {
 // Función controladora que permite crear un usuario.
 const addUserController = async (req, res, next) => {
     try {
-        await validateSchema(userSchema, req.body);
+        await validateSchemaUtil(userSchema, req.body);
 
         // Obtenemos los datos necesarios del body.
         const { firstName, lastName, username, email, password, role } =

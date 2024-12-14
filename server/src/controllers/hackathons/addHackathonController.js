@@ -4,10 +4,10 @@ import { addHackathonModel } from '../../models/index.js';
 import {
     saveFileUtil,
     savePhotoUtil,
-    validateSchema,
+    validateSchemaUtil,
 } from '../../utils/index.js';
 
-import { hackathonSchema } from '../../schemas/index.js';
+import { hackathonSchema } from '../../schemas/hackathons/index.js';
 
 //////
 
@@ -22,7 +22,7 @@ const addHackathonController = async (req, res, next) => {
             req.body.themes = req.body.themes.split(',');
 
         // Validamos los datos del cuerpo de la solicitud según el esquema del hackathon.
-        await validateSchema(hackathonSchema, req.body);
+        await validateSchemaUtil(hackathonSchema, req.body);
 
         const organizerId = req.user.id;
 

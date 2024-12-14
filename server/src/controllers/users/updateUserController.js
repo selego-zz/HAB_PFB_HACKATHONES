@@ -5,10 +5,10 @@ import {
     savePhotoUtil,
     removePhotoUtil,
     generateErrorUtil,
-    validateSchema,
+    validateSchemaUtil,
 } from '../../utils/index.js';
 
-import { updateUserSchema } from '../../schemas/index.js';
+import { updateUserSchema } from '../../schemas/users/index.js';
 
 //////
 
@@ -19,7 +19,7 @@ const updateUserController = async (req, res, next) => {
             req.body.technologies = req.body.technologies.split(',');
 
         // Validamos el esquema de los datos que se están actualizando
-        await validateSchema(updateUserSchema, req.body);
+        await validateSchemaUtil(updateUserSchema, req.body);
 
         if (Object.keys(req.body).length === 0 && !req.files)
             generateErrorUtil('No hay campos que actualizar', 400);

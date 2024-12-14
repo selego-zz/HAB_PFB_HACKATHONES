@@ -1,6 +1,6 @@
 // Importaciones
-import { validateSchema } from '../../utils/index.js';
-import { hackathonFilterSchema } from '../../schemas/index.js';
+import { validateSchemaUtil } from '../../utils/index.js';
+import { hackathonFilterSchema } from '../../schemas/hackathons/index.js';
 
 import {
     getAllHackathonsModel,
@@ -42,7 +42,7 @@ const getAllHackathonsController = async (req, res, next) => {
             filter = JSON.parse(req.query.data);
         }
 
-        if (filter) await validateSchema(hackathonFilterSchema, filter);
+        if (filter) await validateSchemaUtil(hackathonFilterSchema, filter);
 
         let hackathons;
 

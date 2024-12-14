@@ -1,6 +1,6 @@
 // Importaciones
-import { generateErrorUtil, validateSchema } from '../../utils/index.js';
-import { updatePassSchema } from '../../schemas/index.js';
+import { generateErrorUtil, validateSchemaUtil } from '../../utils/index.js';
+import { updatePassSchema } from '../../schemas/users/index.js';
 
 import { updatePassModel } from '../../models/users/index.js';
 
@@ -9,7 +9,7 @@ import { updatePassModel } from '../../models/users/index.js';
 // Función controladora que le permite a un usuario cambiar su contraseña.
 const updatePassController = async (req, res, next) => {
     try {
-        await validateSchema(updatePassSchema, req.body);
+        await validateSchemaUtil(updatePassSchema, req.body);
 
         // Obtenemos los datos necesarios.
         const { oldPass, newPass } = req.body;
