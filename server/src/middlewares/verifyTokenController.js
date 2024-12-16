@@ -1,6 +1,6 @@
 // Importaciones
 import jwt from 'jsonwebtoken';
-import { generateErrorUtil } from './index.js';
+import { generateErrorUtil } from '../utils/index.js';
 import { getLastAuthUpdateModel } from '../models/index.js';
 
 // Tomamos la clave para desencriptar el token
@@ -15,7 +15,7 @@ const SECRET = process.env.SECRET;
 //      que son quienes llaman a esta función
 ////////////////////////////////////////////////////////////////////////
 
-const verifyTokenUtil = async (req, res, next, role) => {
+const verifyTokenController = async (req, res, next, role) => {
     try {
         //tomamos el token de la cabecera
         const { authorization } = req.headers;
@@ -64,4 +64,4 @@ const verifyTokenUtil = async (req, res, next, role) => {
     }
 };
 
-export default verifyTokenUtil;
+export default verifyTokenController;

@@ -3,6 +3,7 @@ import authDeveloperController from './authDeveloperController.js';
 import authOrganizerController from './authOrganizerController.js';
 import authUserController from './authUserController.js';
 import optionalAuthController from './optionalAuthController.js';
+import verifyTokenController from './verifyTokenController.js';
 
 export {
     authAdminController,
@@ -10,4 +11,5 @@ export {
     authOrganizerController,
     authUserController,
     optionalAuthController,
+    verifyTokenController,
 };

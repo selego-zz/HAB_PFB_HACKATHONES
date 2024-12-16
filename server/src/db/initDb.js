@@ -1,11 +1,11 @@
-import { initDB, initAdmin } from './commonDBFunctions.js';
+import { initCommonDB, initAdmin } from './commonDBFunctions.js';
 
 //////
 const init = async () => {
-    await initDB();
+    await initCommonDB();
     await initAdmin();
     console.log('¡Proceso finalizado!');
     process.exit(0);
 };
 init();
-export { initDB, initAdmin };
+export { initCommonDB, initAdmin };

@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import addDummyData from './dummyData.js';
-import { initDB, initAdmin } from './commonDBFunctions.js';
+import { initCommonDB, initAdmin } from './commonDBFunctions.js';
 //////
 
 ////////////////////////////////////////////////////
@@ -11,7 +11,7 @@ import { initDB, initAdmin } from './commonDBFunctions.js';
 ////////////////////////////////////////////////////
 const initDbWithDummyData = async () => {
     try {
-        await initDB();
+        await initCommonDB();
         console.log('Insertando dummy data');
         await addDummyData();
         console.log('Dummy data insertada');

@@ -159,7 +159,7 @@ const SQL_THECHNOLOGY_INSERT = `
 // no recibe parámetros
 // no devuelve nada
 ////////////////////////////////////////////////////
-const initDB = async () => {
+const initCommonDB = async () => {
     try {
         // Obtenemos una conexión con la base de datos.
         const pool = await getPool();
@@ -200,7 +200,7 @@ const initDB = async () => {
         console.log('Insertando temas y tecnologías');
 
         const themes = process.env.DB_THEMES.split(',').map((theme) =>
-            theme.replace(/^"|"$/g, ''),
+            theme.replace(/(^")|("$)/g, ''),
         ); //esto ultimo quita la comilla inicial y final
 
         for (const theme of themes) {
@@ -208,7 +208,7 @@ const initDB = async () => {
         }
 
         const technologies = process.env.DB_TECHNOLOGIES.split(',').map(
-            (technology) => technology.replace(/^"|"$/g, ''),
+            (technology) => technology.replace(/(^")|("$)/g, ''),
         ); //esto ultimo quita la comilla inicial y final
 
         for (const technology of technologies) {
@@ -238,4 +238,4 @@ const initAdmin = async () => {
     ]);
 };
 
-export { initDB, initAdmin };
+export { initCommonDB, initAdmin };

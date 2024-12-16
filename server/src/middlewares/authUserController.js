@@ -1,12 +1,12 @@
-import { verifyTokenUtil } from '../utils/index.js';
+import { verifyTokenController } from '../middlewares/index.js';
 
 /////////////////////////////////////////////////////////////////
-// Este middleware llama a verifyTokenUtil
-//      le pasa a verifyTokenUtil el rol que queremos comprobar.
+// Este middleware llama a verifyTokenController
+//      le pasa a verifyTokenController el rol que queremos comprobar.
 /////////////////////////////////////////////////////////////////
 
 const authUserController = async (req, res, next) => {
-    await verifyTokenUtil(req, res, next);
+    await verifyTokenController(req, res, next);
 };
 
 export default authUserController;
